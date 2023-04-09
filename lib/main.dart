@@ -14,9 +14,6 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'a2b',
       debugShowCheckedModeBanner: false,
-      //  theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      //  ),
       home: WelcomePage(),
     );
   }
