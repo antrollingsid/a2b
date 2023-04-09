@@ -28,7 +28,7 @@ class _DashBoardPage extends State<DashBoardPage> {
                 width: double.infinity,
                 color: Colors.transparent,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     backBtn(),
                     menuBtn(),
