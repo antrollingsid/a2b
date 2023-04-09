@@ -79,8 +79,12 @@ class menuBtn extends StatelessWidget {
         ),
         child: IconButton(
           // iconSize: ,
-          padding: const EdgeInsets.fromLTRB(7, 3, 0, 3),
-          icon: Icon(Icons.adaptive.more, size: 18.0),
+          icon: Center(
+            child: Icon(
+              Icons.adaptive.more,
+              size: 18.0,
+            ),
+          ),
           color: AppColors.onBackgroundDark,
           onPressed: () {
             // Navigator.pop(context);
