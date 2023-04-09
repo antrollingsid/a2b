@@ -5,6 +5,7 @@ import 'package:a2b/screens/colors.dart';
 import 'package:a2b/screens/fonts.dart';
 import 'package:a2b/screens/formWidgets.dart';
 import 'package:flutter/material.dart';
+import 'elements.dart';
 import 'paddings.dart';
 // import 'package:sqflite/sqflite.dart';
 
@@ -24,28 +25,7 @@ class LoginPage extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Material(
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              color: Colors.transparent,
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: AppColors.buttonStroke,
-                  ),
-                  borderRadius: BorderRadius.circular(35),
-                ),
-                child: IconButton(
-                  // iconSize: ,
-                  padding: const EdgeInsets.fromLTRB(7, 3, 0, 3),
-                  icon: Icon(Icons.adaptive.arrow_back, size: 18.0),
-                  color: AppColors.onBackgroundDark,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-            ),
+            const backBtn(),
             const SizedBox(
               width: 12,
             ),

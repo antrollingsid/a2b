@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:a2b/screens/colors.dart';
 
+import 'buttons.dart';
 import 'elements.dart';
+import 'formWidgets.dart';
 import 'paddings.dart';
 
 class DashBoardPage extends StatefulWidget {
@@ -15,30 +17,21 @@ class _DashBoardPage extends State<DashBoardPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        // theme: ThemeData(
-        //   primaryColor: AppColors.primaryDark,
-        // ),
         debugShowCheckedModeBanner: false,
         home: Scaffold(
           backgroundColor: AppColors.backgroundDark,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(293.0),
-            child: AppBar(
-              backgroundColor: AppColors.primaryDark,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(44),
-                ),
-              ),
-              // bottom: ,
-              title: Container(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            title: SizedBox(
+              height: 100,
+              child: Container(
                 width: double.infinity,
-                height: 40,
                 color: Colors.transparent,
-                child: Column(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
-                    // TextFieldEmail(),
+                    backBtn(),
+                    menuBtn(),
                     // TextFieldPassword(),
                     // PaddingTop90(),
                     // SearchBarTrackNo(),
@@ -47,27 +40,30 @@ class _DashBoardPage extends State<DashBoardPage> {
                   ],
                 ),
               ),
-
-              elevation: 0,
             ),
+            elevation: 0,
           ),
-          body: Center(
-            child: Column(children: [
-              Container(
-                height: 90,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
-                child: const SearchBarTrackNo(),
-              ),
-              Container(
-                color: AppColors.buttonYellow,
-                child: Text(
-                  'This is the home page',
-                  style: TextStyle(
-                      fontSize: 24, color: AppColors.onBackgroundDark),
+          body: Padding(
+            padding: const EdgeInsets.only(top: 100),
+            child: Center(
+              child: Column(children: [
+                menuBtn(),
+                Container(
+                  height: 160,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+                  child: const SearchBarTrackNo(),
                 ),
-              ),
-            ]),
+                Container(
+                  color: AppColors.secondary,
+                  child: Text(
+                    'This is the home page',
+                    style: TextStyle(
+                        fontSize: 24, color: AppColors.onBackgroundDark),
+                  ),
+                ),
+              ]),
+            ),
           ),
         ));
   }
