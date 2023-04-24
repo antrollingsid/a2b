@@ -1,20 +1,29 @@
-import 'package:a2b/screens/welcomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'User/screens/authentication/login.dart';
+import 'User/screens/authentication/register.dart';
+import 'User/screens/homepage.dart';
+import 'User/screens/trackpage.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MainApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'a2b',
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
+      home: const HomePage(),
+      getPages: [
+        GetPage(name: '/', page: () => const HomePage()),
+        GetPage(name: '/loginpage', page: () => const LoginPage()),
+        GetPage(name: '/registerpage', page: () => const Register()),
+        GetPage(name: "/trackingpage", page: () => const TrackShippement()),
+      ],
     );
   }
 }
