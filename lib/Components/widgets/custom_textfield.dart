@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../allConstants/dimensions.dart';
+
 class CustomTextfield extends StatefulWidget {
   const CustomTextfield(
       {super.key,
@@ -18,7 +20,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(Dimensions.dimen_8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -35,14 +37,14 @@ class _CustomTextfieldState extends State<CustomTextfield> {
               ),
             ),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: Dimensions.dimen_5),
           TextField(
             obscureText: widget.isPassword,
             style: const TextStyle(color: Colors.white54),
             decoration: InputDecoration(
               hintStyle:
                   const TextStyle(color: Color.fromARGB(66, 247, 247, 247)),
-              contentPadding: const EdgeInsets.all(10.0),
+              contentPadding: const EdgeInsets.all(Dimensions.dimen_10),
               border: myinputborder(), //normal border
               enabledBorder: myinputborder(), //enabled border
               focusedBorder: myfocusborder(), //focused border
@@ -58,20 +60,22 @@ class _CustomTextfieldState extends State<CustomTextfield> {
 
 OutlineInputBorder myinputborder() {
   //return type is OutlineInputBorder
-  return const OutlineInputBorder(
-      //Outline border type for TextFeild
-      borderRadius: BorderRadius.all(Radius.circular(15)),
-      borderSide: BorderSide(
-        color: Colors.white60,
-        width: 2,
-      ));
+  return OutlineInputBorder(
+    //Outline border type for TextFeild
+    borderRadius: BorderRadius.circular(Dimensions.borderRadius10),
+    borderSide: const BorderSide(
+      color: Colors.white60,
+      width: 2,
+    ),
+  );
 }
 
 OutlineInputBorder myfocusborder() {
-  return const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(15)),
-      borderSide: BorderSide(
-        color: Colors.white,
-        width: 2,
-      ));
+  return OutlineInputBorder(
+    borderRadius: BorderRadius.circular(Dimensions.borderRadius10),
+    borderSide: const BorderSide(
+      color: Colors.white,
+      width: 2,
+    ),
+  );
 }

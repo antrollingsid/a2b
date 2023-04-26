@@ -1,3 +1,4 @@
+import 'package:a2b/allConstants/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
@@ -45,7 +46,7 @@ class _GradiantTextfieldState extends State<GradiantTextfield> {
           TextField(
             obscureText: widget.isPassword,
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(10.0),
+              contentPadding: const EdgeInsets.all(Dimensions.dimen_10),
               hintText: widget.hintText, // pass the hint text parameter here
               hintStyle: TextStyle(
                 fontFamily: AppFonts.mainFont,
@@ -60,8 +61,8 @@ class _GradiantTextfieldState extends State<GradiantTextfield> {
                       end: const FractionalOffset(0.5, 0.0),
                       stops: const [0.0, 1.0],
                       tileMode: TileMode.clamp),
-                  width: 2,
-                  borderRadius: BorderRadius.circular(15.0)),
+                  width: 1,
+                  borderRadius: BorderRadius.circular(Dimensions.dimen_10)),
 
               focusedBorder: GradientOutlineInputBorder(
                   gradient: LinearGradient(
@@ -73,8 +74,8 @@ class _GradiantTextfieldState extends State<GradiantTextfield> {
                       end: const FractionalOffset(0.5, 0.0),
                       stops: const [0.0, 1.0],
                       tileMode: TileMode.clamp),
-                  width: 2,
-                  borderRadius: BorderRadius.circular(15.0)),
+                  width: 1,
+                  borderRadius: BorderRadius.circular(Dimensions.dimen_10)),
             ),
             style: const TextStyle(color: Color.fromARGB(255, 181, 181, 181)),
           ),
