@@ -4,6 +4,7 @@ class Dimensions {
   static const double buttonHeight = 64.0;
   static const double loginWithBtnHeight = 60.0;
   static const double textFieldHeight = 64.0;
+  static const double backButtonRadius = 5.0;
   static const double dimen_0 = 0;
   static const double dimen_1 = 1;
   static const double dimen_2 = 2;
