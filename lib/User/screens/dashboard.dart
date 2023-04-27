@@ -6,8 +6,8 @@ import '../../Components/widgets/custom_textfield_gradiant.dart';
 import '../../Components/widgets/offer_detail.dart';
 import '../../Components/widgets/shippement.dart';
 
-class TrackShippement extends StatelessWidget {
-  const TrackShippement({super.key});
+class DashBoard extends StatelessWidget {
+  const DashBoard({super.key});
 
   @override
   Widget build(BuildContext context) {

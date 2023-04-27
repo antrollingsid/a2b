@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'User/screens/authentication/login.dart';
 import 'User/screens/authentication/register.dart';
 import 'User/screens/homepage.dart';
-import 'User/screens/trackpage.dart';
+import 'User/screens/dashboard.dart';
 
 void main() {
   runApp(const MainApp());
@@ -22,7 +22,7 @@ class MainApp extends StatelessWidget {
         GetPage(name: '/', page: () => const HomePage()),
         GetPage(name: '/loginpage', page: () => const LoginPage()),
         GetPage(name: '/registerpage', page: () => const Register()),
-        GetPage(name: "/trackingpage", page: () => const TrackShippement()),
+        GetPage(name: "/trackingpage", page: () => const DashBoard()),
       ],
     );
   }
