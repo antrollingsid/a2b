@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../Components/widgets/custom_button.dart';
 import '../../Components/widgets/inkwell_button.dart';
 import 'authentication/login.dart';
@@ -60,8 +59,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               )),
               CustomBtn(
-                  textonbtn: 'Create an account',
-                  onPress: () => Get.to(const Register())),
+                textonbtn: 'Create an account',
+                onPress: () => Get.to(const Register()),
+              ),
               InkwellBtn(
                 textLeading: 'Already have an account ?  ',
                 textEnding: 'login',

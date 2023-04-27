@@ -7,6 +7,7 @@ import '../../../Components/widgets/custom_button.dart';
 import '../../../Components/widgets/custom_textfield.dart';
 import '../../../Components/widgets/custom_textfield_gradiant.dart';
 import '../../../Components/widgets/inkwell_button.dart';
+import '../trackpage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -43,7 +44,10 @@ class _LoginPageState extends State<LoginPage> {
                 titleText: 'Password',
               ),
               Expanded(child: Container()),
-              CustomBtn(textonbtn: 'Login', onPress: () => () {}),
+              CustomBtn(
+                textonbtn: 'Login',
+                onPress: () => Get.to(const TrackShippement()),
+              ),
               InkwellBtn(
                 textLeading: "Don't have an account?",
                 textEnding: ' signup',
