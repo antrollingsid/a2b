@@ -1,4 +1,6 @@
+import 'package:a2b/allConstants/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../Components/widgets/custom_button.dart';
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.50,
                   padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                  child: Image.asset('assets/images/1x/Artboard14.png'),
+                  child: SvgPicture.string(SvgConstant.splashSvgDark1),
                 ),
               ),
               const SizedBox(
