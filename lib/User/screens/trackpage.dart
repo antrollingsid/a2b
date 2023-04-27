@@ -174,30 +174,6 @@ class TrackShippement extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Container(
-                //   color: AppColors.secondaryBlue,
-                //   child: const Padding(
-                //     padding: EdgeInsets.only(top: 40),
-                //     child: SizedBox(
-                //       width: 150,
-                //       child: Text(
-                //         "Track your shippement",
-                //         style: TextStyle(
-                //           color: AppColors.onBackgroundDark,
-                //           fontWeight: FontWeight.bold,
-                //           fontSize: 24,
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 5,
-                // ),
-                // const GradiantTextfield(
-                //   hintText: 'Text',
-                //   titleText: '',
-                // )
               ],
             ),
           ),
