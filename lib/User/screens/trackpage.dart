@@ -1,3 +1,4 @@
+import 'package:a2b/Components/assets/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../Components/widgets/custom_textfield_gradiant.dart';
@@ -13,7 +14,7 @@ class TrackShippement extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color.fromARGB(255, 16, 16, 16),
+        backgroundColor: const Color.fromARGB(255, 16, 16, 16),
       ),
       body: SafeArea(
           child: Column(
@@ -24,42 +25,188 @@ class TrackShippement extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                RichText(
-                  text: const TextSpan(
-                    text: 'Hello, ',
-                    style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: 'John Doe',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.tealAccent)),
-                    ],
-                  ),
-                ),
                 const SizedBox(
                   height: 14,
                 ),
                 const CustomShip(),
-                const SizedBox(
-                  width: 150,
-                  child: Text(
-                    "Track your shippement",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 0, 211, 22),
+                  child: RichText(
+                    text: const TextSpan(
+                      style: TextStyle(
+                        fontFamily: 'SF Pro Display',
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        // height: 1.3333333333 * ffem / fem,
+                        letterSpacing: 1.5,
+                        color: Color(0xffffffff),
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Latest ',
+                        ),
+                        TextSpan(
+                          text: 'activities',
+                          style: TextStyle(
+                            fontFamily: 'SF Pro Display',
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            // height: 1.3333333333 * ffem / fem,
+                            letterSpacing: 1.5,
+                            color: Color(0xff979797),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 10, 27, 10),
+                  height: 60,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 23, 1),
+                        child: Image.asset(
+                          'assets/images/1x/Artboard14.png',
+                          width: 47,
+                          height: 47,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 56, 0),
+                        width: 142,
+                        height: double.infinity,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'iPhone Head Charger',
+                              style: TextStyle(
+                                fontFamily: 'SF Pro Display',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                // height:  1.5*ffem/fem,
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(0.75, 0, 26, 0),
+                              width: double.infinity,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.fromLTRB(
+                                        0, 0, 6.75, 0),
+                                    // child: Image.asset(
+                                    //   'assets/images/1x/Artboard14.png',
+                                    //   width: 7.5,
+                                    //   height: 7.5,
+                                    // ),
+                                  ),
+                                  RichText(
+                                    text: const TextSpan(
+                                      style: TextStyle(
+                                        fontFamily: 'SF Pro Display',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        // height:  2*ffem/,
+                                        color: Color(0xffffffff),
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: 'Order',
+                                          style: TextStyle(
+                                            fontFamily: 'SF Pro Display',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            height: 1,
+                                            color: Color(0xffcf6679),
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: ' ',
+                                        ),
+                                        TextSpan(
+                                          text: '- 27 May, 2022',
+                                          style: TextStyle(
+                                            fontFamily: 'SF Pro Display',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            height: 2,
+                                            color: Color(0xff979797),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        //TICK ICON
+                        margin: const EdgeInsets.fromLTRB(0, 0, 6, 2.5),
+                        // child: Image.asset(
+                        //   'assets/images/1x/Artboard14.png',
+                        //   width: 8,
+                        //   height: 5.5,
+                        // ),
+                      ),
+                      Container(
+                        // received2QS (354:3561)
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 3),
+                        child: const Text(
+                          'Received',
+                          style: TextStyle(
+                            fontFamily: 'SF Pro Display',
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            // height:  2*ffem/fem,
+                            color: Color(0xffffffff),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const GradiantTextfield(
-                  hintText: 'Text',
-                  titleText: '',
-                )
+                // Container(
+                //   color: AppColors.secondaryBlue,
+                //   child: const Padding(
+                //     padding: EdgeInsets.only(top: 40),
+                //     child: SizedBox(
+                //       width: 150,
+                //       child: Text(
+                //         "Track your shippement",
+                //         style: TextStyle(
+                //           color: AppColors.onBackgroundDark,
+                //           fontWeight: FontWeight.bold,
+                //           fontSize: 24,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 5,
+                // ),
+                // const GradiantTextfield(
+                //   hintText: 'Text',
+                //   titleText: '',
+                // )
               ],
             ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          const GradiantTextfield(
+            hintText: 'Text',
+            titleText: '',
           )
         ],
       )),

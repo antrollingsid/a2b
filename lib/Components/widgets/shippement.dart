@@ -1,3 +1,4 @@
+import 'package:a2b/Components/assets/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomShip extends StatelessWidget {
@@ -8,19 +9,26 @@ class CustomShip extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: Container(
+        height: 143,
         decoration: BoxDecoration(
-            color: Colors.deepPurple, borderRadius: BorderRadius.circular(10)),
+          color: AppColors.primaryDark,
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(children: [
             Expanded(
                 child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Track \n Your Shipping',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     )),
                 Row(
                   children: const [
