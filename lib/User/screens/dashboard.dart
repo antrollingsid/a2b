@@ -65,7 +65,7 @@ class DashBoard extends StatelessWidget {
                                   color: Color(0xffffffff),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 // margin:
                                 //     const EdgeInsets.fromLTRB(0.75, 0, 26, 0),
                                 width: double.infinity,
