@@ -2,6 +2,7 @@ import 'package:a2b/Components/assets/colors.dart';
 import 'package:a2b/allConstants/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 
 import '../../Components/widgets/custom_textfield_gradiant.dart';
 import '../../Components/widgets/offer_detail.dart';
@@ -23,6 +24,25 @@ class DashBoard extends StatelessWidget {
         children: const [
           CustomShip(),
           OrderHistoryActivity(),
+          SizedBox(
+            height: 67,
+            width: 333,
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Search',
+                border: GradientOutlineInputBorder(
+                  gradient: const LinearGradient(
+                      colors: [AppColors.primaryDark, AppColors.secondary],
+                      begin: FractionalOffset(0.0, 0.0),
+                      end: FractionalOffset(0.5, 0.0),
+                      stops: [0.0, 1.0],
+                      tileMode: TileMode.clamp),
+                  width: 1,
+                  // borderRadius: BorderRadius.circular(Dimensions.dimen_10),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

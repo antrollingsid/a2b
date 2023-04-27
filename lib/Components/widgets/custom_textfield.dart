@@ -20,7 +20,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(Dimensions.dimen_8),
+      padding: const EdgeInsets.only(top: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -37,19 +37,23 @@ class _CustomTextfieldState extends State<CustomTextfield> {
               ),
             ),
           ),
-          const SizedBox(height: Dimensions.dimen_5),
-          TextField(
-            obscureText: widget.isPassword,
-            style: const TextStyle(color: Colors.white54),
-            decoration: InputDecoration(
-              hintStyle:
-                  const TextStyle(color: Color.fromARGB(66, 247, 247, 247)),
-              contentPadding: const EdgeInsets.all(Dimensions.dimen_10),
-              border: myinputborder(), //normal border
-              enabledBorder: myinputborder(), //enabled border
-              focusedBorder: myfocusborder(), //focused border
-              // set more border style like disabledBorder
-              hintText: widget.hintText,
+          const SizedBox(height: 5),
+          SizedBox(
+            height: 67,
+            width: 333,
+            child: TextField(
+              obscureText: widget.isPassword,
+              style: const TextStyle(color: Colors.white54),
+              decoration: InputDecoration(
+                hintStyle:
+                    const TextStyle(color: Color.fromARGB(66, 247, 247, 247)),
+                contentPadding: const EdgeInsets.all(Dimensions.dimen_10),
+                border: myinputborder(), //normal border
+                enabledBorder: myinputborder(), //enabled border
+                focusedBorder: myfocusborder(), //focused border
+                // set more border style like disabledBorder
+                hintText: widget.hintText,
+              ),
             ),
           ),
         ],
@@ -65,7 +69,7 @@ OutlineInputBorder myinputborder() {
     borderRadius: BorderRadius.circular(Dimensions.borderRadius10),
     borderSide: const BorderSide(
       color: Colors.white60,
-      width: 2,
+      width: 1,
     ),
   );
 }
@@ -75,7 +79,7 @@ OutlineInputBorder myfocusborder() {
     borderRadius: BorderRadius.circular(Dimensions.borderRadius10),
     borderSide: const BorderSide(
       color: Colors.white,
-      width: 2,
+      width: 1,
     ),
   );
 }
