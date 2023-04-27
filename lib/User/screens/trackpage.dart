@@ -94,8 +94,8 @@ class TrackShippement extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                margin:
-                                    const EdgeInsets.fromLTRB(0.75, 0, 26, 0),
+                                // margin:
+                                //     const EdgeInsets.fromLTRB(0.75, 0, 26, 0),
                                 width: double.infinity,
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -116,7 +116,7 @@ class TrackShippement extends StatelessWidget {
                                             text: 'Order',
                                             style: TextStyle(
                                               fontFamily: 'SF Pro Display',
-                                              fontSize: 8,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w400,
                                               height: 1,
                                               color: Color(0xffcf6679),
@@ -129,7 +129,7 @@ class TrackShippement extends StatelessWidget {
                                             text: '- 27 May, 2022',
                                             style: TextStyle(
                                               fontFamily: 'SF Pro Display',
-                                              fontSize: 8,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w400,
                                               height: 2,
                                               color: Color(0xff979797),
