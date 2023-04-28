@@ -32,22 +32,31 @@ class DashBoard extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        backgroundColor: AppColors.buttonStroke,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(
+              Icons.access_time,
+              color: AppColors.backgroundLightMode,
+            ),
+            label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
+            icon: Icon(
+              Icons.add,
+              color: AppColors.backgroundLightMode,
+            ),
+            label: '',
+          )
         ],
         // currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: AppColors.primaryDark,
         // onTap: _onItemTapped,
       ),
     );
