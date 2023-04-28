@@ -1,5 +1,7 @@
 import 'package:a2b/Components/assets/colors.dart';
+import 'package:a2b/allConstants/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomShip extends StatelessWidget {
   const CustomShip({super.key});
@@ -32,12 +34,18 @@ class CustomShip extends StatelessWidget {
                       ),
                     )),
                 Row(
-                  children: const [
-                    Icon(Icons.gif_box),
-                    Text(
-                      "Iphone 12",
-                      style: TextStyle(
-                        fontSize: 12,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                      child: SvgPicture.string(SvgConstant.parcelIconBlack),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(6, 10, 0, 0),
+                      child: Text(
+                        "Iphone 12",
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
                       ),
                     )
                   ],
@@ -46,7 +54,7 @@ class CustomShip extends StatelessWidget {
             )),
             Container(
               height: 95,
-              width: 90,
+              width: 95,
               decoration: BoxDecoration(
                   color: Colors.blueGrey,
                   borderRadius: BorderRadius.circular(12)),
