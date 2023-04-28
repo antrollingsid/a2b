@@ -28,29 +28,40 @@ class DashBoard extends StatelessWidget {
             padding: const EdgeInsets.only(left: 90),
             child: SvgPicture.string(SvgConstant.lineDark),
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 15),
-            child: SizedBox(
-              height: 67,
-              width: 333,
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  border: GradientOutlineInputBorder(
-                    gradient: LinearGradient(
-                        colors: [AppColors.primaryDark, AppColors.secondary],
-                        begin: FractionalOffset(0.0, 0.0),
-                        end: FractionalOffset(0.5, 0.0),
-                        stops: [0.0, 1.0],
-                        tileMode: TileMode.clamp),
-                    width: 1,
-                    // borderRadius: BorderRadius.circular(Dimensions.dimen_10),
-                  ),
-                ),
-              ),
-            ),
-          )
+          const TrackingTextField()
         ],
+      ),
+    );
+  }
+}
+
+class TrackingTextField extends StatelessWidget {
+  const TrackingTextField({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.only(top: 15),
+      child: SizedBox(
+        height: 67,
+        width: 333,
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: 'Search',
+            border: GradientOutlineInputBorder(
+              gradient: LinearGradient(
+                  colors: [AppColors.primaryDark, AppColors.secondary],
+                  begin: FractionalOffset(0.0, 0.0),
+                  end: FractionalOffset(0.5, 0.0),
+                  stops: [0.0, 1.0],
+                  tileMode: TileMode.clamp),
+              width: 1,
+              // borderRadius: BorderRadius.circular(Dimensions.dimen_10),
+            ),
+          ),
+        ),
       ),
     );
   }
