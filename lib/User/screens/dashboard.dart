@@ -23,12 +23,12 @@ class DashBoard extends StatelessWidget {
       body: Column(
         children: [
           const CustomShip(),
+          const TrackingTextField(),
           const OrderHistoryActivity(),
           Padding(
             padding: const EdgeInsets.only(left: 90),
             child: SvgPicture.string(SvgConstant.lineDark),
           ),
-          const TrackingTextField()
         ],
       ),
     );
