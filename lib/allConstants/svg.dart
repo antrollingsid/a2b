@@ -72,4 +72,11 @@ class SvgConstant {
 </defs>
 </svg>
 ''';
+
+  static String lineDark = '''
+<svg width="290" height="3" viewBox="0 0 290 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line x1="-0.000976562" y1="1.5" x2="289.999" y2="1.5" stroke="#979797" stroke-width="2"/>
+</svg>
+
+''';
 }
