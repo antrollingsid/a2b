@@ -35,6 +35,7 @@ class DashBoard extends StatelessWidget {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         backgroundColor: AppColors.buttonStroke,
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -53,7 +54,21 @@ class DashBoard extends StatelessWidget {
               color: AppColors.backgroundLightMode,
             ),
             label: '',
-          )
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.feedback_outlined,
+              color: AppColors.backgroundLightMode,
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person_outlined,
+              color: AppColors.backgroundLightMode,
+            ),
+            label: '',
+          ),
         ],
         // currentIndex: _selectedIndex,
         selectedItemColor: AppColors.primaryDark,
