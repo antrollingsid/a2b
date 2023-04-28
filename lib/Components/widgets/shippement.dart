@@ -10,12 +10,13 @@ class CustomShip extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: Container(
         height: 143,
+        width: 333,
         decoration: BoxDecoration(
           color: AppColors.primaryDark,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
           child: Row(children: [
             Expanded(
                 child: Column(
@@ -25,7 +26,7 @@ class CustomShip extends StatelessWidget {
                 const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Track \n Your Shipping',
+                      'Track\nYour Shipping',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -44,7 +45,7 @@ class CustomShip extends StatelessWidget {
               ],
             )),
             Container(
-              height: 100,
+              height: 95,
               width: 90,
               decoration: BoxDecoration(
                   color: Colors.blueGrey,
