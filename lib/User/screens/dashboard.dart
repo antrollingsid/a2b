@@ -85,23 +85,39 @@ class TrackingTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.only(top: 15),
       child: SizedBox(
         height: 67,
         width: 333,
-        child: TextField(
-          decoration: InputDecoration(
-            hintText: 'Search',
-            border: GradientOutlineInputBorder(
-              gradient: LinearGradient(
-                  colors: [AppColors.primaryDark, AppColors.secondary],
-                  begin: FractionalOffset(0.0, 0.0),
-                  end: FractionalOffset(0.5, 0.0),
-                  stops: [0.0, 1.0],
-                  tileMode: TileMode.clamp),
-              width: 1,
-              // borderRadius: BorderRadius.circular(Dimensions.dimen_10),
+        child: Center(
+          child: TextField(
+            style: TextStyle(color: AppColors.backgroundLightMode),
+            textAlign: TextAlign.center,
+            decoration: InputDecoration(
+              prefixIcon: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: SvgPicture.string(
+                  SvgConstant.searchIconDark,
+                  // alignment: Alignment.center,
+                  width: 19,
+                  height: 19,
+                ),
+              ),
+              hintText: 'Tracking code',
+              hintStyle: const TextStyle(color: AppColors.textGrey),
+              filled: true,
+              fillColor: AppColors.buttonStroke,
+              border: GradientOutlineInputBorder(
+                gradient: const LinearGradient(
+                    colors: [AppColors.secondaryBlue, AppColors.primaryDark],
+                    begin: FractionalOffset(0.0, 0.0),
+                    end: FractionalOffset(0.5, 0.0),
+                    stops: [0.0, 1.0],
+                    tileMode: TileMode.clamp),
+                width: 1,
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
         ),
