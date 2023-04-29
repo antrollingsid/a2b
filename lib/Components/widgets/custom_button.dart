@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../allConstants/dimensions.dart';
 import '../assets/colors.dart';
 
 class CustomBtn extends StatelessWidget {
@@ -15,9 +14,9 @@ class CustomBtn extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(0),
         width: double.infinity,
-        height: Dimensions.buttonHeight,
+        height: 50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Dimensions.borderRadius10),
+          borderRadius: BorderRadius.circular(10),
           gradient: const LinearGradient(
               colors: [
                 AppColors.secondary,

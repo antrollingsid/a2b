@@ -1,12 +1,22 @@
 import 'package:a2b/allConstants/svg.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../Components/assets/colors.dart';
 import '../../Components/widgets/custom_button.dart';
 import '../../Components/widgets/inkwell_button.dart';
 import 'authentication/login.dart';
 import 'authentication/register.dart';
+
+final List<String> imgList = [
+  'assets/images/1x/Artboard14.png',
+  'assets/images/1x/Artboard14.png',
+  'assets/images/1x/Artboard14.png',
+];
+int currentIndex = 0;
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({super.key});
@@ -29,7 +39,46 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.50,
                   padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                  child: SvgPicture.string(SvgConstant.splashSvgDark1),
+                  child: Column(
+                    children: [
+                      CarouselSlider(
+                        options: CarouselOptions(
+                          viewportFraction: 1.0,
+                          height: 250,
+                          enlargeCenterPage: true,
+                          enlargeStrategy: CenterPageEnlargeStrategy.height,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              currentIndex = index;
+                            });
+                          },
+                        ),
+                        items: imgList
+                            .map((item) => Center(
+                                  child: SizedBox(
+                                    width: 2500,
+                                    child: Image.asset(item),
+                                  ),
+                                ))
+                            .toList(),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      DotsIndicator(
+                        dotsCount: imgList.length,
+                        position: currentIndex.toDouble(),
+                        decorator: DotsDecorator(
+                          color: AppColors.secondary,
+                          size: const Size.square(5.0),
+                          activeSize: const Size(30.0, 5.0),
+                          activeColor: AppColors.primaryDark,
+                          activeShape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.0)),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(

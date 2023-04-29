@@ -1,7 +1,4 @@
-import 'package:a2b/Components/assets/colors.dart';
-import 'package:a2b/allConstants/svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomShip extends StatelessWidget {
   const CustomShip({super.key});
@@ -11,41 +8,27 @@ class CustomShip extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: Container(
-        height: 143,
-        width: 333,
         decoration: BoxDecoration(
-          color: AppColors.primaryDark,
-          borderRadius: BorderRadius.circular(15),
-        ),
+            color: Colors.deepPurple, borderRadius: BorderRadius.circular(10)),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+          padding: const EdgeInsets.all(8.0),
           child: Row(children: [
             Expanded(
                 child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'Track\nYour Shipping',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      'Track \n Your Shipping',
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     )),
                 Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                      child: SvgPicture.string(SvgConstant.parcelIconBlack),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(6, 10, 0, 0),
-                      child: Text(
-                        "Iphone 12",
-                        style: TextStyle(
-                          fontSize: 12,
-                        ),
+                  children: const [
+                    Icon(Icons.gif_box),
+                    Text(
+                      "Iphone 12",
+                      style: TextStyle(
+                        fontSize: 12,
                       ),
                     )
                   ],
@@ -53,8 +36,8 @@ class CustomShip extends StatelessWidget {
               ],
             )),
             Container(
-              height: 95,
-              width: 95,
+              height: 100,
+              width: 90,
               decoration: BoxDecoration(
                   color: Colors.blueGrey,
                   borderRadius: BorderRadius.circular(12)),

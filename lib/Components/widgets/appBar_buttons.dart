@@ -1,11 +1,12 @@
+// ignore: file_names
 import 'package:a2b/allConstants/svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../allConstants/dimensions.dart';
 import '../assets/colors.dart';
 import '../assets/fonts.dart';
 
+// ignore: camel_case_types
 class backBtn extends StatelessWidget {
   const backBtn({
     Key? key,
@@ -38,6 +39,7 @@ class backBtn extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class menuBtn extends StatelessWidget {
   const menuBtn({
     Key? key,
