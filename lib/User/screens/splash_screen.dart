@@ -8,14 +8,14 @@ import '../../Components/widgets/inkwell_button.dart';
 import 'authentication/login.dart';
 import 'authentication/register.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class SplashScreenPage extends StatefulWidget {
+  const SplashScreenPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<SplashScreenPage> createState() => _SplashScreenPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                     height: 20,
                   ),
                   SizedBox(
-                    width: 300,
+                    width: 333,
                     child: Text(
                       "Ship and track parcels and packages and learn about our express courier services.",
                       style: TextStyle(
