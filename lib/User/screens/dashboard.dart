@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 
+import '../../Components/assets/fonts.dart';
+import '../../Components/widgets/appBar_buttons.dart';
 import '../../Components/widgets/custom_textfield_gradiant.dart';
 import '../../Components/widgets/offer_detail.dart';
 import '../../Components/widgets/order_activity.dart';
@@ -16,10 +18,12 @@ class DashBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 16, 16, 16),
+      backgroundColor: AppColors.backgroundDark,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: CustomLoginSignupAppBar(
+          titleText: 'Sign up',
+        ),
       ),
       body: Column(
         children: [
@@ -87,13 +91,13 @@ class TrackingTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.only(top: 15),
       child: SizedBox(
         height: 67,
         width: 333,
         child: Center(
           child: TextField(
-            style: TextStyle(color: AppColors.backgroundLightMode),
+            style: const TextStyle(color: AppColors.backgroundLightMode),
             textAlign: TextAlign.center,
             decoration: InputDecoration(
               prefixIcon: Padding(

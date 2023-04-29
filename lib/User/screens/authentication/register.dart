@@ -1,7 +1,9 @@
+import 'package:a2b/Components/assets/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Components/login_with_btn.dart';
+import '../../../Components/widgets/appBar_buttons.dart';
 import '../../../Components/widgets/custom_button.dart';
 import '../../../Components/widgets/custom_textfield.dart';
 import '../../../Components/widgets/custom_textfield_gradiant.dart';
@@ -14,10 +16,12 @@ class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
-      appBar: AppBar(
-        title: const Text('Sign up'),
-        backgroundColor: Colors.black87,
+      backgroundColor: AppColors.backgroundDark,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: CustomLoginSignupAppBar(
+          titleText: 'Sign up',
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -26,7 +30,7 @@ class Register extends StatelessWidget {
             children: [
               const LoginWithBtn(),
               const GradiantTextfield(
-                hintText: 'Sid alfouri',
+                hintText: 'Sid alfaouri',
                 titleText: 'Name',
               ),
               const GradiantTextfield(

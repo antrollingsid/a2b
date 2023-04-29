@@ -2,7 +2,7 @@ class Dimensions {
   static const double borderRadius8 = 8.0;
   static const double borderRadius10 = 10.0;
   static const double buttonHeight = 64.0;
-  static const double loginWithBtnHeight = 60.0;
+  static const double loginWithBtnHeight = 62.0;
   static const double textFieldHeight = 64.0;
   static const double backButtonRadius = 5.0;
   static const double dimen_0 = 0;

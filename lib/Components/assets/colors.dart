@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   static const Color backgroundLightMode = Colors.white;
   static const Color onBackgroundDark = Colors.white;
-  static const Color backgroundDark = Color.fromRGBO(16, 16, 16, 1.0);
+  static const Color backgroundDark = Color.fromRGBO(10, 10, 10, 1.0);
   static const Color textLightBlue = Color.fromRGBO(229, 242, 253, 1.0);
   static const Color secondaryBlue = Color.fromRGBO(96, 191, 244, 1.0);
   static const Color buttonStroke = Color.fromRGBO(33, 33, 33, 1.0);

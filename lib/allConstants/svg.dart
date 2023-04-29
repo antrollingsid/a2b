@@ -85,4 +85,18 @@ class SvgConstant {
 <path d="M16.625 16.625L13.1813 13.1812" stroke="#979797" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 ''';
+
+  static String burgerMenuDark = '''
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M20 6L10 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20 12L4 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20 18H14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+''';
+
+  static String backArrowDark = '''
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.25 19.5L9.75 13L16.25 6.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+''';
 }

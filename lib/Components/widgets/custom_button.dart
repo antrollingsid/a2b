@@ -18,14 +18,14 @@ class CustomBtn extends StatelessWidget {
         height: Dimensions.buttonHeight,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.borderRadius10),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
               colors: [
                 AppColors.secondary,
                 AppColors.primaryDark,
               ],
-              begin: const FractionalOffset(0.0, 1.0),
-              end: const FractionalOffset(1.0, 0.4),
-              stops: const [0.0, 1.0],
+              begin: FractionalOffset(0.0, 1.0),
+              end: FractionalOffset(1.0, 0.4),
+              stops: [0.0, 1.0],
               tileMode: TileMode.clamp),
         ),
         child: TextButton(

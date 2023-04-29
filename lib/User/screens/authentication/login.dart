@@ -1,8 +1,10 @@
+import 'package:a2b/Components/assets/colors.dart';
 import 'package:a2b/User/screens/authentication/register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Components/login_with_btn.dart';
+import '../../../Components/widgets/appBar_buttons.dart';
 import '../../../Components/widgets/custom_button.dart';
 import '../../../Components/widgets/custom_textfield.dart';
 import '../../../Components/widgets/custom_textfield_gradiant.dart';
@@ -20,10 +22,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
-      appBar: AppBar(
-        title: const Text('Login'),
-        backgroundColor: Colors.black87,
+      resizeToAvoidBottomInset: false,
+      backgroundColor: AppColors.backgroundDark,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: CustomLoginSignupAppBar(
+          titleText: 'Log in',
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
