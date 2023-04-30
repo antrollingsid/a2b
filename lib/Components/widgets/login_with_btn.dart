@@ -1,5 +1,4 @@
-import 'package:a2b/Components/assets/colors.dart';
-import 'package:a2b/allConstants/dimensions.dart';
+import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 
 class LoginWithBtn extends StatelessWidget {

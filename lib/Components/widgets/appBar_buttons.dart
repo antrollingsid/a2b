@@ -1,9 +1,8 @@
 // ignore: file_names
-import 'package:a2b/allConstants/svg.dart';
+import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../assets/colors.dart';
 import '../assets/fonts.dart';
 
 // ignore: camel_case_types

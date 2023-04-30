@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../allConstants/svg.dart';
-import '../assets/colors.dart';
+import '../../main/utils/allConstants.dart';
 
 class OrderHistoryActivity extends StatelessWidget {
   const OrderHistoryActivity({

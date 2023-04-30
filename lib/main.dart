@@ -5,6 +5,11 @@ import 'User/screens/authentication/login.dart';
 import 'User/screens/authentication/register.dart';
 import 'User/screens/splash_screen.dart';
 import 'User/screens/dashboard.dart';
+import 'main/languages/base_language.dart';
+import 'main/store/store.dart';
+
+AppStore appStore = AppStore();
+late BaseLanguage language;
 
 void main() {
   runApp(const MainApp());

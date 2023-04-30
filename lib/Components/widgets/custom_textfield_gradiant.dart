@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
-import '../assets/colors.dart';
+import '../../main/utils/colors.dart';
 import '../assets/fonts.dart';
 
 class GradiantTextfield extends StatefulWidget {

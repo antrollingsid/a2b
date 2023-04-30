@@ -39,6 +39,8 @@ dependencies:
   gradient_borders: ^1.0.0
   carousel_slider: ^4.2.1
   dots_indicator: ^2.1.0
+  nb_utils: ^5.0.8
+  mobx: ^2.1.4
 dev_dependencies:
   flutter_test:
     sdk: flutter

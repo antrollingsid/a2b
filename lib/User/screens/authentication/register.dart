@@ -1,4 +1,4 @@
-import 'package:a2b/Components/assets/colors.dart';
+import 'package:a2b/main/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

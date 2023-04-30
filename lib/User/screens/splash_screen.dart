@@ -1,11 +1,12 @@
-import 'package:a2b/allConstants/svg.dart';
+import 'package:a2b/main.dart';
+
+import '../../main/utils/allConstants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../Components/assets/colors.dart';
+import '../../main/utils/colors.dart';
 import '../../Components/widgets/custom_button.dart';
 import '../../Components/widgets/inkwell_button.dart';
 import 'authentication/login.dart';
@@ -115,7 +116,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
               ),
               InkwellBtn(
                 textLeading: 'Already have an account ?  ',
-                textEnding: 'login',
+                textEnding: language.addAmount,
                 onTap: () => Get.to(const LoginPage()),
               ),
               const SizedBox(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:a2b/Components/assets/colors.dart';
-import 'package:a2b/allConstants/svg.dart';
+import '../../main/utils/allConstants.dart';
 
 class CustomShip extends StatelessWidget {
   const CustomShip({super.key});
