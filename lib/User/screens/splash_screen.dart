@@ -1,5 +1,5 @@
-import 'package:a2b/main.dart';
-
+// import 'package:a2b/main.dart';
+import '../../main.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -116,7 +116,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
               ),
               InkwellBtn(
                 textLeading: 'Already have an account ?  ',
-                textEnding: language.addAmount,
+                textEnding: 'language.logIn',
                 onTap: () => Get.to(const LoginPage()),
               ),
               const SizedBox(

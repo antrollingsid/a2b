@@ -106,7 +106,7 @@ abstract class _AppStore with Store {
             .languageCode!;
 
     if (context != null) language = BaseLanguage.of(context)!;
-    language = await AppLocalizations().load(Locale(selectedLanguage));
+    language = await const AppLocalizations().load(Locale(selectedLanguage));
   }
 
   @action
