@@ -48,10 +48,10 @@ class menuBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      color: Colors.transparent,
+      color: AppColors.backgroundDark,
       child: Container(
-        height: 54,
-        width: 54,
+        height: 47,
+        width: 47,
         decoration: BoxDecoration(
           border: Border.all(
             width: 2,
@@ -133,32 +133,47 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       // toolbarHeight: 100,
-      centerTitle: true,
-      // automaticallyImplyLeading: false,
-      leading: Row(
-        children: const [
-          // SizedBox(
-          //   width: 27,
-          // ),
-          backBtn(),
-        ],
-      ),
+      centerTitle: false,
+      automaticallyImplyLeading: false,
+      // leading: Row(
+      //   children: const [
+      //     SizedBox(
+      //       width: 27,
+      //     ),
+      //     backBtn(),
+      //   ],
+      // ),
       title: Container(
         alignment: Alignment.center,
-        child: Text(
-          titleText,
-          style: TextStyle(
-            fontFamily: AppFonts.mainFont,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: AppColors.onBackgroundDark,
-          ),
+        child: Row(
+          children: [
+            const SizedBox(
+              width: 14,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 5),
+              child: backBtn(),
+            ),
+            const SizedBox(
+              width: 67,
+            ),
+            Text(
+              titleText,
+              style: TextStyle(
+                fontFamily: AppFonts.mainFont,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: AppColors.onBackgroundDark,
+              ),
+            ),
+            // menuBtn()
+          ],
         ),
       ),
 
       actions: const [
         Padding(
-          padding: EdgeInsets.only(right: 30),
+          padding: EdgeInsets.fromLTRB(0, 5, 30, 3),
           child: menuBtn(),
         ),
       ],

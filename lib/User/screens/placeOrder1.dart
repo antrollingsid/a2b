@@ -1,13 +1,18 @@
+import 'package:a2b/User/screens/dashboard.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../../Components/widgets/custom_textfield_fromto.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
-
 import '../../Components/widgets/appBar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
+import 'package:location/location.dart';
+
+const darkMapStyle = 'assets/json/dark_mode_style.json';
 
 class PlaceOrder extends StatefulWidget {
   const PlaceOrder({super.key});
@@ -24,6 +29,24 @@ class _PlaceOrderState extends State<PlaceOrder> {
   }
 
   int _selectedIndex = 0;
+
+  static final LatLng _kMapCenter = LatLng(
+    35.1424,
+    33.9116,
+  );
+
+  static final CameraPosition _kInitialPosition =
+      CameraPosition(target: _kMapCenter, zoom: 15.0, tilt: 0, bearing: 0);
+
+  late GoogleMapController _controller;
+
+  Future<void> onMapCreated(GoogleMapController controller) async {
+    _controller = controller;
+    String value = await DefaultAssetBundle.of(context)
+        .loadString('assets/json/map-dark-mode-style.json');
+    _controller.setMapStyle(value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,16 +58,38 @@ class _PlaceOrderState extends State<PlaceOrder> {
           titleText: 'Place Order',
         ),
       ),
-      body: Column(
-        children: [
-          const CustomShip(),
-          const TrackingTextField(),
-          const OrderHistoryActivity(),
-          Padding(
-            padding: const EdgeInsets.only(left: 90),
-            child: SvgPicture.string(SvgConstant.lineDark),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                width: 333,
+                height: 374,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15.0),
+                  child: GoogleMap(
+                    initialCameraPosition: _kInitialPosition,
+                    onMapCreated: onMapCreated,
+                    zoomControlsEnabled: true,
+                  ),
+                ),
+              ),
+              const FromToTextField(
+                hintText: 'enter location',
+                titleText: 'FROM',
+                type: 'from',
+              ),
+              const FromToTextField(
+                hintText: 'enter location',
+                titleText: 'TO',
+                type: 'to',
+              ),
+            ],
           ),
-        ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
@@ -85,61 +130,13 @@ class _PlaceOrderState extends State<PlaceOrder> {
             label: '',
           ),
         ],
-        // currentIndex: _selectedIndex,
+        currentIndex: _selectedIndex,
         selectedItemColor: AppColors.primaryDark,
         onTap: (index) {
           if (index == 2) {
             Get.to(() => const PlaceOrder());
           }
         },
-      ),
-    );
-  }
-}
-
-class TrackingTextField extends StatelessWidget {
-  const TrackingTextField({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: SizedBox(
-        height: 67,
-        width: 333,
-        child: Center(
-          child: TextField(
-            style: const TextStyle(color: AppColors.backgroundLightMode),
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              prefixIcon: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SvgPicture.string(
-                  SvgConstant.searchIconDark,
-                  // alignment: Alignment.center,
-                  width: 19,
-                  height: 19,
-                ),
-              ),
-              hintText: 'Tracking code',
-              hintStyle: const TextStyle(color: AppColors.textGrey),
-              filled: true,
-              fillColor: AppColors.buttonStroke,
-              border: GradientOutlineInputBorder(
-                gradient: const LinearGradient(
-                    colors: [AppColors.secondaryBlue, AppColors.primaryDark],
-                    begin: FractionalOffset(0.0, 0.0),
-                    end: FractionalOffset(0.5, 0.0),
-                    stops: [0.0, 1.0],
-                    tileMode: TileMode.clamp),
-                width: 1,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }
