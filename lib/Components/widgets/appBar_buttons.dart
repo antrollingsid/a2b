@@ -121,3 +121,49 @@ class CustomLoginSignupAppBar extends StatelessWidget {
     );
   }
 }
+
+class CustomAppBar extends StatelessWidget {
+  const CustomAppBar({
+    super.key,
+    required this.titleText,
+  });
+  final String titleText;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      // toolbarHeight: 100,
+      centerTitle: true,
+      // automaticallyImplyLeading: false,
+      leading: Row(
+        children: const [
+          // SizedBox(
+          //   width: 27,
+          // ),
+          backBtn(),
+        ],
+      ),
+      title: Container(
+        alignment: Alignment.center,
+        child: Text(
+          titleText,
+          style: TextStyle(
+            fontFamily: AppFonts.mainFont,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: AppColors.onBackgroundDark,
+          ),
+        ),
+      ),
+
+      actions: const [
+        Padding(
+          padding: EdgeInsets.only(right: 30),
+          child: menuBtn(),
+        ),
+      ],
+      elevation: 0,
+      backgroundColor: AppColors.backgroundDark,
+    );
+  }
+}

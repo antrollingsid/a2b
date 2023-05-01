@@ -1,6 +1,4 @@
-import 'package:a2b/User/screens/placeOrder1.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +9,21 @@ import '../../Components/widgets/appBar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
 
-class DashBoard extends StatelessWidget {
-  const DashBoard({super.key});
+class PlaceOrder extends StatefulWidget {
+  const PlaceOrder({super.key});
 
+  @override
+  State<PlaceOrder> createState() => _PlaceOrderState();
+}
+
+class _PlaceOrderState extends State<PlaceOrder> {
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,8 +31,8 @@ class DashBoard extends StatelessWidget {
       backgroundColor: AppColors.backgroundDark,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
-        child: CustomLoginSignupAppBar(
-          titleText: 'Sign up',
+        child: CustomAppBar(
+          titleText: 'Place Order',
         ),
       ),
       body: Column(
