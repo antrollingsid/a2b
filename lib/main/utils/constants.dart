@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 const mAppName = 'a2b';
 const mPrivacyPolicy = 'ADD_YOUR_PRIVACY_POLICY_URL';
 const mTermAndCondition = 'ADD_YOUR_TERM_AND_CONDITION_URL';

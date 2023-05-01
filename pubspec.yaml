@@ -46,6 +46,8 @@ dependencies:
   json_annotation: ^4.8.0
   google_maps_flutter: ^2.2.5
   location: ^4.4.0
+  table_calendar: ^2.1.0 
+  syncfusion_flutter_calendar: ^21.1.41
 dev_dependencies:
   flutter_test:
     sdk: flutter

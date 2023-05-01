@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../Components/widgets/login_with_btn.dart';
-import '../../../Components/widgets/appBar_buttons.dart';
+import '../../../Components/widgets/app_bar_buttons.dart';
 import '../../../Components/widgets/custom_button.dart';
 import '../../../Components/widgets/custom_textfield.dart';
 import '../../../Components/widgets/custom_textfield_gradiant.dart';

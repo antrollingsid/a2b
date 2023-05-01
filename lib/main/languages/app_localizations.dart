@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'base_language.dart';
-import 'language_EN.dart';
 import 'language_TR.dart';
+import 'language_en.dart';
+// import 'language_tr.dart';
 
 class AppLocalizations extends LocalizationsDelegate<BaseLanguage> {
   const AppLocalizations();

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, unused_import
+
 import 'package:a2b/User/screens/dashboard.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -7,10 +9,12 @@ import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
-import '../../Components/widgets/appBar_buttons.dart';
+import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
 import 'package:location/location.dart';
+
+import 'calender.dart';
 
 const darkMapStyle = 'assets/json/dark_mode_style.json';
 
@@ -30,6 +34,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
 
   int _selectedIndex = 0;
 
+  // ignore: prefer_const_constructors
   static final LatLng _kMapCenter = LatLng(
     35.1424,
     33.9116,
@@ -134,7 +139,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
         selectedItemColor: AppColors.primaryDark,
         onTap: (index) {
           if (index == 2) {
-            Get.to(() => const PlaceOrder());
+            Get.to(() => const PlaceOrderCalender());
           }
         },
       ),

@@ -1,4 +1,7 @@
+// ignore: duplicate_ignore
 // ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:a2b/main/languages/base_language.dart';
 
 class LanguageEn extends BaseLanguage {

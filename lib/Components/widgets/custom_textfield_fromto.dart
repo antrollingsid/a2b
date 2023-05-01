@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 
 import '../../main/utils/allConstants.dart';
 

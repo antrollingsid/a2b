@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:a2b/main/languages/base_language.dart';
 
 class LanguageTr extends BaseLanguage {
