@@ -53,7 +53,7 @@
       "featureType": "administrative.land_parcel",
       "stylers": [
         {
-          "visibility": "off"
+          "visibility": "on"
         }
       ]
     },
@@ -62,7 +62,7 @@
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#bdbdbd"
+          "color": "#BB86FC"
         }
       ]
     },
@@ -71,7 +71,7 @@
       "elementType": "labels.text.fill",
       "stylers": [
         {
-          "color": "#757575"
+          "color": "#60BFF4"
         }
       ]
     },

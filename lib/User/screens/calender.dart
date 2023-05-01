@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:table_calendar/table_calendar.dart';
 import '../../Components/widgets/custom_textfield_fromto.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';

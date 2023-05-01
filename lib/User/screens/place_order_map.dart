@@ -79,6 +79,8 @@ class _PlaceOrderState extends State<PlaceOrder> {
                     initialCameraPosition: _kInitialPosition,
                     onMapCreated: onMapCreated,
                     zoomControlsEnabled: true,
+                    zoomGesturesEnabled: true,
+                    mapToolbarEnabled: true,
                   ),
                 ),
               ),

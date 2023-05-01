@@ -23,8 +23,8 @@ class DashBoard extends StatelessWidget {
       backgroundColor: AppColors.backgroundDark,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
-        child: CustomLoginSignupAppBar(
-          titleText: 'Sign up',
+        child: CustomAppBar(
+          titleText: '  dashboard',
         ),
       ),
       body: Column(
