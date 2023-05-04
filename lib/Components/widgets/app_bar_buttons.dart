@@ -132,45 +132,22 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      // toolbarHeight: 100,
-      centerTitle: false,
-      automaticallyImplyLeading: false,
-      // leading: Row(
-      //   children: const [
-      //     SizedBox(
-      //       width: 27,
-      //     ),
-      //     backBtn(),
-      //   ],
-      // ),
-      title: Container(
-        alignment: Alignment.center,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 14,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 5),
-              child: backBtn(),
-            ),
-            const SizedBox(
-              width: 67,
-            ),
-            Text(
-              titleText,
-              style: TextStyle(
-                fontFamily: AppFonts.mainFont,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                color: AppColors.onBackgroundDark,
-              ),
-            ),
-            // menuBtn()
-          ],
+      centerTitle: true,
+      automaticallyImplyLeading: true,
+      leading: const Padding(
+        padding: EdgeInsets.fromLTRB(27, 4, 0, 4),
+        child: backBtn(),
+      ),
+      leadingWidth: 74,
+      title: Text(
+        titleText,
+        style: TextStyle(
+          fontFamily: AppFonts.mainFont,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          color: AppColors.onBackgroundDark,
         ),
       ),
-
       actions: const [
         Padding(
           padding: EdgeInsets.fromLTRB(0, 5, 30, 3),

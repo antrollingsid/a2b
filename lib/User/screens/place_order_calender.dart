@@ -51,7 +51,7 @@ class _PlaceOrderState extends State<PlaceOrderCalender> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               CustomCalendar(),
-              CustomShip(),
+              // CustomShip(),
             ],
           ),
         ),

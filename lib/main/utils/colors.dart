@@ -14,6 +14,7 @@ class AppColors {
   static const Color textBlack = Colors.black;
   static const Color secondary = Color.fromRGBO(3, 218, 198, 1.0);
   static const Color buttonRed = Color.fromRGBO(244, 48, 12, 1.0);
+  static const Color errorDark = Color.fromRGBO(207, 102, 121, 1.0);
   static const Color textGrey = Color.fromRGBO(151, 151, 151, 1.0);
   static const Color textBlue = Color.fromRGBO(17, 63, 118, 1.0);
 }

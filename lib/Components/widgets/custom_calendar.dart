@@ -29,6 +29,15 @@ class _CustomCalendarState extends State<CustomCalendar> {
         firstDay: _firstDay,
         focusedDay: _focusedDay,
         lastDay: _lastDay,
+        rowHeight: 48,
+        daysOfWeekStyle: const DaysOfWeekStyle(
+          weekdayStyle: TextStyle(
+            color: AppColors.textGrey,
+          ),
+          weekendStyle: TextStyle(
+            color: AppColors.textGrey,
+          ),
+        ),
 
         /*----------------
          ---- HEAADER ----
@@ -36,11 +45,20 @@ class _CustomCalendarState extends State<CustomCalendar> {
         headerStyle: const HeaderStyle(
           formatButtonVisible: false,
           titleCentered: true,
+          leftChevronIcon: Icon(
+            Icons.chevron_left,
+            color: AppColors.secondaryBlue,
+          ),
+          rightChevronIcon: Icon(
+            Icons.chevron_right,
+            color: AppColors.secondaryBlue,
+          ),
           titleTextStyle: TextStyle(
             color: AppColors.backgroundLightMode,
           ),
         ),
         calendarStyle: CalendarStyle(
+          tablePadding: const EdgeInsets.only(top: 6),
           cellAlignment: Alignment.center,
 
           /*-----------------
@@ -73,11 +91,15 @@ class _CustomCalendarState extends State<CustomCalendar> {
           isTodayHighlighted: true,
           todayDecoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            color: AppColors.secondary,
+            color: Colors.transparent,
             borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              width: 1,
+              color: AppColors.primaryDark,
+            ),
           ),
           todayTextStyle: const TextStyle(
-            color: AppColors.backgroundDark,
+            color: AppColors.primaryDark,
           ),
 
           /*----------------
@@ -89,7 +111,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             borderRadius: BorderRadius.circular(10),
           ),
           outsideTextStyle: const TextStyle(
-            color: Color.fromARGB(255, 88, 88, 88),
+            color: Color.fromARGB(255, 68, 68, 68),
           ),
 
           /*----------------
@@ -106,13 +128,13 @@ class _CustomCalendarState extends State<CustomCalendar> {
         headerVisible: true,
         startingDayOfWeek: StartingDayOfWeek.monday,
         selectedDayPredicate: (day) {
-          return isSameDay(_selectedDay, day);
+          return isSameDay(day, _selectedDay);
         },
         onDaySelected: (selectedDay, focusedDay) {
           setState(
             () {
               _selectedDay = selectedDay;
-              _focusedDay = focusedDay; // update `_focusedDay` here as well
+              _focusedDay = focusedDay;
             },
           );
         },
