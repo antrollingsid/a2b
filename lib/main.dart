@@ -11,7 +11,9 @@ import 'main/store/store.dart';
 AppStore appStore = AppStore();
 late BaseLanguage language;
 
-void main() {
+void main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  await AppStore();
   runApp(const MainApp());
 }
 

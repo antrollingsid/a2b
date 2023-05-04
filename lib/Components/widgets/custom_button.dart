@@ -13,7 +13,7 @@ class CustomBtn extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         margin: const EdgeInsets.all(0),
-        width: double.infinity,
+        width: 333,
         height: 50,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),

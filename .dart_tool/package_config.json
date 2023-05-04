@@ -93,7 +93,7 @@
     },
     {
       "name": "built_value",
-      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/built_value-8.4.4",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/built_value-8.5.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -206,8 +206,20 @@
       "languageVersion": "2.15"
     },
     {
+      "name": "dio",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/dio-5.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "dots_indicator",
       "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/dots_indicator-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "dotted_border",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/dotted_border-2.0.0+3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -234,6 +246,12 @@
       "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/file-6.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "file_picker",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/file_picker-5.2.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "firebase_auth",
@@ -387,9 +405,9 @@
     },
     {
       "name": "google_maps_flutter",
-      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/google_maps_flutter-2.2.5",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/google_maps_flutter-2.2.6",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.17"
     },
     {
       "name": "google_maps_flutter_android",
@@ -423,7 +441,7 @@
     },
     {
       "name": "google_sign_in_ios",
-      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/google_sign_in_ios-5.6.1",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/google_sign_in_ios-5.6.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -453,9 +471,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/http-0.13.5",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/http-0.13.6",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.19"
     },
     {
       "name": "http_multi_server",
@@ -470,6 +488,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "iconsax",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/iconsax-0.0.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "image_picker",
       "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/image_picker-0.8.7+4",
       "packageUri": "lib/",
@@ -477,7 +501,7 @@
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/image_picker_android-0.8.6+10",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/image_picker_android-0.8.6+11",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -616,6 +640,12 @@
     {
       "name": "path",
       "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/path-1.8.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_drawing",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/path_drawing-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -789,9 +819,9 @@
     },
     {
       "name": "simple_gesture_detector",
-      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/simple_gesture_detector-0.1.6",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/simple_gesture_detector-0.2.0",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "sky_engine",
@@ -849,27 +879,27 @@
     },
     {
       "name": "syncfusion_flutter_calendar",
-      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/syncfusion_flutter_calendar-21.1.41",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/syncfusion_flutter_calendar-21.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_flutter_core",
-      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-21.1.41",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/syncfusion_flutter_core-21.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "syncfusion_flutter_datepicker",
-      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/syncfusion_flutter_datepicker-21.1.41",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/syncfusion_flutter_datepicker-21.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "table_calendar",
-      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/table_calendar-2.3.3",
+      "rootUri": "file:///Users/antrollingshon/.pub-cache/hosted/pub.dev/table_calendar-3.0.8",
       "packageUri": "lib/",
-      "languageVersion": "2.7"
+      "languageVersion": "2.12"
     },
     {
       "name": "term_glyph",
@@ -1016,7 +1046,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-05-01T19:46:25.467267Z",
+  "generated": "2023-05-03T13:59:09.059192Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

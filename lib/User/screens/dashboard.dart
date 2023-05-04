@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_import
 
 import 'package:a2b/User/screens/place_order_map.dart';
+import 'package:a2b/User/screens/place_order_upload.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -82,6 +83,8 @@ class DashBoard extends StatelessWidget {
         onTap: (index) {
           if (index == 2) {
             Get.to(() => const PlaceOrder());
+          } else if (index == 1) {
+            Get.to(() => const PlaceOrderUpload());
           }
         },
       ),

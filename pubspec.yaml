@@ -20,12 +20,13 @@ dependencies:
   path_provider: ^2.0.11
   flutter_login: ^4.1.1
   firebase_core: ^2.10.0
-  firebase_auth: ^4.3.0
+  firebase_auth: ^4.4.2
   cloud_firestore: ^4.0.1
   firebase_storage: ^11.0.1
   google_sign_in: ^6.1.0
   fluttertoast: ^8.0.8
   image_picker: ^0.8.4+9
+  firebase_auth_web: ^5.3.2
   shared_preferences: ^2.0.13
   intl: ^0.17.0
   photo_view: ^0.14.0
@@ -46,8 +47,12 @@ dependencies:
   json_annotation: ^4.8.0
   google_maps_flutter: ^2.2.5
   location: ^4.4.0
-  table_calendar: ^2.1.0 
+  table_calendar: ^3.0.8 
   syncfusion_flutter_calendar: ^21.1.41
+  dio: ^5.1.1
+  dotted_border: ^2.0.0+3
+  file_picker: ^5.2.11
+  iconsax: ^0.0.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

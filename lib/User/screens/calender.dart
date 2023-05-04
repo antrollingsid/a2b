@@ -3,6 +3,7 @@
 import 'package:a2b/User/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -25,7 +26,9 @@ class PlaceOrderCalender extends StatefulWidget {
 
 class _PlaceOrderState extends State<PlaceOrderCalender> {
   late CalendarController _controller;
-
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
   @override
   void initState() {
     super.initState();
@@ -58,85 +61,69 @@ class _PlaceOrderState extends State<PlaceOrderCalender> {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: TableCalendar(
-                  calendarController: _controller, // use the controller here
-                  initialCalendarFormat: CalendarFormat.month,
-                  daysOfWeekStyle: const DaysOfWeekStyle(
-                    weekendStyle: TextStyle(
-                      color: AppColors.textGrey,
-                    ),
-                    weekdayStyle: TextStyle(
-                      color: AppColors.textGrey,
-                    ),
+                  firstDay: DateTime.utc(2010, 10, 16),
+                  focusedDay: DateTime.now(),
+                  lastDay: DateTime.utc(2030, 3, 14),
+                  headerStyle: const HeaderStyle(
+                    formatButtonVisible: false,
+                    titleCentered: true,
                   ),
                   calendarStyle: CalendarStyle(
-                    weekdayStyle: const TextStyle(
+                    selectedDecoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(10),
+                      color: AppColors.primaryDark,
+                    ),
+                    isTodayHighlighted: true,
+                    cellAlignment: Alignment.center,
+                    todayDecoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      color: AppColors.secondary,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    outsideDecoration: const BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      // borderRadius: BorderRadius.circular(10),
+                    ),
+                    defaultDecoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      // backgroundBlendMode: BlendMode.clear,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    outsideDaysVisible: true,
+                    outsideTextStyle: const TextStyle(
                       color: AppColors.textGrey,
                     ),
-                    weekendStyle: const TextStyle(
+                    weekendTextStyle: const TextStyle(
                       color: AppColors.textGrey,
                     ),
-                    outsideWeekendStyle: const TextStyle(
-                      color: Color.fromARGB(255, 80, 80, 80),
-                    ),
-                    outsideStyle: const TextStyle(
-                      color: Color.fromARGB(255, 80, 80, 80),
-                    ),
-                    todayColor: AppColors.secondaryBlue,
-                    selectedColor: Theme.of(context).primaryColor,
-                    todayStyle: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22.0,
-                      color: Colors.white,
+                    weekendDecoration: const BoxDecoration(
+                      shape: BoxShape.rectangle,
                     ),
                   ),
-                  headerStyle: const HeaderStyle(
-                    rightChevronIcon: Icon(
-                      Icons.chevron_right,
-                      color: AppColors.backgroundLightMode,
-                    ),
-                    leftChevronIcon: Icon(
-                      Icons.chevron_left,
-                      color: AppColors.backgroundLightMode,
-                    ),
-                    titleTextStyle: TextStyle(
-                      color: AppColors.backgroundLightMode,
-                    ),
-                    centerHeaderTitle: true,
-                    formatButtonVisible: false,
-                    formatButtonTextStyle: TextStyle(color: Colors.white),
-                    formatButtonShowsNext: false,
-                  ),
+                  headerVisible: true,
                   startingDayOfWeek: StartingDayOfWeek.monday,
-
-                  // onDaySelected: (date, events) {
-                  //   print(date.toUtc());
-                  // },
-                  builders: CalendarBuilders(
-                    selectedDayBuilder: (context, date, events) => Container(
-                      margin: const EdgeInsets.all(5.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Text(
-                        date.day.toString(),
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    todayDayBuilder: (context, date, events) => Container(
-                      margin: const EdgeInsets.all(5.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryDark,
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Text(
-                        date.day.toString(),
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
+                  selectedDayPredicate: (day) {
+                    return isSameDay(_selectedDay, day);
+                  },
+                  onDaySelected: (selectedDay, focusedDay) {
+                    setState(
+                      () {
+                        _selectedDay = selectedDay;
+                        _focusedDay =
+                            focusedDay; // update `_focusedDay` here as well
+                      },
+                    );
+                  },
+                  calendarFormat: _calendarFormat,
+                  onFormatChanged: (format) {
+                    setState(() {
+                      _calendarFormat = format;
+                    });
+                  },
+                  onPageChanged: (focusedDay) {
+                    _focusedDay = focusedDay;
+                  },
                 ),
               ),
             ],
