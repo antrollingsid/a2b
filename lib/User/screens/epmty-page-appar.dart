@@ -17,20 +17,20 @@ import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
 import 'package:location/location.dart';
 
-class PlaceOrderCalender extends StatefulWidget {
-  const PlaceOrderCalender({Key? key});
+class EmptyPage extends StatefulWidget {
+  const EmptyPage({Key? key});
 
   @override
-  State<PlaceOrderCalender> createState() => _PlaceOrderState();
+  State<EmptyPage> createState() => _EmptyPage();
 }
 
-class _PlaceOrderState extends State<PlaceOrderCalender> {
+class _EmptyPage extends State<EmptyPage> {
   @override
   void initState() {
     super.initState();
   }
 
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _PlaceOrderState extends State<PlaceOrderCalender> {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
-          titleText: 'Choose The Date',
+          titleText: 'Empty Pagge',
         ),
       ),
       body: SingleChildScrollView(
@@ -48,7 +48,7 @@ class _PlaceOrderState extends State<PlaceOrderCalender> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
-              CustomCalendar(),
+              // CustomCalendar(),
               // CustomShip(),
             ],
           ),
@@ -97,7 +97,7 @@ class _PlaceOrderState extends State<PlaceOrderCalender> {
         selectedItemColor: AppColors.primaryDark,
         onTap: (index) {
           if (index == 2) {
-            // Get.to(() => const PlaceOrderCalender());
+            // Get.to(() => const EmptyPage());
           }
         },
       ),
