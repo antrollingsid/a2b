@@ -26,8 +26,9 @@ class LoginWithBtn extends StatelessWidget {
                   height: Dimensions.loginWithBtnHeight,
                   decoration: BoxDecoration(
                     color: AppColors.buttonDark,
-                    borderRadius:
-                        BorderRadius.circular(Dimensions.borderRadius8),
+                    borderRadius: BorderRadius.circular(
+                      Dimensions.borderRadius8,
+                    ),
                     border: Border.all(
                       color: AppColors.buttonStroke, // specify the border color
                       width: 2.0, // specify the border width
@@ -43,8 +44,9 @@ class LoginWithBtn extends StatelessWidget {
                   height: Dimensions.loginWithBtnHeight,
                   decoration: BoxDecoration(
                     color: AppColors.buttonDark,
-                    borderRadius:
-                        BorderRadius.circular(Dimensions.borderRadius8),
+                    borderRadius: BorderRadius.circular(
+                      Dimensions.borderRadius8,
+                    ),
                     border: Border.all(
                       color: AppColors.buttonStroke, // specify the border color
                       width: 2.0, // specify the border width

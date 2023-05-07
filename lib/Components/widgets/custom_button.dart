@@ -14,12 +14,12 @@ class CustomBtn extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(0),
         width: 333,
-        height: 50,
+        height: 67,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           gradient: const LinearGradient(
               colors: [
-                AppColors.secondary,
+                AppColors.secondaryBlue,
                 AppColors.primaryDark,
               ],
               begin: FractionalOffset(0.0, 1.0),

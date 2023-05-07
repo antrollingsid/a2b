@@ -25,7 +25,7 @@ class DashBoard extends StatelessWidget {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
-          titleText: '  dashboard',
+          titleText: 'dashboard',
         ),
       ),
       body: Column(
@@ -113,7 +113,6 @@ class TrackingTextField extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: SvgPicture.string(
                   SvgConstant.searchIconDark,
-                  // alignment: Alignment.center,
                   width: 19,
                   height: 19,
                 ),

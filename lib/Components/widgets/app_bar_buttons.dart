@@ -86,30 +86,32 @@ class CustomLoginSignupAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      // toolbarHeight: 100,
       centerTitle: false,
       automaticallyImplyLeading: false,
-      title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 14),
-          child: backBtn(),
-        ),
-        const SizedBox(
-          width: 12,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(10, 8, 0, 0),
-          child: Text(
-            titleText,
-            style: TextStyle(
-              fontFamily: AppFonts.mainFont,
-              fontSize: 36,
-              fontWeight: FontWeight.w600,
-              color: AppColors.onBackgroundDark,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(left: 14),
+            child: backBtn(),
+          ),
+          const SizedBox(
+            width: 12,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 8, 0, 0),
+            child: Text(
+              titleText,
+              style: TextStyle(
+                fontFamily: AppFonts.mainFont,
+                fontSize: 36,
+                fontWeight: FontWeight.w600,
+                color: AppColors.onBackgroundDark,
+              ),
             ),
           ),
-        ),
-      ]),
+        ],
+      ),
       // actions: const [
       //   Padding(
       //     padding: EdgeInsets.only(right: 30),
