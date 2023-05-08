@@ -57,6 +57,13 @@ dependencies:
   file_picker: ^5.2.11
   iconsax: ^0.0.8
   flutter_i18n: ^0.32.4
+  google_fonts: ^4.0.4
+  onesignal_flutter: ^3.5.1
+  firebase_crashlytics: ^3.2.0
+  cached_network_image: ^3.2.3
+  lottie: ^2.3.2
+  geolocator: ^9.0.2
+  html: ^0.15.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

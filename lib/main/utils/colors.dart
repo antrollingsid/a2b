@@ -18,3 +18,11 @@ class AppColors {
   static const Color textGrey = Color.fromRGBO(151, 151, 151, 1.0);
   static const Color textBlue = Color.fromRGBO(17, 63, 118, 1.0);
 }
+
+const scaffoldSecondaryDark = Color(0xFF1E1E1E);
+const scaffoldColorDark = Color(0xFF090909);
+const scaffoldColorLight = Colors.white;
+const appButtonColorDark = Color(0xFF282828);
+const dividerColor = Color(0xFFD3D3D3);
+Color colorPrimary = Color(0xFF573391);
+Color borderColor = Color(0xFFEAEAEA);

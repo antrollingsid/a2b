@@ -118,7 +118,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
               ),
               InkwellBtn(
                 textLeading: 'Already have an account ?  ',
-                textEnding: 'language.logIn',
+                textEnding: language.logIn,
                 onTap: () => Get.to(const LoginPage()),
               ),
               const SizedBox(
