@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
-
 class CustomTextfield extends StatefulWidget {
   const CustomTextfield({
     super.key,
@@ -52,17 +51,17 @@ class _CustomTextfieldState extends State<CustomTextfield> {
               ),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              setState(
-                () {
-                  _showIcon = !_showIcon;
-                  _isPassword = !_isPassword;
-                },
-              );
-            },
-            child: const Text('Press me'),
-          ),
+          // ElevatedButton(
+          //   onPressed: () {
+          //     setState(
+          //       () {
+          //         _showIcon = !_showIcon;
+          //         _isPassword = !_isPassword;
+          //       },
+          //     );
+          //   },
+          //   child: const Text('Press me'),
+          // ),
           const SizedBox(height: 2),
           SizedBox(
             height: 67,
@@ -90,34 +89,37 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                       focusedBorder: myfocusborder(),
                     ),
                   ),
-                  if (_isPassword) ClipRect(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          child: IconButton(
-                            icon: SvgPicture.string(
-                              _isFocused
-                                  ? SvgConstant.eyeCloseDark
-                                  : SvgConstant.eyeOpenDark,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {
-                              setState(
-                                () {
-                                  _isFocused = !_isFocused;
-                                  // _showIcon = !_showIcon;
-                                  _isPassword = !_isPassword;
-                                },
-                              );
+                  if (_isPassword)
+                    ClipRect(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: IconButton(
+                        icon: SvgPicture.string(
+                          _isFocused
+                              ? SvgConstant.eyeCloseDark
+                              : SvgConstant.eyeOpenDark,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          setState(
+                            () {
+                              _isFocused = !_isFocused;
+                              // _showIcon = !_showIcon;
+                              _isPassword = !_isPassword;
                             },
-                          ),
-                        ) else _showIcon
-                          ? IconButton(
-                              icon: SvgPicture.string(SvgConstant.checkBoxBtn),
-                              color: _isPassword
-                                  ? Colors.white
-                                  : null, // Set color white when isPassword is true
-                              onPressed: () {},
-                            )
-                          : Container(),
+                          );
+                        },
+                      ),
+                    )
+                  else
+                    _showIcon
+                        ? IconButton(
+                            icon: SvgPicture.string(SvgConstant.checkBoxBtn),
+                            color: _isPassword
+                                ? Colors.white
+                                : null, // Set color white when isPassword is true
+                            onPressed: () {},
+                          )
+                        : Container(),
                 ],
               ),
             ),
