@@ -12,24 +12,21 @@ class OrderHistoryActivity extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 14,
-              ),
               Container(
-                margin: const EdgeInsets.fromLTRB(0, 50, 0, 10),
-                height: 96,
+                margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                height: 60,
                 // color: const Color.fromARGB(255, 81, 2, 90),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 47,
-                      height: 47,
+                      width: 40,
+                      height: 40,
                       margin: const EdgeInsets.fromLTRB(0, 0, 20, 9),
                       decoration: BoxDecoration(
                         color: AppColors.buttonDark,

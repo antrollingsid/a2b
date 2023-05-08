@@ -1,25 +1,15 @@
 import 'dart:io';
 
 import 'package:a2b/Components/widgets/custom_button.dart';
-import 'package:a2b/User/screens/place_order_map.dart';
-import 'package:flutter_login/flutter_login.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
-import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
-import '../../Components/widgets/order_activity.dart';
-import '../../Components/widgets/shippement.dart';
 
 class PlaceOrderUpload extends StatefulWidget {
   const PlaceOrderUpload({Key? key}) : super(key: key);
@@ -89,7 +79,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                 width: 333,
                 height: 374,
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(20, 40, 40, 40),
+                    color: const Color.fromARGB(20, 40, 40, 40),
                     borderRadius: BorderRadius.circular(10)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -165,7 +155,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.shade200,
-                                  offset: Offset(0, 1),
+                                  offset: const Offset(0, 1),
                                   blurRadius: 3,
                                   spreadRadius: 2,
                                 )

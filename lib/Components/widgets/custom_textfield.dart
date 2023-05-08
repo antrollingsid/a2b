@@ -1,9 +1,10 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:a2b/main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 
-import '../assets/fonts.dart';
 
 class CustomTextfield extends StatefulWidget {
   const CustomTextfield({
@@ -89,8 +90,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                       focusedBorder: myfocusborder(),
                     ),
                   ),
-                  _isPassword
-                      ? ClipRect(
+                  if (_isPassword) ClipRect(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           child: IconButton(
                             icon: SvgPicture.string(
@@ -109,8 +109,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                               );
                             },
                           ),
-                        )
-                      : _showIcon
+                        ) else _showIcon
                           ? IconButton(
                               icon: SvgPicture.string(SvgConstant.checkBoxBtn),
                               color: _isPassword
@@ -129,8 +128,8 @@ class _CustomTextfieldState extends State<CustomTextfield> {
   }
 }
 
-GradientOutlineInputBorder myinputborder(_showIcon) {
-  if (_showIcon) {
+GradientOutlineInputBorder myinputborder(showIcon) {
+  if (showIcon) {
     return const GradientOutlineInputBorder(
       gradient: LinearGradient(
         colors: [

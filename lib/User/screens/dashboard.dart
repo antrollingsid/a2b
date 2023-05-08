@@ -13,7 +13,7 @@ import 'package:gradient_borders/input_borders/gradient_outline_input_border.dar
 import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
-import 'epmty-page-appar.dart';
+import 'epmty_page_appar.dart';
 
 class DashBoard extends StatelessWidget {
   const DashBoard({super.key});
@@ -30,22 +30,25 @@ class DashBoard extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const CustomShip(),
-            const TrackingTextField(),
-            const OrderHistoryActivity(),
-            Padding(
-              padding: const EdgeInsets.only(left: 90),
-              child: SvgPicture.string(SvgConstant.lineDark),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Get.to(() => const EmptyPage());
-              },
-              child: const Text('Empty Page'),
-            ),
-          ],
+        child: FittedBox(
+          child: Column(
+            children: [
+              const CustomShip(),
+              const TrackingTextField(),
+              const OrderHistoryActivity(),
+              const OrderHistoryActivity(),
+              Padding(
+                padding: const EdgeInsets.only(left: 90),
+                child: SvgPicture.string(SvgConstant.lineDark),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.to(() => const EmptyPage());
+                },
+                child: const Text('Empty Page'),
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(

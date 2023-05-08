@@ -1,18 +1,17 @@
-// ignore_for_file: use_key_in_widget_constructors
-
-import 'package:a2b/Components/widgets/custom_calendar.dart';
+// ignore: file_names
 import 'package:flutter/material.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 
-class PlaceOrderCalender extends StatefulWidget {
-  const PlaceOrderCalender({Key? key});
+class EmptyPage extends StatefulWidget {
+  // ignore: use_key_in_widget_constructors
+  const EmptyPage({Key? key});
 
   @override
-  State<PlaceOrderCalender> createState() => _PlaceOrderState();
+  State<EmptyPage> createState() => _EmptyPage();
 }
 
-class _PlaceOrderState extends State<PlaceOrderCalender> {
+class _EmptyPage extends State<EmptyPage> {
   @override
   void initState() {
     super.initState();
@@ -28,7 +27,7 @@ class _PlaceOrderState extends State<PlaceOrderCalender> {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
-          titleText: 'Choose The Date',
+          titleText: 'Empty Pagge',
         ),
       ),
       body: SingleChildScrollView(
@@ -36,7 +35,7 @@ class _PlaceOrderState extends State<PlaceOrderCalender> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
-              CustomCalendar(),
+              // CustomCalendar(),
               // CustomShip(),
             ],
           ),
@@ -85,7 +84,7 @@ class _PlaceOrderState extends State<PlaceOrderCalender> {
         selectedItemColor: AppColors.primaryDark,
         onTap: (index) {
           if (index == 2) {
-            // Get.to(() => const PlaceOrderCalender());
+            // Get.to(() => const EmptyPage());
           }
         },
       ),

@@ -27,4 +27,6 @@ class AppLocalizations extends LocalizationsDelegate<BaseLanguage> {
 
   @override
   bool shouldReload(LocalizationsDelegate<BaseLanguage> old) => false;
+
+  static of(BuildContext context) {}
 }
