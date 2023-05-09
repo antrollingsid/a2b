@@ -1,18 +1,20 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:a2b/Components/widgets/custom_calendar.dart';
+import 'package:a2b/User/screens/place_order_upload.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 
-class PlaceOrderCalender extends StatefulWidget {
-  const PlaceOrderCalender({Key? key});
+class PlaceOrderCalendar extends StatefulWidget {
+  const PlaceOrderCalendar({Key? key});
 
   @override
-  State<PlaceOrderCalender> createState() => _PlaceOrderState();
+  State<PlaceOrderCalendar> createState() => _PlaceOrderState();
 }
 
-class _PlaceOrderState extends State<PlaceOrderCalender> {
+class _PlaceOrderState extends State<PlaceOrderCalendar> {
   @override
   void initState() {
     super.initState();
@@ -85,7 +87,7 @@ class _PlaceOrderState extends State<PlaceOrderCalender> {
         selectedItemColor: AppColors.primaryDark,
         onTap: (index) {
           if (index == 2) {
-            // Get.to(() => const PlaceOrderCalender());
+            Get.to(() => const PlaceOrderUpload());
           }
         },
       ),

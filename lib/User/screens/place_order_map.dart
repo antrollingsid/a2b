@@ -14,18 +14,18 @@ import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
 import 'package:location/location.dart';
 
-import 'place_order_calender.dart';
+import 'place_order_calendar.dart';
 
 const darkMapStyle = 'assets/json/dark_mode_style.json';
 
-class PlaceOrder extends StatefulWidget {
-  const PlaceOrder({super.key});
+class PlaceOrderMap extends StatefulWidget {
+  const PlaceOrderMap({super.key});
 
   @override
-  State<PlaceOrder> createState() => _PlaceOrderState();
+  State<PlaceOrderMap> createState() => _PlaceOrderMapState();
 }
 
-class _PlaceOrderState extends State<PlaceOrder> {
+class _PlaceOrderMapState extends State<PlaceOrderMap> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -141,7 +141,7 @@ class _PlaceOrderState extends State<PlaceOrder> {
         selectedItemColor: AppColors.primaryDark,
         onTap: (index) {
           if (index == 2) {
-            Get.to(() => const PlaceOrderCalender());
+            Get.to(() => const PlaceOrderCalendar());
           }
         },
       ),

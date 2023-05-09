@@ -43,7 +43,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
   void initState() {
     loadingController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 10),
+      duration: const Duration(seconds: 5),
     )..addListener(() {
         setState(() {});
       });
@@ -62,112 +62,108 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
           titleText: 'ulpaod documents',
         ),
       ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          GestureDetector(
-            onTap: selectFile,
-            child: DottedBorder(
-              borderType: BorderType.RRect,
-              radius: const Radius.circular(10),
-              dashPattern: const [10, 4],
-              strokeCap: StrokeCap.round,
-              color: Colors.blue.shade400,
-              child: Container(
-                width: 333,
-                height: 374,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(20, 40, 40, 40),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.string(
-                      SvgConstant.uploadIconDark,
-                      height: 80,
-                      width: 80,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Text(
-                      'Upload your file',
-                      style: TextStyle(
-                          fontSize: 17,
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 45,
-                    ),
-                    Container(
-                      height: 53,
-                      width: 131,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: AppColors.secondaryBlue,
-                      ),
-                      child: const Text(
-                        'Browse',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'File should be jpg, png',
-                      style:
-                          TextStyle(fontSize: 15, color: Colors.grey.shade500),
-                    ),
-                  ],
-                ),
-              ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
             ),
-          ),
-          _platformFile != null
-              ? Container(
-                  padding: const EdgeInsets.all(20),
+            GestureDetector(
+              onTap: selectFile,
+              child: DottedBorder(
+                borderType: BorderType.RRect,
+                radius: const Radius.circular(10),
+                dashPattern: const [10, 4],
+                strokeCap: StrokeCap.round,
+                color: Colors.blue.shade400,
+                child: Container(
+                  width: 333,
+                  height: 374,
+                  decoration: BoxDecoration(
+                      color: const Color.fromARGB(20, 40, 40, 40),
+                      borderRadius: BorderRadius.circular(10)),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Selected File',
+                      SvgPicture.string(
+                        SvgConstant.uploadIconDark,
+                        height: 80,
+                        width: 80,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        'Upload your file',
                         style: TextStyle(
-                          color: Colors.grey.shade400,
-                          fontSize: 15,
+                            fontSize: 17,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 45,
+                      ),
+                      Container(
+                        height: 53,
+                        width: 131,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: AppColors.secondaryBlue,
+                        ),
+                        child: const Text(
+                          'Browse',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
+                      Text(
+                        'File should be jpg, png',
+                        style: TextStyle(
+                            fontSize: 15, color: Colors.grey.shade500),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            _platformFile != null
+                ? Container(
+                    width: 333,
+                    padding: const EdgeInsets.only(top: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Selected File',
+                          style: TextStyle(
+                            color: Colors.grey.shade400,
+                            fontSize: 15,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.shade200,
-                                  offset: const Offset(0, 1),
-                                  blurRadius: 3,
-                                  spreadRadius: 2,
-                                )
-                              ]),
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppColors.buttonStroke,
+                          ),
                           child: Row(
                             children: [
                               ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.file(
-                                    _file!,
-                                    width: 70,
-                                  )),
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.file(
+                                  _file!,
+                                  width: 70,
+                                ),
+                              ),
                               const SizedBox(
                                 width: 10,
                               ),
@@ -178,7 +174,10 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                                     Text(
                                       _platformFile!.name,
                                       style: const TextStyle(
-                                          fontSize: 13, color: Colors.black),
+                                        fontSize: 13,
+                                        color:
+                                            Color.fromARGB(255, 235, 231, 231),
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 5,
@@ -186,23 +185,56 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                                     Text(
                                       '${(_platformFile!.size / 1024).ceil()} KB',
                                       style: TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.grey.shade500),
+                                        fontSize: 13,
+                                        color: Colors.grey.shade500,
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    Container(
-                                        height: 5,
-                                        clipBehavior: Clip.hardEdge,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          color: Colors.blue.shade50,
-                                        ),
-                                        child: LinearProgressIndicator(
-                                          value: loadingController.value,
-                                        )),
+                                    SizedBox(
+                                      height: 7,
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: AppColors.primaryDark,
+                                            ),
+                                          ),
+                                          Positioned.fill(
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Container(
+                                                height: 7,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: AppColors.primaryDark,
+                                                ),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  child:
+                                                      LinearProgressIndicator(
+                                                    value:
+                                                        loadingController.value,
+                                                    backgroundColor:
+                                                        Colors.white,
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(
+                                                      AppColors.primaryDark,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -210,33 +242,36 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                                 width: 10,
                               ),
                             ],
-                          )),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      // MaterialButton(
-                      //   minWidth: double.infinity,
-                      //   height: 45,
-                      //   onPressed: () {},
-                      //   color: Colors.black,
-                      //   child: Text('Upload', style: TextStyle(color: Colors.white),),
-                      // )
-                    ],
-                  ))
-              : Container(),
-          const SizedBox(
-            height: 150,
-          ),
-          // const CustomShip(),
-          // const TrackingTextField(),
-          // const OrderHistoryActivity(),
-          Center(
-            child: CustomBtn(
-              textonbtn: 'upload',
-              onPress: () {},
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        // MaterialButton(
+                        //   minWidth: double.infinity,
+                        //   height: 45,
+                        //   onPressed: () {},
+                        //   color: Colors.black,
+                        //   child: Text('Upload', style: TextStyle(color: Colors.white),),
+                        // )
+                      ],
+                    ),
+                  )
+                : Container(),
+            const SizedBox(
+              height: 70,
             ),
-          ),
-        ],
+            // const CustomShip(),
+            // const TrackingTextField(),
+            // const OrderHistoryActivity(),
+            Center(
+              child: CustomBtn(
+                textonbtn: 'upload',
+                onPress: () {},
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
