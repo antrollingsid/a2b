@@ -13,13 +13,13 @@ class AppTheme {
     primaryColor: AppColors.primaryDark,
     scaffoldBackgroundColor: Colors.white,
     fontFamily: GoogleFonts.roboto().fontFamily,
-    iconTheme: IconThemeData(color: Colors.black),
+    iconTheme: const IconThemeData(color: Colors.black),
     dialogBackgroundColor: Colors.white,
     unselectedWidgetColor: Colors.grey,
     dividerColor: viewLineColor,
     cardColor: Colors.white,
-    tabBarTheme: TabBarTheme(labelColor: Colors.black),
-    appBarTheme: AppBarTheme(
+    tabBarTheme: const TabBarTheme(labelColor: Colors.black),
+    appBarTheme: const AppBarTheme(
       color: AppColors.primaryDark,
       elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
@@ -27,12 +27,12 @@ class AppTheme {
           statusBarColor: AppColors.primaryDark),
     ),
     dialogTheme: DialogTheme(shape: dialogShape()),
-    bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white),
-    colorScheme: ColorScheme.light(
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
+    colorScheme: const ColorScheme.light(
       primary: AppColors.primaryDark,
     ),
   ).copyWith(
-    pageTransitionsTheme: PageTransitionsTheme(
+    pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
         TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
         TargetPlatform.linux: OpenUpwardsPageTransitionsBuilder(),
@@ -46,13 +46,13 @@ class AppTheme {
     primaryColor: AppColors.primaryDark,
     scaffoldBackgroundColor: scaffoldColorDark,
     fontFamily: GoogleFonts.roboto().fontFamily,
-    iconTheme: IconThemeData(color: Colors.white),
+    iconTheme: const IconThemeData(color: Colors.white),
     dialogBackgroundColor: scaffoldSecondaryDark,
     unselectedWidgetColor: Colors.white60,
     dividerColor: Colors.white12,
     cardColor: scaffoldSecondaryDark,
-    tabBarTheme: TabBarTheme(labelColor: Colors.white),
-    appBarTheme: AppBarTheme(
+    tabBarTheme: const TabBarTheme(labelColor: Colors.white),
+    appBarTheme: const AppBarTheme(
       color: scaffoldSecondaryDark,
       elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
@@ -61,13 +61,13 @@ class AppTheme {
       ),
     ),
     dialogTheme: DialogTheme(shape: dialogShape()),
-    snackBarTheme: SnackBarThemeData(backgroundColor: appButtonColorDark),
-    bottomSheetTheme: BottomSheetThemeData(backgroundColor: appButtonColorDark),
-    colorScheme: ColorScheme.dark(
+    snackBarTheme: const SnackBarThemeData(backgroundColor: appButtonColorDark),
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: appButtonColorDark),
+    colorScheme: const ColorScheme.dark(
       primary: AppColors.primaryDark,
     ),
   ).copyWith(
-    pageTransitionsTheme: PageTransitionsTheme(
+    pageTransitionsTheme: const PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
         TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
         TargetPlatform.linux: OpenUpwardsPageTransitionsBuilder(),

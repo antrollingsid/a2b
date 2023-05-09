@@ -92,7 +92,7 @@ flutter:
         - asset: fonts/Roboto/Roboto-ThinItalic.ttf
 
   assets:
-   - assets/l10n/
+
    - assets/images/1x/
    - assets/images/icons/
    - assets/json/

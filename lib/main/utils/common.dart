@@ -81,7 +81,7 @@ Widget commonCachedNetworkImage(
             radius: radius);
       },
       placeholder: (_, s) {
-        if (!usePlaceholderIfUrlEmpty) return SizedBox();
+        if (!usePlaceholderIfUrlEmpty) return const SizedBox();
         return placeHolderWidget(
             height: height,
             width: width,
@@ -300,7 +300,7 @@ Widget settingItemWidget(IconData icon, String title, Function() onTap,
               : Icon(Icons.navigate_next,
                   color: appStore.isDarkMode ? Colors.white : Colors.grey),
           onTap: onTap),
-      if (!isLast) Divider()
+      if (!isLast) const Divider()
     ],
   );
 }

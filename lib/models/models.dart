@@ -46,10 +46,10 @@ class FilterAttributeModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['order_status'] = this.orderStatus;
-    data['from_date'] = this.fromDate;
-    data['to_date'] = this.toDate;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['order_status'] = orderStatus;
+    data['from_date'] = fromDate;
+    data['to_date'] = toDate;
     return data;
   }
 }

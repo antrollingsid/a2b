@@ -9,9 +9,17 @@ import '../../../Components/widgets/custom_textfield.dart';
 import '../../../Components/widgets/inkwell_button.dart';
 import 'login.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   const Register({super.key});
 
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  final TextEditingController _namecontroller = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _passcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,20 +36,23 @@ class Register extends StatelessWidget {
           child: Column(
             children: [
               const LoginWithBtn(),
-              const CustomTextfield(
+              CustomTextfield(
                 hintText: 'Sid alfaouri',
                 titleText: 'Name',
                 isPassword: false,
+                mycontroller: _namecontroller,
               ),
-              const CustomTextfield(
+              CustomTextfield(
                 hintText: 'sample@a2b.com',
                 titleText: 'Email',
                 isPassword: false,
+                mycontroller: _emailcontroller,
               ),
-              const CustomTextfield(
+              CustomTextfield(
                 hintText: 'Pick a strong password',
                 isPassword: true,
                 titleText: 'Password',
+                mycontroller: _passcontroller,
               ),
               Expanded(child: Container()),
               CustomBtn(textonbtn: 'Register', onPress: () => () {}),

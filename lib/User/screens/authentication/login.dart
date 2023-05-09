@@ -18,6 +18,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _namecontroller = TextEditingController();
+  final TextEditingController _passcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,15 +40,17 @@ class _LoginPageState extends State<LoginPage> {
                 height: 5,
               ),
               const LoginWithBtn(),
-              const CustomTextfield(
+              CustomTextfield(
                 hintText: 'sample@a2b.com',
                 titleText: 'Email',
                 isPassword: false,
+                mycontroller: _namecontroller,
               ),
-              const CustomTextfield(
+              CustomTextfield(
                 hintText: 'Enter your password',
                 isPassword: true,
                 titleText: 'Password',
+                mycontroller: _passcontroller,
               ),
               Expanded(child: Container()),
               CustomBtn(

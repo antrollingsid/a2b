@@ -11,19 +11,27 @@ class CustomTextfield extends StatefulWidget {
     required this.titleText,
     required this.isPassword,
     required this.hintText,
+    required this.mycontroller,
   });
   final String titleText;
   final bool isPassword;
   final String hintText;
+  final TextEditingController mycontroller;
 
   @override
   State<CustomTextfield> createState() => _CustomTextfieldState();
 }
 
 class _CustomTextfieldState extends State<CustomTextfield> {
-  bool _showIcon = true;
-  bool _isFocused = true;
+  final bool _showIcon = true;
   bool _isPassword = false;
+  bool _obscured = true;
+
+  void _toggleObscured() {
+    setState(() {
+      _obscured = !_obscured;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +79,8 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                 alignment: Alignment.centerRight,
                 children: [
                   TextField(
-                    obscureText: _isPassword,
+                    controller: widget.mycontroller,
+                    obscureText: _obscured,
                     style: const TextStyle(
                       color: AppColors.backgroundLightMode,
                     ),
@@ -87,39 +96,51 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                       border: myinputborder(_showIcon),
                       enabledBorder: myinputborder(_showIcon), //enabled border
                       focusedBorder: myfocusborder(),
+
+                      suffixIcon: Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                          child: _isPassword
+                              ? GestureDetector(
+                                  onTap: _toggleObscured,
+                                  child: Icon(
+                                      _obscured
+                                          ? Icons.visibility_rounded
+                                          : Icons.visibility_off_rounded,
+                                      size: 18,
+                                      color: Colors.white))
+                              : IconButton(
+                                  icon: SvgPicture.string(
+                                      SvgConstant.checkBoxBtn),
+                                  color: _isPassword
+                                      ? Colors.white
+                                      : null, // Set color white when isPassword is true
+                                  onPressed: () {},
+                                )),
                     ),
                   ),
-                  if (_isPassword)
-                    ClipRect(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: IconButton(
-                        icon: SvgPicture.string(
-                          _isFocused
-                              ? SvgConstant.eyeCloseDark
-                              : SvgConstant.eyeOpenDark,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          setState(
-                            () {
-                              _isFocused = !_isFocused;
-                              // _showIcon = !_showIcon;
-                              _isPassword = !_isPassword;
-                            },
-                          );
-                        },
-                      ),
-                    )
-                  else
-                    _showIcon
-                        ? IconButton(
-                            icon: SvgPicture.string(SvgConstant.checkBoxBtn),
-                            color: _isPassword
-                                ? Colors.white
-                                : null, // Set color white when isPassword is true
-                            onPressed: () {},
-                          )
-                        : Container(),
+                  // if (_isPassword)
+                  //   ClipRect(
+                  //     clipBehavior: Clip.antiAliasWithSaveLayer,
+                  //     child: IconButton(
+                  //       icon: SvgPicture.string(
+                  //         _isFocused
+                  //             ? SvgConstant.eyeCloseDark
+                  //             : SvgConstant.eyeOpenDark,
+                  //         color: Colors.white,
+                  //       ),
+                  //       onPressed: _toggleObscured,
+                  //     ),
+                  //   )
+                  // else
+                  //   _showIcon
+                  //       ? IconButton(
+                  //           icon: SvgPicture.string(SvgConstant.checkBoxBtn),
+                  //           color: _isPassword
+                  //               ? Colors.white
+                  //               : null, // Set color white when isPassword is true
+                  //           onPressed: () {},
+                  //         )
+                  //       : Container(),
                 ],
               ),
             ),

@@ -10,16 +10,16 @@ Widget commonButton(String title, Function() onTap,
   return SizedBox(
     width: width,
     child: AppButton(
-      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       shapeBorder: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(defaultRadius)),
       elevation: 0,
+      color: color ?? colorPrimary,
+      onTap: onTap,
       child: Text(
         title,
         style: boldTextStyle(color: textColor ?? white),
       ),
-      color: color ?? colorPrimary,
-      onTap: onTap,
     ),
   );
 }
@@ -28,18 +28,18 @@ Widget outlineButton(String title, Function() onTap, {double? width}) {
   return SizedBox(
     width: width,
     child: TextButton(
-      child: Text(
-        title,
-        style: boldTextStyle(),
-      ),
       onPressed: onTap,
       style: TextButton.styleFrom(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(defaultRadius),
             side: BorderSide(color: borderColor)),
         elevation: 0,
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         backgroundColor: Colors.transparent,
+      ),
+      child: Text(
+        title,
+        style: boldTextStyle(),
       ),
     ),
   );
@@ -48,7 +48,7 @@ Widget outlineButton(String title, Function() onTap, {double? width}) {
 Widget scheduleOptionWidget(
     BuildContext context, bool isSelected, String imagePath, String title) {
   return Container(
-    padding: EdgeInsets.all(16),
+    padding: const EdgeInsets.all(16),
     decoration: boxDecorationWithRoundedCorners(
         border: Border.all(
             color: isSelected
