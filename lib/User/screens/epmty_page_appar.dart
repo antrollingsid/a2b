@@ -27,7 +27,7 @@ class _EmptyPage extends State<EmptyPage> {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
-          titleText: 'Empty Pagge',
+          titleText: 'Profile',
         ),
       ),
       body: SingleChildScrollView(

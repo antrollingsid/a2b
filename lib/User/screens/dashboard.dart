@@ -2,6 +2,7 @@
 
 import 'package:a2b/User/screens/place_order_map.dart';
 import 'package:a2b/User/screens/place_order_upload.dart';
+import 'package:a2b/User/screens/profile.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -97,6 +98,8 @@ class DashBoard extends StatelessWidget {
             Get.to(() => const PlaceOrder());
           } else if (index == 1) {
             Get.to(() => const PlaceOrderUpload());
+          } else if (index == 4) {
+            Get.to(() => const Profile());
           }
         },
       ),
