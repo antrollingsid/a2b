@@ -1,6 +1,6 @@
 // ignore_for_file: unused_element, unused_import
 
-import 'package:a2b/User/screens/dashboard.dart';
+import 'package:a2b/screens/dashboard.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';

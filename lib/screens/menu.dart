@@ -1,5 +1,5 @@
 // ignore: file_names
-import 'package:a2b/User/screens/profile.dart';
+import 'package:a2b/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../Components/widgets/custom_calendar.dart';

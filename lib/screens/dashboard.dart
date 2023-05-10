@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_import
 
-import 'package:a2b/User/screens/place_order_calendar.dart';
-import 'package:a2b/User/screens/profile.dart';
+import '/screens/place_order_calendar.dart';
+import '/screens/profile.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 

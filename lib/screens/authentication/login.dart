@@ -1,5 +1,5 @@
 import 'package:a2b/main/utils/colors.dart';
-import 'package:a2b/User/screens/authentication/register.dart';
+import 'package:a2b/screens/authentication/register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

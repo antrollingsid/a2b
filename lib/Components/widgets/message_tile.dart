@@ -166,7 +166,7 @@ class _MessageTileState extends ConsumerState<MessageTile>
       elevation: 8,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
-          Radius.circular(16),
+          Radius.circular(10),
         ),
       ),
     ).then((value) {

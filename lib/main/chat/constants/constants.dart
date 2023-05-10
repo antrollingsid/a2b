@@ -1,12 +1,15 @@
+import 'package:a2b/main/utils/allConstants.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 
 var parser = EmojiParser();
 
 // message sent status (wheather it is seen, delivered and seen)
 abstract class MessageStatus {
-  static final String Sent = parser.emojify(':thumbsup:');
-  static final String Delivered = parser.emojify(':shushing_face:');
-  static final String Seen = parser.emojify(':slightly_smiling_face:');
+  static final String Sent = 'sent';
+  static final String Delivered = 'delivered';
+  static final String Seen = 'seen';
+  static final String None = '';
 }
 
 // message type

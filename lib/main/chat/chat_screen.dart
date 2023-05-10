@@ -52,7 +52,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             // Message list
             Expanded(
               child: _DemoMessageList(
-                InputBoxFocus: bottomTextFeildFocusNode,
+                inputBoxFocus: bottomTextFeildFocusNode,
               ),
             ),
 
@@ -152,18 +152,18 @@ void getKeyBoardFocus(FocusNode InputBoxFocus) {
 class _DemoMessageList extends StatelessWidget {
   const _DemoMessageList({
     Key? key,
-    required this.InputBoxFocus,
+    required this.inputBoxFocus,
   }) : super(key: key);
-  final FocusNode InputBoxFocus;
+  final FocusNode inputBoxFocus;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: ListView(
-        physics: ScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const ScrollPhysics(parent: BouncingScrollPhysics()),
         children: [
-          DateLable(lable: 'Yesterday'),
+          const DateLable(lable: 'Yesterday'),
           MessageTile(
             message: 'Hi, Lucy! How\'s your day going?',
             messageDate: '12:01 PM',
@@ -172,41 +172,41 @@ class _DemoMessageList extends StatelessWidget {
             type: MessageType.Text,
             onSwipe: () {
               // if input box already has focus
-              getKeyBoardFocus(InputBoxFocus);
+              getKeyBoardFocus(inputBoxFocus);
             },
-            isReacted: true,
+            isReacted: false,
           ),
           MessageTile(
-            message: 'You know how it goes... \n bro',
+            message: 'Hello there, i left the package in front of the door',
             messageDate: '12:02 PM',
             isSender: true,
             status: MessageStatus.Seen,
             type: MessageType.Text,
             onSwipe: () {
               // if input box already has focus
-              getKeyBoardFocus(InputBoxFocus);
+              getKeyBoardFocus(inputBoxFocus);
             },
           ),
           MessageTile(
             message: 'Do you want Starbucks?',
             messageDate: '12:02 PM',
             isSender: false,
-            status: MessageStatus.Seen,
+            status: MessageStatus.None,
             type: MessageType.Text,
             onSwipe: () {
               // if input box already has focus
-              getKeyBoardFocus(InputBoxFocus);
+              getKeyBoardFocus(inputBoxFocus);
             },
           ),
           MessageTile(
             message: 'Would be awesome!',
             messageDate: '12:03 PM',
             isSender: true,
-            status: MessageStatus.Seen,
+            status: MessageStatus.None,
             type: MessageType.Text,
             onSwipe: () {
               // if input box already has focus
-              getKeyBoardFocus(InputBoxFocus);
+              getKeyBoardFocus(inputBoxFocus);
             },
           ),
           MessageTile(
@@ -217,18 +217,18 @@ class _DemoMessageList extends StatelessWidget {
             type: MessageType.Image,
             onSwipe: () {
               // if input box already has focus
-              getKeyBoardFocus(InputBoxFocus);
+              getKeyBoardFocus(inputBoxFocus);
             },
           ),
           MessageTile(
             message: 'YAY!!!',
             messageDate: '12:03 PM',
             isSender: true,
-            status: MessageStatus.Sent,
+            status: MessageStatus.Delivered,
             type: MessageType.Text,
             onSwipe: () {
               // if input box already has focus
-              getKeyBoardFocus(InputBoxFocus);
+              getKeyBoardFocus(inputBoxFocus);
             },
           ),
         ],

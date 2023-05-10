@@ -1,5 +1,5 @@
 // ignore: file_names
-import 'package:a2b/User/screens/menu.dart';
+import 'package:a2b/screens/menu.dart';
 import 'package:get/get.dart';
 
 import '../../main/utils/allConstants.dart';

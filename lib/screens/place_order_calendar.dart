@@ -1,8 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:a2b/Components/widgets/custom_calendar.dart';
-import 'package:a2b/User/screens/place_order_upload.dart';
-import 'package:a2b/User/screens/profile.dart';
+import 'package:a2b/screens/place_order_upload.dart';
+import 'package:a2b/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../main/utils/allConstants.dart';

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import '../../../common/avatar.dart';
 import '../../../models/models.dart';
 // import '../../screens.dart';
-import '../../User/screens/profile/profile_screen.dart';
+import '../../screens/profile/profile_screen.dart';
 import 'appbar_popup.dart';
 
 class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -81,17 +81,17 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Text(
                       'user.name',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 15),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 2,
                     ),
                     // TODO: have to implement online status
-                    const Text(
+                    Text(
                       "Online",
                       style: TextStyle(color: Colors.green, fontSize: 12),
                     ),
@@ -108,7 +108,7 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: () {},
                   icon: const Icon(Icons.call)),
               // more button
-              ChatScreenPopUpMenu(
+              const ChatScreenPopUpMenu(
                 items: [
                   PopupMenuItem(
                     padding: EdgeInsets.only(
@@ -191,7 +191,7 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                     value: "clear",
                   ),
                 ],
-                icon: const Icon(Icons.more_vert),
+                icon: Icon(Icons.more_vert),
               ),
             ],
           ),
