@@ -253,16 +253,16 @@ class _MessageTileState extends ConsumerState<MessageTile>
                                     : AppColors.buttonDark,
                             borderRadius: widget.isSender
                                 ? const BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15),
-                                    bottomLeft: Radius.circular(15),
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
                                     bottomRight: Radius.circular(0),
                                   )
                                 : const BorderRadius.only(
                                     topLeft: Radius.circular(0),
-                                    topRight: Radius.circular(15),
-                                    bottomLeft: Radius.circular(15),
-                                    bottomRight: Radius.circular(15),
+                                    topRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20),
                                   ),
                           ),
                           constraints: const BoxConstraints(
@@ -304,6 +304,8 @@ class _MessageTileState extends ConsumerState<MessageTile>
                                           ),
                                     child: Image.asset(
                                       'assets/images/1x/demo.jpg',
+                                      height: 237,
+                                      width: 159,
                                     ),
                                   ),
                           ),

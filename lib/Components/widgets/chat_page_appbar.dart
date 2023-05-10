@@ -20,14 +20,14 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;
     return AppBar(
-      systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: (brightness != Brightness.light)
-            ? Brightness.light
-            : Brightness.dark,
-        statusBarBrightness: (brightness == Brightness.light)
-            ? Brightness.light
-            : Brightness.dark,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        // statusBarIconBrightness: (brightness != Brightness.light)
+        //     ? Brightness.light
+        //     : Brightness.dark,
+        // statusBarBrightness: (brightness == Brightness.light)
+        //     ? Brightness.light
+        //     : Brightness.dark,
       ),
       elevation: 0,
       backgroundColor: AppColors.backgroundDark,
