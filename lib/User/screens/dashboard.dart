@@ -26,16 +26,57 @@ class DashBoard extends StatelessWidget {
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(80),
           child: CustomAppBar(
-            titleText: 'dashboard',
+            titleText: 'Dashboard',
             isActionVisible: true,
           ),
         ),
         body: SingleChildScrollView(
           child: FittedBox(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const CustomShip(),
+                SizedBox(
+                  height: 30,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 150),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Ship Your",
+                        style: TextStyle(
+                          fontFamily: 'SF Pro Display',
+                          fontSize: 24,
+                          fontWeight: FontWeight.normal,
+                          // height:  1.5*ffem/fem,
+                          color: Color(0xffffffff),
+                        ),
+                      ),
+                      Text(
+                        'Package Safely',
+                        style: TextStyle(
+                          fontFamily: 'SF Pro Display',
+                          fontSize: 24,
+                          fontWeight: FontWeight.normal,
+                          // wordSpacing: 1.5,
+                          // letterSpacing: 1.5,
+                          // height:  1.5*ffem/fem,
+                          color: Color(0xffffffff),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 const TrackingTextField(),
+                SizedBox(
+                  height: 30,
+                ),
+                const CustomShip(),
+                SizedBox(
+                  height: 30,
+                ),
                 const OrderHistoryActivity(),
                 const OrderHistoryActivity(),
                 Padding(
@@ -54,8 +95,8 @@ class DashBoard extends StatelessWidget {
         ),
         bottomNavigationBar: ClipRRect(
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
+            topLeft: Radius.circular(5.0),
+            topRight: Radius.circular(5.0),
           ),
           child: BottomNavigationBar(
             showSelectedLabels: false,
