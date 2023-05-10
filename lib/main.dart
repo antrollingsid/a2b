@@ -1,7 +1,6 @@
 import 'package:a2b/User/screens/place_order_calendar.dart';
 import 'package:a2b/User/screens/place_order_map.dart';
 import 'package:a2b/User/screens/place_order_upload.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -12,13 +11,9 @@ import 'User/screens/dashboard.dart';
 import 'main/languages/base_language.dart';
 import 'main/store/store.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
-import 'main/utils/common.dart';
 import 'main/utils/constants.dart';
 import 'main/utils/data_providers.dart';
-import 'models/models.dart';
 
 AppStore appStore = AppStore();
 late BaseLanguage language;

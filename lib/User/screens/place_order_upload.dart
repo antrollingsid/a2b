@@ -223,7 +223,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                                                     backgroundColor:
                                                         Colors.white,
                                                     valueColor:
-                                                        AlwaysStoppedAnimation<
+                                                        const AlwaysStoppedAnimation<
                                                             Color>(
                                                       AppColors.primaryDark,
                                                     ),
