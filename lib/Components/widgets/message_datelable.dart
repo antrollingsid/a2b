@@ -19,7 +19,7 @@ class DateLable extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 32.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
+            color: Theme.of(context).focusColor,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Padding(

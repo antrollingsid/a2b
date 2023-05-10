@@ -1,3 +1,4 @@
+import 'package:a2b/main/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:heyy/screens/chat/widgets/message_info.dart';
@@ -43,8 +44,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Theme.of(context).brightness;
+    // final brightness = Theme.of(context).brightness;
     return Scaffold(
+      backgroundColor: AppColors.backgroundDark,
       appBar: ChatScreenAppbar(),
       body: SafeArea(
         child: Column(
@@ -165,32 +167,9 @@ class _DemoMessageList extends StatelessWidget {
         children: [
           const DateLable(lable: 'Yesterday'),
           MessageTile(
-            message: 'Hi, Lucy! How\'s your day going?',
-            messageDate: '12:01 PM',
-            isSender: false,
-            status: MessageStatus.Seen,
-            type: MessageType.Text,
-            onSwipe: () {
-              // if input box already has focus
-              getKeyBoardFocus(inputBoxFocus);
-            },
-            isReacted: false,
-          ),
-          MessageTile(
             message: 'Hello there, i left the package in front of the door',
             messageDate: '12:02 PM',
             isSender: true,
-            status: MessageStatus.Seen,
-            type: MessageType.Text,
-            onSwipe: () {
-              // if input box already has focus
-              getKeyBoardFocus(inputBoxFocus);
-            },
-          ),
-          MessageTile(
-            message: 'Do you want Starbucks?',
-            messageDate: '12:02 PM',
-            isSender: false,
             status: MessageStatus.None,
             type: MessageType.Text,
             onSwipe: () {
@@ -203,17 +182,6 @@ class _DemoMessageList extends StatelessWidget {
             messageDate: '12:03 PM',
             isSender: true,
             status: MessageStatus.None,
-            type: MessageType.Text,
-            onSwipe: () {
-              // if input box already has focus
-              getKeyBoardFocus(inputBoxFocus);
-            },
-          ),
-          MessageTile(
-            message: 'Coming up!',
-            messageDate: '12:03 PM',
-            isSender: false,
-            status: MessageStatus.Delivered,
             type: MessageType.Image,
             onSwipe: () {
               // if input box already has focus
@@ -221,9 +189,9 @@ class _DemoMessageList extends StatelessWidget {
             },
           ),
           MessageTile(
-            message: 'YAY!!!',
+            message: 'Hey there! First, thanks for informing me',
             messageDate: '12:03 PM',
-            isSender: true,
+            isSender: false,
             status: MessageStatus.Delivered,
             type: MessageType.Text,
             onSwipe: () {
@@ -231,6 +199,17 @@ class _DemoMessageList extends StatelessWidget {
               getKeyBoardFocus(inputBoxFocus);
             },
           ),
+          // MessageTile(
+          //   message: 'YAY!!!',
+          //   messageDate: '12:03 PM',
+          //   isSender: true,
+          //   status: MessageStatus.Delivered,
+          //   type: MessageType.Text,
+          //   onSwipe: () {
+          //     // if input box already has focus
+          //     getKeyBoardFocus(inputBoxFocus);
+          //   },
+          // ),
         ],
       ),
     );

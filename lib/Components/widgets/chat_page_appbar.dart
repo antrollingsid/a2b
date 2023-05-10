@@ -1,3 +1,5 @@
+import 'package:a2b/Components/widgets/app_bar_buttons.dart';
+import 'package:a2b/main/utils/colors.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,8 +30,9 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
             : Brightness.dark,
       ),
       elevation: 0,
-      backgroundColor: Theme.of(context).cardColor,
+      backgroundColor: AppColors.backgroundDark,
       automaticallyImplyLeading: false,
+      // leading: backBtn(),
       flexibleSpace: SafeArea(
         child: Container(
           padding: const EdgeInsets.only(
@@ -45,6 +48,7 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                 },
                 icon: const Icon(
                   Icons.arrow_back,
+                  color: AppColors.backgroundLightMode,
                 ),
               ),
               // User profile button
@@ -84,8 +88,11 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                   children: const <Widget>[
                     Text(
                       'user.name',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 15,
+                        color: AppColors.textGrey,
+                      ),
                     ),
                     SizedBox(
                       height: 2,
@@ -99,14 +106,14 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               // Call and video button
-              IconButton(
-                  splashRadius: 18.0,
-                  onPressed: () {},
-                  icon: const Icon(Icons.video_call_rounded)),
-              IconButton(
-                  splashRadius: 18.0,
-                  onPressed: () {},
-                  icon: const Icon(Icons.call)),
+              // IconButton(
+              //     splashRadius: 18.0,
+              //     onPressed: () {},
+              //     icon: const Icon(Icons.video_call_rounded)),
+              // IconButton(
+              //     splashRadius: 18.0,
+              //     onPressed: () {},
+              //     icon: const Icon(Icons.call)),
               // more button
               const ChatScreenPopUpMenu(
                 items: [
@@ -191,7 +198,10 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                     value: "clear",
                   ),
                 ],
-                icon: Icon(Icons.more_vert),
+                icon: Icon(
+                  Icons.more_vert,
+                  color: AppColors.backgroundLightMode,
+                ),
               ),
             ],
           ),

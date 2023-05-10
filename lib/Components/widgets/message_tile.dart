@@ -273,8 +273,8 @@ class _MessageTileState extends ConsumerState<MessageTile>
                           ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0,
-                              vertical: 20,
+                              horizontal: 5.0,
+                              vertical: 5,
                             ),
                             // Message
                             child: (widget.type == MessageType.Text)
@@ -288,9 +288,27 @@ class _MessageTileState extends ConsumerState<MessageTile>
                                               : AppColors.textGrey,
                                     ),
                                   )
-                                : Image.asset('assets/images/1x/demo.jpg'),
+                                : ClipRRect(
+                                    borderRadius: widget.isSender
+                                        ? const BorderRadius.only(
+                                            topLeft: Radius.circular(15),
+                                            topRight: Radius.circular(15),
+                                            bottomLeft: Radius.circular(15),
+                                            bottomRight: Radius.circular(0),
+                                          )
+                                        : const BorderRadius.only(
+                                            topLeft: Radius.circular(0),
+                                            topRight: Radius.circular(15),
+                                            bottomLeft: Radius.circular(15),
+                                            bottomRight: Radius.circular(15),
+                                          ),
+                                    child: Image.asset(
+                                      'assets/images/1x/demo.jpg',
+                                    ),
+                                  ),
                           ),
                         ),
+
                         // Reaction widget
                         if (widget.isReacted)
                           Positioned(
