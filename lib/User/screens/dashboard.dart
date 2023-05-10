@@ -1,11 +1,10 @@
 // ignore_for_file: unnecessary_import
 
-import 'package:a2b/User/screens/place_order_upload.dart';
+import 'package:a2b/User/screens/place_order_calendar.dart';
 import 'package:a2b/User/screens/profile.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../../Components/widgets/custom_botton_nav.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -116,11 +115,14 @@ class DashBoard extends StatelessWidget {
             selectedItemColor: AppColors.primaryDark,
             onTap: (index) {
               if (index == 0) {
+                Get.to(const DashBoard());
               } else if (index == 1) {
+                Get.to(const DashBoard());
               } else if (index == 2) {
+                Get.to(const PlaceOrderCalendar());
               } else if (index == 3) {
               } else if (index == 4) {
-                Get.to(() => const Profile());
+                Get.to(const Profile());
               }
             },
           ),
