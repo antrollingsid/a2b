@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 
-class EmptyPage extends StatefulWidget {
+class MenuPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
-  const EmptyPage({Key? key});
+  const MenuPage({Key? key});
 
   @override
-  State<EmptyPage> createState() => _EmptyPage();
+  State<MenuPage> createState() => _MenuPage();
 }
 
-class _EmptyPage extends State<EmptyPage> {
+class _MenuPage extends State<MenuPage> {
   @override
   void initState() {
     super.initState();

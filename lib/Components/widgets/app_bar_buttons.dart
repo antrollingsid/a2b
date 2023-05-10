@@ -1,4 +1,7 @@
 // ignore: file_names
+import 'package:a2b/User/screens/menu.dart';
+import 'package:get/get.dart';
+
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -66,7 +69,7 @@ class menuBtn extends StatelessWidget {
             ),
             color: AppColors.onBackgroundDark,
             onPressed: () {
-              // Navigator.pop(context);
+              Get.to(const MenuPage());
             },
           ),
         ),
