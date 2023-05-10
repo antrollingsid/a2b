@@ -31,7 +31,7 @@ class DashBoard extends StatelessWidget {
           ),
         ),
         body: SingleChildScrollView(
-          child: FittedBox(
+          child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -78,17 +78,14 @@ class DashBoard extends StatelessWidget {
                   height: 30,
                 ),
                 const OrderHistoryActivity(),
+                SvgPicture.string(SvgConstant.lineDark),
                 const OrderHistoryActivity(),
-                Padding(
-                  padding: const EdgeInsets.only(left: 90),
-                  child: SvgPicture.string(SvgConstant.lineDark),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Get.to(() => const EmptyPage());
-                  },
-                  child: const Text('Empty Page'),
-                ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     Get.to(() => const EmptyPage());
+                //   },
+                //   child: const Text('Empty Page'),
+                // ),
               ],
             ),
           ),

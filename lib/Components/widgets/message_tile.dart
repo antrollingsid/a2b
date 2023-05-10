@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:swipe_to/swipe_to.dart';
 
 import '../../../common/popup_menu.dart';
 // import '../../../theme.dart';
 import '../../../common/common.dart';
 
-import '../../main/chat/constants/constants.dart';
+import '../../main/utils/svg.dart';
+import '../../screens/chat/constants/constants.dart';
 // import '../../main/utils/allConstants.dart';
 import '../../main/utils/colors.dart';
 import 'emoji_picker.dart';
@@ -209,20 +211,20 @@ class _MessageTileState extends ConsumerState<MessageTile>
                 : MainAxisAlignment.start,
             children: [
               //profile image avatar
-              if (!widget.isSender)
-                InkWell(
-                  child: Avatar(
-                    radius: 15,
-                    url:
-                        "https://fsb.zobj.net/crop.php?r=FAcicNvLZvREd2P2K5zZ9L0JIRulV8TzAV5foNxUVRxrsoW0wh3DgQIozJv0HSgWCILHwsKEwVb865BLg-L9RKoE96jm-7VwmGTAwdmjbEgLZ1TTzZmX-5RfzkY2LYrpQj8ArPyITHBy0-abcIOq3hQ8yhEJBVpdeUT_tDOShgQVAuuKvlBjqVJj9Y7-Gk6rcT3kOY0zyR2NwKVL",
-                  ),
-                  onTap: () {
-                    // Navigator.of(context).push(
-                    //   UserProfile.route(),
-                    // );
-                  },
-                ),
-              SizedBox(
+              // if (!widget.isSender)
+              //   InkWell(
+              //     child: const Avatar(
+              //       radius: 15,
+              //       url:
+              //           "https://fsb.zobj.net/crop.php?r=FAcicNvLZvREd2P2K5zZ9L0JIRulV8TzAV5foNxUVRxrsoW0wh3DgQIozJv0HSgWCILHwsKEwVb865BLg-L9RKoE96jm-7VwmGTAwdmjbEgLZ1TTzZmX-5RfzkY2LYrpQj8ArPyITHBy0-abcIOq3hQ8yhEJBVpdeUT_tDOShgQVAuuKvlBjqVJj9Y7-Gk6rcT3kOY0zyR2NwKVL",
+              //     ),
+              //     onTap: () {
+              //       // Navigator.of(context).push(
+              //       //   UserProfile.route(),
+              //       // );
+              //     },
+              //   ),
+              const SizedBox(
                 width: 5,
               ),
               GestureDetector(
@@ -245,15 +247,25 @@ class _MessageTileState extends ConsumerState<MessageTile>
                         Container(
                           decoration: BoxDecoration(
                             color: widget.isSender
-                                ? AppColors.secondary
+                                ? AppColors.primaryDark
                                 : (brightness == Brightness.light)
-                                    ? AppColors.buttonRed
+                                    ? AppColors.buttonStroke
                                     : AppColors.buttonDark,
-                            borderRadius: BorderRadius.circular(
-                              26.0,
-                            ),
+                            borderRadius: widget.isSender
+                                ? const BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight: Radius.circular(15),
+                                    bottomLeft: Radius.circular(15),
+                                    bottomRight: Radius.circular(0),
+                                  )
+                                : const BorderRadius.only(
+                                    topLeft: Radius.circular(0),
+                                    topRight: Radius.circular(15),
+                                    bottomLeft: Radius.circular(15),
+                                    bottomRight: Radius.circular(15),
+                                  ),
                           ),
-                          constraints: BoxConstraints(
+                          constraints: const BoxConstraints(
                             maxWidth: 250,
                             maxHeight: 500,
                             minWidth: 50,
@@ -270,17 +282,13 @@ class _MessageTileState extends ConsumerState<MessageTile>
                                     widget.message,
                                     style: TextStyle(
                                       color: widget.isSender
-                                          ? AppColors.buttonYellow
+                                          ? AppColors.backgroundDark
                                           : (brightness == Brightness.light)
-                                              ? AppColors.textBlue
+                                              ? AppColors.backgroundLightMode
                                               : AppColors.textGrey,
                                     ),
                                   )
-                                : Image.network(
-                                    "https://fsb.zobj.net/crop.php?r=FAcicNvLZvREd2P2K5zZ9L0JIRulV8TzAV5foNxUVRxrsoW0wh3DgQIozJv0HSgWCILHwsKEwVb865BLg-L9RKoE96jm-7VwmGTAwdmjbEgLZ1TTzZmX-5RfzkY2LYrpQj8ArPyITHBy0-abcIOq3hQ8yhEJBVpdeUT_tDOShgQVAuuKvlBjqVJj9Y7-Gk6rcT3kOY0zyR2NwKVL",
-                                    height: 350,
-                                    width: 200,
-                                  ),
+                                : Image.asset('assets/images/1x/demo.jpg'),
                           ),
                         ),
                         // Reaction widget
@@ -296,7 +304,7 @@ class _MessageTileState extends ConsumerState<MessageTile>
                                   color: widget.isSender
                                       ? Colors.grey
                                       : Colors.grey.shade300,
-                                  borderRadius: BorderRadius.all(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(10),
                                   ),
                                 ),
@@ -339,20 +347,20 @@ class _MessageTileState extends ConsumerState<MessageTile>
                 // Message date
                 Text(
                   widget.messageDate,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: AppColors.textGrey,
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 // Message status
                 if (widget.isSender)
                   Text(
                     widget.status,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 10,
                     ),
                   ),
@@ -367,14 +375,14 @@ class _MessageTileState extends ConsumerState<MessageTile>
 
 PopupMenuItem<dynamic> _menuItem(String text) {
   return PopupMenuItem(
-    padding: EdgeInsets.only(
+    padding: const EdgeInsets.only(
       left: 30,
       bottom: 3,
       top: 5,
       right: 10,
     ),
-    child: Text(text),
     value: text,
+    child: Text(text),
   );
 }
 
@@ -391,7 +399,7 @@ Widget _reactWidget(
       onTap: onPressed,
       child: Text(
         reaction,
-        style: TextStyle(fontSize: 22),
+        style: const TextStyle(fontSize: 22),
       ),
     ),
   );

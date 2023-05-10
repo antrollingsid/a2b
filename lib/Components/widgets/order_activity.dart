@@ -9,60 +9,58 @@ class OrderHistoryActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-                height: 60,
-                // color: const Color.fromARGB(255, 81, 2, 90),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      margin: const EdgeInsets.fromLTRB(0, 0, 20, 9),
-                      decoration: BoxDecoration(
-                        color: AppColors.buttonDark,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Container(
-                        margin: const EdgeInsets.all(12),
-                        child: SvgPicture.string(
-                          SvgConstant.parcelIconDark,
-                          width: 22,
-                          height: 22,
+    return Container(
+      width: 333,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  height: 60,
+                  // color: const Color.fromARGB(255, 81, 2, 90),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 40,
+                        margin: const EdgeInsets.fromLTRB(0, 0, 20, 9),
+                        decoration: BoxDecoration(
+                          color: AppColors.buttonDark,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Container(
+                          margin: const EdgeInsets.all(12),
+                          child: SvgPicture.string(
+                            SvgConstant.parcelIconDark,
+                            width: 22,
+                            height: 22,
+                          ),
                         ),
                       ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 60, 0),
-                      width: 162,
-                      height: 50,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'iPhone Head Charger',
-                            style: TextStyle(
-                              fontFamily: 'SF Pro Display',
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              // height:  1.5*ffem/fem,
-                              color: Color(0xffffffff),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 30, 0),
+                        width: 162,
+                        height: 50,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'iPhone Head Charger',
+                              style: TextStyle(
+                                fontFamily: 'SF Pro Display',
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                // height:  1.5*ffem/fem,
+                                color: Color(0xffffffff),
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            // margin:
-                            //     const EdgeInsets.fromLTRB(0.75, 0, 26, 0),
-                            width: double.infinity,
-                            child: Row(
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
@@ -102,38 +100,38 @@ class OrderHistoryActivity extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 9, 2.5),
-                      child: SvgPicture.string(
-                        SvgConstant.tickIconDark,
-                        width: 17,
-                        height: 17,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 3),
-                      child: const Text(
-                        'Received',
-                        style: TextStyle(
-                          fontFamily: 'SF Pro Display',
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                          // height:  2*ffem/fem,
-                          color: Color(0xffffffff),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 9, 2.5),
+                        child: SvgPicture.string(
+                          SvgConstant.tickIconDark,
+                          width: 17,
+                          height: 17,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 3),
+                        child: const Text(
+                          'Received',
+                          style: TextStyle(
+                            fontFamily: 'SF Pro Display',
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            // height:  2*ffem/fem,
+                            color: Color(0xffffffff),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

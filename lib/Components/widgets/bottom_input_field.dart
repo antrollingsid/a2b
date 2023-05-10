@@ -10,7 +10,7 @@ import '../../../helper/provider.dart';
 // import '../providers/chat_screen_provider.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../main/chat/providers/chat_screen_provider.dart';
+import '../../screens/chat/providers/chat_screen_provider.dart';
 import '../../main/utils/allConstants.dart';
 
 class BottomInputField extends ConsumerStatefulWidget {

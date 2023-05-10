@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../main/chat/providers/chat_screen_provider.dart';
+import '../../screens/chat/providers/chat_screen_provider.dart';
 
 // import '../providers/chat_screen_provider.dart';
 

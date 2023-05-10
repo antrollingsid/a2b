@@ -1,11 +1,8 @@
 // ignore: file_names
-import 'package:a2b/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../Components/widgets/custom_calendar.dart';
 import '../../Components/widgets/settings_button.dart';
-import '../../main.dart';
-import '../../main/chat/chat_screen.dart';
+import '../screens/chat/chat_screen.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 import 'dashboard.dart';
