@@ -1,3 +1,5 @@
+import 'package:flutter_svg/svg.dart';
+
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 
@@ -19,42 +21,63 @@ class LoginWithBtn extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  height: Dimensions.loginWithBtnHeight,
-                  decoration: BoxDecoration(
-                    color: AppColors.buttonDark,
-                    borderRadius: BorderRadius.circular(
-                      Dimensions.borderRadius8,
-                    ),
-                    border: Border.all(
-                      color: AppColors.buttonStroke, // specify the border color
-                      width: 2.0, // specify the border width
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              Expanded(
-                child: Container(
-                  height: Dimensions.loginWithBtnHeight,
-                  decoration: BoxDecoration(
-                    color: AppColors.buttonDark,
-                    borderRadius: BorderRadius.circular(
-                      Dimensions.borderRadius8,
-                    ),
-                    border: Border.all(
-                      color: AppColors.buttonStroke, // specify the border color
-                      width: 2.0, // specify the border width
+          Container(
+            width: 333,
+            child: Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 62,
+                      // width: 158,
+                      decoration: BoxDecoration(
+                        color: AppColors.buttonDark,
+                        borderRadius: BorderRadius.circular(
+                          Dimensions.borderRadius8,
+                        ),
+                        border: Border.all(
+                          color: AppColors
+                              .buttonStroke, // specify the border color
+                          width: 2.0, // specify the border width
+                        ),
+                      ),
+                      child: IconButton(
+                        icon: SvgPicture.string(
+                          SvgConstant.googleLogo,
+                        ),
+                        onPressed: () {},
+                      ),
                     ),
                   ),
                 ),
-              )
-            ],
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: Container(
+                    height: Dimensions.loginWithBtnHeight,
+                    decoration: BoxDecoration(
+                      color: AppColors.buttonDark,
+                      borderRadius: BorderRadius.circular(
+                        Dimensions.borderRadius8,
+                      ),
+                      border: Border.all(
+                        color:
+                            AppColors.buttonStroke, // specify the border color
+                        width: 2.0, // specify the border width
+                      ),
+                    ),
+                    child: IconButton(
+                      icon: SvgPicture.string(
+                        SvgConstant.appleLogo,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
           const SizedBox(
             height: 30,
