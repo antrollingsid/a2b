@@ -64,6 +64,12 @@ dependencies:
   lottie: ^2.3.2
   geolocator: ^9.0.2
   html: ^0.15.3
+  flutter_emoji: ^2.4.0
+  animations: ^2.0.7
+  swipe_to: ^1.0.2
+  emoji_picker_flutter: ^1.5.4
+  permission_handler: ^10.2.0
+  image_cropper: ^3.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

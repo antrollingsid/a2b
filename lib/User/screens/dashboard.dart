@@ -70,11 +70,11 @@ class DashBoard extends StatelessWidget {
                   ),
                 ),
                 const TrackingTextField(),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 const CustomShip(),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 const OrderHistoryActivity(),
