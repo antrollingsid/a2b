@@ -27,6 +27,7 @@ class _Language extends State<Language> {
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
           titleText: 'Language',
+          isActionVisible: false,
         ),
       ),
       body: ListView(

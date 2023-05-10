@@ -61,6 +61,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
           titleText: 'Place Order',
+          isActionVisible: true,
         ),
       ),
       body: SingleChildScrollView(

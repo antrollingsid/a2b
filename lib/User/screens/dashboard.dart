@@ -27,6 +27,7 @@ class DashBoard extends StatelessWidget {
           preferredSize: Size.fromHeight(80),
           child: CustomAppBar(
             titleText: 'dashboard',
+            isActionVisible: true,
           ),
         ),
         body: SingleChildScrollView(

@@ -33,6 +33,7 @@ class _PlaceOrderState extends State<PlaceOrderCalendar> {
           preferredSize: Size.fromHeight(80),
           child: CustomAppBar(
             titleText: 'Choose The Date',
+            isActionVisible: true,
           ),
         ),
         body: SingleChildScrollView(

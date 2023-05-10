@@ -22,6 +22,7 @@ class Profile extends StatelessWidget {
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
           titleText: 'Profile',
+          isActionVisible: false,
         ),
       ),
       body: SingleChildScrollView(

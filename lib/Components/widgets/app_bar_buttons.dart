@@ -127,8 +127,10 @@ class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
     required this.titleText,
+    required this.isActionVisible,
   });
   final String titleText;
+  final bool isActionVisible;
 
   @override
   Widget build(BuildContext context) {
@@ -149,12 +151,14 @@ class CustomAppBar extends StatelessWidget {
           color: AppColors.onBackgroundDark,
         ),
       ),
-      actions: const [
-        Padding(
-          padding: EdgeInsets.fromLTRB(0, 5, 30, 3),
-          child: menuBtn(),
-        ),
-      ],
+      actions: isActionVisible
+          ? [
+              const Padding(
+                padding: EdgeInsets.fromLTRB(0, 5, 30, 3),
+                child: menuBtn(),
+              ),
+            ]
+          : [], // empty list to hide the action button
       elevation: 0,
       backgroundColor: AppColors.backgroundDark,
     );

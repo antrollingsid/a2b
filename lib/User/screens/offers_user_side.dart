@@ -33,6 +33,7 @@ class _CourierOffers extends State<CourierOffers> {
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
           titleText: 'offers',
+          isActionVisible: true,
         ),
       ),
       body: SingleChildScrollView(

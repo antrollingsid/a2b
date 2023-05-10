@@ -60,6 +60,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
           titleText: 'ulpaod documents',
+          isActionVisible: true,
         ),
       ),
       body: SingleChildScrollView(
