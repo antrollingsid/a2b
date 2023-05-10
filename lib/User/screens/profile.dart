@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/settings_button.dart';
 import '../../Components/widgets/sign_out_btn.dart';
+import '../../Components/widgets/top_profile.dart';
 import '../../Components/widgets/upgrade_button.dart';
 import '../../main/utils/colors.dart';
 
@@ -24,13 +25,13 @@ class Profile extends StatelessWidget {
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(),
-              const SettingBtn(action: 'Edit Profile'),
-              const SettingBtn(action: 'Settings'),
-              const SettingBtn(action: 'Wallets'),
-              const UpgadeBtn(),
-              const SignOutBtn()
+            children: const [
+             TopProfile(),
+              SettingBtn(action: 'Edit Profile'),
+              SettingBtn(action: 'Settings'),
+              SettingBtn(action: 'Wallets'),
+              UpgadeBtn(),
+              SignOutBtn()
             ],
           ),
         ),

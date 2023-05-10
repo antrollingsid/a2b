@@ -1,13 +1,11 @@
 // ignore_for_file: unnecessary_import
 
-import 'package:a2b/User/screens/place_order_map.dart';
 import 'package:a2b/User/screens/place_order_upload.dart';
 import 'package:a2b/User/screens/profile.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:nb_utils/nb_utils.dart';
 
-import '../../main.dart';
+import '../../Components/widgets/custom_botton_nav.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -54,72 +52,28 @@ class DashBoard extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: appStore.availableBal >= 0
-            ? AppColors.primaryDark
-            : AppColors.buttonRed,
-        child: const Icon(
-          Icons.add,
-          color: AppColors.backgroundDark,
-        ),
-        onPressed: () {
-          const PlaceOrderMap().launch(
-            context,
-            pageRouteAnimation: PageRouteAnimation.SlideBottomTop,
-          );
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        backgroundColor: AppColors.buttonStroke,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'hhh',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.access_time,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.feedback_outlined,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outlined,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-        ],
-        // currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primaryDark,
-        onTap: (index) {
-          if (index == 2) {
-            Get.to(() => const PlaceOrderMap());
-          } else if (index == 1) {
-            Get.to(() => const PlaceOrderUpload());
-          } else if (index == 4) {
-            Get.to(() => const Profile());
-          }
-        },
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: appStore.availableBal >= 0
+      //       ? AppColors.primaryDark
+      //       : AppColors.buttonRed,
+      //   child: const Icon(
+      //     Icons.add,
+      //     color: AppColors.backgroundDark,
+      //   ),
+      //   onPressed: () {
+      //     const PlaceOrderMap().launch(
+      //       context,
+      //       pageRouteAnimation: PageRouteAnimation.SlideBottomTop,
+      //     );
+      //   },
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: CustomBottomNav(
+        actionitem1: () => Get.to(const PlaceOrderUpload()),
+        actionitem2: () {},
+        actionitem3: () {},
+        actionitem4: () {},
+        actionitem5: () => Get.to(const Profile()),
       ),
     );
   }
