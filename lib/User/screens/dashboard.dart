@@ -22,60 +22,107 @@ class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundDark,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(80),
-        child: CustomAppBar(
-          titleText: 'dashboard',
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: FittedBox(
-          child: Column(
-            children: [
-              const CustomShip(),
-              const TrackingTextField(),
-              const OrderHistoryActivity(),
-              const OrderHistoryActivity(),
-              Padding(
-                padding: const EdgeInsets.only(left: 90),
-                child: SvgPicture.string(SvgConstant.lineDark),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Get.to(() => const EmptyPage());
-                },
-                child: const Text('Empty Page'),
-              ),
-            ],
+        resizeToAvoidBottomInset: false,
+        backgroundColor: AppColors.backgroundDark,
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(80),
+          child: CustomAppBar(
+            titleText: 'dashboard',
           ),
         ),
-      ),
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: appStore.availableBal >= 0
-      //       ? AppColors.primaryDark
-      //       : AppColors.buttonRed,
-      //   child: const Icon(
-      //     Icons.add,
-      //     color: AppColors.backgroundDark,
-      //   ),
-      //   onPressed: () {
-      //     const PlaceOrderMap().launch(
-      //       context,
-      //       pageRouteAnimation: PageRouteAnimation.SlideBottomTop,
-      //     );
-      //   },
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: CustomBottomNav(
-        actionitem1: () => Get.to(const PlaceOrderUpload()),
-        actionitem2: () {},
-        actionitem3: () {},
-        actionitem4: () {},
-        actionitem5: () => Get.to(const Profile()),
-      ),
-    );
+        body: SingleChildScrollView(
+          child: FittedBox(
+            child: Column(
+              children: [
+                const CustomShip(),
+                const TrackingTextField(),
+                const OrderHistoryActivity(),
+                const OrderHistoryActivity(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 90),
+                  child: SvgPicture.string(SvgConstant.lineDark),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(() => const EmptyPage());
+                  },
+                  child: const Text('Empty Page'),
+                ),
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+          child: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            backgroundColor: AppColors.buttonStroke,
+            type: BottomNavigationBarType.fixed,
+            items: [
+              const BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'hhh',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.access_time,
+                  color: AppColors.backgroundLightMode,
+                ),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Container(
+                  height: 62,
+                  width: 62,
+                  decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                          colors: [
+                            AppColors.secondaryBlue,
+                            AppColors.primaryDark,
+                          ],
+                          begin: FractionalOffset(0.0, 1.0),
+                          end: FractionalOffset(1.0, 0.4),
+                          stops: [0.0, 1.0],
+                          tileMode: TileMode.clamp),
+                      borderRadius: BorderRadius.circular(50)),
+                  child: const Icon(
+                    Icons.add,
+                    color: AppColors.backgroundDark,
+                    size: 40,
+                  ),
+                ),
+                label: '',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.feedback_outlined,
+                  color: AppColors.backgroundLightMode,
+                ),
+                label: '',
+              ),
+              const BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.person_outlined,
+                  color: AppColors.backgroundLightMode,
+                ),
+                label: '',
+              ),
+            ],
+            // currentIndex: _selectedIndex,
+            selectedItemColor: AppColors.primaryDark,
+            onTap: (index) {
+              if (index == 0) {
+              } else if (index == 1) {
+              } else if (index == 2) {
+              } else if (index == 3) {
+              } else if (index == 4) {}
+            },
+          ),
+        ));
   }
 }
 
