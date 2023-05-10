@@ -1,4 +1,6 @@
+import 'package:a2b/main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../main/utils/colors.dart';
 import '../../main/utils/dimensions.dart';
@@ -38,15 +40,9 @@ class SettingBtn extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              width: 40,
-              height: 40,
-              margin: const EdgeInsets.fromLTRB(0, 0, 20, 9),
-              decoration: BoxDecoration(
-                color: const Color(0xff979797),
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: const Center(child: Icon(Icons.forward)),
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: Center(child: SvgPicture.string(SvgConstant.arrowRight)),
             )
           ]),
         ),
