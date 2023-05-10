@@ -28,6 +28,7 @@ class _EmptyPage extends State<EmptyPage> {
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
           titleText: 'Menu',
+          isActionVisible: false,
         ),
       ),
       body: SingleChildScrollView(
