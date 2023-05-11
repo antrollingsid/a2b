@@ -1,3 +1,4 @@
+import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/main/utils/colors.dart';
 import 'package:a2b/screens/authentication/register.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _namecontroller = TextEditingController();
   final TextEditingController _passcontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    _namecontroller.dispose();
+    _passcontroller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,44 +40,47 @@ class _LoginPageState extends State<LoginPage> {
           titleText: 'Log in',
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 5,
-              ),
-              const LoginWithBtn(),
-              CustomTextfield(
-                hintText: 'sample@a2b.com',
-                titleText: 'Email',
-                isPassword: false,
-                mycontroller: _namecontroller,
-              ),
-              CustomTextfield(
-                hintText: 'Enter your password',
-                isPassword: true,
-                titleText: 'Password',
-                mycontroller: _passcontroller,
-              ),
-              Expanded(child: Container()),
-              CustomBtn(
-                textonbtn: 'Login',
-                onPress: () => Get.to(const DashBoard()),
-              ),
-              InkwellBtn(
-                textLeading: "Don't have an account?",
-                textEnding: ' signup',
-                onTap: () => Get.to(const Register()),
-              ),
-              const SizedBox(
-                height: 50,
-              )
-            ],
+      body: GetBuilder<AuthController>(builder: (controller) {
+        return Padding(
+          padding: const EdgeInsets.all(10),
+          child: SafeArea(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 5,
+                ),
+                const LoginWithBtn(),
+                CustomTextfield(
+                  hintText: 'sample@a2b.com',
+                  titleText: 'Email',
+                  isPassword: false,
+                  mycontroller: _namecontroller,
+                ),
+                CustomTextfield(
+                  hintText: 'Enter your password',
+                  isPassword: true,
+                  titleText: 'Password',
+                  mycontroller: _passcontroller,
+                ),
+                Expanded(child: Container()),
+                CustomBtn(
+                  textonbtn: 'Login',
+                  onPress: () => controller.signIn(
+                      context, _namecontroller.text, _passcontroller.text),
+                ),
+                InkwellBtn(
+                  textLeading: "Don't have an account?",
+                  textEnding: ' signup',
+                  onTap: () => Get.to(() => const Register()),
+                ),
+                const SizedBox(
+                  height: 50,
+                )
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

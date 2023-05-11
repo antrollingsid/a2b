@@ -100,7 +100,7 @@ class DashBoard extends StatelessWidget {
           child: BottomNavigationBar(
             showSelectedLabels: false,
             showUnselectedLabels: false,
-            backgroundColor: AppColors.buttonStroke,
+            backgroundColor: Color.fromARGB(255, 27, 27, 27),
             type: BottomNavigationBarType.fixed,
             items: [
               const BottomNavigationBarItem(

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/screens/place_order_calendar.dart';
 import 'package:a2b/screens/place_order_map.dart';
 import 'package:a2b/screens/place_order_upload.dart';
@@ -10,6 +11,7 @@ import 'package:a2b/screens/place_order_upload.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -30,6 +32,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'main/utils/common.dart';
 import 'main/utils/constants.dart';
 import 'main/utils/data_providers.dart';
+import './helper/dependencies.dart' as dep;
 
 AppStore appStore = AppStore();
 late BaseLanguage language;
@@ -37,38 +40,41 @@ late BaseLanguage language;
 // ChatMessageService chatMessageService = ChatMessageService();
 // NotificationService notificationService = NotificationService();
 // late List<FileModel> fileList = [];
-bool isCurrentlyOnNoInternet = false;
-late StreamSubscription<Position> positionStream;
+// bool isCurrentlyOnNoInternet = false;
+// late StreamSubscription<Position> positionStream;
 
-bool mIsEnterKey = false;
-String mSelectedImage = "assets/default_wallpaper.png";
+// bool mIsEnterKey = false;
+// String mSelectedImage = "assets/default_wallpaper.png";
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp().then((value) {
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  });
-  await initialize(aLocaleLanguageList: languageList());
-  appStore.setLogin(getBoolAsync(IS_LOGGED_IN), isInitializing: true);
-  appStore.setUserEmail(getStringAsync(USER_EMAIL), isInitialization: true);
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await dep.init();
+
+  // Firebase.initializeApp().then((value) {
+  //   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  // });
+  // await initialize(aLocaleLanguageList: languageList());
+  // appStore.setLogin(getBoolAsync(IS_LOGGED_IN), isInitializing: true);
+  // appStore.setUserEmail(getStringAsync(USER_EMAIL), isInitialization: true);
   appStore.setLanguage(
       getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: defaultLanguage));
-  FilterAttributeModel? filterData =
-      FilterAttributeModel.fromJson(getJSONAsync(FILTER_DATA));
-  appStore.setFiltering(filterData.orderStatus != null ||
-      !filterData.fromDate.isEmptyOrNull ||
-      !filterData.toDate.isEmptyOrNull);
+  // FilterAttributeModel? filterData =
+  //     FilterAttributeModel.fromJson(getJSONAsync(FILTER_DATA));
+  // appStore.setFiltering(filterData.orderStatus != null ||
+  //     !filterData.fromDate.isEmptyOrNull ||
+  //     !filterData.toDate.isEmptyOrNull);
 
-  int themeModeIndex = getIntAsync(THEME_MODE_INDEX);
-  if (themeModeIndex == appThemeMode.themeModeLight) {
-    appStore.setDarkMode(false);
-  } else if (themeModeIndex == appThemeMode.themeModeDark) {
-    appStore.setDarkMode(true);
-  }
+  // int themeModeIndex = getIntAsync(THEME_MODE_INDEX);
+  // if (themeModeIndex == appThemeMode.themeModeLight) {
+  //   appStore.setDarkMode(false);
+  // } else if (themeModeIndex == appThemeMode.themeModeDark) {
+  //   appStore.setDarkMode(true);
+  // }
 
-  await OneSignal.shared.setAppId(mOneSignalAppId);
+  // await OneSignal.shared.setAppId(mOneSignalAppId);
 
-  saveOneSignalPlayerId();
+  // saveOneSignalPlayerId();
 
   runApp(const ProviderScope(
     child: MainApp(),

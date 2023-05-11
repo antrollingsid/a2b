@@ -1,3 +1,4 @@
+import 'package:a2b/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,7 +40,9 @@ class Profile extends StatelessWidget {
                 onTap: () => Get.to(const Language()),
               ),
               const UpgadeBtn(),
-              const SignOutBtn()
+              InkWell(
+                  onTap: () => Get.find<AuthController>().signOut(),
+                  child: const SignOutBtn())
             ],
           ),
         ),

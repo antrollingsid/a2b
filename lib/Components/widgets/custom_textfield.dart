@@ -24,8 +24,19 @@ class CustomTextfield extends StatefulWidget {
 
 class _CustomTextfieldState extends State<CustomTextfield> {
   final bool _showIcon = true;
-  bool _isPassword = false;
-  bool _obscured = true;
+  late bool _isPassword;
+  late bool _obscured;
+  late String hintText;
+  late String titleText;
+
+  @override
+  void initState() {
+    _isPassword = widget.isPassword;
+    hintText = widget.hintText;
+    titleText = widget.titleText;
+    _obscured = widget.isPassword;
+    super.initState();
+  }
 
   void _toggleObscured() {
     setState(() {
@@ -35,12 +46,6 @@ class _CustomTextfieldState extends State<CustomTextfield> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.isPassword == false) {
-      _isPassword = false;
-    } else {
-      _isPassword = true;
-    }
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -87,7 +92,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                     textAlign: TextAlign.left,
                     decoration: InputDecoration(
                       // prefixIcon: SvgPicture.string(SvgConstant.checkBoxBtn),
-                      hintText: widget.hintText,
+                      hintText: hintText,
                       hintStyle: const TextStyle(
                         color: AppColors.textGrey,
                       ),

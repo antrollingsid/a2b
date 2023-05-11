@@ -1,6 +1,8 @@
 // import 'package:a2b/main.dart';
 // ignore_for_file: unused_import
 
+import 'package:a2b/screens/profile.dart';
+
 import '../../main.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -40,7 +42,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             children: [
               Center(
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.50,
+                  height: MediaQuery.of(context).size.height * 0.40,
                   padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                   child: Column(
                     children: [
@@ -108,6 +110,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                           color: Colors.white,
                           fontWeight: FontWeight.normal,
                           fontSize: 16),
+                      textAlign: TextAlign.center,
                     ),
                   )
                 ],

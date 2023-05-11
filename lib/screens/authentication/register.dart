@@ -1,3 +1,4 @@
+import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/main/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,15 @@ class _RegisterState extends State<Register> {
   final TextEditingController _namecontroller = TextEditingController();
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _passcontroller = TextEditingController();
+
+  @override
+  void dispose() {
+    _namecontroller.dispose();
+    _emailcontroller.dispose();
+    _passcontroller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,43 +40,53 @@ class _RegisterState extends State<Register> {
           titleText: 'Sign up',
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: SafeArea(
-          child: Column(
-            children: [
-              const LoginWithBtn(),
-              CustomTextfield(
-                hintText: 'Sid alfaouri',
-                titleText: 'Name',
-                isPassword: false,
-                mycontroller: _namecontroller,
+      body: GetBuilder<AuthController>(
+        builder: (controller) {
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  const LoginWithBtn(),
+                  CustomTextfield(
+                    hintText: 'Sid alfaouri',
+                    titleText: 'Name',
+                    isPassword: false,
+                    mycontroller: _namecontroller,
+                  ),
+                  CustomTextfield(
+                    hintText: 'sample@a2b.com',
+                    titleText: 'Email',
+                    isPassword: false,
+                    mycontroller: _emailcontroller,
+                  ),
+                  CustomTextfield(
+                    hintText: 'Pick a strong password',
+                    isPassword: true,
+                    titleText: 'Password',
+                    mycontroller: _passcontroller,
+                  ),
+                  Expanded(child: Container()),
+                  CustomBtn(
+                      textonbtn: 'Register',
+                      onPress: () => controller.register(
+                          context,
+                          _emailcontroller.text,
+                          _passcontroller.text,
+                          _namecontroller.text)),
+                  InkwellBtn(
+                    textLeading: 'Already have an account ?  ',
+                    textEnding: 'login',
+                    onTap: () => Get.to(() => const LoginPage()),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  )
+                ],
               ),
-              CustomTextfield(
-                hintText: 'sample@a2b.com',
-                titleText: 'Email',
-                isPassword: false,
-                mycontroller: _emailcontroller,
-              ),
-              CustomTextfield(
-                hintText: 'Pick a strong password',
-                isPassword: true,
-                titleText: 'Password',
-                mycontroller: _passcontroller,
-              ),
-              Expanded(child: Container()),
-              CustomBtn(textonbtn: 'Register', onPress: () => () {}),
-              InkwellBtn(
-                textLeading: 'Already have an account ?  ',
-                textEnding: 'login',
-                onTap: () => Get.to(const LoginPage()),
-              ),
-              const SizedBox(
-                height: 50,
-              )
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
