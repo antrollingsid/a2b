@@ -45,19 +45,19 @@ String mSelectedImage = "assets/default_wallpaper.png";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Firebase.initializeApp().then((value) {
-  //   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-  // });
+  Firebase.initializeApp().then((value) {
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  });
   await initialize(aLocaleLanguageList: languageList());
   appStore.setLogin(getBoolAsync(IS_LOGGED_IN), isInitializing: true);
   appStore.setUserEmail(getStringAsync(USER_EMAIL), isInitialization: true);
   appStore.setLanguage(
       getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: defaultLanguage));
-  // FilterAttributeModel? filterData =
-  //     FilterAttributeModel.fromJson(getJSONAsync(FILTER_DATA));
-  // appStore.setFiltering(filterData.orderStatus != null ||
-  //     !filterData.fromDate.isEmptyOrNull ||
-  //     !filterData.toDate.isEmptyOrNull);
+  FilterAttributeModel? filterData =
+      FilterAttributeModel.fromJson(getJSONAsync(FILTER_DATA));
+  appStore.setFiltering(filterData.orderStatus != null ||
+      !filterData.fromDate.isEmptyOrNull ||
+      !filterData.toDate.isEmptyOrNull);
 
   int themeModeIndex = getIntAsync(THEME_MODE_INDEX);
   if (themeModeIndex == appThemeMode.themeModeLight) {
@@ -66,9 +66,9 @@ void main() async {
     appStore.setDarkMode(true);
   }
 
-  // await OneSignal.shared.setAppId(mOneSignalAppId);
+  await OneSignal.shared.setAppId(mOneSignalAppId);
 
-  // saveOneSignalPlayerId();
+  saveOneSignalPlayerId();
 
   runApp(const ProviderScope(
     child: MainApp(),
