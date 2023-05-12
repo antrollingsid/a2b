@@ -1,4 +1,5 @@
 import 'package:a2b/controllers/auth_controller.dart';
+import 'package:a2b/screens/applyForCourier/apply_for_courier.dart';
 import 'package:a2b/screens/editProfile/edit_profile.dart';
 import 'package:a2b/screens/epmty_page_appar.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,9 @@ class Profile extends StatelessWidget {
                 child: SettingBtn(action: language.language),
                 onTap: () => Get.to(() => const Language()),
               ),
-              const UpgadeBtn(),
+              InkWell(
+                  onTap: () => Get.to(() => const ApplyForCourier()),
+                  child: UpgadeBtn()),
               InkWell(
                   onTap: () => Get.find<AuthController>().signOut(),
                   child: const SignOutBtn())

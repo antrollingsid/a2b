@@ -51,7 +51,7 @@ class UpgadeBtn extends StatelessWidget {
                     ),
                   ),
                   const Text(
-                    "Upgrade to Premium",
+                    "Apply for couriership",
                     style: TextStyle(
                       fontFamily: 'SF Pro Display',
                       fontSize: 16,

@@ -43,6 +43,34 @@ class AuthController extends GetxController {
     }
   }
 
+  void applyForCourier(BuildContext context, String email, String password,
+      String name, String surname) async {
+    // Call api
+    var navigator = Navigator.of(context);
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const CircularProgressIndicator.adaptive(
+            backgroundColor: AppColors.backgroundLightMode,
+          );
+        });
+
+    try {
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password)
+          .then(
+              (value) => addUserDetails(value.user!.uid, email, name, surname));
+
+      navigator.pop();
+      Get.offAll(() => const DashBoard());
+    } on FirebaseAuthException catch (e) {
+      navigator.pop();
+      final snackBar = SnackBar(content: Text(e.message.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      print('Error saving user data ${e.message}');
+    }
+  }
+
   Future<void> signIn(
       BuildContext context, String email, String password) async {
     // Call api
@@ -80,24 +108,42 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<void> updateUserDetails(BuildContext context, String name) async {
-    try {
-      var response = FirebaseAuth.instance.currentUser;
-      print('User ID: ${response?.uid}');
-      print('User ID: $name');
-      final userDocRef =
-          FirebaseFirestore.instance.collection('users').doc(response!.uid);
-      var snapshot = await userDocRef.get();
-      print('Before update: ${snapshot.data()?['details']['name']}');
-      await userDocRef.update({
-        'details.name': name,
-      });
-      snapshot = await userDocRef.get();
-      print('After update: ${snapshot.data()?['details']['name']}');
-    } catch (e) {
-      print('Error updating user details: $e');
-    }
-  }
+  // Future<void> updateUserDetails(
+  //   BuildContext context,
+  //   String? name,
+  //   String? surname,
+  //   String? age,
+  // ) async {
+  //   try {
+  //     var response = FirebaseAuth.instance.currentUser;
+  //     final userDocRef =
+  //         FirebaseFirestore.instance.collection('users').doc(response!.uid);
+  //     var snapshot = await userDocRef.get();
+
+  //     if (name != null) {
+  //       await userDocRef.update({
+  //         'details.name': name,
+  //       });
+  //     }
+
+  //     if (surname != null) {
+  //       await userDocRef.update({
+  //         'details.surname': surname,
+  //       });
+  //     }
+
+  //     if (age != null) {
+  //       await userDocRef.update({
+  //         'details.age': age,
+  //       });
+  //     }
+
+  //     snapshot = await userDocRef.get();
+  //     print('After update: ${snapshot.data()?['details']}');
+  //   } catch (e) {
+  //     print('Error updating user details: $e');
+  //   }
+  // }
 
   Future addUserDetails(
       String uid, String email, String name, String surname) async {
