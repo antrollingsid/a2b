@@ -1,4 +1,6 @@
 import 'package:a2b/controllers/auth_controller.dart';
+import 'package:a2b/screens/editProfile/edit_profile.dart';
+import 'package:a2b/screens/epmty_page_appar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,12 +34,15 @@ class Profile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TopProfile(),
-              SettingBtn(action: language.editProfile),
+              InkWell(
+                child: SettingBtn(action: language.editProfile),
+                onTap: () => Get.to(() => const EditProfile()),
+              ),
               const SettingBtn(action: 'Settings'),
               SettingBtn(action: language.wallet),
               GestureDetector(
                 child: SettingBtn(action: language.language),
-                onTap: () => Get.to(const Language()),
+                onTap: () => Get.to(() => const Language()),
               ),
               const UpgadeBtn(),
               InkWell(

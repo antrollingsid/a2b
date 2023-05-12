@@ -137,9 +137,9 @@ class TopProfile extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            const Text(
-                              'Moonwalk',
-                              style: TextStyle(
+                            Text(
+                              controller.user.details.surname,
+                              style: const TextStyle(
                                 fontFamily: 'SF Pro Display',
                                 fontSize: 36,
                                 fontWeight: FontWeight.w200,

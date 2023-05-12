@@ -1,4 +1,5 @@
 import 'package:a2b/main/utils/colors.dart';
+import 'package:a2b/main/utils/constants.dart';
 import 'package:a2b/models/user_model.dart';
 import 'package:a2b/screens/dashboard.dart';
 import 'package:a2b/screens/splash_screen.dart';
@@ -14,8 +15,8 @@ class AuthController extends GetxController {
   bool _isLoggedIn = false;
   bool get isLoggedIn => _isLoggedIn;
 
-  void register(
-      BuildContext context, String email, String password, String name) async {
+  void register(BuildContext context, String email, String password,
+      String name, String surname) async {
     // Call api
     var navigator = Navigator.of(context);
     showDialog(
@@ -29,7 +30,8 @@ class AuthController extends GetxController {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) => addUserDetails(value.user!.uid, email, name));
+          .then(
+              (value) => addUserDetails(value.user!.uid, email, name, surname));
 
       navigator.pop();
       Get.offAll(() => const DashBoard());
@@ -78,7 +80,27 @@ class AuthController extends GetxController {
     }
   }
 
-  Future addUserDetails(String uid, String email, String name) async {
+  Future<void> updateUserDetails(BuildContext context, String name) async {
+    try {
+      var response = FirebaseAuth.instance.currentUser;
+      print('User ID: ${response?.uid}');
+      print('User ID: $name');
+      final userDocRef =
+          FirebaseFirestore.instance.collection('users').doc(response!.uid);
+      var snapshot = await userDocRef.get();
+      print('Before update: ${snapshot.data()?['details']['name']}');
+      await userDocRef.update({
+        'details.name': name,
+      });
+      snapshot = await userDocRef.get();
+      print('After update: ${snapshot.data()?['details']['name']}');
+    } catch (e) {
+      print('Error updating user details: $e');
+    }
+  }
+
+  Future addUserDetails(
+      String uid, String email, String name, String surname) async {
     // Call api
     final createdAt = DateTime.now();
     final json = {
@@ -87,6 +109,7 @@ class AuthController extends GetxController {
       'details': {
         'id': uid,
         'name': name,
+        'surname': surname,
         'email': email,
         'photoURL':
             'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',

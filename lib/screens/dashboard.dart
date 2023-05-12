@@ -156,14 +156,14 @@ class DashBoard extends StatelessWidget {
             selectedItemColor: AppColors.primaryDark,
             onTap: (index) {
               if (index == 0) {
-                Get.to(const DashBoard());
+                Get.to(() => const DashBoard());
               } else if (index == 1) {
-                Get.to(const DashBoard());
+                Get.to(() => const DashBoard());
               } else if (index == 2) {
-                Get.to(const PlaceOrderMap());
+                Get.to(() => const PlaceOrderMap());
               } else if (index == 3) {
               } else if (index == 4) {
-                Get.to(const Profile());
+                Get.to(() => const Profile());
               }
             },
           ),
@@ -202,7 +202,10 @@ class TrackingTextField extends StatelessWidget {
               fillColor: AppColors.buttonStroke,
               border: GradientOutlineInputBorder(
                 gradient: const LinearGradient(
-                    colors: [AppColors.secondaryBlue, AppColors.primaryDark],
+                    colors: [
+                      AppColors.secondaryBlue,
+                      AppColors.primaryDark,
+                    ],
                     begin: FractionalOffset(0.0, 0.0),
                     end: FractionalOffset(0.5, 0.0),
                     stops: [0.0, 1.0],

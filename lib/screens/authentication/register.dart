@@ -19,6 +19,7 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final TextEditingController _namecontroller = TextEditingController();
+  final TextEditingController _surnamecontroller = TextEditingController();
   final TextEditingController _emailcontroller = TextEditingController();
   final TextEditingController _passcontroller = TextEditingController();
 
@@ -27,6 +28,7 @@ class _RegisterState extends State<Register> {
     _namecontroller.dispose();
     _emailcontroller.dispose();
     _passcontroller.dispose();
+    _surnamecontroller.dispose();
     super.dispose();
   }
 
@@ -49,10 +51,16 @@ class _RegisterState extends State<Register> {
                 children: [
                   const LoginWithBtn(),
                   CustomTextfield(
-                    hintText: 'Sid alfaouri',
+                    hintText: 'Sid',
                     titleText: 'Name',
                     isPassword: false,
                     mycontroller: _namecontroller,
+                  ),
+                  CustomTextfield(
+                    hintText: 'Alfaouri',
+                    titleText: 'Surname',
+                    isPassword: false,
+                    mycontroller: _surnamecontroller,
                   ),
                   CustomTextfield(
                     hintText: 'sample@a2b.com',
@@ -73,7 +81,8 @@ class _RegisterState extends State<Register> {
                           context,
                           _emailcontroller.text,
                           _passcontroller.text,
-                          _namecontroller.text)),
+                          _namecontroller.text,
+                          _surnamecontroller.text)),
                   InkwellBtn(
                     textLeading: 'Already have an account ?  ',
                     textEnding: 'login',

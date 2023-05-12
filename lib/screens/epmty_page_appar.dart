@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
