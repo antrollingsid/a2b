@@ -9,7 +9,8 @@ import '../../../Components/widgets/app_bar_buttons.dart';
 import '../../../Components/widgets/custom_button.dart';
 import '../../../Components/widgets/custom_textfield.dart';
 import '../../../Components/widgets/inkwell_button.dart';
-import '../dashboard.dart';
+import '../../controllers/login_controller.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,18 +20,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _namecontroller = TextEditingController();
-  final TextEditingController _passcontroller = TextEditingController();
 
-  @override
-  void dispose() {
-    _namecontroller.dispose();
-    _passcontroller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final logcontroller = Get.put(LoginController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.backgroundDark,
@@ -54,19 +48,19 @@ class _LoginPageState extends State<LoginPage> {
                   hintText: 'sample@a2b.com',
                   titleText: 'Email',
                   isPassword: false,
-                  mycontroller: _namecontroller,
+                  mycontroller: logcontroller.email
                 ),
                 CustomTextfield(
                   hintText: 'Enter your password',
                   isPassword: true,
                   titleText: 'Password',
-                  mycontroller: _passcontroller,
+                  mycontroller: logcontroller.password,
                 ),
                 Expanded(child: Container()),
                 CustomBtn(
                   textonbtn: 'Login',
                   onPress: () => controller.signIn(
-                      context, _namecontroller.text, _passcontroller.text),
+                      context, logcontroller.email.text, logcontroller.password.text),
                 ),
                 InkwellBtn(
                   textLeading: "Don't have an account?",

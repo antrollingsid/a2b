@@ -19,13 +19,6 @@ class AuthController extends GetxController {
       String name, String surname) async {
     // Call api
     var navigator = Navigator.of(context);
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const CircularProgressIndicator.adaptive(
-            backgroundColor: AppColors.backgroundLightMode,
-          );
-        });
 
     try {
       await FirebaseAuth.instance
@@ -75,13 +68,6 @@ class AuthController extends GetxController {
       BuildContext context, String email, String password) async {
     // Call api
     var navigator = Navigator.of(context);
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const CircularProgressIndicator.adaptive(
-            backgroundColor: AppColors.backgroundLightMode,
-          );
-        });
 
     try {
       var response = await FirebaseAuth.instance

@@ -8,6 +8,7 @@ import '../../../Components/widgets/app_bar_buttons.dart';
 import '../../../Components/widgets/custom_button.dart';
 import '../../../Components/widgets/custom_textfield.dart';
 import '../../../Components/widgets/inkwell_button.dart';
+import '../../controllers/signup_controller.dart';
 import 'login.dart';
 
 class Register extends StatefulWidget {
@@ -18,22 +19,9 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final TextEditingController _namecontroller = TextEditingController();
-  final TextEditingController _surnamecontroller = TextEditingController();
-  final TextEditingController _emailcontroller = TextEditingController();
-  final TextEditingController _passcontroller = TextEditingController();
-
-  @override
-  void dispose() {
-    _namecontroller.dispose();
-    _emailcontroller.dispose();
-    _passcontroller.dispose();
-    _surnamecontroller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final regcontroller = Get.put(SignUpController());
     return Scaffold(
       backgroundColor: AppColors.backgroundDark,
       appBar: const PreferredSize(
@@ -44,57 +32,60 @@ class _RegisterState extends State<Register> {
       ),
       body: GetBuilder<AuthController>(
         builder: (controller) {
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: SafeArea(
-              child: Column(
-                children: [
-                  const LoginWithBtn(),
-                  CustomTextfield(
-                    hintText: 'Sid',
-                    titleText: 'Name',
-                    isPassword: false,
-                    mycontroller: _namecontroller,
+          return CustomScrollView(slivers: [
+            SliverFillRemaining(
+                hasScrollBody: false,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SafeArea(
+                    child: Column(
+                      children: [
+                        const LoginWithBtn(),
+                        CustomTextfield(
+                          hintText: 'Sid',
+                          titleText: 'Name',
+                          isPassword: false,
+                          mycontroller: regcontroller.name,
+                        ),
+                        CustomTextfield(
+                          hintText: 'Alfaouri',
+                          titleText: 'Surname',
+                          isPassword: false,
+                          mycontroller: regcontroller.surname,
+                        ),
+                        CustomTextfield(
+                          hintText: 'sample@a2b.com',
+                          titleText: 'Email',
+                          isPassword: false,
+                          mycontroller: regcontroller.email,
+                        ),
+                        CustomTextfield(
+                            hintText: 'Pick a strong password',
+                            isPassword: true,
+                            titleText: 'Password',
+                            mycontroller: regcontroller.password),
+                        Expanded(child: Container()),
+                        CustomBtn(
+                            textonbtn: 'Register',
+                            onPress: () => controller.register(
+                                context,
+                                regcontroller.email.text,
+                                regcontroller.password.text,
+                                regcontroller.name.text,
+                                regcontroller.password.text)),
+                        InkwellBtn(
+                          textLeading: 'Already have an account ?  ',
+                          textEnding: 'login',
+                          onTap: () => Get.to(() => const LoginPage()),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        )
+                      ],
+                    ),
                   ),
-                  CustomTextfield(
-                    hintText: 'Alfaouri',
-                    titleText: 'Surname',
-                    isPassword: false,
-                    mycontroller: _surnamecontroller,
-                  ),
-                  CustomTextfield(
-                    hintText: 'sample@a2b.com',
-                    titleText: 'Email',
-                    isPassword: false,
-                    mycontroller: _emailcontroller,
-                  ),
-                  CustomTextfield(
-                    hintText: 'Pick a strong password',
-                    isPassword: true,
-                    titleText: 'Password',
-                    mycontroller: _passcontroller,
-                  ),
-                  Expanded(child: Container()),
-                  CustomBtn(
-                      textonbtn: 'Register',
-                      onPress: () => controller.register(
-                          context,
-                          _emailcontroller.text,
-                          _passcontroller.text,
-                          _namecontroller.text,
-                          _surnamecontroller.text)),
-                  InkwellBtn(
-                    textLeading: 'Already have an account ?  ',
-                    textEnding: 'login',
-                    onTap: () => Get.to(() => const LoginPage()),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  )
-                ],
-              ),
-            ),
-          );
+                ))
+          ]);
         },
       ),
     );

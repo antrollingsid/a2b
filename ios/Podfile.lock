@@ -5,7 +5,7 @@ PODS:
   - AppAuth/Core (1.6.1)
   - AppAuth/ExternalUserAgent (1.6.1):
     - AppAuth/Core
-  - cloud_firestore (4.6.0):
+  - cloud_firestore (4.7.0):
     - Firebase/Firestore (= 10.7.0)
     - firebase_core
     - Flutter
@@ -63,18 +63,18 @@ PODS:
   - Firebase/Storage (10.7.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.7.0)
-  - firebase_auth (4.5.0):
+  - firebase_auth (4.6.0):
     - Firebase/Auth (= 10.7.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.11.0):
+  - firebase_core (2.12.0):
     - Firebase/CoreOnly (= 10.7.0)
     - Flutter
-  - firebase_crashlytics (3.2.0):
+  - firebase_crashlytics (3.3.0):
     - Firebase/Crashlytics (= 10.7.0)
     - firebase_core
     - Flutter
-  - firebase_storage (11.1.2):
+  - firebase_storage (11.2.0):
     - Firebase/Storage (= 10.7.0)
     - firebase_core
     - Flutter
@@ -355,17 +355,17 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AppAuth: e48b432bb4ba88b10cb2bcc50d7f3af21e78b9c2
-  cloud_firestore: 3809dfc121ab99b81bba51eb84ac6ca3f9033325
+  cloud_firestore: 511b4d22a2b3c73d1d6f1974b1cf0971a034ea16
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   emoji_picker_flutter: df19dac03a2b39ac667dc8d1da939ef3a9e21347
   file_picker: ce3938a0df3cc1ef404671531facef740d03f920
   Firebase: 0219acf760880eeec8ce479895bd7767466d9f81
-  firebase_auth: 1eb69de8f57040c5c78bb3267412e9cb395fd08c
-  firebase_core: dee76ded6c693fdb38b8ea39aef7129e32e587a3
-  firebase_crashlytics: 450dc80dcb167d04714c147336dd04a7230d20e4
-  firebase_storage: f6fb3e54e886182b5ab5cf514da1d9ceb196fa2f
+  firebase_auth: 6608b43809305e8d82957dffd6419b04ee4a31e5
+  firebase_core: 312d0d81b346ec20540822c8498e626d6918ef48
+  firebase_crashlytics: 869c43dd16f650004bb312ff9eff8d068406b939
+  firebase_storage: d093441a28c685ff955d87f710588b83e1a4815f
   FirebaseAppCheckInterop: 8e907eea79958960a8bd2058e067f31e03a7914b
   FirebaseAuth: dd64c01631df724b09f33e584625775c52f7d71f
   FirebaseAuthInterop: 5ea2a68b83f5222f6d8688ffc3a49a9e92bb3eba
@@ -373,7 +373,7 @@ SPEC CHECKSUMS:
   FirebaseCoreExtension: d815fd6fec8bb3a0940bc02dd5e3e641ea7229d8
   FirebaseCoreInternal: fa2899eb1f340054858d289e5a0fb935a0a74e52
   FirebaseCrashlytics: 35fdd1a433b31e28adcf5c8933f4c526691a1e0b
-  FirebaseFirestore: 7b7d95b74637ed61b76996077a2b292167dae7e5
+  FirebaseFirestore: 712ff268d746fc65efb361e9ce2cfeb458f10643
   FirebaseInstallations: c58489c9caacdbf27d1da60891a87318e20218e0
   FirebaseSessions: 44a6782502eb279a214d4adca20891353278760c
   FirebaseStorage: 4841efa304543e1f9e4ca116c559c7a1ea2a9d0f
