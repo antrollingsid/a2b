@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_import
 
 import 'package:a2b/screens/place_order_map.dart';
+import 'package:a2b/screens/userDetails/details.dart';
 
 import '/screens/place_order_calendar.dart';
 import '/screens/profile.dart';
@@ -82,12 +83,12 @@ class DashBoard extends StatelessWidget {
                 const OrderHistoryActivity(),
                 SvgPicture.string(SvgConstant.lineDark),
                 const OrderHistoryActivity(),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     Get.to(() => const EmptyPage());
-                //   },
-                //   child: const Text('Empty Page'),
-                // ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(() => const DetailsPage());
+                  },
+                  child: const Text('detail Page'),
+                ),
               ],
             ),
           ),

@@ -72,6 +72,7 @@ dependencies:
   image_cropper: ^3.0.3
   flutter_native_splash: ^2.2.19
   timeago: ^3.3.0
+  flutter_rating_bar: ^4.0.1
 
 
 dev_dependencies:

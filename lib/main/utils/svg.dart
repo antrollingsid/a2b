@@ -156,4 +156,11 @@ class SvgConstant {
 <path d="M10.5714 1.77544L4.28573 8.06115L1.42859 5.20401" stroke="#979797" stroke-width="2" stroke-linecap="square"/>
 </svg>
 ''';
+
+  static String callBtnDark = '''
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="27" cy="27" r="27" fill="#BB86FC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M26.5317 27.4724C30.5208 31.4604 31.4258 26.8467 33.9656 29.3848C36.4143 31.8328 37.8216 32.3232 34.7192 35.4247C34.3306 35.737 31.8616 39.4943 23.1846 30.8197C14.5065 22.144 18.2616 19.6724 18.574 19.2839C21.6839 16.1738 22.1659 17.5894 24.6145 20.0373C27.1544 22.5765 22.5427 23.4844 26.5317 27.4724Z" fill="white"/>
+</svg>
+''';
 }

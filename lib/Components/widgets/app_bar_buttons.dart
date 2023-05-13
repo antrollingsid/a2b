@@ -167,3 +167,76 @@ class CustomAppBar extends StatelessWidget {
     );
   }
 }
+
+class DetailsAppBar extends StatelessWidget {
+  const DetailsAppBar({
+    super.key,
+    required this.titleText,
+  });
+  final String titleText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: const AssetImage('assets/images/1x/1.png'),
+          colorFilter: ColorFilter.mode(
+            AppColors.backgroundDark.withOpacity(0.6),
+            BlendMode.multiply,
+          ),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: AppBar(
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        leading: const Padding(
+          padding: EdgeInsets.fromLTRB(27, 4, 0, 4),
+          child: backBtn(),
+        ),
+        leadingWidth: 74,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(0),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: Container(
+              height: 10,
+              width: double.infinity,
+              // margin: const EdgeInsets.all(26),
+              decoration: const BoxDecoration(
+                color: AppColors.backgroundDark,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(0),
+                  bottomRight: Radius.circular(0),
+                ),
+              ),
+            ),
+          ),
+        ),
+        title: Text(
+          titleText,
+          style: TextStyle(
+            fontFamily: AppFonts.mainFont,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: AppColors.onBackgroundDark,
+          ),
+        ),
+        actions: true
+            ? [
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(0, 5, 30, 3),
+                  child: menuBtn(),
+                ),
+              ]
+            : [], // empty list to hide the action button
+        elevation: 0,
+        backgroundColor:
+            Colors.transparent, // set background color to transparent
+      ),
+    );
+  }
+}
