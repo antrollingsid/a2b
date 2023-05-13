@@ -36,6 +36,23 @@ class AuthController extends GetxController {
     }
   }
 
+  void registerwithgoogle(BuildContext context, String email, String password,
+      String name, String surname) async {
+    // Call api
+    var navigator = Navigator.of(context);
+
+    try {
+      await FirebaseAuth.instance.signInWithProvider(GoogleAuthProvider());
+      navigator.pop();
+      Get.offAll(() => const DashBoard());
+    } on FirebaseAuthException catch (e) {
+      navigator.pop();
+      final snackBar = SnackBar(content: Text(e.message.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      print('Error saving user data ${e.message}');
+    }
+  }
+
   void applyForCourier(BuildContext context, String email, String password,
       String name, String surname) async {
     // Call api
