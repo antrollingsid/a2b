@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/Components/widgets/custom_textfield.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
+import '../../controllers/apply_controller.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -28,6 +30,25 @@ class _ApplyForCourierState extends State<ApplyForCourier>
 
   File? _file;
   PlatformFile? _platformFile;
+  UploadTask? uploadTask;
+
+  late String urlDownload;
+
+  Future uploadFile() async {
+    try {
+      final path = 'applications/${_platformFile!.name}';
+      final files = File(_platformFile!.path!);
+
+      final ref = FirebaseStorage.instance.ref().child(path);
+      uploadTask = ref.putFile(files);
+
+      final snapshot = await uploadTask!.whenComplete(() {});
+      urlDownload = await snapshot.ref.getDownloadURL();
+      print('download link: $urlDownload');
+    } catch (e) {
+      print(e);
+    }
+  }
 
   selectFile() async {
     final file = await FilePicker.platform.pickFiles(
@@ -70,9 +91,6 @@ class _ApplyForCourierState extends State<ApplyForCourier>
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 10,
-            ),
             GestureDetector(
               onTap: selectFile,
               child: DottedBorder(
@@ -107,22 +125,6 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                       ),
                       const SizedBox(
                         height: 45,
-                      ),
-                      Container(
-                        height: 53,
-                        width: 131,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.secondaryBlue,
-                        ),
-                        child: const Text(
-                          'Browse',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
                       ),
                       const SizedBox(
                         height: 10,
@@ -198,7 +200,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                       height: 5,
                                     ),
                                     SizedBox(
-                                      height: 7,
+                                      height: 20,
                                       child: Stack(
                                         children: [
                                           Container(
@@ -212,7 +214,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                             child: Align(
                                               alignment: Alignment.centerLeft,
                                               child: Container(
-                                                height: 7,
+                                                height: 20,
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
@@ -221,18 +223,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                                 child: ClipRRect(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
-                                                  child:
-                                                      LinearProgressIndicator(
-                                                    value:
-                                                        loadingController.value,
-                                                    backgroundColor:
-                                                        Colors.white,
-                                                    valueColor:
-                                                        const AlwaysStoppedAnimation<
-                                                            Color>(
-                                                      AppColors.primaryDark,
-                                                    ),
-                                                  ),
+                                                  child: buildProcess(),
                                                 ),
                                               ),
                                             ),
@@ -252,45 +243,43 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                         const SizedBox(
                           height: 20,
                         ),
-                        // MaterialButton(
-                        //   minWidth: double.infinity,
-                        //   height: 45,
-                        //   onPressed: () {},
-                        //   color: Colors.black,
-                        //   child: Text('Upload', style: TextStyle(color: Colors.white),),
-                        // )
+                        MaterialButton(
+                          minWidth: double.infinity,
+                          height: 45,
+                          onPressed: uploadFile,
+                          color: AppColors.primaryDark,
+                          child: const Text(
+                            'Upload file',
+                            style: TextStyle(color: AppColors.backgroundDark),
+                          ),
+                        )
                       ],
                     ),
                   )
                 : Container(),
             const SizedBox(
-              height: 70,
+              height: 10,
             ),
             // const CustomShip(),
             // const TrackingTextField(),
             // const OrderHistoryActivity(),
-            const Text(
-              'plate no',
-              style: TextStyle(color: Colors.white),
-            ),
+
             CustomTextfield(
-                titleText: '',
+                titleText: 'plate no',
                 isPassword: false,
                 hintText: 'plate no',
                 mycontroller: _platenocontroller),
-            const Text(
-              'ttransport type',
-              style: TextStyle(color: Colors.white),
-            ),
+
             CustomTextfield(
-                titleText: '',
+                titleText: 'transportation type',
                 isPassword: false,
                 hintText: 'transport type',
                 mycontroller: _transportcontroller),
             Center(
               child: CustomBtn(
-                textonbtn: 'upload',
-                onPress: () {},
+                textonbtn: 'submit',
+                onPress: () => applyForCourier(context, urlDownload,
+                    _platenocontroller.text, _transportcontroller.text),
               ),
             ),
           ],
@@ -298,6 +287,36 @@ class _ApplyForCourierState extends State<ApplyForCourier>
       ),
     );
   }
+
+  Widget buildProcess() => StreamBuilder<TaskSnapshot>(
+      stream: uploadTask?.snapshotEvents,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final data = snapshot.data!;
+          double progress = data.bytesTransferred / data.totalBytes;
+          return SizedBox(
+            height: 20,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                LinearProgressIndicator(
+                  value: progress,
+                  backgroundColor: Colors.grey,
+                  color: Colors.green,
+                ),
+                Center(
+                  child: Text('${(100 * progress).roundToDouble()}%',
+                      style: const TextStyle(color: Colors.white)),
+                ), // Center
+              ],
+            ),
+          );
+        } else {
+          return SizedBox(
+            height: 20,
+          );
+        }
+      });
 }
 
 class TrackingTextField extends StatelessWidget {

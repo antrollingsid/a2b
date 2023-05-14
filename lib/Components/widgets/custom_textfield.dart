@@ -46,112 +46,109 @@ class _CustomTextfieldState extends State<CustomTextfield> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
-              child: Text(
-                widget.titleText,
-                textAlign: TextAlign.left,
-                style: const TextStyle(
-                  color: Colors.white70,
-                ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(34, 0, 0, 0),
+            child: Text(
+              widget.titleText,
+              textAlign: TextAlign.left,
+              style: const TextStyle(
+                color: Colors.white70,
               ),
             ),
           ),
-          // ElevatedButton(
-          //   onPressed: () {
-          //     setState(
-          //       () {
-          //         _showIcon = !_showIcon;
-          //         _isPassword = !_isPassword;
-          //       },
-          //     );
-          //   },
-          //   child: const Text('Press me'),
-          // ),
-          const SizedBox(height: 2),
-          SizedBox(
-            height: 67,
-            width: 333,
-            child: Center(
-              child: Stack(
-                alignment: Alignment.centerRight,
-                children: [
-                  TextField(
-                    controller: widget.mycontroller,
-                    obscureText: _obscured,
-                    style: const TextStyle(
-                      color: AppColors.backgroundLightMode,
-                    ),
-                    textAlign: TextAlign.left,
-                    decoration: InputDecoration(
-                      // prefixIcon: SvgPicture.string(SvgConstant.checkBoxBtn),
-                      hintText: hintText,
-                      hintStyle: const TextStyle(
-                        color: AppColors.textGrey,
-                      ),
-                      filled: true,
-                      fillColor: AppColors.buttonDark,
-                      border: myinputborder(_showIcon),
-                      enabledBorder: myinputborder(_showIcon), //enabled border
-                      focusedBorder: myfocusborder(),
-
-                      suffixIcon: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
-                          child: _isPassword
-                              ? GestureDetector(
-                                  onTap: _toggleObscured,
-                                  child: Icon(
-                                      _obscured
-                                          ? Icons.visibility_rounded
-                                          : Icons.visibility_off_rounded,
-                                      size: 18,
-                                      color: Colors.white))
-                              : IconButton(
-                                  icon: SvgPicture.string(
-                                      SvgConstant.checkBoxBtn),
-                                  color: _isPassword
-                                      ? Colors.white
-                                      : null, // Set color white when isPassword is true
-                                  onPressed: () {},
-                                )),
-                    ),
+        ),
+        // ElevatedButton(
+        //   onPressed: () {
+        //     setState(
+        //       () {
+        //         _showIcon = !_showIcon;
+        //         _isPassword = !_isPassword;
+        //       },
+        //     );
+        //   },
+        //   child: const Text('Press me'),
+        // ),
+        const SizedBox(height: 2),
+        SizedBox(
+          height: 67,
+          width: 333,
+          child: Center(
+            child: Stack(
+              alignment: Alignment.centerRight,
+              children: [
+                TextField(
+                  controller: widget.mycontroller,
+                  obscureText: _obscured,
+                  style: const TextStyle(
+                    color: AppColors.backgroundLightMode,
                   ),
-                  // if (_isPassword)
-                  //   ClipRect(
-                  //     clipBehavior: Clip.antiAliasWithSaveLayer,
-                  //     child: IconButton(
-                  //       icon: SvgPicture.string(
-                  //         _isFocused
-                  //             ? SvgConstant.eyeCloseDark
-                  //             : SvgConstant.eyeOpenDark,
-                  //         color: Colors.white,
-                  //       ),
-                  //       onPressed: _toggleObscured,
-                  //     ),
-                  //   )
-                  // else
-                  //   _showIcon
-                  //       ? IconButton(
-                  //           icon: SvgPicture.string(SvgConstant.checkBoxBtn),
-                  //           color: _isPassword
-                  //               ? Colors.white
-                  //               : null, // Set color white when isPassword is true
-                  //           onPressed: () {},
-                  //         )
-                  //       : Container(),
-                ],
-              ),
+                  textAlign: TextAlign.left,
+                  decoration: InputDecoration(
+                    // prefixIcon: SvgPicture.string(SvgConstant.checkBoxBtn),
+                    hintText: hintText,
+                    hintStyle: const TextStyle(
+                      color: AppColors.textGrey,
+                    ),
+                    filled: true,
+                    fillColor: AppColors.buttonDark,
+                    border: myinputborder(_showIcon),
+                    enabledBorder: myinputborder(_showIcon), //enabled border
+                    focusedBorder: myfocusborder(),
+
+                    suffixIcon: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
+                        child: _isPassword
+                            ? GestureDetector(
+                                onTap: _toggleObscured,
+                                child: Icon(
+                                    _obscured
+                                        ? Icons.visibility_rounded
+                                        : Icons.visibility_off_rounded,
+                                    size: 18,
+                                    color: Colors.white))
+                            : IconButton(
+                                icon:
+                                    SvgPicture.string(SvgConstant.checkBoxBtn),
+                                color: _isPassword
+                                    ? Colors.white
+                                    : null, // Set color white when isPassword is true
+                                onPressed: () {},
+                              )),
+                  ),
+                ),
+                // if (_isPassword)
+                //   ClipRect(
+                //     clipBehavior: Clip.antiAliasWithSaveLayer,
+                //     child: IconButton(
+                //       icon: SvgPicture.string(
+                //         _isFocused
+                //             ? SvgConstant.eyeCloseDark
+                //             : SvgConstant.eyeOpenDark,
+                //         color: Colors.white,
+                //       ),
+                //       onPressed: _toggleObscured,
+                //     ),
+                //   )
+                // else
+                //   _showIcon
+                //       ? IconButton(
+                //           icon: SvgPicture.string(SvgConstant.checkBoxBtn),
+                //           color: _isPassword
+                //               ? Colors.white
+                //               : null, // Set color white when isPassword is true
+                //           onPressed: () {},
+                //         )
+                //       : Container(),
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
