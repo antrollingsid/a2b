@@ -11,7 +11,7 @@ class CustomTextfield extends StatefulWidget {
     required this.isPassword,
     required this.hintText,
     required this.mycontroller,
-    required this.width,
+    required this.width, required String titleText,
   });
   final bool isPassword;
   final String hintText;

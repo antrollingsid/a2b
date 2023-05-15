@@ -51,19 +51,19 @@ class _RegisterState extends State<Register> {
                           hintText: 'Alfaouri',
                           titleText: 'Surname',
                           isPassword: false,
-                          mycontroller: regcontroller.surname,
+                          mycontroller: regcontroller.surname, width: null,
                         ),
                         CustomTextfield(
                           hintText: 'sample@a2b.com',
                           titleText: 'Email',
                           isPassword: false,
-                          mycontroller: regcontroller.email,
+                          mycontroller: regcontroller.email, width: null,
                         ),
                         CustomTextfield(
                             hintText: 'Pick a strong password',
                             isPassword: true,
                             titleText: 'Password',
-                            mycontroller: regcontroller.password),
+                            mycontroller: regcontroller.password, width: null,),
                         Expanded(child: Container()),
                         CustomBtn(
                             textonbtn: 'Register',
@@ -72,7 +72,7 @@ class _RegisterState extends State<Register> {
                                 regcontroller.email.text,
                                 regcontroller.password.text,
                                 regcontroller.name.text,
-                                regcontroller.password.text)),
+                                regcontroller.password.text), primary: null,),
                         InkwellBtn(
                           textLeading: 'Already have an account ?  ',
                           textEnding: 'login',
