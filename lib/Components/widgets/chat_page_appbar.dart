@@ -30,7 +30,7 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
         //     : Brightness.dark,
       ),
       elevation: 0,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
       automaticallyImplyLeading: false,
       // leading: backBtn(),
       flexibleSpace: SafeArea(

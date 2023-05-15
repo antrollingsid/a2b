@@ -72,7 +72,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -201,7 +201,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(5),
-                                                color: AppColors.backgroundDark,
+                                                color: AppColors.background,
                                               ),
                                             ),
                                             Positioned.fill(
@@ -213,8 +213,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             5),
-                                                    color:
-                                                        AppColors.primaryDark,
+                                                    color: AppColors.primary,
                                                   ),
                                                   child: ClipRRect(
                                                     borderRadius:
@@ -245,7 +244,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                             height: 45,
                             onPressed: uploadFile,
                             color: Colors.black,
-                            child: Text(
+                            child: const Text(
                               'Upload',
                               style: TextStyle(color: Colors.white),
                             ),
@@ -336,7 +335,7 @@ class TrackingTextField extends StatelessWidget {
               fillColor: AppColors.buttonStroke,
               border: GradientOutlineInputBorder(
                 gradient: const LinearGradient(
-                    colors: [AppColors.secondaryBlue, AppColors.primaryDark],
+                    colors: [AppColors.secondaryBlue, AppColors.primary],
                     begin: FractionalOffset(0.0, 0.0),
                     end: FractionalOffset(0.5, 0.0),
                     stops: [0.0, 1.0],

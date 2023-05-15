@@ -3,5 +3,5 @@
 import 'package:flutter/material.dart';
 
 class AppFonts {
-  static String mainFont = 'Helvetica';
+  static String mainFont = 'Roboto';
 }

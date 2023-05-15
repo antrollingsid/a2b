@@ -18,23 +18,11 @@ class backBtn extends StatelessWidget {
     return Material(
       clipBehavior: Clip.antiAliasWithSaveLayer,
       color: Colors.transparent,
-      child: Container(
-        height: 47,
-        width: 47,
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 2,
-            color: AppColors.buttonStroke,
-          ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: IconButton(
-          icon: SvgPicture.string(SvgConstant.backArrowDark),
-          color: AppColors.onBackgroundDark,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+      child: IconButton(
+        icon: SvgPicture.string(SvgConstant.backArrow),
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }
@@ -50,29 +38,15 @@ class menuBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      color: AppColors.backgroundDark,
-      child: Container(
-        height: 47,
-        width: 47,
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 2,
-            color: AppColors.buttonStroke,
-          ),
-          borderRadius: BorderRadius.circular(10),
+      color: Colors.transparent,
+      child: IconButton(
+        icon: SvgPicture.string(
+          SvgConstant.burgerMenuDark,
+          color: AppColors.primary,
         ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-          child: IconButton(
-            icon: SvgPicture.string(
-              SvgConstant.burgerMenuDark,
-            ),
-            color: AppColors.onBackgroundDark,
-            onPressed: () {
-              Get.to(const MenuPage());
-            },
-          ),
-        ),
+        onPressed: () {
+          Get.to(const MenuPage());
+        },
       ),
     );
   }
@@ -121,7 +95,7 @@ class CustomLoginSignupAppBar extends StatelessWidget {
       //   ),
       // ],
       elevation: 0,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
     );
   }
 }
@@ -147,11 +121,11 @@ class CustomAppBar extends StatelessWidget {
       leadingWidth: 74,
       title: Text(
         titleText,
-        style: TextStyle(
-          fontFamily: AppFonts.mainFont,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          color: AppColors.onBackgroundDark,
+        style: const TextStyle(
+          fontFamily: 'Material Icons',
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: AppColors.primary,
         ),
       ),
       actions: isActionVisible
@@ -163,7 +137,7 @@ class CustomAppBar extends StatelessWidget {
             ]
           : [], // empty list to hide the action button
       elevation: 0,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
     );
   }
 }
@@ -182,7 +156,7 @@ class DetailsAppBar extends StatelessWidget {
         image: DecorationImage(
           image: const AssetImage('assets/images/1x/1.png'),
           colorFilter: ColorFilter.mode(
-            AppColors.backgroundDark.withOpacity(0.6),
+            AppColors.background.withOpacity(0.6),
             BlendMode.multiply,
           ),
           fit: BoxFit.cover,
@@ -205,7 +179,7 @@ class DetailsAppBar extends StatelessWidget {
               width: double.infinity,
               // margin: const EdgeInsets.all(26),
               decoration: const BoxDecoration(
-                color: AppColors.backgroundDark,
+                color: AppColors.background,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),

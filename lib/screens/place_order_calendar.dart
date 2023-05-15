@@ -28,7 +28,7 @@ class _PlaceOrderState extends State<PlaceOrderCalendar> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.backgroundDark,
+        backgroundColor: AppColors.background,
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(80),
           child: CustomAppBar(
@@ -77,7 +77,7 @@ class _PlaceOrderState extends State<PlaceOrderCalendar> {
                       gradient: const LinearGradient(
                           colors: [
                             AppColors.secondaryBlue,
-                            AppColors.primaryDark,
+                            AppColors.primary,
                           ],
                           begin: FractionalOffset(0.0, 1.0),
                           end: FractionalOffset(1.0, 0.4),
@@ -86,7 +86,7 @@ class _PlaceOrderState extends State<PlaceOrderCalendar> {
                       borderRadius: BorderRadius.circular(50)),
                   child: const Icon(
                     Icons.add,
-                    color: AppColors.backgroundDark,
+                    color: AppColors.background,
                     size: 40,
                   ),
                 ),
@@ -108,7 +108,7 @@ class _PlaceOrderState extends State<PlaceOrderCalendar> {
               ),
             ],
             // currentIndex: _selectedIndex,
-            selectedItemColor: AppColors.primaryDark,
+            selectedItemColor: AppColors.primary,
             onTap: (index) {
               if (index == 0) {
                 Get.to(const DashBoard());

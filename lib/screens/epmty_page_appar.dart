@@ -22,7 +22,7 @@ class _EmptyPage extends State<EmptyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -81,7 +81,7 @@ class _EmptyPage extends State<EmptyPage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primaryDark,
+        selectedItemColor: AppColors.primary,
         onTap: (index) {
           if (index == 2) {
             // Get.to(() => const EmptyPage());

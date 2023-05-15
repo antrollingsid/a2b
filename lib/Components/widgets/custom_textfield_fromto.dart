@@ -19,12 +19,12 @@ class FromToTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     Color color;
     if (type == 'from') {
-      color = AppColors.primaryDark;
+      color = AppColors.primary;
     } else if (type == 'to') {
       color = AppColors.secondaryBlue;
     } else {
       color = AppColors
-          .backgroundDark; // optional: handle cases where type is neither 'from' nor 'to'
+          .background; // optional: handle cases where type is neither 'from' nor 'to'
     }
     return Padding(
       padding: const EdgeInsets.only(top: 15),

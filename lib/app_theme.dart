@@ -9,8 +9,8 @@ class AppTheme {
   AppTheme._();
 
   static final ThemeData lightTheme = ThemeData(
-    primarySwatch: createMaterialColor(AppColors.primaryDark),
-    primaryColor: AppColors.primaryDark,
+    primarySwatch: createMaterialColor(AppColors.primary),
+    primaryColor: AppColors.primary,
     scaffoldBackgroundColor: Colors.white,
     fontFamily: GoogleFonts.roboto().fontFamily,
     iconTheme: const IconThemeData(color: Colors.black),
@@ -20,16 +20,16 @@ class AppTheme {
     cardColor: Colors.white,
     tabBarTheme: const TabBarTheme(labelColor: Colors.black),
     appBarTheme: const AppBarTheme(
-      color: AppColors.primaryDark,
+      color: AppColors.primary,
       elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
           statusBarIconBrightness: Brightness.light,
-          statusBarColor: AppColors.primaryDark),
+          statusBarColor: AppColors.primary),
     ),
     dialogTheme: DialogTheme(shape: dialogShape()),
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
     colorScheme: const ColorScheme.light(
-      primary: AppColors.primaryDark,
+      primary: AppColors.primary,
     ),
   ).copyWith(
     pageTransitionsTheme: const PageTransitionsTheme(
@@ -42,8 +42,8 @@ class AppTheme {
   );
 
   static final ThemeData darkTheme = ThemeData(
-    primarySwatch: createMaterialColor(AppColors.primaryDark),
-    primaryColor: AppColors.primaryDark,
+    primarySwatch: createMaterialColor(AppColors.primary),
+    primaryColor: AppColors.primary,
     scaffoldBackgroundColor: scaffoldColorDark,
     fontFamily: GoogleFonts.roboto().fontFamily,
     iconTheme: const IconThemeData(color: Colors.white),
@@ -62,9 +62,10 @@ class AppTheme {
     ),
     dialogTheme: DialogTheme(shape: dialogShape()),
     snackBarTheme: const SnackBarThemeData(backgroundColor: appButtonColorDark),
-    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: appButtonColorDark),
+    bottomSheetTheme:
+        const BottomSheetThemeData(backgroundColor: appButtonColorDark),
     colorScheme: const ColorScheme.dark(
-      primary: AppColors.primaryDark,
+      primary: AppColors.primary,
     ),
   ).copyWith(
     pageTransitionsTheme: const PageTransitionsTheme(

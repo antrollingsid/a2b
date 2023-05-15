@@ -170,7 +170,7 @@ abstract class BaseLanguage {
 
   String get forgotPasswordQue;
 
-  String get logIn;
+  String get signIn;
 
   String get or;
 

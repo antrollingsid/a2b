@@ -19,7 +19,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '/screens/authentication/login.dart';
 import '/screens/authentication/register.dart';
-import '/screens/splash_screen.dart';
+import 'screens/home_page.dart';
 import '/screens/dashboard.dart';
 // import 'main/Services/ChatMessagesService.dart';
 // import 'main/Services/NotificationService.dart';
@@ -97,9 +97,9 @@ class _MainAppState extends State<MainApp> {
       locale: const Locale('en', 'US'), // Set a default locale
 
       debugShowCheckedModeBanner: false,
-      home: const SplashScreenPage(),
+      home: const HomePage(),
       getPages: [
-        GetPage(name: '/', page: () => const SplashScreenPage()),
+        GetPage(name: '/', page: () => const HomePage()),
         GetPage(name: '/login', page: () => const LoginPage()),
         GetPage(name: '/register', page: () => const Register()),
         GetPage(name: "/dashbored", page: () => const DashBoard()),

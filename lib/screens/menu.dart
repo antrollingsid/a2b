@@ -27,7 +27,7 @@ class _MenuPage extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(

@@ -46,7 +46,7 @@ class CustomBottomNav extends StatelessWidget {
                   gradient: const LinearGradient(
                       colors: [
                         AppColors.secondaryBlue,
-                        AppColors.primaryDark,
+                        AppColors.primary,
                       ],
                       begin: FractionalOffset(0.0, 1.0),
                       end: FractionalOffset(1.0, 0.4),
@@ -55,7 +55,7 @@ class CustomBottomNav extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50)),
               child: const Icon(
                 Icons.add,
-                color: AppColors.backgroundDark,
+                color: AppColors.background,
                 size: 40,
               ),
             ),
@@ -77,7 +77,7 @@ class CustomBottomNav extends StatelessWidget {
           ),
         ],
         // currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primaryDark,
+        selectedItemColor: AppColors.primary,
         onTap: (index) {
           if (index == 0) {
             actionitem1;

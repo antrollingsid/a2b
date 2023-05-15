@@ -80,7 +80,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -207,7 +207,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(5),
-                                              color: AppColors.primaryDark,
+                                              color: AppColors.primary,
                                             ),
                                           ),
                                           Positioned.fill(
@@ -218,7 +218,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
-                                                  color: AppColors.primaryDark,
+                                                  color: AppColors.primary,
                                                 ),
                                                 child: ClipRRect(
                                                   borderRadius:
@@ -247,10 +247,10 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                           minWidth: double.infinity,
                           height: 45,
                           onPressed: uploadFile,
-                          color: AppColors.primaryDark,
+                          color: AppColors.primary,
                           child: const Text(
                             'Upload file',
-                            style: TextStyle(color: AppColors.backgroundDark),
+                            style: TextStyle(color: AppColors.background),
                           ),
                         )
                       ],
@@ -265,21 +265,24 @@ class _ApplyForCourierState extends State<ApplyForCourier>
             // const OrderHistoryActivity(),
 
             CustomTextfield(
-                titleText: 'plate no',
-                isPassword: false,
-                hintText: 'plate no',
-                mycontroller: _platenocontroller),
+              isPassword: false,
+              hintText: 'plate no',
+              mycontroller: _platenocontroller,
+              width: 333,
+            ),
 
             CustomTextfield(
-                titleText: 'transportation type',
-                isPassword: false,
-                hintText: 'transport type',
-                mycontroller: _transportcontroller),
+              isPassword: false,
+              hintText: 'transport type',
+              mycontroller: _transportcontroller,
+              width: 333,
+            ),
             Center(
               child: CustomBtn(
                 textonbtn: 'submit',
                 onPress: () => applyForCourier(context, urlDownload,
                     _platenocontroller.text, _transportcontroller.text),
+                primary: true,
               ),
             ),
           ],
@@ -351,7 +354,7 @@ class TrackingTextField extends StatelessWidget {
               fillColor: AppColors.buttonStroke,
               border: GradientOutlineInputBorder(
                 gradient: const LinearGradient(
-                    colors: [AppColors.secondaryBlue, AppColors.primaryDark],
+                    colors: [AppColors.secondaryBlue, AppColors.primary],
                     begin: FractionalOffset(0.0, 0.0),
                     end: FractionalOffset(0.5, 0.0),
                     stops: [0.0, 1.0],

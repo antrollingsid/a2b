@@ -67,10 +67,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
           selectedDecoration: BoxDecoration(
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(10),
-            color: AppColors.primaryDark,
+            color: AppColors.primary,
           ),
           selectedTextStyle: const TextStyle(
-            color: AppColors.backgroundDark,
+            color: AppColors.background,
           ),
 
           /*-----------------
@@ -95,11 +95,11 @@ class _CustomCalendarState extends State<CustomCalendar> {
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               width: 1,
-              color: AppColors.primaryDark,
+              color: AppColors.primary,
             ),
           ),
           todayTextStyle: const TextStyle(
-            color: AppColors.primaryDark,
+            color: AppColors.primary,
           ),
 
           /*----------------

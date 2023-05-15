@@ -15,8 +15,12 @@ class LoginWithBtn extends StatelessWidget {
         children: [
           const Text(
             "Login with one the following options",
+            style: TextStyle(
+              fontFamily: 'Material Icons',
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
             textAlign: TextAlign.left,
-            style: TextStyle(color: Colors.white, fontSize: 14),
           ),
           const SizedBox(
             height: 15,
@@ -29,22 +33,22 @@ class LoginWithBtn extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {},
                     child: Container(
-                      height: 62,
+                      height: 52,
                       // width: 158,
                       decoration: BoxDecoration(
-                        color: AppColors.buttonDark,
+                        color: AppColors.background,
                         borderRadius: BorderRadius.circular(
-                          Dimensions.borderRadius8,
+                          5,
                         ),
                         border: Border.all(
-                          color: AppColors
-                              .buttonStroke, // specify the border color
-                          width: 2.0, // specify the border width
+                          color: AppColors.primary, // specify the border color
+                          width: 1.0, // specify the border width
                         ),
                       ),
                       child: IconButton(
                         icon: SvgPicture.string(
                           SvgConstant.googleLogo,
+                          color: AppColors.primary,
                         ),
                         onPressed: () {},
                       ),
@@ -52,25 +56,25 @@ class LoginWithBtn extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: 20,
+                  width: 10,
                 ),
                 Expanded(
                   child: Container(
-                    height: Dimensions.loginWithBtnHeight,
+                    height: 52,
                     decoration: BoxDecoration(
-                      color: AppColors.buttonDark,
+                      color: AppColors.background,
                       borderRadius: BorderRadius.circular(
-                        Dimensions.borderRadius8,
+                        5,
                       ),
                       border: Border.all(
-                        color:
-                            AppColors.buttonStroke, // specify the border color
-                        width: 2.0, // specify the border width
+                        color: AppColors.primary, // specify the border color
+                        width: 1.0, // specify the border width
                       ),
                     ),
                     child: IconButton(
                       icon: SvgPicture.string(
                         SvgConstant.appleLogo,
+                        color: AppColors.primary,
                       ),
                       onPressed: () {},
                     ),
@@ -80,7 +84,7 @@ class LoginWithBtn extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 40,
           )
         ],
       ),

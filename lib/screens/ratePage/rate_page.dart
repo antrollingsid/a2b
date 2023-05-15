@@ -25,7 +25,7 @@ class _RatePage extends State<RatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -85,6 +85,7 @@ class _RatePage extends State<RatePage> {
               CustomBtn(
                 onPress: () {},
                 textonbtn: 'submit',
+                primary: true,
               ),
               // CustomCalendar(),
               // CustomShip(),
@@ -132,7 +133,7 @@ class _RatePage extends State<RatePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primaryDark,
+        selectedItemColor: AppColors.primary,
         onTap: (index) {
           if (index == 2) {
             // Get.to(() => const RatePage());
