@@ -1,5 +1,5 @@
-import 'package:a2b/main/utils/colors.dart';
-import 'package:a2b/main/utils/constants.dart';
+import 'dart:async';
+
 import 'package:a2b/models/user_model.dart';
 import 'package:a2b/screens/dashboard.dart';
 import 'package:a2b/screens/splash_screen.dart';
@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class AuthController extends GetxController {
   late UserModel _user;
   UserModel get user => _user;
-
+  bool isLoaddIn = true;
   bool _isLoggedIn = false;
   bool get isLoggedIn => _isLoggedIn;
 
@@ -27,9 +27,11 @@ class AuthController extends GetxController {
               (value) => addUserDetails(value.user!.uid, email, name, surname));
 
       navigator.pop();
+      isLoaddIn= false ;
       Get.offAll(() => const DashBoard());
     } on FirebaseAuthException catch (e) {
       navigator.pop();
+      isLoaddIn= false ;
       final snackBar = SnackBar(content: Text(e.message.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       print('Error saving user data ${e.message}');
@@ -44,9 +46,11 @@ class AuthController extends GetxController {
     try {
       await FirebaseAuth.instance.signInWithProvider(GoogleAuthProvider());
       navigator.pop();
+      isLoaddIn= false ;
       Get.offAll(() => const DashBoard());
     } on FirebaseAuthException catch (e) {
       navigator.pop();
+      isLoaddIn= true ;
       final snackBar = SnackBar(content: Text(e.message.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       print('Error saving user data ${e.message}');
@@ -57,27 +61,24 @@ class AuthController extends GetxController {
       String name, String surname) async {
     // Call api
     var navigator = Navigator.of(context);
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const CircularProgressIndicator.adaptive(
-            backgroundColor: AppColors.backgroundLightMode,
-          );
-        });
-
+   if(isLoaddIn){ 
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password)
           .then(
-              (value) => addUserDetails(value.user!.uid, email, name, surname));
+           
+            (value) => addUserDetails(value.user!.uid, email, name, surname),
+          ).then((value) => isLoaddIn=false);
 
       navigator.pop();
       Get.offAll(() => const DashBoard());
     } on FirebaseAuthException catch (e) {
       navigator.pop();
+      isLoaddIn= false ;
       final snackBar = SnackBar(content: Text(e.message.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       print('Error saving user data ${e.message}');
+    }
     }
   }
 
@@ -100,11 +101,12 @@ class AuthController extends GetxController {
       _user = newUser;
       _isLoggedIn = true;
       update();
-
+      isLoaddIn= false ;
       navigator.pop();
       Get.offAll(() => const DashBoard());
     } on FirebaseAuthException catch (e) {
       navigator.pop();
+      isLoaddIn= false ;
       final snackBar = SnackBar(content: Text(e.message.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       print('Error saving user data ${e.message}');

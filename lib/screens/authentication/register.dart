@@ -22,6 +22,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     final regcontroller = Get.put(SignUpController());
+        var Authcontroller = Get.put( AuthController());
     return Scaffold(
       backgroundColor: AppColors.backgroundDark,
       appBar: const PreferredSize(
@@ -32,60 +33,74 @@ class _RegisterState extends State<Register> {
       ),
       body: GetBuilder<AuthController>(
         builder: (controller) {
-          return CustomScrollView(slivers: [
-            SliverFillRemaining(
-                hasScrollBody: false,
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SafeArea(
-                    child: Column(
-                      children: [
-                        const LoginWithBtn(),
-                        CustomTextfield(
-                          hintText: 'Sid',
-                          titleText: 'Name',
-                          isPassword: false,
-                          mycontroller: regcontroller.name,
+          var isLoading= Authcontroller.isLoaddIn;
+          return Stack(
+            children: [
+              CustomScrollView(slivers: [
+                SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SafeArea(
+                        child: Column(
+                          children: [
+                            const LoginWithBtn(),
+                            CustomTextfield(
+                              hintText: 'Sid',
+                              titleText: 'Name',
+                              isPassword: false,
+                              mycontroller: regcontroller.name,
+                            ),
+                            CustomTextfield(
+                              hintText: 'Alfaouri',
+                              titleText: 'Surname',
+                              isPassword: false,
+                              mycontroller: regcontroller.surname,
+                            ),
+                            CustomTextfield(
+                              hintText: 'sample@a2b.com',
+                              titleText: 'Email',
+                              isPassword: false,
+                              mycontroller: regcontroller.email,
+                            ),
+                            CustomTextfield(
+                                hintText: 'Pick a strong password',
+                                isPassword: true,
+                                titleText: 'Password',
+                                mycontroller: regcontroller.password),
+                            Expanded(child: Container()),
+                            CustomBtn(
+                                textonbtn: 'Register',
+                                onPress: () => controller.register(
+                                    context,
+                                    regcontroller.email.text,
+                                    regcontroller.password.text,
+                                    regcontroller.name.text,
+                                    regcontroller.password.text)),
+                            InkwellBtn(
+                              textLeading: 'Already have an account ?  ',
+                              textEnding: 'login',
+                              onTap: () => Get.to(() => const LoginPage()),
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            )
+                          ],
                         ),
-                        CustomTextfield(
-                          hintText: 'Alfaouri',
-                          titleText: 'Surname',
-                          isPassword: false,
-                          mycontroller: regcontroller.surname,
-                        ),
-                        CustomTextfield(
-                          hintText: 'sample@a2b.com',
-                          titleText: 'Email',
-                          isPassword: false,
-                          mycontroller: regcontroller.email,
-                        ),
-                        CustomTextfield(
-                            hintText: 'Pick a strong password',
-                            isPassword: true,
-                            titleText: 'Password',
-                            mycontroller: regcontroller.password),
-                        Expanded(child: Container()),
-                        CustomBtn(
-                            textonbtn: 'Register',
-                            onPress: () => controller.register(
-                                context,
-                                regcontroller.email.text,
-                                regcontroller.password.text,
-                                regcontroller.name.text,
-                                regcontroller.password.text)),
-                        InkwellBtn(
-                          textLeading: 'Already have an account ?  ',
-                          textEnding: 'login',
-                          onTap: () => Get.to(() => const LoginPage()),
-                        ),
-                        const SizedBox(
-                          height: 50,
-                        )
-                      ],
-                    ),
-                  ),
-                ))
-          ]);
+                      ),
+                    ))
+              ]),
+
+               // Loading overlay
+    if (isLoading)
+      Container(
+        color: Colors.black.withOpacity(0.5),
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+            ],
+          );
         },
       ),
     );
