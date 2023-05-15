@@ -111,11 +111,11 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                 child: IntlPhoneField(
                   showCountryFlag: false,
                   controller: locationcontroller.number,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     prefixIcon: null,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(),
-                    ),
+                    border: myinputborder(),
+                    enabledBorder: myinputborder(), //enabled border
+                    focusedBorder: myfocusborder(),
                   ),
                   initialCountryCode: 'TR',
                   onChanged: (phone) {
@@ -134,4 +134,26 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
       ),
     );
   }
+}
+
+OutlineInputBorder myinputborder() {
+  return const OutlineInputBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(5),
+      ),
+      borderSide: BorderSide(
+        color: AppColors.textFaded,
+        width: 1,
+      ));
+}
+
+OutlineInputBorder myfocusborder() {
+  return const OutlineInputBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(5),
+      ),
+      borderSide: BorderSide(
+        color: AppColors.primary,
+        width: 1,
+      ));
 }
