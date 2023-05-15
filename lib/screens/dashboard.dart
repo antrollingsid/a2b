@@ -168,7 +168,7 @@ class DashBoard extends StatelessWidget {
               } else if (index == 1) {
                 Get.to(() => const DashBoard());
               } else if (index == 2) {
-                Get.to(() => const PlaceOrderMap());
+                Get.to(() => const OrderPage());
               } else if (index == 3) {
               } else if (index == 4) {
                 Get.to(() => const Profile());

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/Components/widgets/custom_textfield.dart';
+import 'package:a2b/screens/place_order_map.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -188,104 +189,99 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
                                 ),
                                 color: AppColors.background,
                               ),
-                              child: Row(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.file(
-                                      _file!,
-                                      width: 95,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          _platformFile!.name,
-                                          style: const TextStyle(
-                                            fontSize: 13,
-                                            color: Colors.black,
-                                          ),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(8),
+                                        child: Image.file(
+                                          _file!,
+                                          width: 95,
                                         ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(
-                                          '${(_platformFile!.size / 1024).ceil()} KB',
-                                          style: const TextStyle(
-                                            fontSize: 13,
-                                            color: AppColors.textFaded,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                          child: Stack(
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(3),
-                                                  color: AppColors.background,
-                                                ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              _platformFile!.name,
+                                              style: const TextStyle(
+                                                fontSize: 13,
+                                                color: Colors.black,
                                               ),
-                                              Positioned.fill(
-                                                child: Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
-                                                  child: Container(
-                                                    height: 20,
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Text(
+                                              '${(_platformFile!.size / 1024).ceil()} KB',
+                                              style: const TextStyle(
+                                                fontSize: 13,
+                                                color: AppColors.textFaded,
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                              child: Stack(
+                                                children: [
+                                                  Container(
                                                     decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
-                                                              5),
-                                                      color: AppColors.primary,
-                                                    ),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      child: buildProcess(),
+                                                              3),
+                                                      color:
+                                                          AppColors.background,
                                                     ),
                                                   ),
-                                                ),
+                                                  Positioned.fill(
+                                                    child: Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Container(
+                                                        height: 20,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          color:
+                                                              AppColors.primary,
+                                                        ),
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          child: buildProcess(),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      // const SizedBox(
+                                      //   width: 10,
+                                      // ),
+                                    ],
                                   ),
-                                  // const SizedBox(
-                                  //   width: 10,
-                                  // ),
+                                  CustomBtn(
+                                      textonbtn: 'Upload Product',
+                                      onPress: uploadFile,
+                                      primary: false),
                                 ],
                               ),
                             ),
-                            CustomBtn(
-                                textonbtn: 'Upload Product',
-                                onPress: uploadFile,
-                                primary: false),
-                            // const SizedBox(
-                            //   height: 20,
-                            // ),
-                            // MaterialButton(
-                            //   minWidth: double.infinity,
-                            //   height: 45,
-                            //   onPressed: uploadFile,
-                            //   color: Colors.black,
-                            //   child: const Text(
-                            //     'Upload',
-                            //     style: TextStyle(color: Colors.white),
-                            //   ),
-                            // )
                           ],
                         ),
                       )
@@ -298,7 +294,11 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
               // CustomCalendar(),
               // CustomShip(),
 
-              CustomBtn(textonbtn: 'Next', onPress: () {}, primary: true),
+              CustomBtn(
+                textonbtn: 'Next',
+                onPress: () => Get.to(() => const PlaceOrderMap()),
+                primary: true,
+              ),
             ],
           ),
         ),

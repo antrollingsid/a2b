@@ -1,9 +1,12 @@
 // ignore_for_file: unused_element, unused_import
 
+import 'package:a2b/Components/widgets/custom_textfield.dart';
+import 'package:a2b/controllers/location_text_controller.dart';
 import 'package:a2b/screens/dashboard.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../Components/widgets/custom_textfield_fromto.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +57,8 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
 
   @override
   Widget build(BuildContext context) {
+    final locationcontroller = Get.put(LocationTextController());
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.background,
@@ -85,15 +90,31 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                   ),
                 ),
               ),
-              const FromToTextField(
-                hintText: 'enter location',
-                titleText: 'FROM',
-                type: 'from',
-              ),
-              const FromToTextField(
-                hintText: 'enter location',
-                titleText: 'TO',
-                type: 'to',
+              CustomTextfield(
+                  isPassword: false,
+                  hintText: 'Where from?',
+                  mycontroller: locationcontroller.from,
+                  width: 333),
+              CustomTextfield(
+                  isPassword: false,
+                  hintText: 'Where to?',
+                  mycontroller: locationcontroller.to,
+                  width: 333),
+              SizedBox(
+                width: 333,
+                child: IntlPhoneField(
+                  controller: locationcontroller.number,
+                  decoration: const InputDecoration(
+                    prefixIcon: null,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(),
+                    ),
+                  ),
+                  initialCountryCode: 'TR',
+                  onChanged: (phone) {
+                    print(phone.completeNumber);
+                  },
+                ),
               ),
             ],
           ),
