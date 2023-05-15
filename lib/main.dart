@@ -104,7 +104,7 @@ class _MainAppState extends State<MainApp> {
         GetPage(name: '/register', page: () => const Register()),
         GetPage(name: "/dashbored", page: () => const DashBoard()),
         GetPage(name: "/ordermap", page: () => const PlaceOrderMap()),
-        GetPage(name: "/ordercalendar", page: () => const PlaceOrderCalendar()),
+        GetPage(name: "/ordercalendar", page: () => const ConfirmOrder()),
         GetPage(name: "/orderupload", page: () => const PlaceOrderUpload()),
       ],
     );

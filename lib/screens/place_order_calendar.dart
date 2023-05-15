@@ -5,18 +5,20 @@ import 'package:a2b/screens/place_order_upload.dart';
 import 'package:a2b/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:textfield_datepicker/textfield_datepicker.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
+import '../Components/widgets/custom_button.dart';
 import 'dashboard.dart';
 
-class PlaceOrderCalendar extends StatefulWidget {
-  const PlaceOrderCalendar({Key? key});
+class ConfirmOrder extends StatefulWidget {
+  const ConfirmOrder({Key? key});
 
   @override
-  State<PlaceOrderCalendar> createState() => _PlaceOrderState();
+  State<ConfirmOrder> createState() => _ConfirmOrder();
 }
 
-class _PlaceOrderState extends State<PlaceOrderCalendar> {
+class _ConfirmOrder extends State<ConfirmOrder> {
   @override
   void initState() {
     super.initState();
@@ -26,102 +28,70 @@ class _PlaceOrderState extends State<PlaceOrderCalendar> {
 
   @override
   Widget build(BuildContext context) {
+    var categories = [
+      "8:00 - 10:00",
+      "10:00 - 12:00 ",
+      "12:00 - 14:00 ",
+      "14:00 - 16:00 ",
+      "16:00 - 18:00 ",
+      "18:00 - 20:00 ",
+      "20:00 - 22:00 ",
+      "22:00 - 00:00 ",
+    ];
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.background,
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(80),
-          child: CustomAppBar(
-            titleText: 'Choose The Date',
-            isActionVisible: true,
-          ),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: AppColors.background,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: CustomAppBar(
+          titleText: 'Confirm Order',
+          isActionVisible: true,
         ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                CustomCalendar(),
-                // CustomShip(),
-              ],
-            ),
-          ),
-        ),
-        bottomNavigationBar: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
-          ),
-          child: BottomNavigationBar(
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            backgroundColor: AppColors.buttonStroke,
-            type: BottomNavigationBarType.fixed,
-            items: [
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'hhh',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.access_time,
-                  color: AppColors.backgroundLightMode,
-                ),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Container(
-                  height: 62,
-                  width: 62,
-                  decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                          colors: [
-                            AppColors.secondaryBlue,
-                            AppColors.primary,
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 333,
+                child: DropdownButtonFormField(
+                  items: categories.map((String category) {
+                    return DropdownMenuItem(
+                        value: category,
+                        child: Row(
+                          children: <Widget>[
+                            Icon(Icons.star),
+                            Text(category),
                           ],
-                          begin: FractionalOffset(0.0, 1.0),
-                          end: FractionalOffset(1.0, 0.4),
-                          stops: [0.0, 1.0],
-                          tileMode: TileMode.clamp),
-                      borderRadius: BorderRadius.circular(50)),
-                  child: const Icon(
-                    Icons.add,
-                    color: AppColors.background,
-                    size: 40,
+                        ));
+                  }).toList(),
+                  onChanged: (newValue) {
+                    // do other stuff with _category
+                    //  setState();
+                  },
+                  //  value: _category,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                    hintText: 'Time',
+                    //  errorText: errorSnapshot.data == 0 ? Localization.of(context).categoryEmpty : null),
                   ),
                 ),
-                label: '',
               ),
-              const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.feedback_outlined,
-                  color: AppColors.backgroundLightMode,
-                ),
-                label: '',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person_outlined,
-                  color: AppColors.backgroundLightMode,
-                ),
-                label: '',
+
+              // const CustomCalendar(),
+              // CustomShip(),
+              CustomBtn(
+                onPress: () {},
+                primary: true,
+                textonbtn: 'Confirm Order',
               ),
             ],
-            // currentIndex: _selectedIndex,
-            selectedItemColor: AppColors.primary,
-            onTap: (index) {
-              if (index == 0) {
-                Get.to(const DashBoard());
-              } else if (index == 1) {
-                Get.to(const DashBoard());
-              } else if (index == 2) {
-                Get.to(const PlaceOrderUpload());
-              } else if (index == 3) {
-              } else if (index == 4) {
-                Get.to(const Profile());
-              }
-            },
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

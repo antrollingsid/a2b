@@ -1562,6 +1562,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.16"
+  textfield_datepicker:
+    dependency: "direct main"
+    description:
+      name: textfield_datepicker
+      sha256: cc9ea9ba40403f52ee8baf190e8b866cf54b4d1c236582de72cf67b8b70cab1c
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   timeago:
     dependency: "direct main"
     description:

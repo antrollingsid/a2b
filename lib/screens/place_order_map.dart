@@ -17,6 +17,7 @@ import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
 import 'package:location/location.dart';
 //yandix api maps check ?????
+import '../Components/widgets/custom_button.dart';
 import 'place_order_calendar.dart';
 
 const darkMapStyle = 'assets/json/dark_mode_style.json';
@@ -100,9 +101,15 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                   hintText: 'Where to?',
                   mycontroller: locationcontroller.to,
                   width: 333),
+              CustomTextfield(
+                  isPassword: false,
+                  hintText: 'receiver\'s name',
+                  mycontroller: locationcontroller.name,
+                  width: 333),
               SizedBox(
                 width: 333,
                 child: IntlPhoneField(
+                  showCountryFlag: false,
                   controller: locationcontroller.number,
                   decoration: const InputDecoration(
                     prefixIcon: null,
@@ -116,56 +123,14 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                   },
                 ),
               ),
+              CustomBtn(
+                textonbtn: 'Next',
+                onPress: () => Get.to(() => const ConfirmOrder()),
+                primary: true,
+              ),
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        backgroundColor: AppColors.buttonStroke,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.access_time,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.feedback_outlined,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outlined,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primary,
-        onTap: (index) {
-          if (index == 2) {
-            Get.to(() => const PlaceOrderCalendar());
-          }
-        },
       ),
     );
   }
