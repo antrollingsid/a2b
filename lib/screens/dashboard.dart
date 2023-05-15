@@ -16,7 +16,7 @@ import 'package:gradient_borders/input_borders/gradient_outline_input_border.dar
 import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
-import 'createOrder/order_page.dart';
+import 'createOrder/order_details.dart';
 import 'epmty_page_appar.dart';
 
 class DashBoard extends StatelessWidget {

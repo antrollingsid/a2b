@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/Components/widgets/custom_textfield.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/order_details_text_controller.dart';
@@ -15,9 +19,50 @@ class OrderPage extends StatefulWidget {
   State<OrderPage> createState() => _OrderPage();
 }
 
-class _OrderPage extends State<OrderPage> {
+class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
+  late AnimationController loadingController;
+  File? _file;
+  PlatformFile? _platformFile;
+  UploadTask? uploadTask;
+
+  Future uploadFile() async {
+    try {
+      final path = 'demo/${_platformFile!.name}';
+      final files = File(_platformFile!.path!);
+
+      final ref = FirebaseStorage.instance.ref().child(path);
+      uploadTask = ref.putFile(files);
+
+      final snapshot = await uploadTask!.whenComplete(() {});
+      final urlDownload = await snapshot.ref.getDownloadURL();
+      print('download link: $urlDownload');
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  selectFile() async {
+    final file = await FilePicker.platform.pickFiles();
+
+    if (file != null) {
+      setState(() {
+        _file = File(file.files.single.path!);
+        _platformFile = file.files.first;
+      });
+    }
+
+    loadingController.forward();
+  }
+
   @override
   void initState() {
+    loadingController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    )..addListener(() {
+        setState(() {});
+      });
+
     super.initState();
   }
 
@@ -111,60 +156,183 @@ class _OrderPage extends State<OrderPage> {
                 ),
               ),
               CustomBtn(
-                  textonbtn: 'Upload Product', onPress: () {}, primary: false)
+                  textonbtn: 'Select Product',
+                  onPress: selectFile,
+                  primary: false),
+              Container(
+                height: 220,
+                child: _platformFile != null
+                    ? Container(
+                        width: 333,
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Selected File:',
+                              style: TextStyle(
+                                color: AppColors.textGrey,
+                                fontSize: 15,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                  color: AppColors.primary,
+                                  width: 1.0,
+                                ),
+                                color: AppColors.background,
+                              ),
+                              child: Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.file(
+                                      _file!,
+                                      width: 95,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          _platformFile!.name,
+                                          style: const TextStyle(
+                                            fontSize: 13,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(
+                                          '${(_platformFile!.size / 1024).ceil()} KB',
+                                          style: const TextStyle(
+                                            fontSize: 13,
+                                            color: AppColors.textFaded,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        SizedBox(
+                                          height: 20,
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(3),
+                                                  color: AppColors.background,
+                                                ),
+                                              ),
+                                              Positioned.fill(
+                                                child: Align(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  child: Container(
+                                                    height: 20,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      color: AppColors.primary,
+                                                    ),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      child: buildProcess(),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  // const SizedBox(
+                                  //   width: 10,
+                                  // ),
+                                ],
+                              ),
+                            ),
+                            CustomBtn(
+                                textonbtn: 'Upload Product',
+                                onPress: uploadFile,
+                                primary: false),
+                            // const SizedBox(
+                            //   height: 20,
+                            // ),
+                            // MaterialButton(
+                            //   minWidth: double.infinity,
+                            //   height: 45,
+                            //   onPressed: uploadFile,
+                            //   color: Colors.black,
+                            //   child: const Text(
+                            //     'Upload',
+                            //     style: TextStyle(color: Colors.white),
+                            //   ),
+                            // )
+                          ],
+                        ),
+                      )
+                    : Container(),
+              ),
+              // CustomBtn(
+              //     textonbtn: 'Upload Product',
+              //     onPress: uploadFile,
+              //     primary: true),
               // CustomCalendar(),
               // CustomShip(),
+
+              CustomBtn(textonbtn: 'Next', onPress: () {}, primary: true),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        backgroundColor: AppColors.background,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.access_time,
-              color: AppColors.primary,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add,
-              color: AppColors.primary,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.feedback_outlined,
-              color: AppColors.primary,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outlined,
-              color: AppColors.primary,
-            ),
-            label: '',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primary,
-        onTap: (index) {
-          if (index == 2) {
-            // Get.to(() => const OrderPage());
-          }
-        },
-      ),
     );
   }
+
+  Widget buildProcess() => StreamBuilder<TaskSnapshot>(
+      stream: uploadTask?.snapshotEvents,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final data = snapshot.data!;
+          double progress = data.bytesTransferred / data.totalBytes;
+          return SizedBox(
+            height: 20,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                LinearProgressIndicator(
+                  value: progress,
+                  backgroundColor: Colors.grey,
+                  color: AppColors.primary,
+                ),
+                Center(
+                  child: Text('${(100 * progress).roundToDouble()}%',
+                      style: const TextStyle(color: Colors.white)),
+                ), // Center
+              ],
+            ),
+          );
+        } else {
+          return SizedBox(
+            height: 20,
+          );
+        }
+      });
 }
