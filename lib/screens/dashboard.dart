@@ -16,6 +16,7 @@ import 'package:gradient_borders/input_borders/gradient_outline_input_border.dar
 import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
+import 'createOrder/order_details.dart';
 import 'epmty_page_appar.dart';
 
 class DashBoard extends StatelessWidget {
@@ -25,7 +26,7 @@ class DashBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.backgroundDark,
+        backgroundColor: AppColors.background,
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(80),
           child: CustomAppBar(
@@ -80,7 +81,7 @@ class DashBoard extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                const OrderHistoryActivity(),
+                // const OrderHistoryActivity(),
                 SvgPicture.string(SvgConstant.lineDark),
                 const OrderHistoryActivity(),
                 ElevatedButton(
@@ -88,6 +89,12 @@ class DashBoard extends StatelessWidget {
                     Get.to(() => const DetailsPage());
                   },
                   child: const Text('detail Page'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(() => const OrderPage());
+                  },
+                  child: const Text('first page order'),
                 ),
               ],
             ),
@@ -123,7 +130,7 @@ class DashBoard extends StatelessWidget {
                       gradient: const LinearGradient(
                           colors: [
                             AppColors.secondaryBlue,
-                            AppColors.primaryDark,
+                            AppColors.primary,
                           ],
                           begin: FractionalOffset(0.0, 1.0),
                           end: FractionalOffset(1.0, 0.4),
@@ -132,7 +139,7 @@ class DashBoard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50)),
                   child: const Icon(
                     Icons.add,
-                    color: AppColors.backgroundDark,
+                    color: AppColors.background,
                     size: 40,
                   ),
                 ),
@@ -154,14 +161,14 @@ class DashBoard extends StatelessWidget {
               ),
             ],
             // currentIndex: _selectedIndex,
-            selectedItemColor: AppColors.primaryDark,
+            selectedItemColor: AppColors.primary,
             onTap: (index) {
               if (index == 0) {
                 Get.to(() => const DashBoard());
               } else if (index == 1) {
                 Get.to(() => const DashBoard());
               } else if (index == 2) {
-                Get.to(() => const PlaceOrderMap());
+                Get.to(() => const OrderPage());
               } else if (index == 3) {
               } else if (index == 4) {
                 Get.to(() => const Profile());
@@ -205,7 +212,7 @@ class TrackingTextField extends StatelessWidget {
                 gradient: const LinearGradient(
                     colors: [
                       AppColors.secondaryBlue,
-                      AppColors.primaryDark,
+                      AppColors.primary,
                     ],
                     begin: FractionalOffset(0.0, 0.0),
                     end: FractionalOffset(0.5, 0.0),

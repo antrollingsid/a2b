@@ -8,7 +8,8 @@ import '../../../Components/widgets/app_bar_buttons.dart';
 import '../../../Components/widgets/custom_button.dart';
 import '../../../Components/widgets/custom_textfield.dart';
 import '../../../Components/widgets/inkwell_button.dart';
-import '../../controllers/signup_controller.dart';
+import '../../controllers/signup_text_controller.dart';
+import '../../main.dart';
 import 'login.dart';
 
 class Register extends StatefulWidget {
@@ -24,83 +25,67 @@ class _RegisterState extends State<Register> {
     final regcontroller = Get.put(SignUpController());
         var Authcontroller = Get.put( AuthController());
     return Scaffold(
-      backgroundColor: AppColors.backgroundDark,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(80),
-        child: CustomLoginSignupAppBar(
-          titleText: 'Sign up',
-        ),
-      ),
+      backgroundColor: AppColors.background,
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80),
+          child:
+              CustomAppBar(titleText: language.signUp, isActionVisible: false)),
       body: GetBuilder<AuthController>(
         builder: (controller) {
-          var isLoading= Authcontroller.isLoaddIn;
-          return Stack(
-            children: [
-              CustomScrollView(slivers: [
-                SliverFillRemaining(
-                    hasScrollBody: false,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: SafeArea(
-                        child: Column(
-                          children: [
-                            const LoginWithBtn(),
-                            CustomTextfield(
-                              hintText: 'Sid',
-                              titleText: 'Name',
-                              isPassword: false,
-                              mycontroller: regcontroller.name,
-                            ),
-                            CustomTextfield(
-                              hintText: 'Alfaouri',
-                              titleText: 'Surname',
-                              isPassword: false,
-                              mycontroller: regcontroller.surname,
-                            ),
-                            CustomTextfield(
-                              hintText: 'sample@a2b.com',
-                              titleText: 'Email',
-                              isPassword: false,
-                              mycontroller: regcontroller.email,
-                            ),
-                            CustomTextfield(
-                                hintText: 'Pick a strong password',
-                                isPassword: true,
-                                titleText: 'Password',
-                                mycontroller: regcontroller.password),
-                            Expanded(child: Container()),
-                            CustomBtn(
-                                textonbtn: 'Register',
-                                onPress: () => controller.register(
-                                    context,
-                                    regcontroller.email.text,
-                                    regcontroller.password.text,
-                                    regcontroller.name.text,
-                                    regcontroller.password.text)),
-                            InkwellBtn(
-                              textLeading: 'Already have an account ?  ',
-                              textEnding: 'login',
-                              onTap: () => Get.to(() => const LoginPage()),
-                            ),
-                            const SizedBox(
-                              height: 50,
-                            )
-                          ],
+          return CustomScrollView(slivers: [
+            SliverFillRemaining(
+                hasScrollBody: false,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SafeArea(
+                    child: Column(
+                      children: [
+                        const LoginWithBtn(),
+                        CustomTextfield(
+                          hintText: 'Sid',
+                          titleText: 'Name',
+                          isPassword: false,
+                          mycontroller: regcontroller.name,
                         ),
-                      ),
-                    ))
-              ]),
-
-               // Loading overlay
-    if (isLoading)
-      Container(
-        color: Colors.black.withOpacity(0.5),
-        child: const Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
-            ],
-          );
+                        CustomTextfield(
+                          hintText: 'Alfaouri',
+                          titleText: 'Surname',
+                          isPassword: false,
+                          mycontroller: regcontroller.surname,
+                        ),
+                        CustomTextfield(
+                          hintText: 'sample@a2b.com',
+                          titleText: 'Email',
+                          isPassword: false,
+                          mycontroller: regcontroller.email,
+                        ),
+                        CustomTextfield(
+                            hintText: 'Pick a strong password',
+                            isPassword: true,
+                            titleText: 'Password',
+                            mycontroller: regcontroller.password),
+                        Expanded(child: Container()),
+                        CustomBtn(
+                            textonbtn: 'Register',
+                            onPress: () => controller.register(
+                                context,
+                                regcontroller.email.text,
+                                regcontroller.password.text,
+                                regcontroller.name.text,
+                                regcontroller.password.text)),
+                        InkwellBtn(
+                          textLeading: 'Already have an account ?  ',
+                          textEnding: 'login',
+                          onTap: () => Get.to(() => const LoginPage()),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        )
+                      ],
+                    ),
+                  ),
+                ))
+          ]);
         },
       ),
     );

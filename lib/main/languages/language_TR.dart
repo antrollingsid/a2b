@@ -258,7 +258,7 @@ class LanguageTr extends BaseLanguage {
   String get forgotPasswordQue => "Parolanızı mı unuttunuz ?";
 
   @override
-  String get logIn => "Kayıt olmak";
+  String get signIn => "Kayıt olmak";
 
   @override
   String get or => "Veya";

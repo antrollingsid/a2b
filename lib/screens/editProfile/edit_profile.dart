@@ -30,7 +30,7 @@ class _EditProfile extends State<EditProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -46,22 +46,22 @@ class _EditProfile extends State<EditProfile> {
               // CustomCalendar(),
               // CustomShip(),
               CustomTextfield(
-                titleText: 'edit name',
                 isPassword: false,
                 hintText: 'name...',
                 mycontroller: _namecontroller,
+                width: 333,
               ),
               CustomTextfield(
-                titleText: 'edit surename',
                 isPassword: false,
                 hintText: 'surename...',
                 mycontroller: _surnamecontroller,
+                width: 333,
               ),
               CustomTextfield(
-                titleText: 'edit phone',
                 isPassword: false,
                 hintText: 'surename...',
                 mycontroller: _phonecontroller,
+                width: 333,
               ),
               CustomBtn(
                 textonbtn: 'update',
@@ -70,6 +70,7 @@ class _EditProfile extends State<EditProfile> {
                     _namecontroller.text,
                     _surnamecontroller.text,
                     _phonecontroller.text),
+                primary: true,
               ),
             ],
           );

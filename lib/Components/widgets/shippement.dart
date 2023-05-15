@@ -13,7 +13,7 @@ class CustomShip extends StatelessWidget {
         height: 143,
         width: 333,
         decoration: BoxDecoration(
-          color: AppColors.primaryDark,
+          color: AppColors.primary,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Padding(

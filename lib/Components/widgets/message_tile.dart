@@ -247,7 +247,7 @@ class _MessageTileState extends ConsumerState<MessageTile>
                         Container(
                           decoration: BoxDecoration(
                             color: widget.isSender
-                                ? AppColors.primaryDark
+                                ? AppColors.primary
                                 : (brightness == Brightness.light)
                                     ? AppColors.buttonStroke
                                     : AppColors.buttonDark,
@@ -282,7 +282,7 @@ class _MessageTileState extends ConsumerState<MessageTile>
                                     widget.message,
                                     style: TextStyle(
                                       color: widget.isSender
-                                          ? AppColors.backgroundDark
+                                          ? AppColors.background
                                           : (brightness == Brightness.light)
                                               ? AppColors.backgroundLightMode
                                               : AppColors.textGrey,

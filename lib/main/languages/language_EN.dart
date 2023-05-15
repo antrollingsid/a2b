@@ -260,7 +260,7 @@ class LanguageEn extends BaseLanguage {
   String get forgotPasswordQue => "Forgot Password ?";
 
   @override
-  String get logIn => "Log In";
+  String get signIn => "Sign In";
 
   @override
   String get or => "Or";

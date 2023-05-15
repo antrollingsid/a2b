@@ -27,7 +27,7 @@ class _DetailsPage extends State<DetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(227),
         child: DetailsAppBar(
@@ -114,10 +114,12 @@ class _DetailsPage extends State<DetailsPage> {
               ),
               CustomReview(),
               CustomBtn(
-                  textonbtn: 'rate the courier',
-                  onPress: () {
-                    Get.to(() => const RatePage());
-                  })
+                textonbtn: 'rate the courier',
+                onPress: () {
+                  Get.to(() => const RatePage());
+                },
+                primary: true,
+              )
               // CustomCalendar(),
               // CustomShip(),
             ],

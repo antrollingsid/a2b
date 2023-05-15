@@ -79,7 +79,7 @@ class _UserProfileState extends State<UserProfile> {
                       ? CircleAvatar(
                           backgroundColor: brightness == Brightness.light
                               ? Colors.grey.shade100
-                              : AppColors.primaryDark,
+                              : AppColors.primary,
                           radius: 65,
                           child: Icon(
                             Icons.account_circle,

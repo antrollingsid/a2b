@@ -1,9 +1,12 @@
 // ignore_for_file: unused_element, unused_import
 
+import 'package:a2b/Components/widgets/custom_textfield.dart';
+import 'package:a2b/controllers/location_text_controller.dart';
 import 'package:a2b/screens/dashboard.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../Components/widgets/custom_textfield_fromto.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +16,8 @@ import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
 import 'package:location/location.dart';
-
+//yandix api maps check ?????
+import '../Components/widgets/custom_button.dart';
 import 'place_order_calendar.dart';
 
 const darkMapStyle = 'assets/json/dark_mode_style.json';
@@ -54,9 +58,11 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
 
   @override
   Widget build(BuildContext context) {
+    final locationcontroller = Get.put(LocationTextController());
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundDark,
+      backgroundColor: AppColors.background,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -85,67 +91,69 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                   ),
                 ),
               ),
-              const FromToTextField(
-                hintText: 'enter location',
-                titleText: 'FROM',
-                type: 'from',
+              CustomTextfield(
+                  isPassword: false,
+                  hintText: 'Where from?',
+                  mycontroller: locationcontroller.from,
+                  width: 333),
+              CustomTextfield(
+                  isPassword: false,
+                  hintText: 'Where to?',
+                  mycontroller: locationcontroller.to,
+                  width: 333),
+              CustomTextfield(
+                  isPassword: false,
+                  hintText: 'receiver\'s name',
+                  mycontroller: locationcontroller.name,
+                  width: 333),
+              SizedBox(
+                width: 333,
+                child: IntlPhoneField(
+                  showCountryFlag: false,
+                  controller: locationcontroller.number,
+                  decoration: InputDecoration(
+                    prefixIcon: null,
+                    border: myinputborder(),
+                    enabledBorder: myinputborder(), //enabled border
+                    focusedBorder: myfocusborder(),
+                  ),
+                  initialCountryCode: 'TR',
+                  onChanged: (phone) {
+                    print(phone.completeNumber);
+                  },
+                ),
               ),
-              const FromToTextField(
-                hintText: 'enter location',
-                titleText: 'TO',
-                type: 'to',
+              CustomBtn(
+                textonbtn: 'Next',
+                onPress: () => Get.to(() => const ConfirmOrder()),
+                primary: true,
               ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        backgroundColor: AppColors.buttonStroke,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.access_time,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.feedback_outlined,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outlined,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primaryDark,
-        onTap: (index) {
-          if (index == 2) {
-            Get.to(() => const PlaceOrderCalendar());
-          }
-        },
-      ),
     );
   }
+}
+
+OutlineInputBorder myinputborder() {
+  return const OutlineInputBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(5),
+      ),
+      borderSide: BorderSide(
+        color: AppColors.textFaded,
+        width: 1,
+      ));
+}
+
+OutlineInputBorder myfocusborder() {
+  return const OutlineInputBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(5),
+      ),
+      borderSide: BorderSide(
+        color: AppColors.primary,
+        width: 1,
+      ));
 }

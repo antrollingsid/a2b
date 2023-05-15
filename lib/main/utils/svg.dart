@@ -94,12 +94,11 @@ class SvgConstant {
 </svg>
 ''';
 
-  static String backArrowDark = '''
-<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M16.25 19.5L9.75 13L16.25 6.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  static String backArrow = ''''
+<svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.25 14.5L1.75 8L8.25 1.5" stroke="#D16545" stroke-width="2" stroke-linecap="square"/>
 </svg>
 ''';
-
   static String uploadIconDark = '''
 <svg width="84" height="84" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M73.5 52.5V66.5C73.5 68.3565 72.7625 70.137 71.4497 71.4497C70.137 72.7625 68.3565 73.5 66.5 73.5H17.5C15.6435 73.5 13.863 72.7625 12.5503 71.4497C11.2375 70.137 10.5 68.3565 10.5 66.5V52.5" stroke="#BB86FC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
