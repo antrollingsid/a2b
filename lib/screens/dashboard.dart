@@ -16,6 +16,7 @@ import 'package:gradient_borders/input_borders/gradient_outline_input_border.dar
 import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
+import 'createOrder/new_order.dart';
 import 'createOrder/order_details.dart';
 import 'epmty_page_appar.dart';
 
@@ -168,7 +169,7 @@ class DashBoard extends StatelessWidget {
               } else if (index == 1) {
                 Get.to(() => const DashBoard());
               } else if (index == 2) {
-                Get.to(() => const OrderPage());
+                Get.to(() => const NewOrder());
               } else if (index == 3) {
               } else if (index == 4) {
                 Get.to(() => const Profile());

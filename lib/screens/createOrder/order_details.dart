@@ -76,18 +76,14 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.background,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(80),
-        child: CustomAppBar(
-          titleText: 'Order Details',
-          isActionVisible: true,
-        ),
-      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const SizedBox(
+                height: 15,
+              ),
               CustomTextfield(
                 isPassword: false,
                 hintText: 'Product Name',

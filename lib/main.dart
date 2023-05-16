@@ -19,6 +19,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import '/screens/authentication/login.dart';
 import '/screens/authentication/register.dart';
+import 'main/utils/colors.dart';
 import 'screens/home_page.dart';
 import '/screens/dashboard.dart';
 // import 'main/Services/ChatMessagesService.dart';
@@ -95,7 +96,19 @@ class _MainAppState extends State<MainApp> {
       //  localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: const Locale('en', 'US'), // Set a default locale
-
+      theme: ThemeData(
+        fontFamily: 'lucida',
+        indicatorColor: const Color.fromARGB(255, 255, 255, 255),
+      ).copyWith(
+        // change the focus border color of the TextField
+        colorScheme: ThemeData()
+            .colorScheme
+            .copyWith(
+              primary: AppColors.primary,
+            )
+            .copyWith(onBackground: const Color(0xffffffff))
+            .copyWith(error: const Color.fromARGB(255, 127, 40, 40)),
+      ),
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
       getPages: [

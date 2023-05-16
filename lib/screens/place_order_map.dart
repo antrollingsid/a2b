@@ -63,17 +63,13 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.background,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(80),
-        child: CustomAppBar(
-          titleText: 'Place Order',
-          isActionVisible: true,
-        ),
-      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
+              const SizedBox(
+                height: 15,
+              ),
               Container(
                 width: 333,
                 height: 374,
