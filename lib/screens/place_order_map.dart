@@ -62,7 +62,18 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+<<<<<<< Updated upstream
       backgroundColor: AppColors.background,
+=======
+      backgroundColor: AppColors.backgroundLightMode,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: CustomAppBar(
+          titleText: 'Place Order',
+          isActionVisible: true,
+        ),
+      ),
+>>>>>>> Stashed changes
       body: SingleChildScrollView(
         child: Center(
           child: Column(

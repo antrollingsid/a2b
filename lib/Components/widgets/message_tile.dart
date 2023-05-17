@@ -282,7 +282,7 @@ class _MessageTileState extends ConsumerState<MessageTile>
                                     widget.message,
                                     style: TextStyle(
                                       color: widget.isSender
-                                          ? AppColors.background
+                                          ? AppColors.backgroundLightMode
                                           : (brightness == Brightness.light)
                                               ? AppColors.backgroundLightMode
                                               : AppColors.textGrey,

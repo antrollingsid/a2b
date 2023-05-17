@@ -36,7 +36,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
 
   Future uploadFile() async {
     try {
-      final path = 'applications/${_platformFile!.name}';
+      final path = 'foad/${_platformFile!.name}';
       final files = File(_platformFile!.path!);
 
       final ref = FirebaseStorage.instance.ref().child(path);
@@ -51,14 +51,19 @@ class _ApplyForCourierState extends State<ApplyForCourier>
   }
 
   selectFile() async {
-    final file = await FilePicker.platform.pickFiles(
-        type: FileType.custom, allowedExtensions: ['png', 'jpg', 'jpeg']);
+    final files = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['png', 'jpg', 'jpeg'],
+        allowMultiple: true);
 
-    if (file != null) {
-      setState(() {
-        _file = File(file.files.single.path!);
-        _platformFile = file.files.first;
-      });
+    if (files != null) {
+      for (int i = 0; i < files.files.length; i++) {
+        setState(() {
+          _file = File(files.files[i].path!);
+          _platformFile = files.files[i];
+        });
+        await uploadFile();
+      }
     }
 
     loadingController.forward();
@@ -80,7 +85,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundLightMode,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -250,7 +255,8 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                           color: AppColors.primary,
                           child: const Text(
                             'Upload file',
-                            style: TextStyle(color: AppColors.background),
+                            style:
+                                TextStyle(color: AppColors.backgroundLightMode),
                           ),
                         )
                       ],

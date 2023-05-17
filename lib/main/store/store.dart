@@ -128,7 +128,7 @@ abstract class _AppStore with Store {
       textSecondaryColorGlobal = textSecondaryColor;
 
       defaultLoaderBgColorGlobal = Colors.white;
-      // appButtonBackgroundColorGlobal = colorPrimary;
+      appButtonBackgroundColorGlobal = colorPrimary;
       shadowColorGlobal = Colors.black12;
     }
   }

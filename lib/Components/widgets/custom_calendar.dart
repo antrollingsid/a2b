@@ -70,7 +70,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             color: AppColors.primary,
           ),
           selectedTextStyle: const TextStyle(
-            color: AppColors.background,
+            color: AppColors.backgroundLightMode,
           ),
 
           /*-----------------

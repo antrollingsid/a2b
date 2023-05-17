@@ -72,7 +72,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundLightMode,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -201,7 +201,8 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(5),
-                                                color: AppColors.background,
+                                                color: AppColors
+                                                    .backgroundLightMode,
                                               ),
                                             ),
                                             Positioned.fill(

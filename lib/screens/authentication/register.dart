@@ -2,6 +2,7 @@ import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/main/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../../Components/widgets/login_with_btn.dart';
 import '../../../Components/widgets/app_bar_buttons.dart';
@@ -25,7 +26,7 @@ class _RegisterState extends State<Register> {
     final regcontroller = Get.put(SignUpController());
     var Authcontroller = Get.put(AuthController());
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
           child:
@@ -60,10 +61,18 @@ class _RegisterState extends State<Register> {
                           width: 333,
                         ),
                         CustomTextfield(
+<<<<<<< Updated upstream
                             hintText: 'Pick a strong password',
                             isPassword: true,
                             mycontroller: regcontroller.password,
                             width: 333),
+=======
+                          hintText: 'Pick a strong password',
+                          isPassword: true,
+                          mycontroller: regcontroller.password,
+                          width: 333,
+                        ),
+>>>>>>> Stashed changes
                         Expanded(child: Container()),
                         CustomBtn(
                           textonbtn: 'Register',

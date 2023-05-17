@@ -1,4 +1,5 @@
 import 'package:flutter_svg/svg.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,6 @@ class LoginWithBtn extends StatelessWidget {
           const Text(
             "Login with one the following options",
             style: TextStyle(
-              fontFamily: 'Material Icons',
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
@@ -25,7 +25,7 @@ class LoginWithBtn extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          Container(
+          SizedBox(
             width: 333,
             child: Row(
               children: [
@@ -36,19 +36,20 @@ class LoginWithBtn extends StatelessWidget {
                       height: 52,
                       // width: 158,
                       decoration: BoxDecoration(
-                        color: AppColors.background,
+                        color: context.scaffoldBackgroundColor,
                         borderRadius: BorderRadius.circular(
                           5,
                         ),
                         border: Border.all(
-                          color: AppColors.primary, // specify the border color
+                          color:
+                              context.primaryColor, // specify the border color
                           width: 1.0, // specify the border width
                         ),
                       ),
                       child: IconButton(
                         icon: SvgPicture.string(
                           SvgConstant.googleLogo,
-                          color: AppColors.primary,
+                          color: context.primaryColor,
                         ),
                         onPressed: () {},
                       ),
@@ -62,19 +63,19 @@ class LoginWithBtn extends StatelessWidget {
                   child: Container(
                     height: 52,
                     decoration: BoxDecoration(
-                      color: AppColors.background,
+                      color: context.scaffoldBackgroundColor,
                       borderRadius: BorderRadius.circular(
                         5,
                       ),
                       border: Border.all(
-                        color: AppColors.primary, // specify the border color
+                        color: context.primaryColor, // specify the border color
                         width: 1.0, // specify the border width
                       ),
                     ),
                     child: IconButton(
                       icon: SvgPicture.string(
                         SvgConstant.appleLogo,
-                        color: AppColors.primary,
+                        color: context.primaryColor,
                       ),
                       onPressed: () {},
                     ),

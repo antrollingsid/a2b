@@ -3,7 +3,9 @@ import 'package:a2b/screens/applyForCourier/apply_for_courier.dart';
 import 'package:a2b/screens/editProfile/edit_profile.dart';
 import 'package:a2b/screens/epmty_page_appar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/settings_button.dart';
@@ -12,16 +14,22 @@ import '../../Components/widgets/top_profile.dart';
 import '../../Components/widgets/upgrade_button.dart';
 import '../../main.dart';
 import '../../main/utils/colors.dart';
+import '../main/utils/svg.dart';
 import 'pick_language.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
 
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -32,22 +40,80 @@ class Profile extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TopProfile(),
               InkWell(
                 child: SettingBtn(action: language.editProfile),
                 onTap: () => Get.to(() => const EditProfile()),
               ),
+              Container(
+                width: 290,
+                height: 1,
+                color: Theme.of(context).iconTheme.color,
+              ),
               const SettingBtn(action: 'Settings'),
+              Container(
+                width: 290,
+                height: 1,
+                color: Theme.of(context).iconTheme.color,
+              ),
+
               SettingBtn(action: language.wallet),
+              Container(
+                width: 290,
+                height: 1,
+                color: Theme.of(context).iconTheme.color,
+              ),
               GestureDetector(
                 child: SettingBtn(action: language.language),
                 onTap: () => Get.to(() => const Language()),
               ),
+              // GestureDetector(
+              //   child: const SettingBtn(action: 'apply for couriership'),
+              //   onTap: () => Get.to(() => const ApplyForCourier()),
+              // ),
+              Container(
+                width: 290,
+                height: 1,
+                color: Theme.of(context).iconTheme.color,
+              ),
               InkWell(
                   onTap: () => Get.to(() => const ApplyForCourier()),
-                  child: UpgadeBtn()),
+                  child: const UpgadeBtn()),
+              Container(
+                width: 290,
+                height: 1,
+                color: Theme.of(context).iconTheme.color,
+              ),
+              InkWell(
+                child: const Icon(LineIcons.sun),
+                onTap: () {
+                  print('this is light modde');
+                  appStore.setDarkMode(false);
+                  print('we set light mode to true');
+                  setValue(THEME_MODE_INDEX, 1);
+                  setState(() {});
+                  LiveStream().emit('UpdateTheme');
+                  // finish(context);
+                },
+              ),
+              InkWell(
+                child: const Icon(LineIcons.moon),
+                onTap: () {
+                  print('this is dark modde');
+                  appStore.setDarkMode(true);
+                  print('we set dark mode to true');
+                  setValue(THEME_MODE_INDEX, 2);
+                  setState(() {});
+                  LiveStream().emit('UpdateTheme');
+                  // finish(context);
+                },
+              ),
+              Container(
+                width: 290,
+                height: 1,
+                color: Theme.of(context).iconTheme.color,
+              ),
               InkWell(
                   onTap: () => Get.find<AuthController>().signOut(),
                   child: const SignOutBtn())

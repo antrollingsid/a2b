@@ -46,7 +46,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   Widget build(BuildContext context) {
     // final brightness = Theme.of(context).brightness;
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundLightMode,
       appBar: ChatScreenAppbar(),
       body: SafeArea(
         child: Column(

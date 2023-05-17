@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../main/utils/colors.dart';
 import '../../main/utils/dimensions.dart';
@@ -12,13 +13,13 @@ class UpgadeBtn extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: Center(
         child: Container(
-          margin: const EdgeInsets.all(0),
+          margin: EdgeInsets.all(0),
           width: 333,
           height: 86,
           decoration: BoxDecoration(
-            color: AppColors.buttonDark,
+            color: context.primaryColor,
             borderRadius: BorderRadius.circular(
-              Dimensions.borderRadius8,
+              5,
             ),
           ),
           child: Padding(
@@ -26,44 +27,19 @@ class UpgadeBtn extends StatelessWidget {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(0),
-                    width: 38,
-                    height: 18,
-                    decoration: BoxDecoration(
-                      color: AppColors.buttonRed,
-                      borderRadius: BorderRadius.circular(
-                        Dimensions.borderRadius8,
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Pro",
-                        style: TextStyle(
-                          fontFamily: 'SF Pro Display',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                          // height:  1.5*ffem/fem,
-                          color: Color(0xffffffff),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Text(
+                children: const [
+                  Text(
                     "Apply for couriership",
                     style: TextStyle(
-                      fontFamily: 'SF Pro Display',
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                       // height:  1.5*ffem/fem,
                       color: Color(0xffffffff),
                     ),
                   ),
-                  const Text(
+                  Text(
                     "This subscription is auto-renewalble",
                     style: TextStyle(
-                      fontFamily: 'SF Pro Display',
                       fontSize: 12,
                       fontWeight: FontWeight.w100,
                       // height:  1.5*ffem/fem,

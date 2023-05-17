@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../main/utils/colors.dart';
 import '../../main/utils/dimensions.dart';
@@ -14,25 +15,24 @@ class SignOutBtn extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(0),
           width: 333,
-          height: 67,
+          height: 52,
           decoration: BoxDecoration(
-            color: AppColors.buttonDark,
+            color: context.primaryColor,
             borderRadius: BorderRadius.circular(
-              Dimensions.borderRadius8,
+              5,
             ),
           ),
-          child: const Padding(
+          child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "Sign Out",
                 style: TextStyle(
-                    fontFamily: 'SF Pro Display',
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     // height:  1.5*ffem/fem,
-                    color: AppColors.errorDark),
+                    color: context.scaffoldBackgroundColor),
               ),
             ),
           ),

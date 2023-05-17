@@ -3,6 +3,7 @@ import 'package:a2b/main/utils/colors.dart';
 import 'package:a2b/screens/authentication/register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../../Components/widgets/login_with_btn.dart';
 import '../../../Components/widgets/app_bar_buttons.dart';
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     final logcontroller = Get.put(LoginController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
           child:
@@ -39,12 +40,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const Text(
                 "Glad to see you again!",
-                style: TextStyle(
-                    wordSpacing: 5,
-                    fontFamily: 'Material Icons',
-                    color: Colors.black,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 24),
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
               ),
               const SizedBox(
                 height: 20,
@@ -54,14 +50,13 @@ class _LoginPageState extends State<LoginPage> {
                 child: Text(
                   "sign it and continue to delivery your\npackages!",
                   style: TextStyle(
-                      fontFamily: 'Material Icons',
                       color: AppColors.textFaded,
                       fontWeight: FontWeight.normal,
                       fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               const LoginWithBtn(),

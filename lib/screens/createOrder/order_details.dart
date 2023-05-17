@@ -25,6 +25,8 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
   File? _file;
   PlatformFile? _platformFile;
   UploadTask? uploadTask;
+  List<PlatformFile> _uploadedFiles =
+      []; // define an empty list of platform files
 
   Future uploadFile() async {
     try {
@@ -43,15 +45,20 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
   }
 
   selectFile() async {
-    final file = await FilePicker.platform.pickFiles();
-
-    if (file != null) {
-      setState(() {
-        _file = File(file.files.single.path!);
-        _platformFile = file.files.first;
-      });
+    final files = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['png', 'jpg', 'jpeg'],
+      allowMultiple: true,
+    );
+    if (files != null) {
+      for (int i = 0; i < files.files.length; i++) {
+        setState(() {
+          _file = File(files.files[i].path!);
+          _platformFile = files.files[i];
+        });
+        await uploadFile();
+      }
     }
-
     loadingController.forward();
   }
 
@@ -75,7 +82,18 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
     bool _isChecked = false;
     return Scaffold(
       resizeToAvoidBottomInset: false,
+<<<<<<< Updated upstream
       backgroundColor: AppColors.background,
+=======
+      backgroundColor: AppColors.backgroundLightMode,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: CustomAppBar(
+          titleText: 'Order Details',
+          isActionVisible: true,
+        ),
+      ),
+>>>>>>> Stashed changes
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -176,6 +194,7 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
                               height: 10,
                             ),
                             Container(
+                              //files here
                               padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
@@ -183,7 +202,7 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
                                   color: AppColors.primary,
                                   width: 1.0,
                                 ),
-                                color: AppColors.background,
+                                color: AppColors.backgroundLightMode,
                               ),
                               child: Column(
                                 children: <Widget>[
@@ -233,8 +252,8 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               3),
-                                                      color:
-                                                          AppColors.background,
+                                                      color: AppColors
+                                                          .backgroundLightMode,
                                                     ),
                                                   ),
                                                   Positioned.fill(
@@ -266,9 +285,6 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
                                           ],
                                         ),
                                       ),
-                                      // const SizedBox(
-                                      //   width: 10,
-                                      // ),
                                     ],
                                   ),
                                   CustomBtn(
@@ -283,13 +299,6 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
                       )
                     : Container(),
               ),
-              // CustomBtn(
-              //     textonbtn: 'Upload Product',
-              //     onPress: uploadFile,
-              //     primary: true),
-              // CustomCalendar(),
-              // CustomShip(),
-
               CustomBtn(
                 textonbtn: 'Next',
                 onPress: () => Get.to(() => const PlaceOrderMap()),
@@ -326,7 +335,7 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
             ),
           );
         } else {
-          return SizedBox(
+          return const SizedBox(
             height: 20,
           );
         }
