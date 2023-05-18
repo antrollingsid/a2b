@@ -138,7 +138,7 @@ class CustomAppBar extends StatelessWidget {
             ]
           : [], // empty list to hide the action button
       elevation: 0,
-      backgroundColor: context.scaffoldBackgroundColor,
+      backgroundColor: Colors.transparent,
     );
   }
 }
