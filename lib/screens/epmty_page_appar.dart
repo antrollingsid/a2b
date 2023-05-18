@@ -1,92 +1,99 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../main/utils/allConstants.dart';
-import '../../Components/widgets/app_bar_buttons.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class EmptyPage extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const EmptyPage({Key? key});
+  const EmptyPage({Key? key}) : super(key: key);
 
   @override
-  State<EmptyPage> createState() => _EmptyPage();
+  _EmptyPage createState() => _EmptyPage();
 }
 
 class _EmptyPage extends State<EmptyPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  final Completer<GoogleMapController> _controller = Completer();
+  // on below line we have specified camera position
+  static const CameraPosition _kGoogle = CameraPosition(
+    target: LatLng(20.42796133580664, 80.885749655962),
+    zoom: 14.4746,
+  );
 
-  final int _selectedIndex = 0;
+  // on below line we have created the list of markers
+  final List<Marker> _markers = <Marker>[
+    const Marker(
+        markerId: MarkerId('1'),
+        position: LatLng(20.42796133580664, 75.885749655962),
+        infoWindow: InfoWindow(
+          title: 'My Position',
+        )),
+  ];
+
+  // created method for getting user current location
+  Future<Position> getUserCurrentLocation() async {
+    await Geolocator.requestPermission()
+        .then((value) {})
+        .onError((error, stackTrace) async {
+      await Geolocator.requestPermission();
+      print("ERROR" + error.toString());
+    });
+    return await Geolocator.getCurrentPosition();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundLightMode,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(80),
-        child: CustomAppBar(
-          titleText: 'Profile',
-          isActionVisible: true,
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF0F9D58),
+        // on below line we have given title of app
+        title: const Text("GFG"),
+      ),
+      body: SafeArea(
+        // on below line creating google maps
+        child: GoogleMap(
+          // on below line setting camera position
+          initialCameraPosition: _kGoogle,
+          // on below line we are setting markers on the map
+          markers: Set<Marker>.of(_markers),
+          // on below line specifying map type.
+          mapType: MapType.normal,
+          // on below line setting user location enabled.
+          myLocationEnabled: true,
+          // on below line setting compass enabled.
+          compassEnabled: true,
+          // on below line specifying controller on map complete.
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
         ),
       ),
-      body: const SingleChildScrollView(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // CustomCalendar(),
-              // CustomShip(),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        backgroundColor: AppColors.buttonStroke,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.access_time,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.feedback_outlined,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person_outlined,
-              color: AppColors.backgroundLightMode,
-            ),
-            label: '',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primary,
-        onTap: (index) {
-          if (index == 2) {
-            // Get.to(() => const EmptyPage());
-          }
+      // on pressing floating action button the camera will take to user current location
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          getUserCurrentLocation().then((value) async {
+            print(value.latitude.toString() + " " + value.longitude.toString());
+
+            // marker added for current users location
+            _markers.add(Marker(
+              markerId: const MarkerId("2"),
+              position: LatLng(value.latitude, value.longitude),
+              infoWindow: const InfoWindow(
+                title: 'My Current Location',
+              ),
+            ));
+
+            // specified current users location
+            CameraPosition cameraPosition = CameraPosition(
+              target: LatLng(value.latitude, value.longitude),
+              zoom: 14,
+            );
+
+            final GoogleMapController controller = await _controller.future;
+            controller
+                .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+            setState(() {});
+          });
         },
+        child: const Icon(Icons.local_activity),
       ),
     );
   }

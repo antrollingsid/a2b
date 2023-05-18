@@ -17,6 +17,7 @@ import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
 import 'createOrder/new_order.dart';
 import 'createOrder/order_details.dart';
+import 'epmty_page_appar.dart';
 
 class DashBoard extends StatelessWidget {
   const DashBoard({super.key});
@@ -86,6 +87,12 @@ class DashBoard extends StatelessWidget {
                     Get.to(() => const DetailsPage());
                   },
                   child: const Text('detail Page'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(() => const EmptyPage());
+                  },
+                  child: const Text('empty Page'),
                 ),
                 ElevatedButton(
                   onPressed: () {

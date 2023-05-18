@@ -128,12 +128,12 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                 width: 333,
                 height: 374,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(0),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(0),
                   child: currentLocation == null
-                      ? Text(
+                      ? const Text(
                           "loadin",
                           style: TextStyle(color: Colors.black),
                         )
@@ -145,7 +145,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                           mapToolbarEnabled: true,
                           polylines: {
                             Polyline(
-                              polylineId: PolylineId("route"),
+                              polylineId: const PolylineId("route"),
                               points: polylineCoordinates,
                               color: context.primaryColor,
                               width: 6,
