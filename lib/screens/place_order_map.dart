@@ -68,26 +68,30 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
   }
 
   void getPolyPoints() async {
-    PolylinePoints polylinePoints = PolylinePoints();
+    try {
+      PolylinePoints polylinePoints = PolylinePoints();
 
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      googleMapAPIKey,
-      PointLatLng(_sourceLocation.latitude, _sourceLocation.longitude),
-      PointLatLng(_destination.latitude, _destination.longitude),
-    );
-    if (result.points.isNotEmpty) {
-      result.points.forEach(
-        (PointLatLng point) => polylineCoordinates.add(
-          LatLng(point.latitude, point.longitude),
-        ),
+      PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        googleMapAPIKey,
+        PointLatLng(_sourceLocation.latitude, _sourceLocation.longitude),
+        PointLatLng(_destination.latitude, _destination.longitude),
       );
-      setState(() {});
+      if (result.points.isNotEmpty) {
+        result.points.forEach(
+          (PointLatLng point) => polylineCoordinates.add(
+            LatLng(point.latitude, point.longitude),
+          ),
+        );
+        setState(() {});
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
   @override
   void initState() {
-    // getCurrentLocation();
+    getCurrentLocation();
     getPolyPoints();
     super.initState();
   }
@@ -162,6 +166,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                         ),
                 ),
               ),
+              // ElevatedButton(onPressed:getCurrentLocation(), child: const Text("data")),
               CustomTextfield(
                   isPassword: false,
                   hintText: 'Where from?',

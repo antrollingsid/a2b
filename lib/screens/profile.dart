@@ -2,7 +2,6 @@ import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/screens/applyForCourier/apply_for_courier.dart';
 import 'package:a2b/screens/editProfile/edit_profile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 

@@ -9,7 +9,7 @@ const mCodeCanyonURL = 'ADD_CODE_CANYON_URL';
 
 const mBaseUrl = 'ADD_YOUR_BASE_URL';
 
-const googleMapAPIKey = 'AIzaSyD6pzkimqG_UZx6EQdvq7r0VcYP1sxZe04';
+const String googleMapAPIKey = "AIzaSyD6pzkimqG_UZx6EQdvq7r0VcYP1sxZe04";
 
 const mOneSignalAppId = 'ADD_YOUR_ONE_SIGNAL_APP_ID';
 const mOneSignalRestKey = 'ADD_YOUR_ONE_SIGNAL_REST_KEY';
