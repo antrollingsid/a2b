@@ -1,7 +1,7 @@
 import 'package:a2b/controllers/auth_controller.dart';
-import 'package:a2b/main/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../../Components/widgets/login_with_btn.dart';
 import '../../../Components/widgets/app_bar_buttons.dart';
@@ -23,9 +23,9 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     final regcontroller = Get.put(SignUpController());
-        var Authcontroller = Get.put( AuthController());
+    var Authcontroller = Get.put(AuthController());
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
           child:
@@ -43,36 +43,39 @@ class _RegisterState extends State<Register> {
                         const LoginWithBtn(),
                         CustomTextfield(
                           hintText: 'Sid',
-                          titleText: 'Name',
                           isPassword: false,
                           mycontroller: regcontroller.name,
+                          width: 333,
                         ),
                         CustomTextfield(
                           hintText: 'Alfaouri',
-                          titleText: 'Surname',
                           isPassword: false,
-                          mycontroller: regcontroller.surname, width: null,
+                          mycontroller: regcontroller.surname,
+                          width: 333,
                         ),
                         CustomTextfield(
                           hintText: 'sample@a2b.com',
-                          titleText: 'Email',
                           isPassword: false,
-                          mycontroller: regcontroller.email, width: null,
+                          mycontroller: regcontroller.email,
+                          width: 333,
                         ),
                         CustomTextfield(
-                            hintText: 'Pick a strong password',
-                            isPassword: true,
-                            titleText: 'Password',
-                            mycontroller: regcontroller.password, width: null,),
+                          hintText: 'Pick a strong password',
+                          isPassword: true,
+                          mycontroller: regcontroller.password,
+                          width: 333,
+                        ),
                         Expanded(child: Container()),
                         CustomBtn(
-                            textonbtn: 'Register',
-                            onPress: () => controller.register(
-                                context,
-                                regcontroller.email.text,
-                                regcontroller.password.text,
-                                regcontroller.name.text,
-                                regcontroller.password.text), primary: null,),
+                          textonbtn: 'Register',
+                          onPress: () => controller.register(
+                              context,
+                              regcontroller.email.text,
+                              regcontroller.password.text,
+                              regcontroller.name.text,
+                              regcontroller.password.text),
+                          primary: true,
+                        ),
                         InkwellBtn(
                           textLeading: 'Already have an account ?  ',
                           textEnding: 'login',

@@ -22,7 +22,7 @@ class _EmptyPage extends State<EmptyPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundLightMode,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -30,11 +30,11 @@ class _EmptyPage extends State<EmptyPage> {
           isActionVisible: true,
         ),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               // CustomCalendar(),
               // CustomShip(),
             ],

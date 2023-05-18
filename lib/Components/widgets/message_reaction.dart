@@ -26,7 +26,7 @@ class MessageReaction extends StatelessWidget {
             const SizedBox(
               height: 40,
             ),
-            Center(child: Text("Todo..")),
+            const Center(child: Text("Todo..")),
           ],
         ),
       ),

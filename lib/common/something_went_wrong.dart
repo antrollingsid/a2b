@@ -7,7 +7,7 @@ class SomethingWentWrong extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;
-    return Container(
+    return SizedBox(
       height: 400,
       child: Container(
         padding: const EdgeInsets.only(
@@ -46,7 +46,7 @@ class SomethingWentWrong extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            Center(
+            const Center(
               child: Text(
                 "Something went wrong",
                 style: TextStyle(

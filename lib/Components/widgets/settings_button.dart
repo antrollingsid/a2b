@@ -1,9 +1,8 @@
 import 'package:a2b/main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nb_utils/nb_utils.dart';
 
-import '../../main/utils/colors.dart';
-import '../../main/utils/dimensions.dart';
 
 class SettingBtn extends StatelessWidget {
   const SettingBtn({super.key, required this.action});
@@ -11,41 +10,40 @@ class SettingBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-      child: Center(
-        child: Container(
-          margin: const EdgeInsets.all(0),
-          width: 333,
-          height: 67,
-          decoration: BoxDecoration(
-            color: AppColors.buttonDark,
-            borderRadius: BorderRadius.circular(
-              Dimensions.borderRadius8,
-            ),
-          ),
-          child: Row(children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text(
-                  action,
-                  style: const TextStyle(
-                    fontFamily: 'SF Pro Display',
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    // height:  1.5*ffem/fem,
-                    color: Color(0xffffffff),
-                  ),
+    return Center(
+      child: Container(
+        margin: const EdgeInsets.all(0),
+        width: 333,
+        height: 52,
+        decoration: BoxDecoration(
+          // color: context.primaryColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        // border: Border.all(color: context.primaryColor)),
+        child: Row(children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 18.0),
+              child: Text(
+                action,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: context.primaryColor,
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: Center(child: SvgPicture.string(SvgConstant.arrowRight)),
-            )
-          ]),
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: Center(
+              child: SvgPicture.string(
+                SvgConstant.arrowRight,
+                color: context.primaryColor,
+              ),
+            ),
+          )
+        ]),
       ),
     );
   }

@@ -15,7 +15,7 @@ class UserProfile extends StatefulWidget {
 
   // this is for navigation
   static Route route() => MaterialPageRoute(
-        builder: (context) => UserProfile(),
+        builder: (context) => const UserProfile(),
       );
 
   @override
@@ -23,7 +23,7 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  NetworkImage? image = NetworkImage(
+  NetworkImage? image = const NetworkImage(
       'https://fsb.zobj.net/crop.php?r=FAcicNvLZvREd2P2K5zZ9L0JIRulV8TzAV5foNxUVRxrsoW0wh3DgQIozJv0HSgWCILHwsKEwVb865BLg-L9RKoE96jm-7VwmGTAwdmjbEgLZ1TTzZmX-5RfzkY2LYrpQj8ArPyITHBy0-abcIOq3hQ8yhEJBVpdeUT_tDOShgQVAuuKvlBjqVJj9Y7-Gk6rcT3kOY0zyR2NwKVL');
 
   @override
@@ -32,7 +32,7 @@ class _UserProfileState extends State<UserProfile> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        appBar: UserProfileAppBar(),
+        appBar: const UserProfileAppBar(),
         body: ListView(
           children: [
             Stack(
@@ -49,7 +49,7 @@ class _UserProfileState extends State<UserProfile> {
                         height: 240,
                         width: double.infinity,
                         // Cover photo wiill be here
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: NetworkImage(
                               'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
@@ -81,12 +81,12 @@ class _UserProfileState extends State<UserProfile> {
                               ? Colors.grey.shade100
                               : AppColors.primary,
                           radius: 65,
-                          child: Icon(
+                          child: const Icon(
                             Icons.account_circle,
                             size: 65,
                           ), // Replace with lottie animation
                         )
-                      : CircleAvatar(
+                      : const CircleAvatar(
                           backgroundImage: NetworkImage(
                               'https://fsb.zobj.net/crop.php?r=FAcicNvLZvREd2P2K5zZ9L0JIRulV8TzAV5foNxUVRxrsoW0wh3DgQIozJv0HSgWCILHwsKEwVb865BLg-L9RKoE96jm-7VwmGTAwdmjbEgLZ1TTzZmX-5RfzkY2LYrpQj8ArPyITHBy0-abcIOq3hQ8yhEJBVpdeUT_tDOShgQVAuuKvlBjqVJj9Y7-Gk6rcT3kOY0zyR2NwKVL'),
                           radius: 65,
@@ -95,12 +95,12 @@ class _UserProfileState extends State<UserProfile> {
               ],
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 18,
             ),
 
             // Name and bio working status
-            Row(
+            const Row(
               children: [
                 Expanded(
                   child: Column(
@@ -139,7 +139,7 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                       // follow following
                       Padding(
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 60,
                         ),
                         child: Row(
@@ -168,7 +168,7 @@ class _UserProfileState extends State<UserProfile> {
               ],
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
 
@@ -199,7 +199,7 @@ class _UserProfileState extends State<UserProfile> {
               ),
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 18,
             ),
 
@@ -209,7 +209,7 @@ class _UserProfileState extends State<UserProfile> {
               labelColor: brightness == Brightness.light
                   ? AppColors.textBlue
                   : AppColors.textGrey,
-              tabs: [
+              tabs: const [
                 Tab(
                   text: "Activity",
                 ),
@@ -232,7 +232,7 @@ class _UserProfileState extends State<UserProfile> {
                     height: 300,
                     width: MediaQuery.of(context).size.width,
                     color: AppColors.buttonBlue,
-                    child: Center(
+                    child: const Center(
                       child: Text("Activity"),
                     ),
                   ),
@@ -240,7 +240,7 @@ class _UserProfileState extends State<UserProfile> {
                     height: 300,
                     width: MediaQuery.of(context).size.width,
                     color: AppColors.secondary,
-                    child: Center(
+                    child: const Center(
                       child: Text("Channel"),
                     ),
                   ),
@@ -248,7 +248,7 @@ class _UserProfileState extends State<UserProfile> {
                     height: 300,
                     width: MediaQuery.of(context).size.width,
                     color: Colors.amberAccent,
-                    child: Center(
+                    child: const Center(
                       child: Text("Interest"),
                     ),
                   ),
@@ -256,7 +256,7 @@ class _UserProfileState extends State<UserProfile> {
                     height: 300,
                     width: MediaQuery.of(context).size.width,
                     color: Colors.amber,
-                    child: Center(
+                    child: const Center(
                       child: Text("About"),
                     ),
                   ),

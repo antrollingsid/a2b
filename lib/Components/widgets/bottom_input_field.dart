@@ -35,7 +35,7 @@ class _BottomInputFieldState extends ConsumerState<BottomInputField> {
       context: context,
       isDismissible: true,
       isScrollControlled: true,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(18),
         ),
@@ -240,30 +240,30 @@ class _BottomInputFieldState extends ConsumerState<BottomInputField> {
                   cursorColor: AppColors.secondary,
                   enableIMEPersonalizedLearning: true,
                   textAlignVertical: TextAlignVertical.top,
-                  scrollPhysics: BouncingScrollPhysics(),
+                  scrollPhysics: const BouncingScrollPhysics(),
                   maxLines: 4,
                   minLines: 1,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(
+                    contentPadding: const EdgeInsets.only(
                       right: 12,
                       left: 12,
                       top: 18,
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                       ),
                     ),
                     suffixIconColor: AppColors.buttonYellow,
                     suffixIcon: InkWell(
-                      child: Icon(
+                      child: const Icon(
                         Icons.camera_alt,
                         size: 25,
                       ),

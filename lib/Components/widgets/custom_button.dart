@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../main/utils/colors.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class CustomBtn extends StatelessWidget {
   const CustomBtn(
@@ -24,17 +24,20 @@ class CustomBtn extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           border: Border.all(
-            color: AppColors.primary,
+            color: context.primaryColor,
             width: 1,
           ),
-          color: primary ? AppColors.primary : AppColors.background,
+          color:
+              primary ? context.primaryColor : context.scaffoldBackgroundColor,
         ),
         child: TextButton(
           onPressed: onPress,
           child: Text(
             textonbtn,
             style: TextStyle(
-              color: primary ? AppColors.background : AppColors.primary,
+              color: primary
+                  ? context.scaffoldBackgroundColor
+                  : context.primaryColor,
             ),
           ),
         ),

@@ -7,7 +7,7 @@ class MoreActionsBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -28,28 +28,28 @@ class MoreActionsBottomSheet extends StatelessWidget {
             ),
             Expanded(
               child: ListView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   ListTile(
                     leading: CustomBorderedButton(
                       icon: Icons.notifications_off,
                       onPressed: () {},
                     ),
-                    title: Text("Mute"),
+                    title: const Text("Mute"),
                   ),
                   ListTile(
                     leading: CustomBorderedButton(
                       icon: Icons.block,
                       onPressed: () {},
                     ),
-                    title: Text("Block"),
+                    title: const Text("Block"),
                   ),
                   ListTile(
                     leading: CustomBorderedButton(
                       icon: Icons.archive,
                       onPressed: () {},
                     ),
-                    title: Text("UnFollow"),
+                    title: const Text("UnFollow"),
                   ),
                 ],
               ),

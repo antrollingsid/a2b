@@ -1,10 +1,5 @@
-import 'package:a2b/Components/widgets/message.dart';
 import 'package:flutter/material.dart';
-import '../../Components/widgets/offer_detail.dart';
 import '../../Components/widgets/offer_show.dart';
-import '../../Components/widgets/order_activity.dart';
-import '../../Components/widgets/review.dart';
-import '../../Components/widgets/settings_button.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 
@@ -26,10 +21,10 @@ class _CourierOffers extends State<CourierOffers> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
-      appBar: const PreferredSize(
+      backgroundColor: AppColors.backgroundLightMode,
+      appBar: PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
           titleText: 'offers',
@@ -40,7 +35,7 @@ class _CourierOffers extends State<CourierOffers> {
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               OfferView(),
               OfferView(),
               OfferView(),

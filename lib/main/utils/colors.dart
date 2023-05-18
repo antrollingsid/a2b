@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color backgroundLightMode = Colors.white;
   static const Color onBackgroundDark = Colors.white;
-  static const Color background = Color.fromRGBO(255, 255, 255, 1);
+  static const Color backgroundLightMode = Color.fromRGBO(255, 255, 255, 1);
   static const Color secondaryBlue = Color.fromRGBO(209, 101, 69, 1.0);
-  static const Color buttonStroke = Color.fromRGBO(33, 33, 33, 1.0);
+  static const Color buttonStroke = Color.fromRGBO(18, 18, 18, 1.0);
   static const Color buttonYellow = Color.fromRGBO(255, 246, 117, 1.0);
   static const Color primary = Color.fromRGBO(209, 101, 69, 1.0);
+  static const Color purple = Color.fromRGBO(187, 134, 252, 1.0);
   static const Color buttonDark = Color.fromRGBO(23, 23, 23, 1.0);
   static const Color buttonBlue = Color.fromRGBO(17, 63, 118, 1.0);
   static const Color textBlack = Colors.black;

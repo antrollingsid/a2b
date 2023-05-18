@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../main/utils/allConstants.dart';
 import 'package:nb_utils/nb_utils.dart';
+import '../main/utils/Colors.dart';
 
 class AppTheme {
   //
   AppTheme._();
 
   static final ThemeData lightTheme = ThemeData(
-    primarySwatch: createMaterialColor(AppColors.primary),
+    primarySwatch: createMaterialColor(colorPrimary),
     primaryColor: AppColors.primary,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: AppColors.backgroundLightMode,
     fontFamily: GoogleFonts.roboto().fontFamily,
     iconTheme: const IconThemeData(color: Colors.black),
     dialogBackgroundColor: Colors.white,
@@ -19,17 +19,17 @@ class AppTheme {
     dividerColor: viewLineColor,
     cardColor: Colors.white,
     tabBarTheme: const TabBarTheme(labelColor: Colors.black),
-    appBarTheme: const AppBarTheme(
-      color: AppColors.primary,
+    appBarTheme: AppBarTheme(
+      color: colorPrimary,
       elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
           statusBarIconBrightness: Brightness.light,
-          statusBarColor: AppColors.primary),
+          statusBarColor: colorPrimary),
     ),
     dialogTheme: DialogTheme(shape: dialogShape()),
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
     colorScheme: const ColorScheme.light(
-      primary: AppColors.primary,
+      primary: Color.fromARGB(255, 19, 128, 43),
     ),
   ).copyWith(
     pageTransitionsTheme: const PageTransitionsTheme(
@@ -42,16 +42,17 @@ class AppTheme {
   );
 
   static final ThemeData darkTheme = ThemeData(
-    primarySwatch: createMaterialColor(AppColors.primary),
-    primaryColor: AppColors.primary,
-    scaffoldBackgroundColor: scaffoldColorDark,
+    primarySwatch: createMaterialColor(colorPrimary),
+    primaryColor: const Color.fromRGBO(187, 134, 252, 1.0),
+    scaffoldBackgroundColor: AppColors.buttonStroke,
     fontFamily: GoogleFonts.roboto().fontFamily,
-    iconTheme: const IconThemeData(color: Colors.white),
+    iconTheme: const IconThemeData(color: AppColors.backgroundLightMode),
     dialogBackgroundColor: scaffoldSecondaryDark,
-    unselectedWidgetColor: Colors.white60,
+    unselectedWidgetColor: Colors.black,
+    // textTheme: TextTheme(),
     dividerColor: Colors.white12,
     cardColor: scaffoldSecondaryDark,
-    tabBarTheme: const TabBarTheme(labelColor: Colors.white),
+    tabBarTheme: const TabBarTheme(labelColor: Color.fromARGB(255, 7, 48, 130)),
     appBarTheme: const AppBarTheme(
       color: scaffoldSecondaryDark,
       elevation: 0,
@@ -65,7 +66,7 @@ class AppTheme {
     bottomSheetTheme:
         const BottomSheetThemeData(backgroundColor: appButtonColorDark),
     colorScheme: const ColorScheme.dark(
-      primary: AppColors.primary,
+      primary: Color.fromARGB(255, 19, 128, 43),
     ),
   ).copyWith(
     pageTransitionsTheme: const PageTransitionsTheme(
@@ -76,4 +77,6 @@ class AppTheme {
       },
     ),
   );
+
+  static of(BuildContext context) {}
 }

@@ -10,7 +10,7 @@ class ImageSelectOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;
-    return Container(
+    return SizedBox(
       height: 200,
       child: Column(
         children: [
@@ -31,7 +31,7 @@ class ImageSelectOptions extends StatelessWidget {
           ),
           Expanded(
             child: ListView(
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -42,11 +42,11 @@ class ImageSelectOptions extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18),
                     ),
-                    leading: CustomBorderedButton(
+                    leading: const CustomBorderedButton(
                       icon: Icons.photo,
                       radius: 25,
                     ),
-                    title: Text(
+                    title: const Text(
                       "Gallery",
                       style: TextStyle(
                         fontSize: 18,
@@ -65,11 +65,11 @@ class ImageSelectOptions extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18),
                     ),
-                    leading: CustomBorderedButton(
+                    leading: const CustomBorderedButton(
                       icon: Icons.camera_alt,
                       radius: 25,
                     ),
-                    title: Text(
+                    title: const Text(
                       "Camera",
                       style: TextStyle(
                         fontSize: 18,

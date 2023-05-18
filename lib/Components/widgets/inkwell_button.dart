@@ -1,5 +1,5 @@
-import 'package:a2b/main/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class InkwellBtn extends StatelessWidget {
   const InkwellBtn(
@@ -18,12 +18,15 @@ class InkwellBtn extends StatelessWidget {
         child: RichText(
           text: TextSpan(
             text: textLeading,
-            style: const TextStyle(color: Colors.black),
+            style: TextStyle(
+              color: IconTheme.of(context).color,
+            ),
             children: <TextSpan>[
               TextSpan(
                   text: textEnding,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, color: AppColors.primary)),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: context.primaryColor)),
             ],
           ),
         ),

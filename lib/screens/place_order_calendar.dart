@@ -1,15 +1,10 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:a2b/Components/widgets/custom_calendar.dart';
-import 'package:a2b/screens/place_order_upload.dart';
-import 'package:a2b/screens/profile.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:textfield_datepicker/textfield_datepicker.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 import '../Components/widgets/custom_button.dart';
-import 'dashboard.dart';
 
 class ConfirmOrder extends StatefulWidget {
   const ConfirmOrder({Key? key});
@@ -40,7 +35,7 @@ class _ConfirmOrder extends State<ConfirmOrder> {
     ];
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundLightMode,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -61,7 +56,7 @@ class _ConfirmOrder extends State<ConfirmOrder> {
                         value: category,
                         child: Row(
                           children: <Widget>[
-                            Icon(Icons.star),
+                            const Icon(Icons.star),
                             Text(category),
                           ],
                         ));
@@ -72,7 +67,7 @@ class _ConfirmOrder extends State<ConfirmOrder> {
                   },
                   //  value: _category,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                    contentPadding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                     filled: true,
                     fillColor: Colors.grey[200],
                     hintText: 'Time',

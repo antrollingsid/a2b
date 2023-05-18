@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:heyy/screens/chat/widgets/message_info.dart';
 
 import '../../Components/widgets/bottom_input_field.dart';
-import '../../Components/widgets/chat_page_appbar.dart';
 import '../../Components/widgets/message_datelable.dart';
 import '../../Components/widgets/message_info.dart';
 import '../../Components/widgets/message_tile.dart';
@@ -23,7 +22,7 @@ class ChatScreen extends ConsumerStatefulWidget {
 
   // this is for navigation
   static Route route() => MaterialPageRoute(
-        builder: (context) => ChatScreen(
+        builder: (context) => const ChatScreen(
             // userConversation: data,
             ),
       );
@@ -46,8 +45,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   Widget build(BuildContext context) {
     // final brightness = Theme.of(context).brightness;
     return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: ChatScreenAppbar(),
+      backgroundColor: AppColors.backgroundLightMode,
+      appBar: const ChatScreenAppbar(),
       body: SafeArea(
         child: Column(
           children: <Widget>[
@@ -145,7 +144,7 @@ void getKeyBoardFocus(FocusNode InputBoxFocus) {
   // }
   showCustomBottomSheet(
     bottomSheetContext,
-    MessageInfo(),
+    const MessageInfo(),
     .18,
     .18,
   );

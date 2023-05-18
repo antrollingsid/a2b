@@ -1,9 +1,8 @@
 // ignore_for_file: unnecessary_import
 
-import 'package:a2b/screens/place_order_map.dart';
 import 'package:a2b/screens/userDetails/details.dart';
+import 'package:nb_utils/nb_utils.dart';
 
-import '/screens/place_order_calendar.dart';
 import '/screens/profile.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -17,7 +16,6 @@ import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
 import 'createOrder/order_details.dart';
-import 'epmty_page_appar.dart';
 
 class DashBoard extends StatelessWidget {
   const DashBoard({super.key});
@@ -26,7 +24,7 @@ class DashBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: AppColors.background,
+        backgroundColor: context.scaffoldBackgroundColor,
         appBar: const PreferredSize(
           preferredSize: Size.fromHeight(80),
           child: CustomAppBar(
@@ -39,19 +37,18 @@ class DashBoard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 150),
+                const Padding(
+                  padding: EdgeInsets.only(right: 150),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         "Ship Your",
                         style: TextStyle(
-                          fontFamily: 'SF Pro Display',
                           fontSize: 24,
                           fontWeight: FontWeight.normal,
                           // height:  1.5*ffem/fem,
@@ -61,7 +58,6 @@ class DashBoard extends StatelessWidget {
                       Text(
                         'Package Safely',
                         style: TextStyle(
-                          fontFamily: 'SF Pro Display',
                           fontSize: 24,
                           fontWeight: FontWeight.normal,
                           // wordSpacing: 1.5,
@@ -108,7 +104,7 @@ class DashBoard extends StatelessWidget {
           child: BottomNavigationBar(
             showSelectedLabels: false,
             showUnselectedLabels: false,
-            backgroundColor: Color.fromARGB(255, 27, 27, 27),
+            backgroundColor: context.scaffoldBackgroundColor,
             type: BottomNavigationBarType.fixed,
             items: [
               const BottomNavigationBarItem(
@@ -139,7 +135,7 @@ class DashBoard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50)),
                   child: const Icon(
                     Icons.add,
-                    color: AppColors.background,
+                    color: AppColors.backgroundLightMode,
                     size: 40,
                   ),
                 ),

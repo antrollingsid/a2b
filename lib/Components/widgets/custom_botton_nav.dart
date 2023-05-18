@@ -55,7 +55,7 @@ class CustomBottomNav extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50)),
               child: const Icon(
                 Icons.add,
-                color: AppColors.background,
+                color: AppColors.backgroundLightMode,
                 size: 40,
               ),
             ),

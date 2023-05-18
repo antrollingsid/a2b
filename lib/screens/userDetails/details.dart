@@ -27,7 +27,7 @@ class _DetailsPage extends State<DetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundLightMode,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(227),
         child: DetailsAppBar(
@@ -42,9 +42,9 @@ class _DetailsPage extends State<DetailsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
+                  const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         'courier name',
                         style: TextStyle(
@@ -68,12 +68,12 @@ class _DetailsPage extends State<DetailsPage> {
                 height: 86,
                 width: 333,
                 color: AppColors.buttonBlue,
-                child: Row(
+                child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
                             '6y',
                             style: TextStyle(
@@ -86,7 +86,7 @@ class _DetailsPage extends State<DetailsPage> {
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
                             '6y',
                             style: TextStyle(
@@ -99,7 +99,7 @@ class _DetailsPage extends State<DetailsPage> {
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
                             '6y',
                             style: TextStyle(
@@ -112,7 +112,7 @@ class _DetailsPage extends State<DetailsPage> {
                       ),
                     ]),
               ),
-              CustomReview(),
+              const CustomReview(),
               CustomBtn(
                 textonbtn: 'rate the courier',
                 onPress: () {

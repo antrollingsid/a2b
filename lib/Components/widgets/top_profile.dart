@@ -14,7 +14,7 @@ class TopProfile extends StatelessWidget {
         return !controller.isLoggedIn
             ? Container()
             : Center(
-                child: Container(
+                child: SizedBox(
                   // color: AppColors.buttonBlue,
                   width: 333,
                   // mainAxisAlignment: MainAxisAlignment.start,
@@ -87,10 +87,10 @@ class TopProfile extends StatelessWidget {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                Column(
+                                const Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
+                                  children: [
                                     Text(
                                       'Wallet',
                                       style: TextStyle(

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../main/utils/allConstants.dart';
@@ -72,7 +71,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundLightMode,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -201,7 +200,8 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(5),
-                                                color: AppColors.background,
+                                                color: AppColors
+                                                    .backgroundLightMode,
                                               ),
                                             ),
                                             Positioned.fill(
@@ -296,7 +296,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
             ),
           );
         } else {
-          return SizedBox(
+          return const SizedBox(
             height: 20,
           );
         }

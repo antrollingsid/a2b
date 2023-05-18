@@ -24,7 +24,7 @@ class FromToTextField extends StatelessWidget {
       color = AppColors.secondaryBlue;
     } else {
       color = AppColors
-          .background; // optional: handle cases where type is neither 'from' nor 'to'
+          .backgroundLightMode; // optional: handle cases where type is neither 'from' nor 'to'
     }
     return Padding(
       padding: const EdgeInsets.only(top: 15),

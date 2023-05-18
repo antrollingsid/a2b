@@ -21,7 +21,7 @@ class UserProfileAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _UserProfileAppBarState extends State<UserProfileAppBar> {
-  NetworkImage? image = NetworkImage(
+  NetworkImage? image = const NetworkImage(
       'https://fsb.zobj.net/crop.php?r=FAcicNvLZvREd2P2K5zZ9L0JIRulV8TzAV5foNxUVRxrsoW0wh3DgQIozJv0HSgWCILHwsKEwVb865BLg-L9RKoE96jm-7VwmGTAwdmjbEgLZ1TTzZmX-5RfzkY2LYrpQj8ArPyITHBy0-abcIOq3hQ8yhEJBVpdeUT_tDOShgQVAuuKvlBjqVJj9Y7-Gk6rcT3kOY0zyR2NwKVL');
 
   @override
@@ -76,7 +76,7 @@ class _UserProfileAppBarState extends State<UserProfileAppBar> {
           icon: Icons.edit,
         ),
 
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
 
@@ -85,14 +85,14 @@ class _UserProfileAppBarState extends State<UserProfileAppBar> {
           onPressed: () {
             showCustomBottomSheet(
               context,
-              MoreActionsBottomSheet(),
+              const MoreActionsBottomSheet(),
               .3,
               .3,
             );
           },
           icon: Icons.more_vert,
         ),
-        SizedBox(
+        const SizedBox(
           width: 12,
         ),
       ],

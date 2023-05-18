@@ -1,9 +1,9 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import '../../Components/widgets/settings_button.dart';
 import '../screens/chat/chat_screen.dart';
-import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 import 'dashboard.dart';
 
@@ -27,7 +27,7 @@ class _MenuPage extends State<MenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.background,
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -42,16 +42,16 @@ class _MenuPage extends State<MenuPage> {
             children: [
               // CustomCalendar(),
               GestureDetector(
-                child: SettingBtn(action: 'messages'),
-                onTap: () => Get.to(ChatScreen()),
+                child: const SettingBtn(action: 'messages'),
+                onTap: () => Get.to(const ChatScreen()),
               ),
               GestureDetector(
-                child: SettingBtn(action: 'home'),
-                onTap: () => Get.to(DashBoard()),
+                child: const SettingBtn(action: 'home'),
+                onTap: () => Get.to(const DashBoard()),
               ),
-              SettingBtn(action: 'offers'),
-              SettingBtn(action: 'order history'),
-              SettingBtn(action: 'create an order'),
+              const SettingBtn(action: 'offers'),
+              const SettingBtn(action: 'order history'),
+              const SettingBtn(action: 'create an order'),
 
               // CustomShip(),
             ],

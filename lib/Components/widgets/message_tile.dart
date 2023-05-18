@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:swipe_to/swipe_to.dart';
 
 import '../../../common/popup_menu.dart';
 // import '../../../theme.dart';
 import '../../../common/common.dart';
 
-import '../../main/utils/svg.dart';
 import '../../screens/chat/constants/constants.dart';
 // import '../../main/utils/allConstants.dart';
 import '../../main/utils/colors.dart';
@@ -58,7 +56,7 @@ class _MessageTileState extends ConsumerState<MessageTile>
     bottomSheetContext = context;
 
     _animationController = AnimationController(
-      duration: Duration(milliseconds: 30),
+      duration: const Duration(milliseconds: 30),
       vsync: this,
       lowerBound: 0,
       upperBound: 0.02,
@@ -67,7 +65,6 @@ class _MessageTileState extends ConsumerState<MessageTile>
           setState(() {});
         },
       );
-    ;
   }
 
   List<PopupMenuEntry> messageTileOptions = [
@@ -106,9 +103,9 @@ class _MessageTileState extends ConsumerState<MessageTile>
               borderRadius: BorderRadius.circular(20),
               onTap: () {
                 showCustomBottomSheet(
-                    bottomSheetContext, CustomEmojiPicker(), .4, .6);
+                    bottomSheetContext, const CustomEmojiPicker(), .4, .6);
               },
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
             ),
           ),
         ],
@@ -166,7 +163,7 @@ class _MessageTileState extends ConsumerState<MessageTile>
           bottom: top + 2),
       items: items,
       elevation: 8,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),
@@ -176,7 +173,7 @@ class _MessageTileState extends ConsumerState<MessageTile>
         case 'Info':
           showCustomBottomSheet(
             bottomSheetContext,
-            MessageInfo(),
+            const MessageInfo(),
             .18,
             .18,
           );
@@ -282,7 +279,7 @@ class _MessageTileState extends ConsumerState<MessageTile>
                                     widget.message,
                                     style: TextStyle(
                                       color: widget.isSender
-                                          ? AppColors.background
+                                          ? AppColors.backgroundLightMode
                                           : (brightness == Brightness.light)
                                               ? AppColors.backgroundLightMode
                                               : AppColors.textGrey,
@@ -343,7 +340,7 @@ class _MessageTileState extends ConsumerState<MessageTile>
                               onTap: () {
                                 showCustomBottomSheet(
                                   bottomSheetContext,
-                                  MessageReaction(),
+                                  const MessageReaction(),
                                   .2,
                                   .2,
                                 );

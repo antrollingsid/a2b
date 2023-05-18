@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:a2b/screens/menu.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,8 @@ class backBtn extends StatelessWidget {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       color: Colors.transparent,
       child: IconButton(
-        icon: SvgPicture.string(SvgConstant.backArrow),
+        icon: SvgPicture.string(SvgConstant.backArrow,
+            color: context.primaryColor),
         onPressed: () {
           Navigator.pop(context);
         },
@@ -42,7 +44,7 @@ class menuBtn extends StatelessWidget {
       child: IconButton(
         icon: SvgPicture.string(
           SvgConstant.burgerMenuDark,
-          color: AppColors.primary,
+          color: context.primaryColor,
         ),
         onPressed: () {
           Get.to(const MenuPage());
@@ -95,7 +97,7 @@ class CustomLoginSignupAppBar extends StatelessWidget {
       //   ),
       // ],
       elevation: 0,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundLightMode,
     );
   }
 }
@@ -121,11 +123,10 @@ class CustomAppBar extends StatelessWidget {
       leadingWidth: 74,
       title: Text(
         titleText,
-        style: const TextStyle(
-          fontFamily: 'Material Icons',
+        style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w500,
-          color: AppColors.primary,
+          color: context.primaryColor,
         ),
       ),
       actions: isActionVisible
@@ -137,7 +138,7 @@ class CustomAppBar extends StatelessWidget {
             ]
           : [], // empty list to hide the action button
       elevation: 0,
-      backgroundColor: AppColors.background,
+      backgroundColor: context.scaffoldBackgroundColor,
     );
   }
 }
@@ -156,7 +157,7 @@ class DetailsAppBar extends StatelessWidget {
         image: DecorationImage(
           image: const AssetImage('assets/images/1x/1.png'),
           colorFilter: ColorFilter.mode(
-            AppColors.background.withOpacity(0.6),
+            AppColors.backgroundLightMode.withOpacity(0.6),
             BlendMode.multiply,
           ),
           fit: BoxFit.cover,
@@ -179,7 +180,7 @@ class DetailsAppBar extends StatelessWidget {
               width: double.infinity,
               // margin: const EdgeInsets.all(26),
               decoration: const BoxDecoration(
-                color: AppColors.background,
+                color: AppColors.backgroundLightMode,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),

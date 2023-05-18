@@ -10,7 +10,7 @@ void showSnackBar(BuildContext context, String message) {
   final brightness = Theme.of(context).brightness;
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),
@@ -51,14 +51,14 @@ void showAlertDialog(
         ),
         child: AlertDialog(
           content: Text(content),
-          contentPadding: EdgeInsets.all(30),
-          shape: RoundedRectangleBorder(
+          contentPadding: const EdgeInsets.all(30),
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(16),
             ),
           ),
-          buttonPadding: EdgeInsets.all(15),
-          contentTextStyle: TextStyle(
+          buttonPadding: const EdgeInsets.all(15),
+          contentTextStyle: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w400,
             color: AppColors.textGrey,
@@ -68,9 +68,9 @@ void showAlertDialog(
             TextButton(
               style: ButtonStyle(
                 padding: MaterialStateProperty.all<EdgeInsets>(
-                    EdgeInsets.symmetric(horizontal: 12)),
+                    const EdgeInsets.symmetric(horizontal: 12)),
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
+                  const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(8),
                     ),
@@ -81,7 +81,7 @@ void showAlertDialog(
                         ? AppColors.customIconButtonBackgroundLight
                         : AppColors.customIconButtonBackgroundDark),
                 textStyle: MaterialStateProperty.all<TextStyle>(
-                  TextStyle(
+                  const TextStyle(
                     fontSize: 17,
                   ),
                 ),
@@ -89,12 +89,12 @@ void showAlertDialog(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Cancle"),
+              child: const Text("Cancle"),
             ),
             TextButton(
               style: ButtonStyle(
                 textStyle: MaterialStateProperty.all<TextStyle>(
-                  TextStyle(
+                  const TextStyle(
                     fontSize: 17,
                   ),
                 ),
@@ -124,7 +124,7 @@ void showHomePagePopUpMenu(BuildContext context, Offset offset,
         bottom: top + 2),
     items: items,
     elevation: 8,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(16),
       ),
@@ -147,7 +147,7 @@ void showChatScreenPopUpMenu(BuildContext context, Offset offset,
         bottom: top + 2),
     items: items,
     elevation: 8,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(16),
       ),
@@ -166,7 +166,7 @@ void showCustomBottomSheet(
     context: context,
     isDismissible: true,
     isScrollControlled: true,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(16),
         topRight: Radius.circular(16),

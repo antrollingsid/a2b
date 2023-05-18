@@ -2,8 +2,7 @@
 
 import 'package:a2b/main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gradient_borders/gradient_borders.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class CustomTextfield extends StatefulWidget {
   const CustomTextfield({
@@ -11,7 +10,7 @@ class CustomTextfield extends StatefulWidget {
     required this.isPassword,
     required this.hintText,
     required this.mycontroller,
-    required this.width, required String titleText,
+    required this.width,
   });
   final bool isPassword;
   final String hintText;
@@ -56,9 +55,9 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                 TextField(
                   controller: widget.mycontroller,
                   obscureText: _obscured,
-                  style: const TextStyle(
-                    color: Colors.black,
-                  ),
+                  // style: const TextStyle(
+                  //   color: Colors.black,
+                  // ),
                   textAlign: TextAlign.left,
                   textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(
@@ -67,10 +66,10 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                       color: AppColors.textGrey,
                     ),
                     filled: true,
-                    fillColor: AppColors.background,
+                    fillColor: Colors.transparent,
                     border: myinputborder(),
                     enabledBorder: myinputborder(), //enabled border
-                    focusedBorder: myfocusborder(),
+                    focusedBorder: myFocusBorder(context),
 
                     suffixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
@@ -82,7 +81,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                                       ? Icons.remove_red_eye_outlined
                                       : Icons.visibility_off_outlined,
                                   size: 18,
-                                  color: AppColors.primary))
+                                  color: context.primaryColor))
                           : const SizedBox(
                               height: 0,
                             ),
@@ -112,13 +111,14 @@ OutlineInputBorder myinputborder() {
       ));
 }
 
-OutlineInputBorder myfocusborder() {
-  return const OutlineInputBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(5),
-      ),
-      borderSide: BorderSide(
-        color: AppColors.primary,
-        width: 1,
-      ));
+OutlineInputBorder myFocusBorder(BuildContext context) {
+  return OutlineInputBorder(
+    borderRadius: const BorderRadius.all(
+      Radius.circular(5),
+    ),
+    borderSide: BorderSide(
+      color: Theme.of(context).primaryColor,
+      width: 1,
+    ),
+  );
 }

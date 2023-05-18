@@ -9,7 +9,7 @@ class OrderHistoryActivity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 333,
       child: Column(
         children: [

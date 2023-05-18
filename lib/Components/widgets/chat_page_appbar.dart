@@ -1,11 +1,9 @@
-import 'package:a2b/Components/widgets/app_bar_buttons.dart';
 import 'package:a2b/main/utils/colors.dart';
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../common/avatar.dart';
-import '../../../models/models.dart';
 // import '../../screens.dart';
 import '../../screens/profile/profile_screen.dart';
 import 'appbar_popup.dart';
@@ -30,7 +28,7 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
         //     : Brightness.dark,
       ),
       elevation: 0,
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundLightMode,
       automaticallyImplyLeading: false,
       // leading: backBtn(),
       flexibleSpace: SafeArea(
@@ -66,7 +64,7 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                   transitionType: ContainerTransitionType.fadeThrough,
                   openBuilder: (BuildContext context,
                           void Function({Object? returnValue}) action) =>
-                      UserProfile(),
+                      const UserProfile(),
                   closedBuilder: (context, VoidCallback openContainer) =>
                       Avatar(
                     radius: 21,
@@ -81,11 +79,11 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                 width: 12,
               ),
               // Name and Online status
-              Expanded(
+              const Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const <Widget>[
+                  children: <Widget>[
                     Text(
                       'user.name',
                       style: TextStyle(
@@ -124,8 +122,8 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                       top: 5,
                       right: 10,
                     ),
-                    child: Text("View public profile"),
                     value: "profile",
+                    child: Text("View public profile"),
                   ),
                   PopupMenuItem(
                     padding: EdgeInsets.only(
@@ -134,8 +132,8 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                       top: 3,
                       right: 5,
                     ),
-                    child: Text("Search"),
                     value: "search",
+                    child: Text("Search"),
                   ),
                   PopupMenuItem(
                     padding: EdgeInsets.only(
@@ -144,8 +142,8 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                       top: 3,
                       right: 5,
                     ),
-                    child: Text("Media"),
                     value: "media",
+                    child: Text("Media"),
                   ),
                   PopupMenuItem(
                     padding: EdgeInsets.only(
@@ -154,8 +152,8 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                       top: 3,
                       right: 5,
                     ),
-                    child: Text("Wallpaper"),
                     value: "wallpaper",
+                    child: Text("Wallpaper"),
                   ),
                   PopupMenuItem(
                     padding: EdgeInsets.only(
@@ -164,8 +162,8 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                       top: 3,
                       right: 5,
                     ),
-                    child: Text("Mute Notifications"),
                     value: "mute",
+                    child: Text("Mute Notifications"),
                   ),
                   PopupMenuItem(
                     padding: EdgeInsets.only(
@@ -174,8 +172,8 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                       top: 3,
                       right: 5,
                     ),
-                    child: Text("Add Shortcut"),
                     value: "shortcut",
+                    child: Text("Add Shortcut"),
                   ),
                   PopupMenuItem(
                     padding: EdgeInsets.only(
@@ -184,8 +182,8 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                       top: 3,
                       right: 5,
                     ),
-                    child: Text("Block"),
                     value: "block",
+                    child: Text("Block"),
                   ),
                   PopupMenuItem(
                     padding: EdgeInsets.only(
@@ -194,8 +192,8 @@ class ChatScreenAppbar extends StatelessWidget implements PreferredSizeWidget {
                       top: 3,
                       right: 5,
                     ),
-                    child: Text("Clear chat"),
                     value: "clear",
+                    child: Text("Clear chat"),
                   ),
                 ],
                 icon: Icon(
