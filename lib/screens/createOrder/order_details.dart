@@ -89,7 +89,6 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
           isActionVisible: true,
         ),
       ),
->>>>>>> Stashed changes
       body: SingleChildScrollView(
         child: Center(
           child: Column(

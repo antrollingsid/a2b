@@ -77,6 +77,7 @@ class _RegisterState extends State<Register> {
                               regcontroller.password.text),
                           primary: true,
                         ),
+                        CustomBtn(
                           textonbtn: 'Register',
                           onPress: () => controller.register(
                               context,

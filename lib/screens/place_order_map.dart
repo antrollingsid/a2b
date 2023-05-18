@@ -70,7 +70,6 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
           isActionVisible: true,
         ),
       ),
->>>>>>> Stashed changes
       body: SingleChildScrollView(
         child: Center(
           child: Column(
