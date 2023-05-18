@@ -111,7 +111,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
     final locationcontroller = Get.put(LocationTextController());
 
     return Scaffold(
-      extendBodyBehindAppBar: false,
+      extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.backgroundLightMode,
       appBar: const PreferredSize(
@@ -121,91 +121,84 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
           isActionVisible: true,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 15,
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              // width: 333,
+              height: 374,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(0),
               ),
-              Container(
-                width: 333,
-                height: 374,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(0),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(0),
-                  child: currentLocation == null
-                      ? const Text(
-                          "loadin",
-                          style: TextStyle(color: Colors.black),
-                        )
-                      : GoogleMap(
-                          initialCameraPosition: _kInitialPosition,
-                          // onMapCreated: onMapCreated,
-                          zoomControlsEnabled: true,
-                          zoomGesturesEnabled: true,
-                          mapToolbarEnabled: true,
-                          polylines: {
-                            Polyline(
-                              polylineId: const PolylineId("route"),
-                              points: polylineCoordinates,
-                              color: context.primaryColor,
-                              width: 6,
-                            ),
-                          },
-                          markers: {
-                            const Marker(
-                                markerId: MarkerId("source"),
-                                position: _sourceLocation),
-                            const Marker(
-                                markerId: MarkerId("destination"),
-                                position: _destination),
-                          },
-                        ),
-                ),
-              ),
-              // ElevatedButton(onPressed:getCurrentLocation(), child: const Text("data")),
-              CustomTextfield(
-                  isPassword: false,
-                  hintText: 'Where from?',
-                  mycontroller: locationcontroller.from,
-                  width: 333),
-              CustomTextfield(
-                  isPassword: false,
-                  hintText: 'Where to?',
-                  mycontroller: locationcontroller.to,
-                  width: 333),
-              CustomTextfield(
-                  isPassword: false,
-                  hintText: 'receiver\'s name',
-                  mycontroller: locationcontroller.name,
-                  width: 333),
-              SizedBox(
-                width: 333,
-                child: IntlPhoneField(
-                  showCountryFlag: false,
-                  controller: locationcontroller.number,
-                  decoration: InputDecoration(
-                    prefixIcon: null,
-                    border: myinputborder(),
-                    enabledBorder: myinputborder(), //enabled border
-                    focusedBorder: myfocusborder(),
-                  ),
-                  initialCountryCode: 'TR',
-                  onChanged: (phone) {
-                    print(phone.completeNumber);
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(0),
+                child: GoogleMap(
+                  initialCameraPosition: _kInitialPosition,
+                  // onMapCreated: onMapCreated,
+                  zoomControlsEnabled: true,
+                  zoomGesturesEnabled: true,
+                  mapToolbarEnabled: true,
+                  polylines: {
+                    Polyline(
+                      polylineId: const PolylineId("route"),
+                      points: polylineCoordinates,
+                      color: context.primaryColor,
+                      width: 6,
+                    ),
+                  },
+                  markers: {
+                    const Marker(
+                        markerId: MarkerId("source"),
+                        position: _sourceLocation),
+                    const Marker(
+                        markerId: MarkerId("destination"),
+                        position: _destination),
                   },
                 ),
               ),
-              CustomBtn(
-                textonbtn: 'Next',
-                onPress: () => Get.to(() => const ConfirmOrder()),
-                primary: true,
+            ),
+            // ElevatedButton(onPressed:getCurrentLocation(), child: const Text("data")),
+            CustomTextfield(
+                isPassword: false,
+                hintText: 'Where from?',
+                mycontroller: locationcontroller.from,
+                width: 333),
+            CustomTextfield(
+                isPassword: false,
+                hintText: 'Where to?',
+                mycontroller: locationcontroller.to,
+                width: 333),
+            CustomTextfield(
+                isPassword: false,
+                hintText: 'receiver\'s name',
+                mycontroller: locationcontroller.name,
+                width: 333),
+            SizedBox(
+              width: 333,
+              child: IntlPhoneField(
+                showCountryFlag: false,
+                controller: locationcontroller.number,
+                decoration: InputDecoration(
+                  prefixIcon: null,
+                  border: myinputborder(),
+                  enabledBorder: myinputborder(), //enabled border
+                  focusedBorder: myfocusborder(),
+                ),
+                initialCountryCode: 'TR',
+                onChanged: (phone) {
+                  print(phone.completeNumber);
+                },
               ),
-            ],
-          ),
+            ),
+            CustomBtn(
+              textonbtn: 'Next',
+              onPress: () => Get.to(() => const ConfirmOrder()),
+              primary: true,
+            ),
+          ],
         ),
       ),
     );
