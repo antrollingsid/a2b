@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-
+import 'package:nb_utils/nb_utils.dart';
 
 class UpgadeBtn extends StatelessWidget {
   const UpgadeBtn({super.key});
@@ -11,7 +11,7 @@ class UpgadeBtn extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: Center(
         child: Container(
-          margin: const EdgeInsets.all(0),
+          margin: EdgeInsets.all(0),
           width: 333,
           height: 86,
           decoration: BoxDecoration(

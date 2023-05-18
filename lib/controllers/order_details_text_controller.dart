@@ -10,4 +10,5 @@ class OrderDetails extends GetxController {
   final height = TextEditingController();
   final weight = TextEditingController();
   final type = TextEditingController();
+  late String canbebroken;
 }

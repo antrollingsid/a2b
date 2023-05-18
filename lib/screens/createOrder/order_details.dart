@@ -89,11 +89,15 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
           isActionVisible: true,
         ),
       ),
+>>>>>>> Stashed changes
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const SizedBox(
+                height: 15,
+              ),
               CustomTextfield(
                 isPassword: false,
                 hintText: 'Product Name',
