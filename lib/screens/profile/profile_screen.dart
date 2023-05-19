@@ -107,7 +107,6 @@ class _UserProfileState extends State<UserProfile> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        // TODO add provider here
                         "Rohit sharma",
                         style: TextStyle(
                           fontSize: 26,

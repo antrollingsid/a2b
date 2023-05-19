@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
@@ -36,9 +37,13 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
 
       final snapshot = await uploadTask!.whenComplete(() {});
       final urlDownload = await snapshot.ref.getDownloadURL();
-      print('download link: $urlDownload');
+      if (kDebugMode) {
+        print('download link: $urlDownload');
+      }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 

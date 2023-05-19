@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field, unused_local_variable
+
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -45,89 +47,87 @@ class _BottomInputFieldState extends ConsumerState<BottomInputField> {
           initialChildSize: .46,
           expand: false,
           builder: (context, controller) {
-            return Container(
-              child: Column(
-                children: <Widget>[
-                  const SizedBox(
-                    height: 16,
+            return Column(
+              children: <Widget>[
+                const SizedBox(
+                  height: 16,
+                ),
+                Center(
+                  child: Container(
+                    height: 4,
+                    width: 50,
+                    color: Colors.grey.shade200,
                   ),
-                  Center(
-                    child: Container(
-                      height: 4,
-                      width: 50,
-                      color: Colors.grey.shade200,
-                    ),
-                  ),
-                  _fileSelectOption(
-                    "Photos & Videos",
-                    Icons.image,
-                    Colors.amber,
-                    () {
-                      Navigator.of(context).pop();
-                      showCustomBottomSheet(
-                        newContext,
-                        ImageSelectOptions(
-                          onTap: pickImage,
-                        ),
-                        .25,
-                        .25,
-                      );
-                    },
-                  ),
-                  _fileSelectOption(
-                    "Document",
-                    Icons.insert_drive_file,
-                    Colors.blue,
-                    () async {
-                      Navigator.of(context).pop();
-                      FilePickerResult? result =
-                          await FilePicker.platform.pickFiles(
-                        allowMultiple: true,
-                        type: FileType.any,
-                      );
+                ),
+                _fileSelectOption(
+                  "Photos & Videos",
+                  Icons.image,
+                  Colors.amber,
+                  () {
+                    Navigator.of(context).pop();
+                    showCustomBottomSheet(
+                      newContext,
+                      ImageSelectOptions(
+                        onTap: pickImage,
+                      ),
+                      .25,
+                      .25,
+                    );
+                  },
+                ),
+                _fileSelectOption(
+                  "Document",
+                  Icons.insert_drive_file,
+                  Colors.blue,
+                  () async {
+                    Navigator.of(context).pop();
+                    FilePickerResult? result =
+                        await FilePicker.platform.pickFiles(
+                      allowMultiple: true,
+                      type: FileType.any,
+                    );
 
-                      if (result != null) {
-                        List<File> files =
-                            result.paths.map((e) => File(e!)).toList();
-                      }
-                      return;
-                    },
-                  ),
-                  _fileSelectOption(
-                    "Audio",
-                    Icons.music_note,
-                    Colors.orange,
-                    () async {
-                      Navigator.of(context).pop();
-                      FilePickerResult? result =
-                          await FilePicker.platform.pickFiles(
-                        allowMultiple: true,
-                        type: FileType.audio,
-                      );
+                    if (result != null) {
+                      List<File> files =
+                          result.paths.map((e) => File(e!)).toList();
+                    }
+                    return;
+                  },
+                ),
+                _fileSelectOption(
+                  "Audio",
+                  Icons.music_note,
+                  Colors.orange,
+                  () async {
+                    Navigator.of(context).pop();
+                    FilePickerResult? result =
+                        await FilePicker.platform.pickFiles(
+                      allowMultiple: true,
+                      type: FileType.audio,
+                    );
 
-                      if (result != null) {
-                        List<File> files =
-                            result.paths.map((e) => File(e!)).toList();
-                      }
-                      return;
-                    },
-                  ),
-                  _fileSelectOption(
-                    "Location",
-                    Icons.location_on,
-                    Colors.green,
-                    () {},
-                  ),
-                  _fileSelectOption(
-                    "Contact",
-                    Icons.person,
-                    Colors.purple,
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
-              ),
+                    if (result != null) {
+                      List<File> files =
+                          result.paths.map((e) => File(e!)).toList();
+                    }
+                    return;
+                  },
+                ),
+                _fileSelectOption(
+                  "Location",
+                  Icons.location_on,
+                  Colors.green,
+                  () {},
+                ),
+                _fileSelectOption(
+                  "Contact",
+                  Icons.person,
+                  Colors.purple,
+                  () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
             );
           },
         );
