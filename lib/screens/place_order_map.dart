@@ -91,7 +91,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
 
   @override
   void initState() {
-    getCurrentLocation();
+    // getCurrentLocation();
     getPolyPoints();
     super.initState();
   }
