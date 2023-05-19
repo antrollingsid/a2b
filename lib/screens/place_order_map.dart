@@ -6,6 +6,7 @@ import 'package:a2b/Components/widgets/custom_textfield.dart';
 import 'package:a2b/controllers/location_text_controller.dart';
 import 'package:a2b/screens/dashboard.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -34,7 +35,7 @@ class PlaceOrderMap extends StatefulWidget {
 }
 
 class _PlaceOrderMapState extends State<PlaceOrderMap> {
-  final Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controllers = Completer();
   // void _onItemTapped(int index) {
   //   setState(() {
   //     // _selectedIndex = index;
@@ -58,13 +59,46 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
   List<LatLng> polylineCoordinates = [];
   LocationData? currentLocation;
 
-  void getCurrentLocation() {
-    Location location = Location();
-    location.getLocation().then(
-      (location) {
-        currentLocation = location;
-      },
-    );
+  // void getCurrentLocation() async {
+  //   Location location = Location();
+  //   try {
+  //     LocationData locationData = await location.getLocation();
+  //     setState(() {
+  //       currentLocation = locationData;
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+  Future<Position> getUserCurrentLocation() async {
+    await Geolocator.requestPermission()
+        .then((value) {})
+        .onError((error, stackTrace) async {
+      await Geolocator.requestPermission();
+      print("ERROR" + error.toString());
+    });
+    return await Geolocator.getCurrentPosition();
+  }
+
+  void getLocation() {
+    getUserCurrentLocation().then((position) async {
+      print(position.latitude.toString() + " " + position.longitude.toString());
+
+      setState(() {
+        currentLocation = LocationData.fromMap({
+          "latitude": position.latitude,
+          "longitude": position.longitude,
+        });
+      });
+
+      CameraPosition cameraPosition = CameraPosition(
+        target: LatLng(position.latitude, position.longitude),
+        zoom: 16,
+      );
+
+      final GoogleMapController controller = await _controllers.future;
+      controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+    });
   }
 
   void getPolyPoints() async {
@@ -91,27 +125,34 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
 
   @override
   void initState() {
-    // getCurrentLocation();
+    // try {
+    //   getCurrentLocation();
+    // } catch (e) {
+    //   print(e);
+    // }
+
     getPolyPoints();
     super.initState();
   }
-  // late GoogleMapController _controller;
 
-//   Future<void> onMapCreated(GoogleMapController controller) async {
-//     _controller = controller;
-//     String value = await DefaultAssetBundle.of(context)
-//         .loadString('assets/json/map-dark-mode-style.json');
-//     _controller.setMapStyle(value);
+  late GoogleMapController _controller;
 
-//   }
+  Future<void> onMapCreated(GoogleMapController controller) async {
+    _controllers.complete(controller);
+    _controller = controller;
+    String value = await DefaultAssetBundle.of(context)
+        .loadString('assets/json/map-dark-mode-style.json');
+    _controller.setMapStyle(value);
+  }
+
 // _controller.setMapStyle(DefaultAssetBundle.of(context)
-//         .loadString('assets/json/map-dark-mode-style.json'));
+  // .loadString('assets/json/map-dark-mode-style.json'));
   @override
   Widget build(BuildContext context) {
     final locationcontroller = Get.put(LocationTextController());
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
       resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.backgroundLightMode,
       appBar: const PreferredSize(
@@ -136,10 +177,17 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(0),
                 child: GoogleMap(
+                  // onMapCreated: (GoogleMapController controller) {
+                  //   _controller.complete(controller);
+                  // },
                   initialCameraPosition: _kInitialPosition,
-                  // onMapCreated: onMapCreated,
+                  onMapCreated: onMapCreated,
                   zoomControlsEnabled: true,
                   zoomGesturesEnabled: true,
+                  myLocationEnabled: true,
+                  compassEnabled: true,
+                  mapType: MapType.normal,
+
                   mapToolbarEnabled: true,
                   polylines: {
                     Polyline(
@@ -160,7 +208,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                 ),
               ),
             ),
-            // ElevatedButton(onPressed:getCurrentLocation(), child: const Text("data")),
+            ElevatedButton(onPressed: getLocation, child: const Text("data")),
             CustomTextfield(
                 isPassword: false,
                 hintText: 'Where from?',
