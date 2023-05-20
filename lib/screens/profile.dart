@@ -37,6 +37,7 @@ class _ProfileState extends State<Profile> {
         child: Center(
           child: Column(
             children: [
+              // if()
               const TopProfile(),
               InkWell(
                 child: SettingBtn(action: language.editProfile),

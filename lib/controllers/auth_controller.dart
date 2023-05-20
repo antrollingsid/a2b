@@ -39,13 +39,66 @@ class AuthController extends GetxController {
     }
   }
 
-  signInWithGoogle() async {
-    print('i am here');
-    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication gAuth = await gUser!.authentication;
-    final credential = GoogleAuthProvider.credential(
-        accessToken: gAuth.accessToken, idToken: gAuth.idToken);
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+  signInWithGoogle(BuildContext context) async {
+    var navigator = Navigator.of(context);
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      User? user = userCredential.user;
+
+      if (user != null) {
+        if (userCredential.additionalUserInfo?.isNewUser == true) {
+          final displayName = googleUser.displayName ?? '';
+          final nameParts = displayName.split(' ');
+          final givenName = nameParts.first;
+          final surname = nameParts.length > 1 ? nameParts.last : '';
+
+          final createdAt = DateTime.now();
+          final userDetails = {
+            'role': 'general',
+            'createdAt': createdAt,
+            'details': {
+              'id': user.uid,
+              'name': givenName,
+              'surname': surname,
+              'email': user.email ?? '',
+              'photoURL': user.photoURL ?? '',
+              'phoneNumber': user.phoneNumber ?? '',
+            },
+          };
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .set(userDetails);
+
+          _user = UserModel(
+              role: 'general',
+              createdAt: createdAt,
+              details: Details(
+                  id: user.uid,
+                  name: givenName,
+                  surname: surname,
+                  email: user.email ?? '',
+                  photoURL: user.photoURL ?? ''));
+        }
+
+        _isLoggedIn = true;
+        update();
+        isLoaddIn = false;
+        navigator.pop();
+        Get.offAll(() => const DashBoard());
+      } else {}
+    } catch (e) {
+      print('Error signing in with Google: $e');
+    }
   }
 
   void registerwithgoogle(BuildContext context, String email, String password,
@@ -195,6 +248,7 @@ class AuthController extends GetxController {
     _isLoggedIn = false;
     update();
     FirebaseAuth.instance.signOut();
+    GoogleSignIn().signOut();
     Get.offAll(() => const HomePage());
   }
 }

@@ -11,6 +11,11 @@ class TopProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(
       builder: (controller) {
+        if (controller.isLoggedIn) {
+          print('loged in');
+        } else {
+          print('not loged in');
+        }
         return !controller.isLoggedIn
             ? Container()
             : Center(

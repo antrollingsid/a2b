@@ -92,12 +92,12 @@ class _HomePageState extends State<HomePage> {
             ),
             CustomBtn(
               textonbtn: language.signIn,
-              onPress: () => Get.to(const LoginPage()),
+              onPress: () => Get.to(() => const LoginPage()),
               primary: true,
             ),
             CustomBtn(
               textonbtn: language.signUp,
-              onPress: () => Get.to(const Register()),
+              onPress: () => Get.to(() => const Register()),
               primary: false,
             ),
             const SizedBox(

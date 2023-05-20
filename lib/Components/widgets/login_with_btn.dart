@@ -55,7 +55,7 @@ class LoginWithBtn extends StatelessWidget {
                             color: context.primaryColor,
                           ),
                           onPressed: () {
-                            controller.signInWithGoogle();
+                            controller.signInWithGoogle(context);
                           },
                         ),
                       ),
