@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'dart:async';
 
 import 'package:a2b/controllers/location_text_controller.dart';
@@ -65,7 +67,9 @@ class _LiveTrackingState extends State<LiveTracking> {
 
   void stopLocationUpdates() {
     positionStreamSubscription?.cancel();
-    positionStreamSubscription = null;
+    setState(() {
+      positionStreamSubscription = null;
+    });
   }
 
   void startCameraUpdates() {
@@ -143,16 +147,21 @@ class _LiveTrackingState extends State<LiveTracking> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    stopLocationUpdates();
-    stopCameraUpdates();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   stopLocationUpdates();
+  //   stopCameraUpdates();
+  //   // super.dispose();
+  // }
+  // @override
+  // void dispose() {
+  //   positionStreamSubscription?.cancel();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final locationController = Get.put(LocationTextController());
+    // final locationController = Get.put(LocationTextController());
 
     return Scaffold(
       extendBodyBehindAppBar: false,
@@ -229,12 +238,12 @@ class _LiveTrackingState extends State<LiveTracking> {
                 ),
               ),
             ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     // stopLocationUpdates;
-            //   },
-            //   child: const Text("stop"),
-            // ),
+            ElevatedButton(
+              onPressed: () {
+                stopLocationUpdates;
+              },
+              child: const Text("stop"),
+            ),
             ElevatedButton(
               onPressed: () {
                 if (polylineCoordinates.isEmpty) {

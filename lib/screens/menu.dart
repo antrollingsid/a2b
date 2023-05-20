@@ -21,8 +21,6 @@ class _MenuPage extends State<MenuPage> {
     super.initState();
   }
 
-  final int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +45,7 @@ class _MenuPage extends State<MenuPage> {
               ),
               GestureDetector(
                 child: const SettingBtn(action: 'home'),
-                onTap: () => Get.to(const DashBoard()),
+                onTap: () => Get.to(() => const DashBoard()),
               ),
               const SettingBtn(action: 'offers'),
               const SettingBtn(action: 'order history'),

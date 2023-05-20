@@ -10,9 +10,7 @@ import '../assets/fonts.dart';
 
 // ignore: camel_case_types
 class backBtn extends StatelessWidget {
-  const backBtn({
-    Key? key,
-  }) : super(key: key);
+  const backBtn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +18,20 @@ class backBtn extends StatelessWidget {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       color: Colors.transparent,
       child: IconButton(
-        icon: SvgPicture.string(SvgConstant.backArrow,
-            color: context.primaryColor),
+        icon: SvgPicture.string(
+          SvgConstant.backArrow,
+          color: context.primaryColor,
+        ),
         onPressed: () {
-          Navigator.pop(context);
+          // Wrap the navigation code inside a try-catch block
+          try {
+            // Check if the current route can be popped
+            if (Navigator.canPop(context)) {
+              Navigator.pop(context);
+            }
+          } catch (e) {
+            print('Error navigating back: $e');
+          }
         },
       ),
     );

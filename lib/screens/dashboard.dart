@@ -20,6 +20,7 @@ import 'createOrder/new_order.dart';
 import 'createOrder/order_details.dart';
 import 'demo_page.dart';
 import 'epmty_page_appar.dart';
+import 'mymap.dart';
 
 class DashBoard extends StatelessWidget {
   const DashBoard({super.key});
@@ -95,6 +96,12 @@ class DashBoard extends StatelessWidget {
                     Get.to(() => const EmptyPage());
                   },
                   child: const Text('empty Page'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(() => MyApp());
+                  },
+                  child: const Text('track page 2'),
                 ),
 
                 ElevatedButton(
