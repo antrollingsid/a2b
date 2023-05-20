@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
   late UserModel _user;
@@ -27,15 +28,24 @@ class AuthController extends GetxController {
               (value) => addUserDetails(value.user!.uid, email, name, surname));
 
       navigator.pop();
-      isLoaddIn= false ;
+      isLoaddIn = false;
       Get.offAll(() => const DashBoard());
     } on FirebaseAuthException catch (e) {
       navigator.pop();
-      isLoaddIn= false ;
+      isLoaddIn = false;
       final snackBar = SnackBar(content: Text(e.message.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       print('Error saving user data ${e.message}');
     }
+  }
+
+  signInWithGoogle() async {
+    print('i am here');
+    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication gAuth = await gUser!.authentication;
+    final credential = GoogleAuthProvider.credential(
+        accessToken: gAuth.accessToken, idToken: gAuth.idToken);
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   void registerwithgoogle(BuildContext context, String email, String password,
@@ -46,11 +56,11 @@ class AuthController extends GetxController {
     try {
       await FirebaseAuth.instance.signInWithProvider(GoogleAuthProvider());
       navigator.pop();
-      isLoaddIn= false ;
+      isLoaddIn = false;
       Get.offAll(() => const DashBoard());
     } on FirebaseAuthException catch (e) {
       navigator.pop();
-      isLoaddIn= true ;
+      isLoaddIn = true;
       final snackBar = SnackBar(content: Text(e.message.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       print('Error saving user data ${e.message}');
@@ -61,24 +71,24 @@ class AuthController extends GetxController {
       String name, String surname) async {
     // Call api
     var navigator = Navigator.of(context);
-   if(isLoaddIn){ 
-    try {
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then(
-           
-            (value) => addUserDetails(value.user!.uid, email, name, surname),
-          ).then((value) => isLoaddIn=false);
+    if (isLoaddIn) {
+      try {
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then(
+              (value) => addUserDetails(value.user!.uid, email, name, surname),
+            )
+            .then((value) => isLoaddIn = false);
 
-      navigator.pop();
-      Get.offAll(() => const DashBoard());
-    } on FirebaseAuthException catch (e) {
-      navigator.pop();
-      isLoaddIn= false ;
-      final snackBar = SnackBar(content: Text(e.message.toString()));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      print('Error saving user data ${e.message}');
-    }
+        navigator.pop();
+        Get.offAll(() => const DashBoard());
+      } on FirebaseAuthException catch (e) {
+        navigator.pop();
+        isLoaddIn = false;
+        final snackBar = SnackBar(content: Text(e.message.toString()));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        print('Error saving user data ${e.message}');
+      }
     }
   }
 
@@ -101,12 +111,12 @@ class AuthController extends GetxController {
       _user = newUser;
       _isLoggedIn = true;
       update();
-      isLoaddIn= false ;
+      isLoaddIn = false;
       navigator.pop();
       Get.offAll(() => const DashBoard());
     } on FirebaseAuthException catch (e) {
       navigator.pop();
-      isLoaddIn= false ;
+      isLoaddIn = false;
       final snackBar = SnackBar(content: Text(e.message.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       print('Error saving user data ${e.message}');

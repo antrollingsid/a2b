@@ -25,6 +25,7 @@ class _MyAppState extends State<MyApp> {
     //   interval: 300,
     //   accuracy: geo.LocationAccuracy.high,
     // );
+    // this is for bg off the app???
     // geolocator.enableBackgroundMode(enable: true);
   }
 

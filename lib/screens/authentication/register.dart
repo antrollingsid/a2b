@@ -2,7 +2,6 @@ import 'package:a2b/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 import '../../../Components/widgets/login_with_btn.dart';
 import '../../../Components/widgets/app_bar_buttons.dart';
@@ -24,7 +23,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     final regcontroller = Get.put(SignUpController());
-    var Authcontroller = Get.put(AuthController());
+    // var Authcontroller = Get.put(AuthController());
     return Scaffold(
       backgroundColor: context.scaffoldBackgroundColor,
       appBar: PreferredSize(
