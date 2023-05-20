@@ -10,7 +10,7 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData(
     primarySwatch: createMaterialColor(colorPrimary),
-    primaryColor: AppColors.primary,
+    primaryColor: Color.fromRGBO(17, 63, 118, 1),
     scaffoldBackgroundColor: AppColors.backgroundLightMode,
     fontFamily: GoogleFonts.roboto().fontFamily,
     iconTheme: const IconThemeData(color: Colors.black),

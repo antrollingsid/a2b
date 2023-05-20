@@ -9,6 +9,13 @@ class LanguageEn extends BaseLanguage {
   String get appName => "a2b";
 
   @override
+  String get welcomeMsg => "Welcome to a2b delivery";
+
+  @override
+  String get info1 =>
+      "ship and track parcels and packages and learn about our express courier services";
+
+  @override
   String get language => "Language";
 
   @override
@@ -251,7 +258,7 @@ class LanguageEn extends BaseLanguage {
   String get signInAccount => "Sign in Account";
 
   @override
-  String get signInWithYourCredential => "Sign In with your credentials";
+  String get signInWithGoogleApple => "Sign In with your credentials";
 
   @override
   String get password => "Password";

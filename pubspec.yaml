@@ -40,6 +40,7 @@ dependencies:
   flutter_statusbarcolor_ns: ^0.5.0
   flutter_svg: ^2.0.5
   fluttertoast: ^8.0.8
+  geocoding: ^2.1.0
   geolocator: ^9.0.2
   get: ^4.6.5
   google_fonts: ^4.0.4
@@ -112,4 +113,5 @@ flutter:
     - assets/images/1x/
     - assets/images/icons/
     - assets/json/
+    - assets/images/SVG/
     - assets/images/1x/demo.jpg

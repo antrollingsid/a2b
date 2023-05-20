@@ -7,6 +7,13 @@ class LanguageTr extends BaseLanguage {
   String get appName => "a2b";
 
   @override
+  String get welcomeMsg => "a2b teslimatına hoş geldiniz";
+
+  @override
+  String get info1 =>
+      "kolileri ve paketleri gönderin ve takip edin ve ekspres kurye hizmetlerimiz hakkında bilgi edinin";
+
+  @override
   String get language => "Dilim";
 
   @override
@@ -249,7 +256,7 @@ class LanguageTr extends BaseLanguage {
   String get signInAccount => "Hesap Aç";
 
   @override
-  String get signInWithYourCredential => "Kimlik bilgilerinizle giriş yapın";
+  String get signInWithGoogleApple => "Kimlik bilgilerinizle giriş yapın";
 
   @override
   String get password => "Parola";

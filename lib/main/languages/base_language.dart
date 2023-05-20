@@ -6,6 +6,10 @@ abstract class BaseLanguage {
 
   String get appName;
 
+  String get welcomeMsg;
+
+  String get info1;
+
   String get language;
 
   String get confirmation;
@@ -164,7 +168,7 @@ abstract class BaseLanguage {
 
   String get signInAccount;
 
-  String get signInWithYourCredential;
+  String get signInWithGoogleApple;
 
   String get password;
 
