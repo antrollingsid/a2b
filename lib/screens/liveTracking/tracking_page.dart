@@ -36,6 +36,9 @@ class _LiveTrackingState extends State<LiveTracking> {
   BitmapDescriptor destinationIcon = BitmapDescriptor.defaultMarker;
   BitmapDescriptor currentLocationIcon = BitmapDescriptor.defaultMarker;
 
+  StreamSubscription<Position>? positionStreamSubscription;
+  Timer? cameraUpdateTimer; // Added timer variable
+
   Future<Position> getUserCurrentLocation() async {
     await Geolocator.requestPermission()
         .then((value) {})
@@ -46,28 +49,47 @@ class _LiveTrackingState extends State<LiveTracking> {
     return await Geolocator.getCurrentPosition();
   }
 
-  void getLocation() async {
-    try {
-      Position position = await getUserCurrentLocation();
-      print(position.latitude.toString() + " " + position.longitude.toString());
+  void startLocationUpdates() {
+    positionStreamSubscription =
+        Geolocator.getPositionStream().listen((Position position) {
+      print('${position.latitude} ${position.longitude}');
 
       setState(() {
         currentLocation = LocationData.fromMap({
-          "latitude": position.latitude,
-          "longitude": position.longitude,
+          'latitude': position.latitude,
+          'longitude': position.longitude,
         });
       });
+    });
+  }
 
-      CameraPosition cameraPosition = CameraPosition(
-        target: LatLng(position.latitude, position.longitude),
+  void stopLocationUpdates() {
+    positionStreamSubscription?.cancel();
+    positionStreamSubscription = null;
+  }
+
+  void startCameraUpdates() {
+    cameraUpdateTimer =
+        Timer.periodic(const Duration(milliseconds: 300), (timer) {
+      final cameraPosition = CameraPosition(
+        target: LatLng(
+          currentLocation?.latitude ?? _sourceLocation.latitude,
+          currentLocation?.longitude ?? _sourceLocation.longitude,
+        ),
         zoom: 16,
       );
 
-      final GoogleMapController controller = await _controllerCompleter.future;
-      controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-    } catch (e) {
-      print("Error getting location: $e");
-    }
+      final controller = _controllerCompleter.future;
+      controller.then((GoogleMapController controller) {
+        controller
+            .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+      });
+    });
+  }
+
+  void stopCameraUpdates() {
+    cameraUpdateTimer?.cancel();
+    cameraUpdateTimer = null;
   }
 
   void getPolyPoints() async {
@@ -115,9 +137,17 @@ class _LiveTrackingState extends State<LiveTracking> {
   @override
   void initState() {
     // setCustomMarkerIcon();
-    getLocation();
+    startLocationUpdates();
+    startCameraUpdates();
     getPolyPoints();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    stopLocationUpdates();
+    stopCameraUpdates();
+    super.dispose();
   }
 
   @override
@@ -199,10 +229,12 @@ class _LiveTrackingState extends State<LiveTracking> {
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: getLocation,
-              child: const Text("Get Location"),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     // stopLocationUpdates;
+            //   },
+            //   child: const Text("stop"),
+            // ),
             ElevatedButton(
               onPressed: () {
                 if (polylineCoordinates.isEmpty) {
