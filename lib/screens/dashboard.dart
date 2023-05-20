@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_import
 
+import 'package:a2b/screens/liveTracking/tracking_page.dart';
 import 'package:a2b/screens/userDetails/details.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -17,6 +18,7 @@ import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
 import 'createOrder/new_order.dart';
 import 'createOrder/order_details.dart';
+import 'demo_page.dart';
 import 'epmty_page_appar.dart';
 
 class DashBoard extends StatelessWidget {
@@ -54,7 +56,7 @@ class DashBoard extends StatelessWidget {
                           fontSize: 24,
                           fontWeight: FontWeight.normal,
                           // height:  1.5*ffem/fem,
-                          color: Color(0xffffffff),
+                          // color: Color(0xffffffff),
                         ),
                       ),
                       Text(
@@ -65,7 +67,7 @@ class DashBoard extends StatelessWidget {
                           // wordSpacing: 1.5,
                           // letterSpacing: 1.5,
                           // height:  1.5*ffem/fem,
-                          color: Color(0xffffffff),
+                          // color: Color(0xffffffff),
                         ),
                       ),
                     ],
@@ -94,11 +96,12 @@ class DashBoard extends StatelessWidget {
                   },
                   child: const Text('empty Page'),
                 ),
+
                 ElevatedButton(
                   onPressed: () {
-                    Get.to(() => const OrderPage());
+                    Get.to(() => const LiveTracking());
                   },
-                  child: const Text('first page order'),
+                  child: const Text('live trackin page'),
                 ),
               ],
             ),
@@ -211,7 +214,7 @@ class TrackingTextField extends StatelessWidget {
               hintText: 'Tracking code',
               hintStyle: const TextStyle(color: AppColors.textGrey),
               filled: true,
-              fillColor: AppColors.buttonStroke,
+              fillColor: context.scaffoldBackgroundColor,
               border: GradientOutlineInputBorder(
                 gradient: const LinearGradient(
                     colors: [

@@ -1,29 +1,20 @@
-// ignore_for_file: unused_element, unused_import
-
 import 'dart:async';
 
-import 'package:a2b/Components/widgets/custom_textfield.dart';
 import 'package:a2b/controllers/location_text_controller.dart';
-import 'package:a2b/screens/dashboard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../Components/widgets/custom_textfield_fromto.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
-import '../../Components/widgets/order_activity.dart';
-import '../../Components/widgets/shippement.dart';
 import 'package:location/location.dart';
+import 'package:location/location.dart' as loc;
 //yandix api maps check ?????
-import '../Components/widgets/custom_button.dart';
-import 'place_order_calendar.dart';
+import 'my_map.dart';
 
 const darkMapStyle = 'assets/json/dark_mode_style.json';
 
@@ -36,15 +27,9 @@ class PlaceOrderMap extends StatefulWidget {
 
 class _PlaceOrderMapState extends State<PlaceOrderMap> {
   final Completer<GoogleMapController> _controllers = Completer();
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     // _selectedIndex = index;
-  //   });
-  // }
+  final loc.Location location = loc.Location();
 
-  // int _selectedIndex = 0;
-
-  // ignore: prefer_const_constructors
+  StreamSubscription<loc.LocationData>? _locationSubscription;
   static const LatLng _sourceLocation = LatLng(
     35.151649,
     33.904888,
@@ -59,17 +44,6 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
   List<LatLng> polylineCoordinates = [];
   LocationData? currentLocation;
 
-  // void getCurrentLocation() async {
-  //   Location location = Location();
-  //   try {
-  //     LocationData locationData = await location.getLocation();
-  //     setState(() {
-  //       currentLocation = locationData;
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
   Future<Position> getUserCurrentLocation() async {
     await Geolocator.requestPermission()
         .then((value) {})
@@ -130,7 +104,6 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
     } catch (e) {
       print(e);
     }
-
     getPolyPoints();
     super.initState();
   }
@@ -154,7 +127,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
     return Scaffold(
       extendBodyBehindAppBar: false,
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundLightMode,
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
@@ -209,47 +182,158 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
               ),
             ),
             ElevatedButton(onPressed: getLocation, child: const Text("data")),
-            CustomTextfield(
-                isPassword: false,
-                hintText: 'Where from?',
-                mycontroller: locationcontroller.from,
-                width: 333),
-            CustomTextfield(
-                isPassword: false,
-                hintText: 'Where to?',
-                mycontroller: locationcontroller.to,
-                width: 333),
-            CustomTextfield(
-                isPassword: false,
-                hintText: 'receiver\'s name',
-                mycontroller: locationcontroller.name,
-                width: 333),
-            SizedBox(
-              width: 333,
-              child: IntlPhoneField(
-                showCountryFlag: false,
-                controller: locationcontroller.number,
-                decoration: InputDecoration(
-                  prefixIcon: null,
-                  border: myinputborder(),
-                  enabledBorder: myinputborder(), //enabled border
-                  focusedBorder: myfocusborder(),
-                ),
-                initialCountryCode: 'TR',
-                onChanged: (phone) {
-                  print(phone.completeNumber);
+            ElevatedButton(
+                onPressed: () {
+                  _getLocation();
                 },
-              ),
-            ),
-            CustomBtn(
-              textonbtn: 'Next',
-              onPress: () => Get.to(() => const ConfirmOrder()),
-              primary: true,
-            ),
+                child: const Text("add my location")),
+            ElevatedButton(
+                onPressed: () {
+                  _listenLocation();
+                },
+                child: const Text("enable live locattion")),
+            ElevatedButton(
+                onPressed: () {
+                  _stopListening();
+                },
+                child: const Text("stop live location")),
+
+            Expanded(
+                child: StreamBuilder(
+              stream:
+                  FirebaseFirestore.instance.collection('location').snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                return ListView.builder(
+                    itemCount: snapshot.data?.docs.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title:
+                            Text(snapshot.data!.docs[index]['name'].toString()),
+                        subtitle: Row(
+                          children: [
+                            Text(snapshot.data!.docs[index]['latitude']
+                                .toString()),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(snapshot.data!.docs[index]['longitude']
+                                .toString()),
+                          ],
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.directions),
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    MyMap(snapshot.data!.docs[index].id)));
+                          },
+                        ),
+                      );
+                    });
+              },
+            )),
+            // CustomTextfield(
+            //     isPassword: false,
+            //     hintText: 'Where from?',
+            //     mycontroller: locationcontroller.from,
+            //     width: 333),
+            // CustomTextfield(
+            //     isPassword: false,
+            //     hintText: 'Where to?',
+            //     mycontroller: locationcontroller.to,
+            //     width: 333),
+            // CustomTextfield(
+            //     isPassword: false,
+            //     hintText: 'receiver\'s name',
+            //     mycontroller: locationcontroller.name,
+            //     width: 333),
+            // SizedBox(
+            //   width: 333,
+            //   child: IntlPhoneField(
+            //     showCountryFlag: false,
+            //     controller: locationcontroller.number,
+            //     decoration: InputDecoration(
+            //       prefixIcon: null,
+            //       border: myinputborder(),
+            //       enabledBorder: myinputborder(), //enabled border
+            //       focusedBorder: myfocusborder(),
+            //     ),
+            //     initialCountryCode: 'TR',
+            //     onChanged: (phone) {
+            //       print(phone.completeNumber);
+            //     },
+            //   ),
+            // ),
+            // CustomBtn(
+            //   textonbtn: 'Next',
+            //   onPress: () => Get.to(() => const ConfirmOrder()),
+            //   primary: true,
+            // ),
           ],
         ),
       ),
     );
+  }
+
+  _getLocation() async {
+    try {
+      _requestPermission();
+      Location location = Location();
+      // if (await location.hasPermission()) {
+      final LocationData pos = await location.getLocation();
+
+      print(pos.runtimeType);
+      // _lastMapPosition = pos;
+
+      // } else {
+      //     // await location.requestPermission();
+      // }
+      // final loc.LocationData _locationResult = await location.getLocation();
+      // await FirebaseFirestore.instance.collection('location').doc('user1').set({
+      //   'latitude': _locationResult.latitude,
+      //   'longitude': _locationResult.longitude,
+      //   'name': 'john'
+      // }, SetOptions(merge: true));
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _listenLocation() async {
+    _locationSubscription = location.onLocationChanged.handleError((onError) {
+      print(onError);
+      _locationSubscription?.cancel();
+      setState(() {
+        _locationSubscription = null;
+      });
+    }).listen((loc.LocationData currentlocation) async {
+      await FirebaseFirestore.instance.collection('location').doc('user1').set({
+        'latitude': currentlocation.latitude,
+        'longitude': currentlocation.longitude,
+        'name': 'john'
+      }, SetOptions(merge: true));
+    });
+  }
+
+  _stopListening() {
+    _locationSubscription?.cancel();
+    setState(() {
+      _locationSubscription = null;
+    });
+  }
+
+  _requestPermission() async {
+    var status = await Permission.location.request();
+    if (status.isGranted) {
+      print('done');
+    } else if (status.isDenied) {
+      _requestPermission();
+    } else if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
   }
 }
 
