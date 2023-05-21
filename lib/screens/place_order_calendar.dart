@@ -19,8 +19,6 @@ class _ConfirmOrder extends State<ConfirmOrder> {
     super.initState();
   }
 
-  final int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     var categories = [

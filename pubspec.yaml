@@ -111,7 +111,5 @@ flutter:
 
   assets:
     - assets/images/1x/
-    - assets/images/icons/
     - assets/json/
-    - assets/images/SVG/
     - assets/images/1x/demo.jpg

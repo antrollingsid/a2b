@@ -1,4 +1,6 @@
 // ignore: file_names
+// ignore_for_file: dead_code
+
 import 'package:a2b/screens/menu.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';

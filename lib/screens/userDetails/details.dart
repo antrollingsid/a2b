@@ -21,8 +21,6 @@ class _DetailsPage extends State<DetailsPage> {
     super.initState();
   }
 
-  final int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

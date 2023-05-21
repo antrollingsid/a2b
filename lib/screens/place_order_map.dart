@@ -1,9 +1,13 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:async';
+import 'package:a2b/main/utils/allConstants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:flutter/material.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
@@ -99,7 +103,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
   void updateSelectedDestinationText() {
     getAddressFromCoordinates(_selectedDestination).then((address) {
       setState(() {
-        selectedDestinationText = 'Selected Destination: $address';
+        selectedDestinationText = address;
       });
       print(selectedDestinationText);
     });
@@ -108,7 +112,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
   void updateSelectedLocationText() {
     getAddressFromCoordinates(_selectedLocation).then((address) {
       setState(() {
-        selectedLocationText = 'Selected Location: $address';
+        selectedLocationText = address;
       });
       print(selectedLocationText);
     });
@@ -136,6 +140,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
     _controller.setMapStyle(value);
   }
 
+  DateTime _selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -206,121 +211,144 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
             },
           ),
           DraggableScrollableSheet(
-            initialChildSize: 0.3,
-            minChildSize: 0.1,
+            initialChildSize: 0.5,
+            minChildSize: 0.14,
             maxChildSize: 0.5,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color.fromRGBO(3, 3, 3, 1),
                   borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(16)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 3,
-                      blurRadius: 10,
-                      offset: const Offset(0, -3),
-                    ),
-                  ],
+                      const BorderRadius.vertical(top: Radius.circular(10)),
                 ),
                 child: ListView(
+                  shrinkWrap: true,
                   controller: scrollController,
+                  padding: const EdgeInsets.all(16),
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: double.infinity,
-                            height: 50,
+                    TextFormField(
+                      textAlign: TextAlign.start,
+                      onTap: () async {
+                        final selectedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime(DateTime.now().year + 1),
+                        );
+                        if (selectedDate != null) {
+                          // Update the selected date value here
+                          setState(() {
+                            _selectedDate = selectedDate;
+                          });
+                        }
+                      },
+                      decoration: const InputDecoration(
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        hintText: 'Select date',
+                      ),
+                      style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight:
+                              FontWeight.w500), // Set font size and bold
+                      controller: TextEditingController(
+                        text: _selectedDate != null
+                            ? DateFormat('dd MMM\nyyyy').format(_selectedDate)
+                            : '',
+                      ),
+                      readOnly: true,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              sourcePoint = true;
+                            });
+                          },
+                          child: Container(
+                            width: 160,
+                            height: 90,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: AppColors.buttonStroke,
+                              border: Border.all(
+                                color: AppColors.buttonStroke,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Center(
+                              child: Text(
+                                selectedLocationText,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              sourcePoint = false;
+                            });
+                          },
+                          child: Container(
+                            width: 160,
+                            height: 90,
+                            decoration: BoxDecoration(
+                              color: AppColors.buttonStroke,
                               border: Border.all(
                                 color: Colors.black,
                                 width: 2,
                               ),
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  sourcePoint = true;
-                                });
-                              },
-                              child: Center(
-                                child: Text(
-                                  selectedLocationText,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                            child: Center(
+                              child: Text(
+                                selectedDestinationText,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
                           ),
+                        ),
+                      ],
+                    ),
 
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 2,
-                              ),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  sourcePoint = false;
-                                });
-                                // updateSelectedLocationText();
-                              },
-                              child: Center(
-                                child: Text(
-                                  selectedDestinationText,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          // Add destination input field or dropdown.
-                          const SizedBox(height: 8),
-                          const Text('Product Type'),
-                          // Add product type options, such as a dropdown.
-                          const SizedBox(height: 8),
-                          const Text('Weight'),
-                          // Add weight input field or slider.
-                          const SizedBox(height: 8),
-                          const Text('Date'),
-                          TextFormField(
-                            onTap: () async {
-                              final selectedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(DateTime.now().year + 1),
-                              );
-                              if (selectedDate != null) {
-                                // Update the date value here
-                              }
-                            },
-                            decoration: InputDecoration(
-                              hintText: 'Select date',
-                              suffixIcon: Icon(Icons.calendar_today),
-                            ),
-                          ),
-                        ],
+                    // Add destination input field or dropdown.
+                    const SizedBox(height: 8),
+                    const Text('Product Type'),
+                    // Add product type options, such as a dropdown.
+                    const SizedBox(height: 8),
+                    const Text('Weight'),
+                    // Add weight input field or slider.
+                    const SizedBox(height: 8),
+                    const Text('Date'),
+                    TextFormField(
+                      onTap: () async {
+                        final selectedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime(DateTime.now().year + 1),
+                        );
+                        if (selectedDate != null) {
+                          // Update the date value here
+                        }
+                      },
+                      decoration: const InputDecoration(
+                        hintText: 'Select date',
+                        suffixIcon: Icon(Icons.calendar_today),
                       ),
                     ),
                   ],
@@ -334,28 +362,35 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
             bottom: 0,
             height: 155,
             child: DraggableScrollableSheet(
-              initialChildSize: 1,
-              // minChildSize: 0.2,
-              maxChildSize: 1,
+              initialChildSize: 0.5,
+              minChildSize: 0.14,
+              maxChildSize: 0.5,
               builder:
                   (BuildContext context, ScrollController scrollController) {
                 return Container(
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 181, 11, 11),
+                    color: context.primaryColor,
                     borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(16)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 3,
-                        blurRadius: 10,
-                        offset: Offset(0, -3),
-                      ),
-                    ],
+                        const BorderRadius.vertical(top: Radius.circular(10)),
                   ),
-                  child: ListView(
+                  child: ListView.builder(
                     controller: scrollController,
-                    children: const [],
+                    shrinkWrap: true, // Added shrinkWrap property
+                    padding: const EdgeInsets.all(0), // Adjusted the padding
+                    itemCount:
+                        1, // Adjust the itemCount to match the number of items
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Add your widgets here
+                            Text('data'),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 );
               },

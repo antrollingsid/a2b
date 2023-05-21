@@ -17,8 +17,6 @@ import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
 import 'createOrder/new_order.dart';
-import 'createOrder/order_details.dart';
-import 'demo_page.dart';
 import 'epmty_page_appar.dart';
 import 'mymap.dart';
 

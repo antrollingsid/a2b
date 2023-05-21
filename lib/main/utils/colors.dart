@@ -37,13 +37,3 @@ const appButtonColorDark = Color(0xFF282828);
 const dividerColor = Color(0xFFD3D3D3);
 Color colorPrimary = const Color(0xFF573391);
 Color borderColor = const Color(0xFFEAEAEA);
-
-abstract class _LightColors {
-  static const background = Colors.white;
-  static const card = AppColors.cardLight;
-}
-
-abstract class _DarkColors {
-  static const background = Color(0xFF1B1E1F);
-  static const card = AppColors.cardDark;
-}

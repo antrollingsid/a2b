@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../main.dart';
@@ -44,8 +46,7 @@ class _Language extends State<Language> {
                   children: [
                     Text(data.name.validate(), style: boldTextStyle()),
                     8.height,
-                    Text(data.subTitle.validate(),
-                        style: secondaryTextStyle()),
+                    Text(data.subTitle.validate(), style: secondaryTextStyle()),
                   ],
                 ).expand(),
                 if (getStringAsync(SELECTED_LANGUAGE_CODE,

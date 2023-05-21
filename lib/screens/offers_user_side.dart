@@ -17,8 +17,6 @@ class _CourierOffers extends State<CourierOffers> {
     super.initState();
   }
 
-  final int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

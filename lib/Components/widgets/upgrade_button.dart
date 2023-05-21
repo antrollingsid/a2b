@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class UpgadeBtn extends StatelessWidget {
   const UpgadeBtn({super.key});
