@@ -45,6 +45,7 @@ dependencies:
   get: ^4.6.5
   google_fonts: ^4.0.4
   google_maps_flutter: ^2.2.5
+  google_maps_webservice: ^0.0.20-nullsafety.5
   google_sign_in: ^6.1.0
   google_sign_in_web: ^0.12.0
   gradient_borders: ^1.0.0

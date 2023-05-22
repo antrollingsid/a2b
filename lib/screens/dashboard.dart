@@ -16,6 +16,8 @@ import 'package:gradient_borders/input_borders/gradient_outline_input_border.dar
 import '../../Components/widgets/app_bar_buttons.dart';
 import '../../Components/widgets/order_activity.dart';
 import '../../Components/widgets/shippement.dart';
+
+import 'admin/adminDashboard/admin_dashboard.dart';
 import 'createOrder/new_order.dart';
 import 'epmty_page_appar.dart';
 import 'mymap.dart';
@@ -107,6 +109,12 @@ class DashBoard extends StatelessWidget {
                     Get.to(() => const LiveTracking());
                   },
                   child: const Text('live trackin page'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.to(() => const AdminDashboard());
+                  },
+                  child: const Text('admin dashboard'),
                 ),
               ],
             ),

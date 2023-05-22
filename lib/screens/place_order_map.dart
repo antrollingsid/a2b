@@ -1,19 +1,23 @@
-// ignore_for_file: unnecessary_null_comparison
+// ignore_for_file: unnecessary_null_comparison, prefer_final_fields
 
 import 'dart:async';
+import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/main/utils/allConstants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_webservice/directions.dart' as directions;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:flutter/material.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
+import '../main.dart';
 import '../main/utils/constants.dart';
 
 const darkMapStyle = 'assets/json/dark_mode_style.json';
+const lightMapStyle = 'assets/json/map-light-mode-style.json';
 
 class PlaceOrderMap extends StatefulWidget {
   const PlaceOrderMap({Key? key}) : super(key: key);
@@ -24,58 +28,113 @@ class PlaceOrderMap extends StatefulWidget {
 
 class _PlaceOrderMapState extends State<PlaceOrderMap> {
   final Completer<GoogleMapController> _controllers = Completer();
+  final _directions = directions.GoogleMapsDirections(apiKey: googleMapAPIKey);
+  var overviewPolylines;
+
   LatLng _selectedDestination = LatLng(0, 0);
   LatLng _selectedLocation = LatLng(0, 0);
-  String selectedLocationText = 'Selected Location: Loading...';
-  String selectedDestinationText = 'Selected Destination: Loading...';
-  bool sourcePoint = false;
-  static LatLng _sourceLocation = LatLng(
+
+  String selectedLocationText = 'click to select source';
+  String selectedDestinationText = 'click to select destination';
+
+  String selectedWeight = 'light';
+  String selectedItem = 'Envelope';
+
+  bool sourcePoint = true;
+  bool isPickupFocused = false;
+  bool isDeliveryFocused = false;
+
+  static LatLng _sourceLocation = const LatLng(
     35.151649,
     33.904888,
   );
-  static LatLng _destination = LatLng(
+  static LatLng _destination = const LatLng(
     35.146837,
     33.908643,
   );
+
   static CameraPosition _kInitialPosition =
       CameraPosition(target: _sourceLocation, zoom: 15.0, tilt: 0, bearing: 0);
 
   List<LatLng> polylineCoordinates = [];
 
   Future<Position> getUserCurrentLocation() async {
-    await Geolocator.requestPermission()
-        .then((value) {})
-        .onError((error, stackTrace) async {
-      await Geolocator.requestPermission();
-      if (kDebugMode) {
-        print("ERROR: $error");
+    try {
+      LocationPermission permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
       }
-    });
-    return await Geolocator.getCurrentPosition();
+
+      if (permission == LocationPermission.deniedForever) {
+        throw Exception('Location permission denied.');
+      }
+
+      return await Geolocator.getCurrentPosition();
+    } catch (e) {
+      print('ERROR: $e');
+      rethrow;
+    }
   }
 
   void getLocation() {
-    getUserCurrentLocation().then((position) async {
+    getUserCurrentLocation().then((position) {
       if (kDebugMode) {
         print("${position.latitude} ${position.longitude}");
       }
 
       setState(() {});
+    }).catchError((error) {
+      print('ERROR: $error');
     });
   }
 
   Future<String> getAddressFromCoordinates(LatLng coordinates) async {
-    List<Placemark> placemarks = await placemarkFromCoordinates(
-      coordinates.latitude,
-      coordinates.longitude,
-    );
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+        coordinates.latitude,
+        coordinates.longitude,
+      );
 
-    if (placemarks.isNotEmpty) {
-      Placemark placemark = placemarks[0];
-      return placemark.street ?? placemark.name ?? '';
+      if (placemarks.isNotEmpty) {
+        Placemark placemark = placemarks[0];
+        return placemark.street ?? placemark.name ?? '';
+      }
+
+      return '';
+    } catch (e) {
+      print('ERROR: $e');
+      rethrow;
     }
+  }
 
-    return '';
+  void updateSelectedDestinationText() {
+    getAddressFromCoordinates(_selectedDestination).then((address) {
+      setState(() {
+        selectedDestinationText = address;
+      });
+      polylineCoordinates.add(
+        LatLng(_selectedDestination.latitude, _selectedDestination.longitude),
+      );
+      print(polylineCoordinates);
+      print(selectedDestinationText);
+    }).catchError((error) {
+      print('ERROR: $error');
+    });
+  }
+
+  void updateSelectedLocationText() {
+    getAddressFromCoordinates(_selectedLocation).then((address) {
+      setState(() {
+        selectedLocationText = address;
+      });
+      polylineCoordinates.add(
+        LatLng(_selectedLocation.latitude, _selectedLocation.longitude),
+      );
+      print(polylineCoordinates);
+      print(selectedLocationText);
+    }).catchError((error) {
+      print('ERROR: $error');
+    });
   }
 
   void getPolyPoints() async {
@@ -86,36 +145,20 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
         googleMapAPIKey,
         PointLatLng(_sourceLocation.latitude, _sourceLocation.longitude),
         PointLatLng(_destination.latitude, _destination.longitude),
+        travelMode: TravelMode.driving,
       );
+
       if (result.points.isNotEmpty) {
-        result.points.forEach(
-          (PointLatLng point) => polylineCoordinates.add(
-            LatLng(point.latitude, point.longitude),
-          ),
-        );
+        for (var position in result.points) {
+          polylineCoordinates.add(
+            LatLng(position.latitude, position.longitude),
+          );
+        }
         setState(() {});
       }
     } catch (e) {
-      print(e);
+      print('ERROR: $e');
     }
-  }
-
-  void updateSelectedDestinationText() {
-    getAddressFromCoordinates(_selectedDestination).then((address) {
-      setState(() {
-        selectedDestinationText = address;
-      });
-      print(selectedDestinationText);
-    });
-  }
-
-  void updateSelectedLocationText() {
-    getAddressFromCoordinates(_selectedLocation).then((address) {
-      setState(() {
-        selectedLocationText = address;
-      });
-      print(selectedLocationText);
-    });
   }
 
   @override
@@ -133,10 +176,10 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
   late GoogleMapController _controller;
 
   Future<void> onMapCreated(GoogleMapController controller) async {
+    String mode = appStore.isDarkMode ? darkMapStyle : lightMapStyle;
     _controllers.complete(controller);
     _controller = controller;
-    String value = await DefaultAssetBundle.of(context)
-        .loadString('assets/json/map-dark-mode-style.json');
+    String value = await DefaultAssetBundle.of(context).loadString(mode);
     _controller.setMapStyle(value);
   }
 
@@ -216,10 +259,9 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
             maxChildSize: 0.5,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color.fromRGBO(3, 3, 3, 1),
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(10)),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
                 ),
                 child: ListView(
                   shrinkWrap: true,
@@ -260,36 +302,60 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                       maxLines: 2,
                     ),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // PICKUP BOX
+
                         GestureDetector(
                           onTap: () {
                             setState(() {
                               sourcePoint = true;
+                              isPickupFocused = true;
+                              isDeliveryFocused = false;
                             });
                           },
                           child: Container(
-                            width: 160,
+                            width: 175,
                             height: 90,
                             decoration: BoxDecoration(
-                              color: AppColors.buttonStroke,
+                              color: const Color.fromRGBO(39, 42, 40, 1),
                               border: Border.all(
-                                color: AppColors.buttonStroke,
-                                width: 2,
+                                color: isPickupFocused
+                                    ? context.primaryColor
+                                    : const Color.fromRGBO(39, 42, 40, 1),
+                                width: 1,
                               ),
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            child: Center(
-                              child: Text(
-                                selectedLocationText,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.left,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    language.pickup,
+                                    style: const TextStyle(
+                                      color: Color.fromRGBO(126, 126, 126, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  const SizedBox(
+                                    height: 14,
+                                  ),
+                                  Text(
+                                    selectedLocationText,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -298,58 +364,209 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                           onTap: () {
                             setState(() {
                               sourcePoint = false;
+                              isPickupFocused = false;
+                              isDeliveryFocused = true;
                             });
                           },
                           child: Container(
-                            width: 160,
+                            width: 175,
                             height: 90,
                             decoration: BoxDecoration(
-                              color: AppColors.buttonStroke,
+                              color: const Color.fromRGBO(39, 42, 40, 1),
                               border: Border.all(
-                                color: Colors.black,
-                                width: 2,
+                                color: isDeliveryFocused
+                                    ? context.primaryColor
+                                    : const Color.fromRGBO(39, 42, 40, 1),
+                                width: 1,
                               ),
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            child: Center(
-                              child: Text(
-                                selectedDestinationText,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    language.delivery,
+                                    style: const TextStyle(
+                                      color: Color.fromRGBO(126, 126, 126, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 14,
+                                  ),
+                                  Text(
+                                    selectedDestinationText,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                         ),
                       ],
                     ),
-
-                    // Add destination input field or dropdown.
-                    const SizedBox(height: 8),
-                    const Text('Product Type'),
-                    // Add product type options, such as a dropdown.
-                    const SizedBox(height: 8),
-                    const Text('Weight'),
-                    // Add weight input field or slider.
-                    const SizedBox(height: 8),
-                    const Text('Date'),
-                    TextFormField(
-                      onTap: () async {
-                        final selectedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(DateTime.now().year + 1),
-                        );
-                        if (selectedDate != null) {
-                          // Update the date value here
-                        }
-                      },
-                      decoration: const InputDecoration(
-                        hintText: 'Select date',
-                        suffixIcon: Icon(Icons.calendar_today),
-                      ),
+                    const SizedBox(
+                      height: 11,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {});
+                          },
+                          child: Container(
+                            width: 175,
+                            height: 62,
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(39, 42, 40, 1),
+                              border: Border.all(
+                                color: const Color.fromRGBO(39, 42, 40, 1),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    language.parcelType,
+                                    style: const TextStyle(
+                                      color: Color.fromRGBO(126, 126, 126, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 0,
+                                  ),
+                                  Container(
+                                    // color: Colors.amberAccent,
+                                    height: 26,
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton(
+                                        icon: SizedBox.shrink(),
+                                        value: selectedItem,
+                                        items: const [
+                                          DropdownMenuItem(
+                                            value: 'Envelope',
+                                            child: Text('Envelope'),
+                                          ),
+                                          DropdownMenuItem(
+                                            value: 'Document',
+                                            child: Text('Document'),
+                                          ),
+                                          DropdownMenuItem(
+                                            value: 'Fragile',
+                                            child: Text('Fragile'),
+                                          ),
+                                          DropdownMenuItem(
+                                            value: 'Electronic',
+                                            child: Text('Electronic'),
+                                          ),
+                                          DropdownMenuItem(
+                                            value: 'Clothing',
+                                            child: Text('Clothing'),
+                                          ),
+                                          DropdownMenuItem(
+                                            value: 'Book',
+                                            child: Text('Book'),
+                                          ),
+                                        ],
+                                        onChanged: (value) {
+                                          setState(() {
+                                            try {} catch (e) {
+                                              print(e);
+                                            }
+                                            selectedItem = value!;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {});
+                          },
+                          child: Container(
+                            width: 175,
+                            height: 62,
+                            decoration: BoxDecoration(
+                              color: const Color.fromRGBO(39, 42, 40, 1),
+                              border: Border.all(
+                                color: const Color.fromRGBO(39, 42, 40, 1),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    language.weight,
+                                    style: const TextStyle(
+                                      color: Color.fromRGBO(126, 126, 126, 1),
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 0,
+                                  ),
+                                  Container(
+                                    // color: Colors.amberAccent,
+                                    height: 26,
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton(
+                                        icon: SizedBox.shrink(),
+                                        value: selectedWeight,
+                                        items: const [
+                                          DropdownMenuItem(
+                                            value: 'light',
+                                            child: Text('0kg - 5kg'),
+                                          ),
+                                          DropdownMenuItem(
+                                            value: 'normal',
+                                            child: Text('5kg - 9kg'),
+                                          ),
+                                          DropdownMenuItem(
+                                            value: 'heavy',
+                                            child: Text('9kg+'),
+                                          ),
+                                        ],
+                                        onChanged: (value) {
+                                          setState(() {
+                                            try {
+                                              selectedWeight = value!;
+                                            } catch (e) {
+                                              print(e);
+                                            }
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -360,33 +577,36 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
             left: 0,
             right: 0,
             bottom: 0,
-            height: 155,
+            height: 135,
             child: DraggableScrollableSheet(
-              initialChildSize: 0.5,
-              minChildSize: 0.14,
-              maxChildSize: 0.5,
+              initialChildSize: 1,
+              minChildSize: 0.5,
+              maxChildSize: 1,
               builder:
                   (BuildContext context, ScrollController scrollController) {
                 return Container(
-                  decoration: BoxDecoration(
-                    color: context.primaryColor,
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(20, 20, 20, 1),
                     borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(10)),
+                        BorderRadius.vertical(top: Radius.circular(30)),
                   ),
                   child: ListView.builder(
                     controller: scrollController,
-                    shrinkWrap: true, // Added shrinkWrap property
-                    padding: const EdgeInsets.all(0), // Adjusted the padding
-                    itemCount:
-                        1, // Adjust the itemCount to match the number of items
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(0),
+                    itemCount: 1,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(16),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // Add your widgets here
-                            Text('data'),
+                            CustomBtn(
+                                textonbtn: "place order",
+                                onPress: () {
+                                  print("place order");
+                                },
+                                primary: true)
                           ],
                         ),
                       );

@@ -77,6 +77,5 @@ class AppTheme {
       },
     ),
   );
-
   static of(BuildContext context) {}
 }
