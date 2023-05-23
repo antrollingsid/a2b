@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/Components/widgets/custom_textfield.dart';
-import 'package:a2b/screens/place_order_map.dart';
+import 'package:a2b/screens/createOrder/order_map.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +15,15 @@ import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 import 'order_summary.dart';
 
-class OrderPage extends StatefulWidget {
+class OrderUploadDoc extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
-  const OrderPage({Key? key});
+  const OrderUploadDoc({Key? key});
 
   @override
-  State<OrderPage> createState() => _OrderPage();
+  State<OrderUploadDoc> createState() => _OrderPage();
 }
 
-class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
+class _OrderPage extends State<OrderUploadDoc> with TickerProviderStateMixin {
   late AnimationController loadingController;
   File? _file;
   PlatformFile? _platformFile;

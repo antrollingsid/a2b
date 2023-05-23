@@ -14,9 +14,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:flutter/material.dart';
-import '../../Components/widgets/app_bar_buttons.dart';
-import '../main.dart';
-import '../main/utils/constants.dart';
+import '../../../Components/widgets/app_bar_buttons.dart';
+import '../../main.dart';
+import '../../main/utils/constants.dart';
 
 const darkMapStyle = 'assets/json/dark_mode_style.json';
 const lightMapStyle = 'assets/json/map-light-mode-style.json';
@@ -602,7 +602,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             CustomBtn(
                                 textonbtn: "place order",
                                 onPress: () {
-                                  Get.to(() => const OrderPage());
+                                  Get.to(() => const OrderUploadDoc());
                                   print("place order");
                                 },
                                 primary: true)
