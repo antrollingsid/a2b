@@ -28,18 +28,21 @@ class _MyMap1State extends State<MyMap1> {
             return Center(child: CircularProgressIndicator());
           }
           return GoogleMap(
+            myLocationButtonEnabled: false,
+            // compassEnabled: false,
             mapType: MapType.normal,
             markers: {
               Marker(
-                  position: LatLng(
-                    snapshot.data!.docs.singleWhere(
-                        (element) => element.id == widget.user_id)['latitude'],
-                    snapshot.data!.docs.singleWhere(
-                        (element) => element.id == widget.user_id)['longitude'],
-                  ),
-                  markerId: MarkerId('id'),
-                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueMagenta)),
+                position: LatLng(
+                  snapshot.data!.docs.singleWhere(
+                      (element) => element.id == widget.user_id)['latitude'],
+                  snapshot.data!.docs.singleWhere(
+                      (element) => element.id == widget.user_id)['longitude'],
+                ),
+                markerId: MarkerId('id'),
+                icon: BitmapDescriptor.defaultMarkerWithHue(
+                    BitmapDescriptor.hueMagenta),
+              ),
             },
             initialCameraPosition: CameraPosition(
                 target: LatLng(
@@ -48,12 +51,14 @@ class _MyMap1State extends State<MyMap1> {
                   snapshot.data!.docs.singleWhere(
                       (element) => element.id == widget.user_id)['longitude'],
                 ),
-                zoom: 14.47),
+                zoom: 16),
             onMapCreated: (GoogleMapController controller) async {
-              setState(() {
-                _controller = controller;
-                _added = true;
-              });
+              setState(
+                () {
+                  _controller = controller;
+                  _added = true;
+                },
+              );
             },
           );
         },
@@ -62,14 +67,17 @@ class _MyMap1State extends State<MyMap1> {
   }
 
   Future<void> mymap(AsyncSnapshot<QuerySnapshot> snapshot) async {
-    await _controller
-        .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+    await _controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
             target: LatLng(
               snapshot.data!.docs.singleWhere(
                   (element) => element.id == widget.user_id)['latitude'],
               snapshot.data!.docs.singleWhere(
                   (element) => element.id == widget.user_id)['longitude'],
             ),
-            zoom: 14.47)));
+            zoom: 15),
+      ),
+    );
   }
 }

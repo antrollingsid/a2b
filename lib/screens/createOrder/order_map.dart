@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/main/utils/allConstants.dart';
-import 'package:a2b/screens/createOrder/order_details.dart';
+import 'package:a2b/screens/createOrder/order_upload_doc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import '../../../Components/widgets/app_bar_buttons.dart';
 import '../../main.dart';
 import '../../main/utils/constants.dart';
+import 'controller/create_order_controller.dart';
 
 const darkMapStyle = 'assets/json/dark_mode_style.json';
 const lightMapStyle = 'assets/json/map-light-mode-style.json';
@@ -188,6 +189,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
   DateTime _selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    final orderPage1controller = Get.put(PackageController());
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
@@ -236,14 +238,14 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                 }
               });
             },
-            polylines: {
-              Polyline(
-                polylineId: const PolylineId("route"),
-                points: polylineCoordinates,
-                color: context.primaryColor,
-                width: 6,
-              ),
-            },
+            // polylines: {
+            //   Polyline(
+            //     polylineId: const PolylineId("route"),
+            //     points: polylineCoordinates,
+            //     color: context.primaryColor,
+            //     width: 6,
+            //   ),
+            // },
             markers: {
               Marker(
                 markerId: const MarkerId("source"),
@@ -600,11 +602,20 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             CustomBtn(
-                                textonbtn: "place order",
-                                onPress: () {
-                                  Get.to(() => const OrderUploadDoc());
-                                  print("place order");
-                                },
+                                textonbtn: "Next",
+                                onPress: () =>
+                                    orderPage1controller.setOrderMapDetails(
+                                      context,
+                                      selectedItem,
+                                      selectedWeight,
+                                      selectedLocationText,
+                                      selectedDestinationText,
+                                      _selectedDate,
+                                      _sourceLocation.latitude,
+                                      _sourceLocation.longitude,
+                                      _sourceLocation.latitude,
+                                      _sourceLocation.longitude,
+                                    ),
                                 primary: true)
                           ],
                         ),

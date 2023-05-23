@@ -6,9 +6,5 @@ class OrderDetails extends GetxController {
 
   //TextField Controllers to get data from TextFields
   final productName = TextEditingController();
-  final width = TextEditingController();
-  final height = TextEditingController();
-  final weight = TextEditingController();
-  final type = TextEditingController();
-  late String canbebroken;
+  final description = TextEditingController();
 }

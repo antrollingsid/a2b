@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_import
 
 import 'package:a2b/screens/liveTracking/tracking_page.dart';
-import 'package:a2b/screens/place_order_map.dart';
+import 'package:a2b/screens/createOrder/order_map.dart';
 import 'package:a2b/screens/userDetails/details.dart';
 import 'package:nb_utils/nb_utils.dart';
 

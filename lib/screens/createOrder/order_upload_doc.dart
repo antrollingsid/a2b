@@ -13,6 +13,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../controllers/order_details_text_controller.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
+import 'controller/create_order_controller.dart';
 import 'order_summary.dart';
 
 class OrderUploadDoc extends StatefulWidget {
@@ -23,11 +24,14 @@ class OrderUploadDoc extends StatefulWidget {
   State<OrderUploadDoc> createState() => _OrderPage();
 }
 
+// final orderPage2controller = Get.put(PackageController());
+
 class _OrderPage extends State<OrderUploadDoc> with TickerProviderStateMixin {
   late AnimationController loadingController;
   File? _file;
   PlatformFile? _platformFile;
   UploadTask? uploadTask;
+  late final String urlDownload;
   final List<PlatformFile> _uploadedFiles =
       []; // define an empty list of platform files
 
@@ -40,9 +44,8 @@ class _OrderPage extends State<OrderUploadDoc> with TickerProviderStateMixin {
       uploadTask = ref.putFile(files);
 
       final snapshot = await uploadTask!.whenComplete(() {});
-      final urlDownload = await snapshot.ref.getDownloadURL();
+      urlDownload = await snapshot.ref.getDownloadURL();
       print('download link: $urlDownload');
-      Get.to(() => const OrderSummary());
     } catch (e) {
       print(e);
     }
@@ -53,7 +56,7 @@ class _OrderPage extends State<OrderUploadDoc> with TickerProviderStateMixin {
     final files = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['png', 'jpg', 'jpeg'],
-      allowMultiple: true,
+      allowMultiple: false,
     );
     if (files != null) {
       for (int i = 0; i < files.files.length; i++) {
@@ -92,6 +95,7 @@ class _OrderPage extends State<OrderUploadDoc> with TickerProviderStateMixin {
       return AppColors.errorDark;
     }
 
+    final orderPage2controller = Get.put(PackageController());
     final ordercontroller = Get.put(OrderDetails());
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -250,6 +254,7 @@ class _OrderPage extends State<OrderUploadDoc> with TickerProviderStateMixin {
                   maxLines: null, // allow any number of lines
                   minLines: 5, // set a minimum of 5 lines
                   keyboardType: TextInputType.multiline,
+                  controller: ordercontroller.description,
                   decoration: InputDecoration(
                     hintText: 'give a brief description of your package....',
                     border: OutlineInputBorder(
@@ -293,7 +298,23 @@ class _OrderPage extends State<OrderUploadDoc> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              CustomBtn(textonbtn: 'Next', onPress: uploadFile, primary: true),
+              CustomBtn(
+                textonbtn: 'Next',
+                onPress: () {
+                  uploadFile();
+                  try {
+                    orderPage2controller.setOrderUploadDetails(
+                        context,
+                        ordercontroller.productName.text,
+                        urlDownload,
+                        ordercontroller.description.text,
+                        isChecked);
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+                primary: true,
+              ),
               // CustomBtn(
               //   textonbtn: 'Next',
               //   onPress: () => Get.to(() => const PlaceOrderMap()),
@@ -336,3 +357,4 @@ class _OrderPage extends State<OrderUploadDoc> with TickerProviderStateMixin {
         }
       });
 }
+//prod name,file, description, isfragile

@@ -1,5 +1,9 @@
+import 'package:a2b/screens/livemap.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import '../../controllers/auth_controller.dart';
 import '../../main/utils/allConstants.dart';
 
 class CustomShip extends StatelessWidget {
@@ -7,62 +11,68 @@ class CustomShip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-      child: Container(
-        height: 143,
-        width: 333,
-        decoration: BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
-          child: Row(children: [
-            Expanded(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Track\nYour Shipping',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Row(
+    final tracked = FirebaseFirestore.instance.collection('location');
+    return GetBuilder<AuthController>(
+      builder: (controller) {
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+          child: Container(
+            height: 143,
+            width: 333,
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
+              child: Row(children: [
+                Expanded(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                      child: SvgPicture.string(SvgConstant.parcelIconBlack),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(6, 10, 0, 0),
+                    const Align(
+                      alignment: Alignment.centerLeft,
                       child: Text(
-                        "Iphone 12",
+                        'Track\nYour Shipping',
                         style: TextStyle(
-                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          child: SvgPicture.string(SvgConstant.parcelIconBlack),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(6, 10, 0, 0),
+                          child: Text(
+                            "Iphone 12",
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                        )
+                      ],
                     )
                   ],
+                )),
+                Container(
+                  height: 95,
+                  width: 95,
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: MyMap1(tracked.doc('user1').id),
                 )
-              ],
-            )),
-            Container(
-              height: 95,
-              width: 95,
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                borderRadius: BorderRadius.circular(12),
-              ),
-            )
-          ]),
-        ),
-      ),
+              ]),
+            ),
+          ),
+        );
+      },
     );
   }
 }

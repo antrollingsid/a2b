@@ -2,64 +2,85 @@
 
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:get/get.dart';
+
+import '../../dashboard.dart';
+import '../order_summary.dart';
+import '../order_upload_doc.dart';
 
 class PackageController extends GetxController {
   static PackageController get instance => Get.find();
 
   /// TextField Controllers to get data from TextFields
-  late final String package_id;
-  late final String sender_id;
-  late final String courrier_id;
-  late final String delivery_duration;
-  final from = TextEditingController();
-  final to = TextEditingController();
-  final address_ref = TextEditingController();
-  final reciever_name = TextEditingController();
-  final package_name = TextEditingController();
-  final package_hieght = TextEditingController();
-  final package_width = TextEditingController();
-  final package_weight = TextEditingController();
-  final delivery_date = TextEditingController();
-  final delivery_time = TextEditingController();
+  late DateTime delivery_date;
+  late String sender_id;
+  late String package_name;
+  late String urlDownload;
+  late String description;
+
+  late String courrier_id;
+  late String package_type;
+  late String pickup_address;
+  late String package_weight;
+  late double pickupLatitude;
+  late double pickupLongitude;
+  late String delivery_address;
+  late double deliveryLatitude;
+  late String delivery_duration = '';
+  late double deliveryLongitude;
+
   late bool IsFragile;
   late String IsAccepted;
-  late String urlDownload;
+
   File? _file;
   PlatformFile? _platformFile;
   UploadTask? uploadTask;
-  Future<void> addPackage() {
-    // Call the package's CollectionReference to add a new user
+
+  Future<void> addPackage() async {
     courrier_id = "0";
-    IsAccepted = "not";
+    IsAccepted = "pending";
+    final user = FirebaseAuth.instance.currentUser!;
+    final createdAt = DateTime.now();
     CollectionReference packages =
-        FirebaseFirestore.instance.collection('packages');
+        FirebaseFirestore.instance.collection('orders');
     return packages
-        .doc(package_id)
-        .set({
-          'statut': IsAccepted,
-          'sendedBy': sender_id,
-          'deliverBy': courrier_id,
-          'from': from,
-          'to': to,
-          'reference': address_ref,
-          'reciever': reciever_name,
-          'name': package_name,
-          'hieght': package_hieght,
-          'width': package_weight,
-          'weight': package_weight,
-          'date': delivery_date,
-          'time': delivery_time,
-          'fragile': IsFragile,
-          'duration': delivery_duration,
-          'price': 0.0,
-          'url': urlDownload,
-        })
-        .then((value) => print("Package Added"))
+        .doc()
+        .set(
+          {
+            'createdAt': createdAt,
+            'statut': IsAccepted,
+            'packageDetails': {
+              'productName': package_name,
+              'weight': package_weight,
+              'productType': package_type,
+              'fragile': IsFragile,
+              'productUrl': urlDownload,
+            },
+            'locationDetaills': {
+              'pickupAddress': pickup_address,
+              'pickupLatitude': pickupLatitude,
+              'pickupLongitude': pickupLongitude,
+              'deliveryAddress': delivery_address,
+              'deliveryLatitude': deliveryLatitude,
+              'deliveryLongitude': deliveryLongitude,
+            },
+            'deliveryDetails': {
+              'deliveryDate': delivery_date,
+              'sendedBy': user.uid,
+              'deliverBy': courrier_id,
+              'duration': delivery_duration,
+            },
+            'price': 0.0,
+            'description': description,
+          },
+        )
+        .then((value) => dashboard())
+        //  Get.offAll(() => const DashBoard()))
         .catchError((error) => print("Failed to add package: $error"));
   }
 
@@ -69,7 +90,7 @@ class PackageController extends GetxController {
     CollectionReference packages =
         FirebaseFirestore.instance.collection('packages');
     return packages
-        .doc(package_id)
+        .doc()
         .update({
           'statut': IsAccepted,
           'deliverBy': courrier_id,
@@ -78,5 +99,50 @@ class PackageController extends GetxController {
         })
         .then((value) => print("Package Updated"))
         .catchError((error) => print("Failed to update user: $error"));
+  }
+
+  void setOrderUploadDetails(
+    BuildContext context,
+    String productName,
+    String urlDownload,
+    String description,
+    bool isfragile,
+  ) {
+    package_name = productName;
+    this.urlDownload = urlDownload;
+    this.description = description;
+    IsFragile = isfragile;
+
+    Get.to(() => const OrderSummary());
+  }
+
+  void setOrderMapDetails(
+    BuildContext context,
+    String type,
+    String weight,
+    String pickupAddress,
+    String deliveryAddress,
+    DateTime deliveryDate,
+    double pickupLatitude,
+    double pickupLongitude,
+    double deliveryLatitude,
+    double deliveryLongitude,
+  ) {
+    package_type = type;
+    package_weight = weight;
+    pickup_address = pickupAddress;
+    delivery_address = deliveryAddress;
+    delivery_date = deliveryDate;
+    this.pickupLatitude = pickupLatitude;
+    this.pickupLongitude = pickupLongitude;
+    this.deliveryLatitude = deliveryLatitude;
+    this.deliveryLongitude = deliveryLongitude;
+    print('object');
+    Get.to(() => const OrderUploadDoc());
+  }
+
+  dashboard() {
+    print('order created');
+    Get.offAll(() => const DashBoard());
   }
 }
