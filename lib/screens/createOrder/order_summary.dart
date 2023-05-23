@@ -13,17 +13,16 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../controllers/order_details_text_controller.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
-import 'order_summary.dart';
 
-class OrderPage extends StatefulWidget {
+class OrderSummary extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
-  const OrderPage({Key? key});
+  const OrderSummary({Key? key});
 
   @override
-  State<OrderPage> createState() => _OrderPage();
+  State<OrderSummary> createState() => _OrderSummary();
 }
 
-class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
+class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
   late AnimationController loadingController;
   File? _file;
   PlatformFile? _platformFile;
@@ -99,7 +98,7 @@ class _OrderPage extends State<OrderPage> with TickerProviderStateMixin {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
-          titleText: 'Additional Details',
+          titleText: 'order summary',
           isActionVisible: true,
         ),
       ),

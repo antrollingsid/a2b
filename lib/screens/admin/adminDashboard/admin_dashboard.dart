@@ -1,10 +1,6 @@
-import 'dart:async';
-import 'package:a2b/main.dart';
 import 'package:a2b/screens/admin/applications/application.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../controllers/auth_controller.dart';

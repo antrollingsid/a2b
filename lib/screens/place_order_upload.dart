@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundLightMode,
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(

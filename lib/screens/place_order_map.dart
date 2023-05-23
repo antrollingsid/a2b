@@ -1,13 +1,15 @@
-// ignore_for_file: unnecessary_null_comparison, prefer_final_fields
+// ignore_for_file: unnecessary_null_comparison
 
 import 'dart:async';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/main/utils/allConstants.dart';
+import 'package:a2b/screens/createOrder/order_details.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_webservice/directions.dart' as directions;
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -28,8 +30,8 @@ class PlaceOrderMap extends StatefulWidget {
 
 class _PlaceOrderMapState extends State<PlaceOrderMap> {
   final Completer<GoogleMapController> _controllers = Completer();
-  final _directions = directions.GoogleMapsDirections(apiKey: googleMapAPIKey);
-  var overviewPolylines;
+
+  List<Location> searchResults = [];
 
   LatLng _selectedDestination = LatLng(0, 0);
   LatLng _selectedLocation = LatLng(0, 0);
@@ -268,6 +270,10 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                   controller: scrollController,
                   padding: const EdgeInsets.all(16),
                   children: [
+                    // PlacePicker(
+                    //   googleMapAPIKey,
+                    // ),
+
                     TextFormField(
                       textAlign: TextAlign.start,
                       onTap: () async {
@@ -461,24 +467,16 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                                             child: Text('Envelope'),
                                           ),
                                           DropdownMenuItem(
-                                            value: 'Document',
-                                            child: Text('Document'),
+                                            value: 'Rectangular Box',
+                                            child: Text('Rectangular Box'),
                                           ),
                                           DropdownMenuItem(
-                                            value: 'Fragile',
-                                            child: Text('Fragile'),
+                                            value: 'Cubic Box',
+                                            child: Text('Cubic Box'),
                                           ),
                                           DropdownMenuItem(
-                                            value: 'Electronic',
-                                            child: Text('Electronic'),
-                                          ),
-                                          DropdownMenuItem(
-                                            value: 'Clothing',
-                                            child: Text('Clothing'),
-                                          ),
-                                          DropdownMenuItem(
-                                            value: 'Book',
-                                            child: Text('Book'),
+                                            value: 'Cylinder',
+                                            child: Text('Cylinder'),
                                           ),
                                         ],
                                         onChanged: (value) {
@@ -604,6 +602,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             CustomBtn(
                                 textonbtn: "place order",
                                 onPress: () {
+                                  Get.to(() => const OrderPage());
                                   print("place order");
                                 },
                                 primary: true)

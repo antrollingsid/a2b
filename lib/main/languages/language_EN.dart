@@ -106,7 +106,7 @@ class LanguageEn extends BaseLanguage {
   String get weight => "Weight";
 
   @override
-  String get parcelType => "Parcel Type";
+  String get parcelType => "Package Shape";
 
   @override
   String get pickupInformation => "Pickup Information";

@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_import
 
 import 'package:a2b/screens/liveTracking/tracking_page.dart';
+import 'package:a2b/screens/place_order_map.dart';
 import 'package:a2b/screens/userDetails/details.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -188,7 +189,7 @@ class DashBoard extends StatelessWidget {
               } else if (index == 1) {
                 Get.to(() => const DashBoard());
               } else if (index == 2) {
-                Get.to(() => const NewOrder());
+                Get.to(() => const PlaceOrderMap());
               } else if (index == 3) {
               } else if (index == 4) {
                 Get.to(() => const Profile());
