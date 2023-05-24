@@ -1,5 +1,6 @@
 import 'package:a2b/Components/widgets/app_bar_buttons.dart';
 import 'package:a2b/main.dart';
+import 'package:a2b/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,17 +8,16 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';
+import '../details.dart';
 
-class UserApplication extends StatefulWidget {
-  const UserApplication({Key? key}) : super(key: key);
+class CourierList extends StatefulWidget {
+  const CourierList({Key? key}) : super(key: key);
 
   @override
-  _UserApplication createState() => _UserApplication();
+  _CourierList createState() => _CourierList();
 }
 
-class _UserApplication extends State<UserApplication> {
-  CollectionReference applicationsCollection =
-      FirebaseFirestore.instance.collection('applications');
+class _CourierList extends State<CourierList> {
   CollectionReference usersCollection =
       FirebaseFirestore.instance.collection('users');
 
@@ -26,61 +26,53 @@ class _UserApplication extends State<UserApplication> {
     return GetBuilder<AuthController>(builder: (controller) {
       // ...
 
-      return controller.user.role == 'admin'
-          ? Scaffold(
-              appBar: AppBar(
-                backgroundColor: const Color(0xFF0F9D58),
-                title: const Text('Applications'),
-              ),
-              body: SafeArea(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: applicationsCollection.snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
-                    }
-                    return Center(
-                      child: SizedBox(
-                        width: 333,
-                        child: ListView(
-                          children: snapshot.data!.docs
-                              .map((DocumentSnapshot document) {
-                            Map<String, dynamic>? userData =
-                                document.data() as Map<String, dynamic>?;
-                            String userId = document.id;
-                            String userName =
-                                userData?['details']['name'] ?? '';
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF0F9D58),
+          title: const Text('Applications'),
+        ),
+        body: SafeArea(
+          child: StreamBuilder<QuerySnapshot>(
+            stream: usersCollection.snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              }
+              return Center(
+                child: SizedBox(
+                  width: 333,
+                  child: ListView(
+                    children:
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map<String, dynamic>? userData =
+                          document.data() as Map<String, dynamic>?;
+                      String userId = document.id;
+                      String userName = userData?['details']['name'] ?? '';
+                      String userRole = userData?['role'] ?? '';
 
-                            return GestureDetector(
-                              onTap: () {
-                                _showDialog(context, userId, userName);
-                              },
-                              child: OfferView(
+                      return GestureDetector(
+                        onTap: () => Get.to(() => DetailsPage(userId)),
+                        child: userRole == 'courier'
+                            ? OfferView(
                                 name: userName,
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                    );
-                  },
+                              )
+                            : Container(),
+                      );
+                    }).toList(),
+                  ),
                 ),
-              ),
-            )
-          : const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('you have no access'),
-              ],
-            );
+              );
+            },
+          ),
+        ),
+      );
     });
   }
 
-  void _showDialog(BuildContext context, String userId, String userName) {
+  void _showDialog(BuildContext context, String userId, String userRole) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -91,8 +83,6 @@ class _UserApplication extends State<UserApplication> {
             TextButton(
               child: Text('Accept'),
               onPressed: () {
-                // Perform accept action
-                _updateUserRole(userId, 'courier');
                 Navigator.of(context).pop();
               },
             ),
@@ -109,15 +99,15 @@ class _UserApplication extends State<UserApplication> {
     );
   }
 
-  void _updateUserRole(String userId, String role) {
-    usersCollection
-        .doc(userId)
-        .update({
-          'role': role,
-        })
-        .then((value) => print('User role updated successfully'))
-        .catchError((error) => print('Failed to update user role: $error'));
-  }
+  // void _updateUserRole(String userId, String role) {
+  //   usersCollection
+  //       .doc(userId)
+  //       .update({
+  //         'role': role,
+  //       })
+  //       .then((value) => print('User role updated successfully'))
+  //       .catchError((error) => print('Failed to update user role: $error'));
+  // }
 }
 
 // import 'package:a2b/Components/widgets/app_bar_buttons.dart';
@@ -130,8 +120,8 @@ class _UserApplication extends State<UserApplication> {
 // import '../../../Components/widgets/offer_show.dart';
 // import '../../../controllers/auth_controller.dart';
 
-// class UserApplication extends StatelessWidget {
-//   UserApplication({Key? key}) : super(key: key);
+// class CourierList extends StatelessWidget {
+//   CourierList({Key? key}) : super(key: key);
 
 //   CollectionReference applicationsCollection =
 //       FirebaseFirestore.instance.collection('applications');
@@ -174,15 +164,15 @@ class _UserApplication extends State<UserApplication> {
 //                                 Map<String, dynamic>? userData =
 //                                     document.data() as Map<String, dynamic>?;
 //                                 String userId = document.id;
-//                                 String userName =
+//                                 String userRole =
 //                                     userData?['details']['name'] ?? '';
 
 //                                 return GestureDetector(
 //                                   onTap: () {
-//                                     _showDialog(context, userId, userName);
+//                                     _showDialog(context, userId, userRole);
 //                                   },
 //                                   child: OfferView(
-//                                     name: userName,
+//                                     name: userRole,
 //                                   ),
 //                                 );
 //                               }).toList(),
@@ -205,7 +195,7 @@ class _UserApplication extends State<UserApplication> {
 //     );
 //   }
 
-//   void _showDialog(BuildContext context, String userId, String userName) {
+//   void _showDialog(BuildContext context, String userId, String userRole) {
 //     showDialog(
 //       context: context,
 //       builder: (BuildContext context) {

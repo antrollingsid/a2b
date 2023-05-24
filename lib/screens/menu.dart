@@ -1,4 +1,5 @@
 // ignore: file_names
+import 'package:a2b/screens/userDetails/courierList/courier-list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -50,6 +51,10 @@ class _MenuPage extends State<MenuPage> {
               const SettingBtn(action: 'offers'),
               const SettingBtn(action: 'order history'),
               const SettingBtn(action: 'create an order'),
+              GestureDetector(
+                child: const SettingBtn(action: 'Couriers'),
+                onTap: () => Get.to(() => const CourierList()),
+              ),
 
               // CustomShip(),
             ],

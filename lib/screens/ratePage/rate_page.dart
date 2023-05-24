@@ -13,7 +13,7 @@ class RatePage extends StatefulWidget {
 }
 
 class _RatePage extends State<RatePage> {
-  RangeValues _currentRangeValues = const RangeValues(40, 80);
+  RangeValues _currentRangeValues = const RangeValues(0, 80);
   @override
   void initState() {
     super.initState();

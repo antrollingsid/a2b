@@ -76,16 +76,6 @@ class _RegisterState extends State<Register> {
                               regcontroller.password.text),
                           primary: true,
                         ),
-                        CustomBtn(
-                          textonbtn: 'Register',
-                          onPress: () => controller.register(
-                              context,
-                              regcontroller.email.text,
-                              regcontroller.password.text,
-                              regcontroller.name.text,
-                              regcontroller.password.text),
-                          primary: true,
-                        ),
                         InkwellBtn(
                           textLeading: 'Already have an account ?  ',
                           textEnding: 'login',

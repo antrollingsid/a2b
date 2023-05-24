@@ -1,76 +1,81 @@
 import 'package:a2b/Components/widgets/custom_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../Components/widgets/review.dart';
-import '../../controllers/auth_controller.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 import '../ratePage/rate_page.dart';
 
-class DetailsPage extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const DetailsPage({Key? key});
+class DetailsPage extends StatelessWidget {
+  final String userId;
 
-  @override
-  State<DetailsPage> createState() => _DetailsPage();
-}
+  DetailsPage(this.userId);
 
-class _DetailsPage extends State<DetailsPage> {
-  @override
-  void initState() {
-    super.initState();
+  Future<DocumentSnapshot<Map<String, dynamic>>> fetchData(String id) async {
+    return FirebaseFirestore.instance.collection('users').doc(id).get();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AuthController>(
-      builder: (controller) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: context.scaffoldBackgroundColor,
-          appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(227),
-            child: DetailsAppBar(
-              titleText: 'Courier Details',
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'name()',
-                            style: TextStyle(
-                              color: AppColors.backgroundLightMode,
-                              fontSize: 20,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: context.scaffoldBackgroundColor,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(227),
+        child: DetailsAppBar(
+          titleText: 'Courier Details',
+        ),
+      ),
+      body: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+        future: fetchData(userId),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else if (!snapshot.hasData || snapshot.data == null) {
+            return Text('No data available');
+          } else {
+            final data = snapshot.data!.data();
+            final name = data!['name'];
+            final otherData = data['otherData'];
+
+            return SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Name',
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'courier/user/admin',
-                            style: TextStyle(
-                              color: AppColors.backgroundLightMode,
-                              fontSize: 14,
+                            Text(
+                              name,
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SvgPicture.string(SvgConstant.callBtnDark)
-                    ],
-                  ),
-                  Container(
-                    height: 86,
-                    width: 333,
-                    color: AppColors.buttonBlue,
-                    child: const Row(
+                          ],
+                        ),
+                        SvgPicture.string(SvgConstant.callBtnDark),
+                      ],
+                    ),
+                    Container(
+                      height: 86,
+                      width: 333,
+                      color: AppColors.buttonBlue,
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Column(
@@ -112,24 +117,24 @@ class _DetailsPage extends State<DetailsPage> {
                               Text('experience'),
                             ],
                           ),
-                        ]),
-                  ),
-                  const CustomReview(),
-                  CustomBtn(
-                    textonbtn: 'rate the courier',
-                    onPress: () {
-                      Get.to(() => const RatePage());
-                    },
-                    primary: true,
-                  )
-                  // CustomCalendar(),
-                  // CustomShip(),
-                ],
+                        ],
+                      ),
+                    ),
+                    CustomReview(),
+                    CustomBtn(
+                      textonbtn: 'rate the courier',
+                      onPress: () {
+                        Get.to(() => const RatePage());
+                      },
+                      primary: true,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
-        );
-      },
+            );
+          }
+        },
+      ),
     );
   }
 }

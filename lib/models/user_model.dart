@@ -1,15 +1,16 @@
 class UserModel {
   late String role;
   late Details details;
-  late DateTime createdAt;
+  late String createdAt;
 
   UserModel(
       {required this.role, required this.createdAt, required this.details});
-
+// createdAt: json['createdAt'],
   static UserModel fromJson(Map<String, dynamic> json) => UserModel(
         // DateTime fromJson(Timestamp json['createdAt']) => value?.toDate();
-        // createdAt: DateTime.now(),
-        createdAt: json['createdAt'].toDate(),
+
+        createdAt: DateTime.now().toString(),
+        // createdAt: json['createdAt'].toDate() ?? DateTime.now(),
         // convert timestamp to date in flutter?
         role: json['role'],
         details: Details(

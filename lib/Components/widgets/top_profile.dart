@@ -2,6 +2,8 @@ import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/main/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class TopProfile extends StatelessWidget {
@@ -73,10 +75,17 @@ class TopProfile extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                timeago
-                                    .format(controller.user.createdAt,
-                                        locale: 'en_short')
-                                    .toString(),
+                                // DateFormat('dd MMM yyyy')
+                                //     .format(DateTime.parse(
+                                controller.user.role,
+                                //     ))
+                                // .toString(),
+                                // timeago
+                                // .format(
+                                //     DateTime.parse(
+                                //         controller.user.createdAt.v),
+                                // locale: 'en_short')
+                                // .toString(),
                                 style: const TextStyle(
                                   fontFamily: 'SF Pro Display',
                                   fontSize: 16,

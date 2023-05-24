@@ -33,88 +33,90 @@ class _ProfileState extends State<Profile> {
           isActionVisible: false,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              // if()
-              const TopProfile(),
-              InkWell(
-                child: SettingBtn(action: language.editProfile),
-                onTap: () => Get.to(() => const EditProfile()),
-              ),
-              Container(
-                width: 290,
-                height: 1,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              const SettingBtn(action: 'Settings'),
-              Container(
-                width: 290,
-                height: 1,
-                color: Theme.of(context).iconTheme.color,
-              ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                // if()
+                const TopProfile(),
+                InkWell(
+                  child: SettingBtn(action: language.editProfile),
+                  onTap: () => Get.to(() => const EditProfile()),
+                ),
+                Container(
+                  width: 290,
+                  height: 1,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                const SettingBtn(action: 'Settings'),
+                Container(
+                  width: 290,
+                  height: 1,
+                  color: Theme.of(context).iconTheme.color,
+                ),
 
-              SettingBtn(action: language.wallet),
-              Container(
-                width: 290,
-                height: 1,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              GestureDetector(
-                child: SettingBtn(action: language.language),
-                onTap: () => Get.to(() => const Language()),
-              ),
-              // GestureDetector(
-              //   child: const SettingBtn(action: 'apply for couriership'),
-              //   onTap: () => Get.to(() => const ApplyForCourier()),
-              // ),
-              Container(
-                width: 290,
-                height: 1,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              InkWell(
-                  onTap: () => Get.to(() => const ApplyForCourier()),
-                  child: const UpgadeBtn()),
-              Container(
-                width: 290,
-                height: 1,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              InkWell(
-                child: const Icon(LineIcons.sun),
-                onTap: () {
-                  print('this is light modde');
-                  appStore.setDarkMode(false);
-                  print('we set light mode to true');
-                  setValue(THEME_MODE_INDEX, 1);
-                  setState(() {});
-                  LiveStream().emit('UpdateTheme');
-                  // finish(context);
-                },
-              ),
-              InkWell(
-                child: const Icon(LineIcons.moon),
-                onTap: () {
-                  print('this is dark modde');
-                  appStore.setDarkMode(true);
-                  print('we set dark mode to true');
-                  setValue(THEME_MODE_INDEX, 2);
-                  setState(() {});
-                  LiveStream().emit('UpdateTheme');
-                  // finish(context);
-                },
-              ),
-              Container(
-                width: 290,
-                height: 1,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              InkWell(
-                  onTap: () => Get.find<AuthController>().signOut(),
-                  child: const SignOutBtn())
-            ],
+                SettingBtn(action: language.wallet),
+                Container(
+                  width: 290,
+                  height: 1,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                GestureDetector(
+                  child: SettingBtn(action: language.language),
+                  onTap: () => Get.to(() => const Language()),
+                ),
+                // GestureDetector(
+                //   child: const SettingBtn(action: 'apply for couriership'),
+                //   onTap: () => Get.to(() => const ApplyForCourier()),
+                // ),
+                Container(
+                  width: 290,
+                  height: 1,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                InkWell(
+                    onTap: () => Get.to(() => const ApplyForCourier()),
+                    child: const UpgadeBtn()),
+                Container(
+                  width: 290,
+                  height: 1,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                InkWell(
+                  child: const Icon(LineIcons.sun),
+                  onTap: () {
+                    print('this is light modde');
+                    appStore.setDarkMode(false);
+                    print('we set light mode to true');
+                    setValue(THEME_MODE_INDEX, 1);
+                    setState(() {});
+                    LiveStream().emit('UpdateTheme');
+                    // finish(context);
+                  },
+                ),
+                InkWell(
+                  child: const Icon(LineIcons.moon),
+                  onTap: () {
+                    print('this is dark modde');
+                    appStore.setDarkMode(true);
+                    print('we set dark mode to true');
+                    setValue(THEME_MODE_INDEX, 2);
+                    setState(() {});
+                    LiveStream().emit('UpdateTheme');
+                    // finish(context);
+                  },
+                ),
+                Container(
+                  width: 290,
+                  height: 1,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                InkWell(
+                    onTap: () => Get.find<AuthController>().signOut(),
+                    child: const SignOutBtn())
+              ],
+            ),
           ),
         ),
       ),

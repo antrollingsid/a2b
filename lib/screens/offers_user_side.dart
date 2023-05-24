@@ -34,13 +34,19 @@ class _CourierOffers extends State<CourierOffers> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              OfferView(),
-              OfferView(),
-              OfferView(),
-              OfferView(),
-              OfferView(),
-              OfferView(),
-              OfferView(),
+              OfferView(
+                name: '',
+              ),
+              OfferView(
+                name: '',
+              ),
+              OfferView(
+                name: '',
+              ),
+              OfferView(
+                name: '',
+              ),
+
               // Message(),
               // CustomReview(),
               // OfferDetail(),

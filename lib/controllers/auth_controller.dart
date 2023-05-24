@@ -29,6 +29,7 @@ class AuthController extends GetxController {
 
       navigator.pop();
       isLoaddIn = false;
+      print('Registration completed');
       Get.offAll(() => const DashBoard());
     } on FirebaseAuthException catch (e) {
       navigator.pop();
@@ -61,7 +62,7 @@ class AuthController extends GetxController {
           final givenName = nameParts.first;
           final surname = nameParts.length > 1 ? nameParts.last : '';
 
-          final createdAt = DateTime.now();
+          final createdAt = DateTime.now().toString();
           final userDetails = {
             'role': 'general',
             'createdAt': createdAt,
@@ -81,13 +82,15 @@ class AuthController extends GetxController {
 
           _user = UserModel(
               role: 'general',
-              createdAt: createdAt,
+              createdAt: createdAt.toString(),
               details: Details(
                   id: user.uid,
                   name: givenName,
                   surname: surname,
                   email: user.email ?? '',
                   photoURL: user.photoURL ?? ''));
+        } else {
+          print("Initialize the user motherfucker");
         }
 
         _isLoggedIn = true;
@@ -101,24 +104,24 @@ class AuthController extends GetxController {
     }
   }
 
-  void registerwithgoogle(BuildContext context, String email, String password,
-      String name, String surname) async {
-    // Call api
-    var navigator = Navigator.of(context);
+  // void registerwithgoogle(BuildContext context, String email, String password,
+  //     String name, String surname) async {
+  //   // Call api
+  //   var navigator = Navigator.of(context);
 
-    try {
-      await FirebaseAuth.instance.signInWithProvider(GoogleAuthProvider());
-      navigator.pop();
-      isLoaddIn = false;
-      Get.offAll(() => const DashBoard());
-    } on FirebaseAuthException catch (e) {
-      navigator.pop();
-      isLoaddIn = true;
-      final snackBar = SnackBar(content: Text(e.message.toString()));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      print('Error saving user data ${e.message}');
-    }
-  }
+  //   try {
+  //     await FirebaseAuth.instance.signInWithProvider(GoogleAuthProvider());
+  //     navigator.pop();
+  //     isLoaddIn = false;
+  //     Get.offAll(() => const DashBoard());
+  //   } on FirebaseAuthException catch (e) {
+  //     navigator.pop();
+  //     isLoaddIn = true;
+  //     final snackBar = SnackBar(content: Text(e.message.toString()));
+  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  //     print('Error saving user data ${e.message}');
+  //   }
+  // }
 
   void applyForCourier(BuildContext context, String email, String password,
       String name, String surname) async {

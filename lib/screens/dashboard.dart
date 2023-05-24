@@ -87,7 +87,7 @@ class DashBoard extends StatelessWidget {
                 const OrderHistoryActivity(),
                 ElevatedButton(
                   onPressed: () {
-                    Get.to(() => const DetailsPage());
+                    // Get.to(() =>  DetailsPage());
                   },
                   child: const Text('detail Page'),
                 ),

@@ -21,13 +21,8 @@ Future<void> init() async {
   try {
     await SharedPreferences.getInstance();
     await initialize(aLocaleLanguageList: languageList());
-    await Firebase.initializeApp(
-            // options: DefaultFirebaseOptions.currentPlatform,
-
-            )
-        .then((value) => Get.put(AuthController()));
+    await Firebase.initializeApp().then((value) => Get.put(AuthController()));
     Get.lazyPut(() => UpdateProfileController());
-    // Get.put(UpdateProfileController());
 
     FlutterNativeSplash.remove();
   } catch (e) {

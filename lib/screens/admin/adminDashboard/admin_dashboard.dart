@@ -44,7 +44,7 @@ class _AdminDashboard extends State<AdminDashboard> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Get.to(() => const UserApplication());
+                                Get.to(() => UserApplication());
                               },
                               child: Container(
                                 color: context.primaryColor,
