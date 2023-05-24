@@ -216,6 +216,8 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - pay_ios (0.0.1):
+    - Flutter
   - permission_handler_apple (9.0.4):
     - Flutter
   - PromisesObjC (2.2.0)
@@ -262,6 +264,7 @@ DEPENDENCIES:
   - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - pay_ios (from `.symlinks/plugins/pay_ios/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -350,6 +353,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  pay_ios:
+    :path: ".symlinks/plugins/pay_ios/ios"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   shared_preferences_foundation:
@@ -412,6 +417,7 @@ SPEC CHECKSUMS:
   OneSignalXCFramework: 087934ab0d4d7445fcf1c015c7c782359e26c020
   package_info_plus: fd030dabf36271f146f1f3beacd48f564b0f17f7
   path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
+  pay_ios: 8c7beb9c61d885f3f51b61f75f8793023fc8843a
   permission_handler_apple: 44366e37eaf29454a1e7b1b7d736c2cceaeb17ce
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   PromisesSwift: cf9eb58666a43bbe007302226e510b16c1e10959

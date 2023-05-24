@@ -53,14 +53,14 @@ class DetailsPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Name',
-                              style: TextStyle(
+                              data!['details']['name'],
+                              style: const TextStyle(
                                 fontSize: 20,
                               ),
                             ),
                             Text(
-                              data!['name'].toString(),
-                              style: TextStyle(
+                              data!['role'],
+                              style: const TextStyle(
                                 fontSize: 14,
                               ),
                             ),
