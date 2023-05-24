@@ -40,8 +40,6 @@ class DetailsPage extends StatelessWidget {
             return Text('No data available');
           } else {
             final data = snapshot.data!.data();
-            final name = data!['name'];
-            final otherData = data['otherData'];
 
             return SingleChildScrollView(
               child: Center(
@@ -61,7 +59,7 @@ class DetailsPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              name,
+                              data!['name'].toString(),
                               style: TextStyle(
                                 fontSize: 14,
                               ),
