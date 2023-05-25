@@ -54,6 +54,8 @@ class PackageController extends GetxController {
           {
             'createdAt': createdAt,
             'statut': IsAccepted,
+            'shippementstatut':
+                'published', // here we have 4 shipement status published,accepted, shipping, recieved
             'packageDetails': {
               'productName': package_name,
               'weight': package_weight,
