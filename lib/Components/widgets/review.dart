@@ -9,8 +9,6 @@ class CustomReview extends StatelessWidget {
     return Container(
         width: 333,
         height: 160,
-        decoration: BoxDecoration(
-            color: context.cardColor, borderRadius: BorderRadius.circular(10)),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
@@ -31,10 +29,8 @@ class CustomReview extends StatelessWidget {
                     ),
                     const Text(
                       "Alex Cooper",
-                      style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       width: 10,
@@ -42,14 +38,16 @@ class CustomReview extends StatelessWidget {
                     Container(
                       width: 40,
                       height: 16,
-                      decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 148, 29, 163),
+                      decoration: BoxDecoration(
+                        color: context.primaryColor,
                       ),
                     ),
                     Expanded(child: Container()),
                     const Text(
-                      "2 days",
-                      style: TextStyle(fontSize: 10, color: Colors.white54),
+                      "2 days ago",
+                      style: TextStyle(
+                        fontSize: 10,
+                      ),
                     ),
                   ],
                 ),
@@ -57,7 +55,6 @@ class CustomReview extends StatelessWidget {
               const Expanded(
                   child: Text(
                 "en an unknown printer too ",
-                style: TextStyle(color: Colors.white70),
               ))
             ],
           ),

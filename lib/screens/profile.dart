@@ -21,17 +21,62 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  String selectedItem = 'en';
+
+  String? selectedLanguage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: context.scaffoldBackgroundColor,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(80),
-        child: CustomAppBar(
-          titleText: 'Profile',
-          isActionVisible: false,
+      appBar: AppBar(
+        backgroundColor: context.scaffoldBackgroundColor,
+        centerTitle: true,
+        title: Text(
+          'Profile',
+          style: TextStyle(color: context.primaryColor),
         ),
+        leading: backBtn(),
+        actions: [
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedItem = 'en';
+                  });
+                  _updateLanguage('en');
+                },
+                child: Text(
+                  'EN',
+                  style: TextStyle(
+                    color: selectedItem == 'en'
+                        ? context.primaryColor
+                        : context.hintColor,
+                  ),
+                ),
+              ),
+              SizedBox(width: 10),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedItem = 'tr';
+                  });
+                  _updateLanguage('tr');
+                },
+                child: Text(
+                  'TR',
+                  style: TextStyle(
+                    color: selectedItem == 'tr'
+                        ? context.primaryColor
+                        : context.hintColor,
+                  ),
+                ),
+              ),
+              SizedBox(width: 20),
+            ],
+          )
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -56,16 +101,16 @@ class _ProfileState extends State<Profile> {
                   color: Theme.of(context).iconTheme.color,
                 ),
 
-                SettingBtn(action: language.wallet),
+                // SettingBtn(action: language.wallet),
                 Container(
                   width: 290,
                   height: 1,
                   color: Theme.of(context).iconTheme.color,
                 ),
-                GestureDetector(
-                  child: SettingBtn(action: language.language),
-                  onTap: () => Get.to(() => const Language()),
-                ),
+                // GestureDetector(
+                //   child: SettingBtn(action: language.language),
+                //   onTap: () => Get.to(() => const Language()),
+                // ),
                 // GestureDetector(
                 //   child: const SettingBtn(action: 'apply for couriership'),
                 //   onTap: () => Get.to(() => const ApplyForCourier()),
@@ -83,30 +128,19 @@ class _ProfileState extends State<Profile> {
                   height: 1,
                   color: Theme.of(context).iconTheme.color,
                 ),
-                InkWell(
-                  child: const Icon(LineIcons.sun),
-                  onTap: () {
-                    print('this is light modde');
-                    appStore.setDarkMode(false);
-                    print('we set light mode to true');
-                    setValue(THEME_MODE_INDEX, 1);
+                IconButton(
+                  icon: appStore.isDarkMode
+                      ? const Icon(LineIcons.sun)
+                      : const Icon(LineIcons.moon),
+                  onPressed: () {
+                    print('Toggle Theme Mode');
+                    appStore.setDarkMode(!appStore.isDarkMode);
+                    setValue(THEME_MODE_INDEX, appStore.isDarkMode ? 2 : 1);
                     setState(() {});
                     LiveStream().emit('UpdateTheme');
-                    // finish(context);
                   },
                 ),
-                InkWell(
-                  child: const Icon(LineIcons.moon),
-                  onTap: () {
-                    print('this is dark modde');
-                    appStore.setDarkMode(true);
-                    print('we set dark mode to true');
-                    setValue(THEME_MODE_INDEX, 2);
-                    setState(() {});
-                    LiveStream().emit('UpdateTheme');
-                    // finish(context);
-                  },
-                ),
+
                 Container(
                   width: 290,
                   height: 1,
@@ -121,5 +155,22 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
+  }
+
+  lanbtn() {}
+
+  void _updateLanguage(String languageCode) {
+    try {
+      setValue(SELECTED_LANGUAGE_CODE, languageCode);
+      appStore.setLanguage(languageCode);
+      setState(() {});
+      LiveStream().emit('UpdateLanguage');
+      // Navigator.pushReplacementNamed(context, '/profile');
+    } catch (e) {
+      print(e);
+    }
+    setState(() {
+      selectedItem = languageCode;
+    });
   }
 }

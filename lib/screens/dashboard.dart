@@ -28,9 +28,8 @@ class DashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      extendBody: true, // Set extendBody to true
-
+      resizeToAvoidBottomInset: true,
+      extendBody: false,
       backgroundColor: context.scaffoldBackgroundColor,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
@@ -87,18 +86,13 @@ class DashBoard extends StatelessWidget {
               // const OrderHistoryActivity(),
               SvgPicture.string(SvgConstant.lineDark),
               const OrderHistoryActivity(),
-              ElevatedButton(
-                onPressed: () {
-                  // Get.to(() =>  DetailsPage());
-                },
-                child: const Text('detail Page'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Get.to(() => const EmptyPage());
-                },
-                child: const Text('empty Page'),
-              ),
+
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Get.to(() => const EmptyPage());
+              //   },
+              //   child: const Text('empty Page'),
+              // ),
               ElevatedButton(
                 onPressed: () {
                   Get.to(() => MyApp());
@@ -106,12 +100,12 @@ class DashBoard extends StatelessWidget {
                 child: const Text('track page 2'),
               ),
 
-              ElevatedButton(
-                onPressed: () {
-                  Get.to(() => const LiveTracking());
-                },
-                child: const Text('live trackin page'),
-              ),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Get.to(() => const LiveTracking());
+              //   },
+              //   child: const Text('live trackin page'),
+              // ),
               ElevatedButton(
                 onPressed: () {
                   Get.to(() => const AdminDashboard());
@@ -122,60 +116,59 @@ class DashBoard extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: SizedBox(
-        height: 88,
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(10.0),
-            topRight: Radius.circular(10.0),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+              color: context.hintColor, // Choose your desired color
+              width: 1.0, // Choose your desired width
+            ),
           ),
-          child: BottomNavigationBar(
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            backgroundColor: context.cardColor,
-            type: BottomNavigationBarType.fixed,
-            items: [
-              const BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: '',
-              ),
-              BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.only(bottom: 45.0),
-                  child: Container(
-                    height: 52,
-                    width: 52,
-                    decoration: BoxDecoration(
-                      color: context.secondaryHeaderColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(
-                      Icons.add,
-                      color: context.scaffoldBackgroundColor,
-                      size: 30,
-                    ),
-                  ),
+        ),
+        child: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          backgroundColor: context.scaffoldBackgroundColor,
+          type: BottomNavigationBarType.fixed,
+          items: [
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Container(
+                height: 52,
+                width: 52,
+                decoration: BoxDecoration(
+                  color: context.secondaryHeaderColor,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                label: '',
-              ),
-              const BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.person_outlined,
+                child: Icon(
+                  Icons.add,
+                  color: context.scaffoldBackgroundColor,
+                  size: 30,
                 ),
-                label: '',
               ),
-            ],
-            selectedItemColor: context.primaryColor,
-            onTap: (index) {
-              if (index == 0) {
-                Get.to(() => const DashBoard());
-              } else if (index == 1) {
-                Get.to(() => const PlaceOrderMap());
-              } else if (index == 2) {
-                Get.to(() => const Profile());
-              }
-            },
-          ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person_outlined,
+                color: context.hintColor,
+              ),
+              label: '',
+            ),
+          ],
+          selectedItemColor: context.primaryColor,
+          onTap: (index) {
+            if (index == 0) {
+              Get.to(() => const DashBoard());
+            } else if (index == 1) {
+              Get.to(() => const PlaceOrderMap());
+            } else if (index == 2) {
+              Get.to(() => const Profile());
+            }
+          },
         ),
       ),
     );

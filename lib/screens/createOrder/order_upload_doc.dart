@@ -344,8 +344,9 @@ class _OrderPage extends State<OrderUploadDoc> with TickerProviderStateMixin {
                   color: Colors.transparent,
                 ),
                 Center(
-                  child: Text('${(100 * progress).roundToDouble()}%',
-                      style: const TextStyle(color: Colors.white)),
+                  child: Text(
+                    '${(100 * progress).roundToDouble()}%',
+                  ),
                 ), // Center
               ],
             ),

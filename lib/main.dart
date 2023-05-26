@@ -2,6 +2,7 @@ import 'package:a2b/screens/home_page.dart';
 import 'package:a2b/screens/place_order_calendar.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
 import 'package:a2b/screens/place_order_upload.dart';
+import 'package:a2b/screens/profile.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:flutter/material.dart';
@@ -99,6 +100,7 @@ class _MainAppState extends State<MainApp> {
             GetPage(name: "/ordermap", page: () => const PlaceOrderMap()),
             GetPage(name: "/ordercalendar", page: () => const ConfirmOrder()),
             GetPage(name: "/orderupload", page: () => const PlaceOrderUpload()),
+            GetPage(name: "/profile", page: () => const Profile()),
           ],
         );
       },

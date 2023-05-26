@@ -157,23 +157,12 @@ class DetailsAppBar extends StatelessWidget {
   const DetailsAppBar({
     super.key,
     required this.titleText,
-    required this.photoURL,
   });
   final String titleText;
-  final String photoURL;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(photoURL),
-          colorFilter: ColorFilter.mode(
-            const Color.fromARGB(255, 23, 18, 18).withOpacity(0.6),
-            BlendMode.multiply,
-          ),
-          fit: BoxFit.cover,
-        ),
-      ),
       child: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: true,
@@ -225,4 +214,59 @@ class DetailsAppBar extends StatelessWidget {
       ),
     );
   }
+}
+// decoration: BoxDecoration(
+//         image: DecorationImage(
+//           image: NetworkImage(photoURL),
+//           colorFilter: ColorFilter.mode(
+//             const Color.fromARGB(255, 23, 18, 18).withOpacity(0.6),
+//             BlendMode.multiply,
+//           ),
+//           fit: BoxFit.cover,
+//         ),
+//       ),
+
+class ProfileAppbar extends StatelessWidget {
+  ProfileAppbar({
+    super.key,
+    required this.titleText,
+    required this.isActionVisible,
+  });
+  final String titleText;
+  final bool isActionVisible;
+  String selectedItem = 'en';
+
+  String? selectedLanguage;
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      centerTitle: true,
+      automaticallyImplyLeading: true,
+      leading: const Padding(
+        padding: EdgeInsets.fromLTRB(27, 4, 0, 4),
+        child: backBtn(),
+      ),
+      leadingWidth: 74,
+      title: Text(
+        titleText,
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: context.primaryColor,
+        ),
+      ),
+      actions: isActionVisible
+          ? [
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 5, 30, 3),
+                child: lngBtn(),
+              ),
+            ]
+          : [], // empty list to hide the action button
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+    );
+  }
+
+  lngBtn() {}
 }

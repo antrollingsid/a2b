@@ -8,6 +8,7 @@ import '../../Components/widgets/review.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 import '../ratePage/rate_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPage extends StatelessWidget {
   final String userId;
@@ -37,99 +38,172 @@ class DetailsPage extends StatelessWidget {
             return Scaffold(
               resizeToAvoidBottomInset: false,
               backgroundColor: context.scaffoldBackgroundColor,
-              appBar: PreferredSize(
-                preferredSize: const Size.fromHeight(227),
-                child: DetailsAppBar(
-                  titleText: 'Courier Details',
-                  photoURL: data!['details']['photoURL'],
-                ),
-              ),
-              body: SingleChildScrollView(
+              body: SafeArea(
                 child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                data!['details']['name'],
-                                style: const TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              Text(
-                                data!['role'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SvgPicture.string(SvgConstant.callBtnDark),
-                        ],
-                      ),
-                      Container(
-                        height: 86,
-                        width: 333,
-                        color: AppColors.buttonBlue,
-                        child: const Row(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 25.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '6y',
-                                  style: TextStyle(
-                                    color: AppColors.backgroundLightMode,
-                                    fontSize: 20,
+                            GestureDetector(
+                              onTap: () {
+                                // Implement the logic to show the image in full size
+                                // For example, you can use a Dialog or a separate screen to display the image.
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => Dialog(
+                                    child: Image.network(
+                                      data!['details']['photoURL'],
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: ClipOval(
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          data!['details']['photoURL']),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                                Text('experience'),
-                              ],
+                              ),
                             ),
                             Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  '6y',
-                                  style: TextStyle(
-                                    color: AppColors.backgroundLightMode,
-                                    fontSize: 20,
+                                  data!['details']['name'],
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
-                                Text('experience'),
+                                Text(
+                                  data!['role'],
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
                               ],
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '6y',
-                                  style: TextStyle(
-                                    color: AppColors.backgroundLightMode,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                Text('experience'),
-                              ],
+                            GestureDetector(
+                              onTap: () {
+                                launch(
+                                    'tel:+905488788211'); // Replace the phone number with your desired phone number
+                              },
+                              child: Container(
+                                width:
+                                    40, // Adjust the width as per your desired size
+                                height:
+                                    40, // Adjust the height as per your desired size
+                                child: ClipOval(
+                                    child: Container(
+                                        height: 40,
+                                        width: 40,
+                                        color: context
+                                            .primaryColor, // Add a background color to the container
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.phone,
+                                            color:
+                                                context.scaffoldBackgroundColor,
+                                            // Set the color of the phone icon
+                                          ),
+                                        ))),
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                      CustomReview(),
-                      CustomBtn(
-                        textonbtn: 'rate the courier',
-                        onPress: () {
-                          Get.to(() => const RatePage());
-                        },
-                        primary: true,
-                      ),
-                    ],
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          height: 86,
+                          width: 333,
+                          decoration: BoxDecoration(
+                              color: context.primaryColor,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '6y',
+                                    style: TextStyle(
+                                      color: AppColors.backgroundLightMode,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  Text('experience'),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '6y',
+                                    style: TextStyle(
+                                      color: AppColors.backgroundLightMode,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  Text('experience'),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '6y',
+                                    style: TextStyle(
+                                      color: AppColors.backgroundLightMode,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  Text('experience'),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                          width: 333,
+                          height:
+                              530, // Adjust the height as per your requirements
+                          child: ListView(
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            children: [
+                              CustomReview(),
+                              CustomReview(),
+                              CustomReview(),
+                              CustomReview(),
+                              // Add more CustomReview widgets as needed
+                            ],
+                          ),
+                        ),
+                        CustomBtn(
+                          textonbtn: 'rate the courier',
+                          onPress: () {
+                            Get.to(() => const RatePage());
+                          },
+                          primary: true,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

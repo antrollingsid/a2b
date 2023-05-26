@@ -1,10 +1,6 @@
-// ignore_for_file: unnecessary_null_comparison
-
 import 'dart:async';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/main/utils/allConstants.dart';
-import 'package:a2b/screens/createOrder/order_upload_doc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
@@ -259,23 +255,31 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
           ),
           DraggableScrollableSheet(
             initialChildSize: 0.5,
-            minChildSize: 0.14,
+            minChildSize: 0.26,
             maxChildSize: 0.5,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
-                decoration: const BoxDecoration(
-                  color: Color.fromRGBO(3, 3, 3, 1),
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+                decoration: BoxDecoration(
+                  color: context.scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
                 ),
                 child: ListView(
                   shrinkWrap: true,
                   controller: scrollController,
                   padding: const EdgeInsets.all(16),
                   children: [
-                    // PlacePicker(
-                    //   googleMapAPIKey,
-                    // ),
-
+                    Center(
+                      child: SizedBox(
+                        width: 25,
+                        child: Container(
+                          height: 3,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(39, 42, 40, 1),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                      ),
+                    ),
                     TextFormField(
                       textAlign: TextAlign.start,
                       onTap: () async {
@@ -302,6 +306,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                           fontWeight:
                               FontWeight.w500), // Set font size and bold
                       controller: TextEditingController(
+                        // ignore: unnecessary_null_comparison
                         text: _selectedDate != null
                             ? DateFormat('dd MMM\nyyyy').format(_selectedDate)
                             : '',
@@ -316,7 +321,6 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // PICKUP BOX
-
                         GestureDetector(
                           onTap: () {
                             setState(() {
@@ -329,11 +333,13 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             width: 175,
                             height: 90,
                             decoration: BoxDecoration(
-                              color: const Color.fromRGBO(39, 42, 40, 1),
+                              color:
+                                  context.secondaryHeaderColor.withOpacity(0.1),
                               border: Border.all(
                                 color: isPickupFocused
                                     ? context.primaryColor
-                                    : const Color.fromRGBO(39, 42, 40, 1),
+                                    : context.secondaryHeaderColor
+                                        .withOpacity(0.1),
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(12),
@@ -345,8 +351,9 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                                 children: [
                                   Text(
                                     language.pickup,
-                                    style: const TextStyle(
-                                      color: Color.fromRGBO(126, 126, 126, 1),
+                                    style: TextStyle(
+                                      color:
+                                          context.primaryColor.withOpacity(0.7),
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -368,6 +375,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             ),
                           ),
                         ),
+                        // DELIVERY BOX
                         GestureDetector(
                           onTap: () {
                             setState(() {
@@ -380,14 +388,16 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             width: 175,
                             height: 90,
                             decoration: BoxDecoration(
-                              color: const Color.fromRGBO(39, 42, 40, 1),
+                              color:
+                                  context.secondaryHeaderColor.withOpacity(0.1),
                               border: Border.all(
                                 color: isDeliveryFocused
                                     ? context.primaryColor
-                                    : const Color.fromRGBO(39, 42, 40, 1),
+                                    : context.secondaryHeaderColor
+                                        .withOpacity(0.1),
                                 width: 1,
                               ),
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -396,8 +406,9 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                                 children: [
                                   Text(
                                     language.delivery,
-                                    style: const TextStyle(
-                                      color: Color.fromRGBO(126, 126, 126, 1),
+                                    style: TextStyle(
+                                      color:
+                                          context.primaryColor.withOpacity(0.7),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -433,12 +444,14 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             width: 175,
                             height: 62,
                             decoration: BoxDecoration(
-                              color: const Color.fromRGBO(39, 42, 40, 1),
+                              color:
+                                  context.secondaryHeaderColor.withOpacity(0.1),
                               border: Border.all(
-                                color: const Color.fromRGBO(39, 42, 40, 1),
+                                color: context.secondaryHeaderColor
+                                    .withOpacity(0.1),
                                 width: 1,
                               ),
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -447,8 +460,9 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                                 children: [
                                   Text(
                                     language.parcelType,
-                                    style: const TextStyle(
-                                      color: Color.fromRGBO(126, 126, 126, 1),
+                                    style: TextStyle(
+                                      color:
+                                          context.primaryColor.withOpacity(0.7),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -497,6 +511,8 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             ),
                           ),
                         ),
+
+                        // WEIGHT BOX
                         GestureDetector(
                           onTap: () {
                             setState(() {});
@@ -505,12 +521,14 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             width: 175,
                             height: 62,
                             decoration: BoxDecoration(
-                              color: const Color.fromRGBO(39, 42, 40, 1),
+                              color:
+                                  context.secondaryHeaderColor.withOpacity(0.1),
                               border: Border.all(
-                                color: const Color.fromRGBO(39, 42, 40, 1),
+                                color: context.secondaryHeaderColor
+                                    .withOpacity(0.1),
                                 width: 1,
                               ),
-                              borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -519,8 +537,9 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                                 children: [
                                   Text(
                                     language.weight,
-                                    style: const TextStyle(
-                                      color: Color.fromRGBO(126, 126, 126, 1),
+                                    style: TextStyle(
+                                      color:
+                                          context.primaryColor.withOpacity(0.7),
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -528,12 +547,12 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                                   const SizedBox(
                                     height: 0,
                                   ),
-                                  Container(
+                                  SizedBox(
                                     // color: Colors.amberAccent,
                                     height: 26,
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton(
-                                        icon: SizedBox.shrink(),
+                                        icon: const SizedBox.shrink(),
                                         value: selectedWeight,
                                         items: const [
                                           DropdownMenuItem(
@@ -577,18 +596,18 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
             left: 0,
             right: 0,
             bottom: 0,
-            height: 135,
+            height: 110,
             child: DraggableScrollableSheet(
               initialChildSize: 1,
-              minChildSize: 0.5,
+              minChildSize: 1,
               maxChildSize: 1,
               builder:
                   (BuildContext context, ScrollController scrollController) {
                 return Container(
-                  decoration: const BoxDecoration(
-                    color: Color.fromRGBO(20, 20, 20, 1),
+                  decoration: BoxDecoration(
+                    color: context.secondaryHeaderColor,
                     borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(30)),
+                        const BorderRadius.vertical(top: Radius.circular(0)),
                   ),
                   child: ListView.builder(
                     controller: scrollController,
@@ -597,7 +616,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                     itemCount: 1,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: EdgeInsets.all(16),
+                        padding: EdgeInsets.only(top: 10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [

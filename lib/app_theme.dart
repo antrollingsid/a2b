@@ -25,9 +25,10 @@ class AppTheme {
     // ),
 
     primarySwatch: createMaterialColor(colorPrimary),
+    hintColor: Color.fromARGB(255, 162, 162, 162),
     primaryColor: const Color.fromRGBO(224, 124, 121, 1),
     secondaryHeaderColor: const Color.fromRGBO(13, 13, 13, 1),
-    scaffoldBackgroundColor: AppColors.backgroundLightMode,
+    scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
     fontFamily: GoogleFonts.roboto().fontFamily,
     iconTheme: const IconThemeData(color: Color.fromRGBO(224, 124, 121, 1)),
     dialogBackgroundColor: Colors.white,
@@ -58,7 +59,7 @@ class AppTheme {
     primarySwatch: createMaterialColor(colorPrimary),
     primaryColor: const Color.fromRGBO(187, 134, 252, 1.0),
     scaffoldBackgroundColor: AppColors.buttonStroke,
-
+    secondaryHeaderColor: Colors.white,
     fontFamily: GoogleFonts.roboto().fontFamily,
     iconTheme: const IconThemeData(color: AppColors.backgroundLightMode),
     dialogBackgroundColor: scaffoldSecondaryDark,
