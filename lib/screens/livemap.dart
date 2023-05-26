@@ -28,6 +28,7 @@ class _MyMap1State extends State<MyMap1> {
             return Center(child: CircularProgressIndicator());
           }
           return GoogleMap(
+            zoomControlsEnabled: false,
             myLocationButtonEnabled: false,
             // compassEnabled: false,
             mapType: MapType.normal,

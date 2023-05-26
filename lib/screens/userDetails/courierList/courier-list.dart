@@ -19,7 +19,7 @@ class CourierList extends StatefulWidget {
 
 class _CourierList extends State<CourierList> {
   CollectionReference usersCollection =
-      FirebaseFirestore.instance.collection('users');
+      FirebaseFirestore.instance.collection('couriers');
 
   @override
   Widget build(BuildContext context) {

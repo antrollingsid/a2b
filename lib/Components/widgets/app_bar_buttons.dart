@@ -157,17 +157,18 @@ class DetailsAppBar extends StatelessWidget {
   const DetailsAppBar({
     super.key,
     required this.titleText,
+    required this.photoURL,
   });
   final String titleText;
-
+  final String photoURL;
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: const AssetImage('assets/images/1x/1.png'),
+          image: NetworkImage(photoURL),
           colorFilter: ColorFilter.mode(
-            AppColors.backgroundLightMode.withOpacity(0.6),
+            const Color.fromARGB(255, 23, 18, 18).withOpacity(0.6),
             BlendMode.multiply,
           ),
           fit: BoxFit.cover,
@@ -189,8 +190,8 @@ class DetailsAppBar extends StatelessWidget {
               height: 10,
               width: double.infinity,
               // margin: const EdgeInsets.all(26),
-              decoration: const BoxDecoration(
-                color: AppColors.backgroundLightMode,
+              decoration: BoxDecoration(
+                color: context.scaffoldBackgroundColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),

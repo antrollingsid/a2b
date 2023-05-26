@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import '../../controllers/auth_controller.dart';
 import '../../main/utils/allConstants.dart';
 
@@ -20,7 +21,7 @@ class CustomShip extends StatelessWidget {
             height: 143,
             width: 333,
             decoration: BoxDecoration(
-              color: AppColors.primary,
+              color: context.primaryColor,
               borderRadius: BorderRadius.circular(15),
             ),
             child: Padding(
@@ -66,7 +67,12 @@ class CustomShip extends StatelessWidget {
                     color: Colors.blueGrey,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: MyMap1(tracked.doc('user1').id),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: MyMap1(
+                      tracked.doc('user1').id,
+                    ),
+                  ),
                 )
               ]),
             ),

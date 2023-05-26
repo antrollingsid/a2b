@@ -62,7 +62,7 @@ class AuthController extends GetxController {
           final givenName = nameParts.first;
           final surname = nameParts.length > 1 ? nameParts.last : '';
 
-          final createdAt = DateTime.now().toString();
+          final createdAt = DateTime.now();
           final userDetails = {
             'role': 'general',
             'createdAt': createdAt,
@@ -82,7 +82,7 @@ class AuthController extends GetxController {
 
           _user = UserModel(
               role: 'general',
-              createdAt: createdAt.toString(),
+              createdAt: createdAt,
               details: Details(
                   id: user.uid,
                   name: givenName,
@@ -91,14 +91,30 @@ class AuthController extends GetxController {
                   photoURL: user.photoURL ?? ''));
         } else {
           print("Initialize the user motherfucker");
+          var response =
+              await FirebaseAuth.instance.signInWithCredential(credential);
+          var snapshot = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(response.user!.uid)
+              .get();
+
+          var data = snapshot.data();
+          UserModel newUser = UserModel.fromJson(data!);
+
+          _user = newUser;
+          _isLoggedIn = true;
+          update();
+          isLoaddIn = false;
+          navigator.pop();
+          Get.offAll(() => const DashBoard());
         }
 
-        _isLoggedIn = true;
-        update();
-        isLoaddIn = false;
-        navigator.pop();
-        Get.offAll(() => const DashBoard());
-      } else {}
+        // _isLoggedIn = true;
+        // update();
+        // isLoaddIn = false;
+        // navigator.pop();
+        // Get.offAll(() => const DashBoard());
+      }
     } catch (e) {
       print('Error signing in with Google: $e');
     }

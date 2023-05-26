@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class CustomReview extends StatelessWidget {
   const CustomReview({super.key});
@@ -6,10 +7,10 @@ class CustomReview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: double.infinity,
-        height: 200,
+        width: 333,
+        height: 160,
         decoration: BoxDecoration(
-            color: Colors.white10, borderRadius: BorderRadius.circular(10)),
+            color: context.cardColor, borderRadius: BorderRadius.circular(10)),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
@@ -55,7 +56,7 @@ class CustomReview extends StatelessWidget {
               ),
               const Expanded(
                   child: Text(
-                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+                "en an unknown printer too ",
                 style: TextStyle(color: Colors.white70),
               ))
             ],

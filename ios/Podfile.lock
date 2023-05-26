@@ -389,7 +389,7 @@ SPEC CHECKSUMS:
   FirebaseCoreExtension: d3e9bba2930a8033042112397cd9f006a1bb203d
   FirebaseCoreInternal: d2b4acb827908e72eca47a9fd896767c3053921e
   FirebaseCrashlytics: b60329455285aff853e54139d8ddbfe1e5f2b9f9
-  FirebaseFirestore: 8418f3a8d5892bf386b05d5f988b6e7e253a2ea6
+  FirebaseFirestore: bfafc0d3ecf3e9f1a706c4a3fa1567c09d9f83fd
   FirebaseInstallations: c58489c9caacdbf27d1da60891a87318e20218e0
   FirebaseSessions: 44a6782502eb279a214d4adca20891353278760c
   FirebaseStorage: 075a0c10ec43f24193018c539d65e991db65d9ef

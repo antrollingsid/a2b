@@ -1,29 +1,12 @@
-// import 'package:a2b/main.dart';
-// ignore_for_file: unused_import
-
-import 'package:a2b/screens/profile.dart';
-import 'package:flutter_svg/svg.dart';
-import '../app_theme.dart';
-import '../main/languages/app_localizations.dart';
-import '../main/languages/base_language.dart';
 import '../../main.dart';
 import '../../main/utils/allConstants.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../main/utils/colors.dart';
 import '../../Components/widgets/custom_button.dart';
-import '../../Components/widgets/inkwell_button.dart';
 import 'authentication/login.dart';
 import 'authentication/register.dart';
 
-final List<SvgPicture> imgList = [
-  SvgPicture.string(SvgConstant.homeSvgDark1),
-  SvgPicture.string(SvgConstant.homeSvgLight1),
-  SvgPicture.string(SvgConstant.homeSvgLight11),
-];
 int currentIndex = 0;
 
 class HomePage extends StatefulWidget {
@@ -66,56 +49,6 @@ class _HomePageState extends State<HomePage> {
             hasScrollBody: false,
             child: Column(
               children: [
-                Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.33,
-                    child: Column(
-                      children: [
-                        CarouselSlider(
-                          options: CarouselOptions(
-                            viewportFraction: 1.0,
-                            height: 250,
-                            enlargeCenterPage: true,
-                            enlargeStrategy: CenterPageEnlargeStrategy.height,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                currentIndex = index;
-                              });
-                            },
-                          ),
-                          items: imgList
-                              .map(
-                                (item) => Center(
-                                  child: SizedBox(
-                                    width: 2400,
-                                    child: item,
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        DotsIndicator(
-                          dotsCount: imgList.length,
-                          position: currentIndex.toDouble(),
-                          decorator: DotsDecorator(
-                            color: AppColors.secondary,
-                            size: const Size.square(5.0),
-                            activeSize: const Size(30.0, 5.0),
-                            activeColor: context.primaryColor,
-                            activeShape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                // const SizedBox(
-                //   height: 40,
-                // ),
                 Expanded(
                   child: Column(
                     children: [
@@ -124,6 +57,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                       Column(
                         children: [
+                          const SizedBox(
+                            height: 80,
+                          ),
                           Text(
                             language.welcomeMsg,
                             style: const TextStyle(
@@ -146,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 100,
                       ),
                       CustomBtn(
                         textonbtn: language.signIn,
@@ -159,9 +95,8 @@ class _HomePageState extends State<HomePage> {
                         primary: false,
                       ),
                       const SizedBox(
-                        height: 50,
+                        height: 150,
                       ),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -191,8 +126,46 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
+                      DropdownButton(
+                        value: selectedItem,
+                        items: const [
+                          DropdownMenuItem(value: 'en', child: Text('English')),
+                          DropdownMenuItem(value: 'tr', child: Text('Turkish')),
+                        ],
+                        onChanged: (value) {
+                          setState(() {
+                            try {
+                              setValue(SELECTED_LANGUAGE_CODE, value);
+                              appStore.setLanguage(value!);
+                              setState(() {});
+                              LiveStream().emit('UpdateLanguage');
+                              finish(context);
+                            } catch (e) {
+                              print(e);
+                            }
+                            selectedItem = value!;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+// themeModeLight = 1;
+// themeModeDark = 2;
+//  themeModeSystem = 0;
 
-                      // .onTap(() async {
+
+
+
+ // .onTap(() async {
                       //   currentIndex = index;
                       //   if (index == appThemeMode.themeModeSystem) {
                       //     appStore.setDarkMode(
@@ -243,40 +216,3 @@ class _HomePageState extends State<HomePage> {
                       //     });
                       //   },
                       // ),
-                      DropdownButton(
-                        value: selectedItem,
-                        items: const [
-                          DropdownMenuItem(value: 'en', child: Text('English')),
-                          DropdownMenuItem(value: 'tr', child: Text('Turkish')),
-                        ],
-                        onChanged: (value) {
-                          setState(() {
-                            try {
-                              setValue(SELECTED_LANGUAGE_CODE, value);
-                              appStore.setLanguage(value!);
-                              setState(() {});
-                              LiveStream().emit('UpdateLanguage');
-                              finish(context);
-                            } catch (e) {
-                              print(e);
-                            }
-                            selectedItem = value!;
-                          });
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-}
-// themeModeLight = 1;
-// themeModeDark = 2;
-//  themeModeSystem = 0;
-
-

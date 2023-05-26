@@ -73,7 +73,7 @@ class _RegisterState extends State<Register> {
                               regcontroller.email.text,
                               regcontroller.password.text,
                               regcontroller.name.text,
-                              regcontroller.password.text),
+                              regcontroller.surname.text),
                           primary: true,
                         ),
                         InkwellBtn(

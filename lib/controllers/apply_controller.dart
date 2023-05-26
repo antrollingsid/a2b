@@ -33,6 +33,7 @@ Future addApplicationDetails(BuildContext context, String url, String plateNo,
       'email': userSnapshot['details']['email'],
       'photoURL': userSnapshot['details']['photoURL'],
     },
+    'role': userSnapshot['role'],
     'documents': {
       'licence': url,
       'plateNo': plateNo,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color onBackgroundDark = Colors.white;
-  static const Color backgroundLightMode = Color.fromRGBO(255, 255, 255, 1);
+  static const Color backgroundLightMode = Color.fromRGBO(223, 219, 216, 1);
   static const Color secondaryBlue = Color.fromRGBO(209, 101, 69, 1.0);
   static const Color buttonStroke = Color.fromRGBO(18, 18, 18, 1.0);
   static const Color buttonYellow = Color.fromRGBO(255, 246, 117, 1.0);
