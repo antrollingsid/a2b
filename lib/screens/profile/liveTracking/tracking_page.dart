@@ -13,8 +13,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
-import '../../Components/widgets/app_bar_buttons.dart';
-import '../../main/utils/Constants.dart';
+import '../../../Components/widgets/app_bar_buttons.dart';
+import '../../../main/utils/Constants.dart';
 
 const darkMapStyle = 'assets/json/dark_mode_style.json';
 

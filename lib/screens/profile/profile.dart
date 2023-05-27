@@ -1,6 +1,5 @@
 import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/screens/profile/applyForCourier/apply_for_courier.dart';
-import 'package:a2b/screens/profile/editProfile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -99,10 +98,6 @@ class _ProfileState extends State<Profile> {
               children: [
                 // if()
                 TopProfile(),
-                InkWell(
-                  child: SettingBtn(action: language.editProfile),
-                  onTap: () => Get.to(() => const EditProfile()),
-                ),
 
                 InkWell(
                     onTap: () => Get.to(() => const ApplyForCourier()),
@@ -140,4 +135,3 @@ class _ProfileState extends State<Profile> {
     });
   }
 }
- 
