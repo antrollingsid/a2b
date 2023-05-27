@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../Components/widgets/settings_button.dart';
-import '../screens/chat/chat_screen.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
-import 'dashboard.dart';
+import 'dashboard/dashboard.dart';
 
 class MenuPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -40,10 +39,10 @@ class _MenuPage extends State<MenuPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // CustomCalendar(),
-              GestureDetector(
-                child: const SettingBtn(action: 'messages'),
-                onTap: () => Get.to(const ChatScreen()),
-              ),
+              // GestureDetector(
+              //   child: const SettingBtn(action: 'messages'),
+              //   onTap: () => Get.to(const ChatScreen()),
+              // ),
               GestureDetector(
                 child: const SettingBtn(action: 'home'),
                 onTap: () => Get.to(() => const DashBoard()),

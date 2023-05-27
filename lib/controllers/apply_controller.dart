@@ -1,5 +1,5 @@
 import 'package:a2b/models/user_model.dart';
-import 'package:a2b/screens/dashboard.dart';
+import 'package:a2b/screens/dashboard/dashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

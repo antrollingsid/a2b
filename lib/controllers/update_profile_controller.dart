@@ -12,7 +12,6 @@ class UpdateProfileController extends GetxController {
     BuildContext context,
     String? name,
     String? surname,
-    String? age,
   ) async {
     try {
       var response = FirebaseAuth.instance.currentUser;
@@ -29,12 +28,6 @@ class UpdateProfileController extends GetxController {
       if (surname != null) {
         await userDocRef.update({
           'details.surname': surname,
-        });
-      }
-
-      if (age != null) {
-        await userDocRef.update({
-          'details.age': age,
         });
       }
 

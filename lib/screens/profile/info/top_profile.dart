@@ -1,4 +1,5 @@
 import 'package:a2b/controllers/auth_controller.dart';
+import 'package:a2b/main.dart';
 import 'package:a2b/main/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,10 +21,7 @@ class TopProfile extends StatelessWidget {
         }
         return Center(
           child: SizedBox(
-            // color: AppColors.buttonBlue,
             width: 333,
-            // mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.start,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,34 +62,18 @@ class TopProfile extends StatelessWidget {
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Joined',
-                                style: TextStyle(
-                                  fontFamily: 'SF Pro Display',
+                              Text(
+                                language.email,
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w100,
-                                  // height:  1.5*ffem/fem,
-                                  color: Color(0xffffffff),
                                 ),
                               ),
                               Text(
-                                // DateFormat('dd MMM yyyy')
-                                //     .format(DateTime.parse(
-                                controller.user.role,
-                                //     ))
-                                // .toString(),
-                                // timeago
-                                // .format(
-                                //     DateTime.parse(
-                                //         controller.user.createdAt.v),
-                                // locale: 'en_short')
-                                // .toString(),
+                                controller.user.details.email,
                                 style: const TextStyle(
-                                  fontFamily: 'SF Pro Display',
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
-                                  // height:  1.5*ffem/fem,
-                                  color: Color(0xffffffff),
                                 ),
                               ),
                             ],
@@ -99,28 +81,22 @@ class TopProfile extends StatelessWidget {
                           const SizedBox(
                             height: 20,
                           ),
-                          const Column(
+                          Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Wallet',
-                                style: TextStyle(
-                                  fontFamily: 'SF Pro Display',
+                                language.phoneNumber,
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w100,
-                                  // height:  1.5*ffem/fem,
-                                  color: Color(0xffffffff),
                                 ),
                               ),
-                              Text(
-                                "250",
+                              const Text(
+                                '05338546422',
                                 style: TextStyle(
-                                  fontFamily: 'SF Pro Display',
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
-                                  // height:  1.5*ffem/fem,
-                                  color: Color(0xffffffff),
                                 ),
                               ),
                             ],
@@ -138,12 +114,10 @@ class TopProfile extends StatelessWidget {
                     children: [
                       Text(
                         controller.user.details.name,
-                        style: const TextStyle(
-                          fontFamily: 'SF Pro Display',
+                        style: TextStyle(
                           fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                          // height:  1.5*ffem/fem,
-                          color: Color(0xffffffff),
+                          fontWeight: FontWeight.w500,
+                          color: context.hintColor,
                         ),
                       ),
                       const SizedBox(
@@ -152,12 +126,10 @@ class TopProfile extends StatelessWidget {
                       Text(
                         controller.user.details.surname,
                         style: const TextStyle(
-                          fontFamily: 'SF Pro Display',
                           fontSize: 36,
                           fontWeight: FontWeight.w200,
                           // wordSpacing: 1.5,
                           letterSpacing: 1.5,
-                          // height:  1.5*ffem/fem,
                           color: AppColors.textGrey,
                         ),
                       ),

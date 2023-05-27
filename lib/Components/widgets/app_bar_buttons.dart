@@ -8,6 +8,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../screens/profile/profile.dart';
 import '../assets/fonts.dart';
 
 // ignore: camel_case_types
@@ -53,11 +54,11 @@ class menuBtn extends StatelessWidget {
       color: Colors.transparent,
       child: IconButton(
         icon: SvgPicture.string(
-          SvgConstant.burgerMenuDark,
+          SvgConstant.profIcon,
           color: context.primaryColor,
         ),
         onPressed: () {
-          Get.to(const MenuPage());
+          Get.to(const Profile());
         },
       ),
     );

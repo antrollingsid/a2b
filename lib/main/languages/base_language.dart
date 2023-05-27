@@ -506,7 +506,7 @@ abstract class BaseLanguage {
 
   String get subTotal;
 
-  String get phoneNumberInvalid;
+  String get phoneNumber;
 
   String get placeOrderByMistake;
 

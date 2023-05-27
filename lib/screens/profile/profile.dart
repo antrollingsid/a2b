@@ -1,17 +1,17 @@
 import 'package:a2b/controllers/auth_controller.dart';
-import 'package:a2b/screens/applyForCourier/apply_for_courier.dart';
-import 'package:a2b/screens/editProfile/edit_profile.dart';
+import 'package:a2b/screens/profile/applyForCourier/apply_for_courier.dart';
+import 'package:a2b/screens/profile/editProfile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../Components/widgets/app_bar_buttons.dart';
-import '../../Components/widgets/settings_button.dart';
-import '../../Components/widgets/sign_out_btn.dart';
-import '../../Components/widgets/top_profile.dart';
-import '../../Components/widgets/upgrade_button.dart';
-import '../../main.dart';
-import 'pick_language.dart';
+import '../../../Components/widgets/app_bar_buttons.dart';
+import '../../../Components/widgets/settings_button.dart';
+import '../../../Components/widgets/sign_out_btn.dart';
+import 'info/top_profile.dart';
+import '../../../Components/widgets/upgrade_button.dart';
+import '../../../main.dart';
+import '../pick_language.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -40,6 +40,18 @@ class _ProfileState extends State<Profile> {
         actions: [
           Row(
             children: [
+              IconButton(
+                icon: appStore.isDarkMode
+                    ? const Icon(LineIcons.sun)
+                    : Icon(LineIcons.moon, color: context.primaryColor),
+                onPressed: () {
+                  print('Toggle Theme Mode');
+                  appStore.setDarkMode(!appStore.isDarkMode);
+                  setValue(THEME_MODE_INDEX, appStore.isDarkMode ? 2 : 1);
+                  setState(() {});
+                  LiveStream().emit('UpdateTheme');
+                },
+              ),
               GestureDetector(
                 onTap: () {
                   setState(() {
@@ -89,66 +101,17 @@ class _ProfileState extends State<Profile> {
                   child: SettingBtn(action: language.editProfile),
                   onTap: () => Get.to(() => const EditProfile()),
                 ),
-                Container(
-                  width: 290,
-                  height: 1,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                const SettingBtn(action: 'Settings'),
-                Container(
-                  width: 290,
-                  height: 1,
-                  color: Theme.of(context).iconTheme.color,
-                ),
 
-                // SettingBtn(action: language.wallet),
-                Container(
-                  width: 290,
-                  height: 1,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                // GestureDetector(
-                //   child: SettingBtn(action: language.language),
-                //   onTap: () => Get.to(() => const Language()),
-                // ),
-                // GestureDetector(
-                //   child: const SettingBtn(action: 'apply for couriership'),
-                //   onTap: () => Get.to(() => const ApplyForCourier()),
-                // ),
-                Container(
-                  width: 290,
-                  height: 1,
-                  color: Theme.of(context).iconTheme.color,
-                ),
                 InkWell(
                     onTap: () => Get.to(() => const ApplyForCourier()),
-                    child: const UpgadeBtn()),
-                Container(
-                  width: 290,
-                  height: 1,
-                  color: Theme.of(context).iconTheme.color,
-                ),
-                IconButton(
-                  icon: appStore.isDarkMode
-                      ? const Icon(LineIcons.sun)
-                      : const Icon(LineIcons.moon),
-                  onPressed: () {
-                    print('Toggle Theme Mode');
-                    appStore.setDarkMode(!appStore.isDarkMode);
-                    setValue(THEME_MODE_INDEX, appStore.isDarkMode ? 2 : 1);
-                    setState(() {});
-                    LiveStream().emit('UpdateTheme');
-                  },
-                ),
+                    child: SettingBtn(action: 'apply for couriership')),
 
-                Container(
-                  width: 290,
-                  height: 1,
-                  color: Theme.of(context).iconTheme.color,
+                SizedBox(
+                  height: 180,
                 ),
                 InkWell(
                     onTap: () => Get.find<AuthController>().signOut(),
-                    child: const SignOutBtn())
+                    child: SettingBtn(action: language.logout))
               ],
             ),
           ),
@@ -156,8 +119,6 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
-
-  lanbtn() {}
 
   void _updateLanguage(String languageCode) {
     try {

@@ -4,15 +4,15 @@ import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/Components/widgets/custom_textfield.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-import '../../controllers/apply_controller.dart';
-import '../../main/utils/allConstants.dart';
+import '../../../controllers/apply_controller.dart';
+import '../../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
-import '../../Components/widgets/app_bar_buttons.dart';
+import '../../../Components/widgets/app_bar_buttons.dart';
 
 class ApplyForCourier extends StatefulWidget {
   const ApplyForCourier({Key? key}) : super(key: key);

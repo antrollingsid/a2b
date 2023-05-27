@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:a2b/models/user_model.dart';
-import 'package:a2b/screens/dashboard.dart';
+import 'package:a2b/screens/dashboard/dashboard.dart';
 import 'package:a2b/screens/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

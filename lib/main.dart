@@ -1,8 +1,7 @@
 import 'package:a2b/screens/home_page.dart';
-import 'package:a2b/screens/place_order_calendar.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
 import 'package:a2b/screens/place_order_upload.dart';
-import 'package:a2b/screens/profile.dart';
+import 'package:a2b/screens/profile/profile.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:flutter/material.dart';
@@ -13,7 +12,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '/screens/authentication/login.dart';
 import '/screens/authentication/register.dart';
 import 'app_theme.dart';
-import '/screens/dashboard.dart';
+import 'screens/dashboard/dashboard.dart';
 // import 'main/Services/ChatMessagesService.dart';
 // import 'main/Services/NotificationService.dart';
 import 'main/languages/base_language.dart';
@@ -98,7 +97,6 @@ class _MainAppState extends State<MainApp> {
             GetPage(name: '/register', page: () => const Register()),
             GetPage(name: "/dashbored", page: () => const DashBoard()),
             GetPage(name: "/ordermap", page: () => const PlaceOrderMap()),
-            GetPage(name: "/ordercalendar", page: () => const ConfirmOrder()),
             GetPage(name: "/orderupload", page: () => const PlaceOrderUpload()),
             GetPage(name: "/profile", page: () => const Profile()),
           ],

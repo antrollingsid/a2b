@@ -2,22 +2,22 @@ import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/Components/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/update_profile_controller.dart';
-import '../../main/utils/allConstants.dart';
-import '../../Components/widgets/app_bar_buttons.dart';
+import '../../../controllers/update_profile_controller.dart';
+import '../../../main/utils/allConstants.dart';
+import '../../../Components/widgets/app_bar_buttons.dart';
 
 class EditProfile extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const EditProfile({Key? key});
+  const EditProfile({key});
 
   @override
   State<EditProfile> createState() => _EditProfile();
 }
 
+final TextEditingController _namecontroller = TextEditingController();
+final TextEditingController _surnamecontroller = TextEditingController();
+final TextEditingController _phonecontroller = TextEditingController();
+
 class _EditProfile extends State<EditProfile> {
-  final TextEditingController _namecontroller = TextEditingController();
-  final TextEditingController _surnamecontroller = TextEditingController();
-  final TextEditingController _phonecontroller = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -26,7 +26,7 @@ class _EditProfile extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.backgroundLightMode,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
@@ -40,8 +40,6 @@ class _EditProfile extends State<EditProfile> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // CustomCalendar(),
-              // CustomShip(),
               CustomTextfield(
                 isPassword: false,
                 hintText: 'name...',
@@ -63,10 +61,10 @@ class _EditProfile extends State<EditProfile> {
               CustomBtn(
                 textonbtn: 'update',
                 onPress: () => controller.updateUserDetails(
-                    context,
-                    _namecontroller.text,
-                    _surnamecontroller.text,
-                    _phonecontroller.text),
+                  context,
+                  _namecontroller.text,
+                  _surnamecontroller.text,
+                ),
                 primary: true,
               ),
             ],

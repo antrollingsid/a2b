@@ -778,7 +778,7 @@ class LanguageEn extends BaseLanguage {
   String get subTotal => "Sub Total";
 
   @override
-  String get phoneNumberInvalid => "The provided phone number is not valid.";
+  String get phoneNumber => "Phone number";
 
   @override
   String get placeOrderByMistake => "Place order by mistake";

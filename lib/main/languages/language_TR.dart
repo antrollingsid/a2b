@@ -777,7 +777,7 @@ class LanguageTr extends BaseLanguage {
   String get subTotal => "Ara toplam";
 
   @override
-  String get phoneNumberInvalid => "Sağlanan telefon numarası geçerli değil.";
+  String get phoneNumber => "Telefon Numarası";
 
   @override
   String get placeOrderByMistake => "Yanlışlıkla sipariş ver";
