@@ -15,7 +15,7 @@ class AuthController extends GetxController {
   bool isLoaddIn = true;
   bool _isLoggedIn = false;
   bool get isLoggedIn => _isLoggedIn;
-
+ 
   void register(BuildContext context, String email, String password,
       String name, String surname) async {
     // Call api
@@ -87,7 +87,7 @@ class AuthController extends GetxController {
                   name: givenName,
                   surname: surname,
                   email: user.email ?? '',
-                  photoURL: user.photoURL ?? '', phone: ''));
+                  photoURL: user.photoURL ?? '', phone: user.phoneNumber??''));
         } else {
           print("Initialize the user motherfucker");
           var response =

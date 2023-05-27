@@ -20,7 +20,7 @@ class UserModel {
           surname: json['details']['surname'],
           photoURL: json['details']['photoURL'],
           id: json['details']['id'],
-          phone: json['details']['phone'],
+          phone: json['details']['phoneNumber'],
         ),
       );
 }
