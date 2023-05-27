@@ -906,7 +906,7 @@ class LanguageTr extends BaseLanguage {
   String get addressNotInArea => "Alanda Adres Değil";
 
   @override
-  String get wallet => "Cüzdan";
+  String get creditCard => "teslimatta kredi kartı";
 
   @override
   String get bankDetails => "Banka detayları";

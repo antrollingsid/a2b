@@ -67,8 +67,8 @@ class _CustomTextfieldState extends State<CustomTextfield> {
                     ),
                     filled: true,
                     fillColor: Colors.transparent,
-                    border: myinputborder(),
-                    enabledBorder: myinputborder(), //enabled border
+                    border: myinputborder(context),
+                    enabledBorder: myinputborder(context), //enabled border
                     focusedBorder: myFocusBorder(context),
 
                     suffixIcon: Padding(
@@ -100,13 +100,13 @@ class _CustomTextfieldState extends State<CustomTextfield> {
   }
 }
 
-OutlineInputBorder myinputborder() {
-  return const OutlineInputBorder(
+OutlineInputBorder myinputborder(BuildContext context) {
+  return OutlineInputBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(5),
       ),
       borderSide: BorderSide(
-        color: AppColors.textFaded,
+        color: Theme.of(context).primaryColor,
         width: 1,
       ));
 }

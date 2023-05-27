@@ -588,7 +588,7 @@ abstract class BaseLanguage {
 
   String get addressNotInArea;
 
-  String get wallet;
+  String get creditCard;
 
   String get bankDetails;
 

@@ -390,7 +390,7 @@ String paymentType(String paymentType) {
   } else if (paymentType.toLowerCase() == PAYMENT_TYPE_CASH.toLowerCase()) {
     return language.cash;
   } else if (paymentType.toLowerCase() == PAYMENT_TYPE_WALLET.toLowerCase()) {
-    return language.wallet;
+    return language.creditCard;
   }
   return language.cash;
 }

@@ -906,7 +906,7 @@ class LanguageEn extends BaseLanguage {
   String get addressNotInArea => "Address not in area";
 
   @override
-  String get wallet => "Wallet";
+  String get creditCard => "credit card on delivery";
 
   @override
   String get bankDetails => "Bank Details";
