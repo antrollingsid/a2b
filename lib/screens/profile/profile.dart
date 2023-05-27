@@ -8,6 +8,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../../../Components/widgets/app_bar_buttons.dart';
 import '../../../../Components/widgets/settings_button.dart';
 import '../../../../Components/widgets/sign_out_btn.dart';
+import '../userDetails/courierList/courier-list.dart';
 import 'info/top_profile.dart';
 import '../../../../Components/widgets/upgrade_button.dart';
 import '../../../../main.dart';
@@ -105,6 +106,9 @@ class _ProfileState extends State<Profile> {
                 InkWell(
                     onTap: () => Get.to(() => const ApplyForCourier()),
                     child: SettingBtn(action: 'apply for couriership')),
+                InkWell(
+                    onTap: () => Get.to(() => const CourierList()),
+                    child: SettingBtn(action: 'Couriers')),
 
                 SizedBox(
                   height: 180,

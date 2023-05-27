@@ -8,10 +8,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CourierController extends GetxController {
-  static CourierController get instance => Get.find();
+class CourierUserController extends GetxController {
+  static CourierUserController get instance => Get.find();
   //TextField Controllers to get data from TextFields
-  late final String  packageId;
+  late final String packageId;
   late final String courierId;
   late final String usererId;
   final duration = TextEditingController();
@@ -20,8 +20,8 @@ class CourierController extends GetxController {
   final comment = TextEditingController();
 
   // accept package or make offert
-  Future<void> makeAnOffer(
-     String offertId, String packageId, String courierId, String duration, double price) {
+  Future<void> makeAnOffer(String offertId, String packageId, String courierId,
+      String duration, double price) {
     CollectionReference packages =
         FirebaseFirestore.instance.collection('offerts');
     return packages

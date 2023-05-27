@@ -19,8 +19,8 @@ import 'package:get/get.dart';
 var rng = Random();
 String package_id = (rng.nextInt(900000) + 100000).toString();
 
-class CourierController extends GetxController {
-  static CourierController get instance => Get.find();
+class UserCourierController extends GetxController {
+  static UserCourierController get instance => Get.find();
   //TextField Controllers to get data from TextFields
   late final String packageId;
   late final String courierId;

@@ -37,6 +37,7 @@ class _RatePage extends State<RatePage> {
 
   @override
   Widget build(BuildContext context) {
+    final rate = Get.put(RateController());
     return GetBuilder<AuthController>(builder: (controller) {
       return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -88,17 +89,13 @@ class _RatePage extends State<RatePage> {
                 ),
 
                 CustomBtn(
-                  onPress: () {
-                    final RateController authController = Get.find();
-                    authController.rateCourier(
-                      controller.user.details
-                          .id, // Use the userId from the widget property
-                      widget.userId, // Replace with the actual courier ID
-                      _rating.toString(), // Pass the rating as a string
-                      _commentController
-                          .text, // Pass the comment from the text controller
-                    );
-                  },
+                  onPress: () => rate.rateCourier(
+                    context,
+                    controller.user.details.id,
+                    widget.userId,
+                    _rating.toString(),
+                    _commentController.text,
+                  ),
                   textonbtn: 'submit',
                   primary: true,
                 ),

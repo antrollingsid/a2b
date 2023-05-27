@@ -177,12 +177,12 @@ class DetailsPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 30,
+                          height: 20,
                         ),
                         Container(
                           width: 333,
                           height:
-                              530, // Adjust the height as per your requirements
+                              480, // Adjust the height as per your requirements
                           child: ListView(
                             shrinkWrap: true,
                             physics: ClampingScrollPhysics(),
