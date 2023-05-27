@@ -1,17 +1,24 @@
 // ignore_for_file: unnecessary_import
 
+import 'package:a2b/screens/liveTracking/tracking_page.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
+import 'package:a2b/screens/userDetails/details.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nb_utils/nb_utils.dart';
+
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+
 import '../../../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
+
 import '../../../../Components/widgets/app_bar_buttons.dart';
 import '../../../../Components/widgets/order_activity.dart';
 import '../../../../Components/widgets/shippement.dart';
 import '../admin/adminDashboard/admin_dashboard.dart';
+import '../livemap.dart';
 import '../mymap.dart';
 import '../profile/profile.dart';
 
@@ -20,6 +27,7 @@ class DashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tracked = FirebaseFirestore.instance.collection('location');
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBody: false,
@@ -72,7 +80,11 @@ class DashBoard extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              const CustomShip(),
+              GestureDetector(
+                  onTap: () => Get.to(() => MyMap1(
+                        tracked.doc('user1').id,
+                      )),
+                  child: const CustomShip()),
               const SizedBox(
                 height: 30,
               ),

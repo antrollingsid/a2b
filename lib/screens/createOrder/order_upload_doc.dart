@@ -104,7 +104,7 @@ class _OrderPage extends State<OrderUploadDoc> with TickerProviderStateMixin {
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
           titleText: 'Additional Details',
-          isActionVisible: true,
+          isActionVisible: false,
         ),
       ),
       body: SingleChildScrollView(

@@ -45,7 +45,9 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
     }
 
     final orderSummary = Get.put(PackageController());
+    String selectedItem = 'en';
 
+    String? selectedLanguage;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: context.scaffoldBackgroundColor,
@@ -58,54 +60,106 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: [
-                  Text('Product Name: '),
-                  Text(orderSummary.package_name),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Text('${language.date}: '),
-                  Text(
-                    DateFormat('dd MMM yyyy')
-                        .format(orderSummary.delivery_date),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Text('source: '),
-                  Text(orderSummary.pickup_address),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  const Text('destination: '),
-                  Text(orderSummary.delivery_address),
-                ],
-              ),
-              CustomBtn(
-                textonbtn: 'Confirm Order',
-                onPress: () => orderSummary.addPackage(),
-                primary: true,
-              ),
-            ],
+          child: SizedBox(
+            width: 333,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${language.product}: ',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    Text(orderSummary.package_name),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      language.createdAt,
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      DateFormat(
+                        'dd MMM yyyy',
+                      ).format(orderSummary.delivery_date),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      language.pickupLocation,
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    Text(orderSummary.pickup_address),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      language.deliveryLocation,
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    Text(orderSummary.delivery_address),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      language.paymentType,
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    DropdownButton(
+                      value: selectedItem,
+                      items: [
+                        DropdownMenuItem(
+                            value: 'en', child: Text(language.cash)),
+                        DropdownMenuItem(
+                            value: 'tr', child: Text(language.creditCard)),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          try {
+                            setValue(SELECTED_LANGUAGE_CODE, value);
+                            appStore.setLanguage(value!);
+                            setState(() {});
+                            LiveStream().emit('UpdateLanguage');
+                            finish(context);
+                          } catch (e) {
+                            print(e);
+                          }
+                          selectedItem = value!;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                CustomBtn(
+                  textonbtn: 'Confirm Order',
+                  onPress: () => orderSummary.addPackage(),
+                  primary: true,
+                ),
+              ],
+            ),
           ),
         ),
       ),

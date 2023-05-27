@@ -65,10 +65,10 @@ class CustomShip extends StatelessWidget {
                   width: 95,
                   decoration: BoxDecoration(
                     color: Colors.blueGrey,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                     child: MyMap1(
                       tracked.doc('user1').id,
                     ),

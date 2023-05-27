@@ -30,14 +30,15 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
 
   List<Location> searchResults = [];
 
-  LatLng _selectedDestination = LatLng(0, 0);
-  LatLng _selectedLocation = LatLng(0, 0);
+  LatLng _selectedDestination = LatLng(35.15571933375463, 33.900646269321435);
+  LatLng _selectedLocation = LatLng(35.15115787475357, 33.90726964920759);
 
   String selectedLocationText = 'click to select source';
   String selectedDestinationText = 'click to select destination';
 
   String selectedWeight = 'light';
   String selectedItem = 'Envelope';
+  PolylinePoints polylinePoints = PolylinePoints();
 
   bool sourcePoint = true;
   bool isPickupFocused = false;
@@ -51,7 +52,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
     35.146837,
     33.908643,
   );
-
+  Set<Polyline> polylineSet = {};
   static CameraPosition _kInitialPosition =
       CameraPosition(target: _sourceLocation, zoom: 15.0, tilt: 0, bearing: 0);
 
@@ -75,17 +76,17 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
     }
   }
 
-  void getLocation() {
-    getUserCurrentLocation().then((position) {
-      if (kDebugMode) {
-        print("${position.latitude} ${position.longitude}");
-      }
+  // void getLocation() {
+  //   getUserCurrentLocation().then((position) {
+  //     if (kDebugMode) {
+  //       print("${position.latitude} ${position.longitude}");
+  //     }
 
-      setState(() {});
-    }).catchError((error) {
-      print('ERROR: $error');
-    });
-  }
+  //     setState(() {});
+  //   }).catchError((error) {
+  //     print('ERROR: $error');
+  //   });
+  // }
 
   Future<String> getAddressFromCoordinates(LatLng coordinates) async {
     try {
@@ -114,6 +115,14 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
       polylineCoordinates.add(
         LatLng(_selectedDestination.latitude, _selectedDestination.longitude),
       );
+      polylineSet.add(
+        Polyline(
+          polylineId: PolylineId('polyline2'),
+          points: polylineCoordinates,
+          color: Colors.blue,
+          width: 6,
+        ),
+      );
       print(polylineCoordinates);
       print(selectedDestinationText);
     }).catchError((error) {
@@ -129,8 +138,17 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
       polylineCoordinates.add(
         LatLng(_selectedLocation.latitude, _selectedLocation.longitude),
       );
+      polylineSet.add(
+        Polyline(
+          polylineId: PolylineId('polyline1'),
+          points: polylineCoordinates,
+          color: Colors.blue,
+          width: 6,
+        ),
+      );
       print(polylineCoordinates);
       print(selectedLocationText);
+      print(polylineSet);
     }).catchError((error) {
       print('ERROR: $error');
     });
@@ -138,38 +156,38 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
 
   void getPolyPoints() async {
     try {
-      PolylinePoints polylinePoints = PolylinePoints();
-
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         googleMapAPIKey,
-        PointLatLng(_sourceLocation.latitude, _sourceLocation.longitude),
-        PointLatLng(_destination.latitude, _destination.longitude),
+        PointLatLng(_selectedLocation.latitude, _selectedLocation.longitude),
+        PointLatLng(
+            _selectedDestination.latitude, _selectedDestination.longitude),
         travelMode: TravelMode.driving,
       );
 
       if (result.points.isNotEmpty) {
-        for (var position in result.points) {
-          polylineCoordinates.add(
-            LatLng(position.latitude, position.longitude),
+        setState(() {
+          polylineCoordinates.clear(); // Clear the existing coordinates
+          polylineSet.clear(); // Clear the existing polylines
+
+          for (var position in result.points) {
+            polylineCoordinates.add(
+              LatLng(position.latitude, position.longitude),
+            );
+          }
+
+          polylineSet.add(
+            Polyline(
+              polylineId: PolylineId('polyline'),
+              points: polylineCoordinates,
+              color: Colors.blue,
+              width: 6,
+            ),
           );
-        }
-        setState(() {});
+        });
       }
     } catch (e) {
       print('ERROR: $e');
     }
-  }
-
-  @override
-  void initState() {
-    try {
-      getLocation();
-    } catch (e) {
-      print(e);
-    }
-    getPolyPoints();
-    super.initState();
-    updateSelectedLocationText();
   }
 
   late GoogleMapController _controller;
@@ -180,9 +198,25 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
     _controller = controller;
     String value = await DefaultAssetBundle.of(context).loadString(mode);
     _controller.setMapStyle(value);
+
+    setState(() {});
+    getPolyPoints();
   }
 
   DateTime _selectedDate = DateTime.now();
+  @override
+  void initState() {
+    // try {
+    //   getLocation();
+    // } catch (e) {
+    //   print(e);
+    // }
+    getPolyPoints();
+
+    super.initState();
+    updateSelectedLocationText();
+  }
+
   @override
   Widget build(BuildContext context) {
     final orderPage1controller = Get.put(PackageController());
@@ -221,42 +255,22 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                 }
               });
             },
-            onLongPress: (LatLng location) {
-              setState(() {
-                if (sourcePoint) {
-                  _selectedLocation = location;
-                  _sourceLocation = location;
-                  updateSelectedLocationText();
-                } else {
-                  _selectedDestination = location;
-                  _destination = location;
-                  updateSelectedDestinationText();
-                }
-              });
-            },
-            // polylines: {
-            //   Polyline(
-            //     polylineId: const PolylineId("route"),
-            //     points: polylineCoordinates,
-            //     color: context.primaryColor,
-            //     width: 6,
-            //   ),
-            // },
             markers: {
               Marker(
-                markerId: const MarkerId("source"),
+                markerId: MarkerId('source'),
                 position: _sourceLocation,
               ),
               Marker(
-                markerId: const MarkerId("destination"),
+                markerId: MarkerId('destination'),
                 position: _destination,
               ),
             },
+            polylines: polylineSet,
           ),
           DraggableScrollableSheet(
-            initialChildSize: 0.5,
-            minChildSize: 0.26,
-            maxChildSize: 0.5,
+            initialChildSize: 0.43,
+            minChildSize: 0.15,
+            maxChildSize: 0.43,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
                 decoration: BoxDecoration(
@@ -290,29 +304,30 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                           lastDate: DateTime(DateTime.now().year + 1),
                         );
                         if (selectedDate != null) {
-                          // Update the selected date value here
                           setState(() {
                             _selectedDate = selectedDate;
                           });
                         }
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         hintText: 'Select date',
+                        suffixIcon: Icon(
+                          Icons.calendar_today,
+                          color: context.primaryColor,
+                        ),
                       ),
                       style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight:
-                              FontWeight.w500), // Set font size and bold
+                          fontSize: 22, fontWeight: FontWeight.w500),
                       controller: TextEditingController(
                         // ignore: unnecessary_null_comparison
                         text: _selectedDate != null
-                            ? DateFormat('dd MMM\nyyyy').format(_selectedDate)
+                            ? DateFormat('dd MMM yyyy').format(_selectedDate)
                             : '',
                       ),
                       readOnly: true,
-                      maxLines: 2,
+                      maxLines: 1,
                     ),
                     const SizedBox(
                       height: 20,
@@ -596,7 +611,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
             left: 0,
             right: 0,
             bottom: 0,
-            height: 110,
+            height: 100,
             child: DraggableScrollableSheet(
               initialChildSize: 1,
               minChildSize: 1,
@@ -605,7 +620,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                   (BuildContext context, ScrollController scrollController) {
                 return Container(
                   decoration: BoxDecoration(
-                    color: context.secondaryHeaderColor,
+                    color: context.scaffoldBackgroundColor,
                     borderRadius:
                         const BorderRadius.vertical(top: Radius.circular(0)),
                   ),
@@ -615,29 +630,26 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                     padding: const EdgeInsets.all(0),
                     itemCount: 1,
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CustomBtn(
-                                textonbtn: "Next",
-                                onPress: () =>
-                                    orderPage1controller.setOrderMapDetails(
-                                      context,
-                                      selectedItem,
-                                      selectedWeight,
-                                      selectedLocationText,
-                                      selectedDestinationText,
-                                      _selectedDate,
-                                      _sourceLocation.latitude,
-                                      _sourceLocation.longitude,
-                                      _sourceLocation.latitude,
-                                      _sourceLocation.longitude,
-                                    ),
-                                primary: true)
-                          ],
-                        ),
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CustomBtn(
+                              textonbtn: "Next",
+                              onPress: () =>
+                                  orderPage1controller.setOrderMapDetails(
+                                    context,
+                                    selectedItem,
+                                    selectedWeight,
+                                    selectedLocationText,
+                                    selectedDestinationText,
+                                    _selectedDate,
+                                    _sourceLocation.latitude,
+                                    _sourceLocation.longitude,
+                                    _sourceLocation.latitude,
+                                    _sourceLocation.longitude,
+                                  ),
+                              primary: true)
+                        ],
                       );
                     },
                   ),
