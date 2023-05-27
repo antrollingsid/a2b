@@ -1,10 +1,6 @@
-import 'package:a2b/Components/widgets/app_bar_buttons.dart';
-import 'package:a2b/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';

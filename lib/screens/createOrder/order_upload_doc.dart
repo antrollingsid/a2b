@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/Components/widgets/custom_textfield.dart';
-import 'package:a2b/screens/createOrder/order_map.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ import '../../controllers/order_details_text_controller.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
 import 'controller/create_order_controller.dart';
-import 'order_summary.dart';
 
 class OrderUploadDoc extends StatefulWidget {
   // ignore: use_key_in_widget_constructors

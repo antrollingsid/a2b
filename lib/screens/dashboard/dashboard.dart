@@ -1,8 +1,6 @@
 // ignore_for_file: unnecessary_import
 
-import 'package:a2b/screens/liveTracking/tracking_page.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
-import 'package:a2b/screens/userDetails/details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -92,12 +90,6 @@ class DashBoard extends StatelessWidget {
               SvgPicture.string(SvgConstant.lineDark),
               const OrderHistoryActivity(),
 
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Get.to(() => const EmptyPage());
-              //   },
-              //   child: const Text('empty Page'),
-              // ),
               ElevatedButton(
                 onPressed: () {
                   Get.to(() => MyApp());
@@ -105,12 +97,6 @@ class DashBoard extends StatelessWidget {
                 child: const Text('track page 2'),
               ),
 
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Get.to(() => const LiveTracking());
-              //   },
-              //   child: const Text('live trackin page'),
-              // ),
               ElevatedButton(
                 onPressed: () {
                   Get.to(() => const AdminDashboard());

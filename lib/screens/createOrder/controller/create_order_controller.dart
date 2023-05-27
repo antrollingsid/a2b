@@ -1,11 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -37,8 +34,6 @@ class PackageController extends GetxController {
   late bool IsFragile;
   late String IsAccepted;
 
-  File? _file;
-  PlatformFile? _platformFile;
   UploadTask? uploadTask;
 
   Future<void> addPackage() async {

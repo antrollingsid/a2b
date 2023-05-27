@@ -76,18 +76,6 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
     }
   }
 
-  // void getLocation() {
-  //   getUserCurrentLocation().then((position) {
-  //     if (kDebugMode) {
-  //       print("${position.latitude} ${position.longitude}");
-  //     }
-
-  //     setState(() {});
-  //   }).catchError((error) {
-  //     print('ERROR: $error');
-  //   });
-  // }
-
   Future<String> getAddressFromCoordinates(LatLng coordinates) async {
     try {
       List<Placemark> placemarks = await placemarkFromCoordinates(

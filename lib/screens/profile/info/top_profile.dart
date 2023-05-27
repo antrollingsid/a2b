@@ -14,8 +14,6 @@ final UpdateProfileController ctrl = Get.put(UpdateProfileController());
 class TopProfile extends StatelessWidget {
   const TopProfile({super.key});
 
-  get name => null;
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(
@@ -126,14 +124,15 @@ class TopProfile extends StatelessWidget {
                                     ),
                                   ),
                                   IconButton(
-                                      onPressed: () {
-                                        _changePhoneNumberPressed(
-                                            context, ctrl.phoneNumber);
-                                      },
-                                      icon: const Icon(
-                                        Icons.edit,
-                                        size: 12,
-                                      ))
+                                    onPressed: () {
+                                      _changePhoneNumberPressed(
+                                          context, ctrl.phoneNumber);
+                                    },
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      size: 12,
+                                    ),
+                                  ),
                                 ],
                               ),
                               Text(

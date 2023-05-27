@@ -3,16 +3,12 @@ import 'package:a2b/screens/profile/applyForCourier/apply_for_courier.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../Components/widgets/app_bar_buttons.dart';
 import '../../../../Components/widgets/settings_button.dart';
-import '../../../../Components/widgets/sign_out_btn.dart';
 import '../userDetails/courierList/courier-list.dart';
 import 'info/top_profile.dart';
-import '../../../../Components/widgets/upgrade_button.dart';
 import '../../../../main.dart';
-import 'info/top_profile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});

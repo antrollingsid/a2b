@@ -1,12 +1,10 @@
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../Components/widgets/review.dart';
 import '../../main/utils/allConstants.dart';
-import '../../Components/widgets/app_bar_buttons.dart';
 import 'ratePage/rate_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -56,7 +54,7 @@ class DetailsPage extends StatelessWidget {
                                   context: context,
                                   builder: (_) => Dialog(
                                     child: Image.network(
-                                      data!['details']['photoURL'],
+                                      data['details']['photoURL'],
                                       fit: BoxFit.contain,
                                     ),
                                   ),
@@ -80,14 +78,14 @@ class DetailsPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  data!['details']['name'],
+                                  data['details']['name'],
                                   style: const TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
                                 Text(
-                                  data!['role'],
+                                  data['role'],
                                   style: const TextStyle(
                                     fontSize: 14,
                                   ),

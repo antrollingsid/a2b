@@ -1,4 +1,3 @@
-import 'package:a2b/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,6 @@ class UpdateProfileController extends GetxController {
           'details.name': name,
         });
       }
-
       snapshot = await userDocRef.get();
       print('After update: ${snapshot.data()?['details']}');
     } catch (e) {
