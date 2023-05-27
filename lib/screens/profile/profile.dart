@@ -4,6 +4,7 @@ import 'package:a2b/screens/profile/editProfile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../Components/widgets/app_bar_buttons.dart';
 import '../../../../Components/widgets/settings_button.dart';
@@ -97,7 +98,7 @@ class _ProfileState extends State<Profile> {
             child: Column(
               children: [
                 // if()
-                const TopProfile(),
+                TopProfile(),
                 InkWell(
                   child: SettingBtn(action: language.editProfile),
                   onTap: () => Get.to(() => const EditProfile()),
@@ -139,3 +140,4 @@ class _ProfileState extends State<Profile> {
     });
   }
 }
+ 

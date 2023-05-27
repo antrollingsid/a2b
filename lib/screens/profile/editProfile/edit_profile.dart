@@ -60,11 +60,8 @@ class _EditProfile extends State<EditProfile> {
               ),
               CustomBtn(
                 textonbtn: 'update',
-                onPress: () => controller.updateUserDetails(
-                  context,
-                  _namecontroller.text,
-                  _surnamecontroller.text,
-                ),
+                onPress: () {},
+                //=> 
                 primary: true,
               ),
             ],

@@ -269,4 +269,6 @@ class AuthController extends GetxController {
     GoogleSignIn().signOut();
     Get.offAll(() => const HomePage());
   }
+
+  updateName(BuildContext context, text, text2) {}
 }

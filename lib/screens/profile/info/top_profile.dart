@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import '../../../controllers/update_profile_controller.dart';
+
+final UpdateProfileController ctrl = Get.put(UpdateProfileController());
 
 class TopProfile extends StatelessWidget {
   const TopProfile({super.key});
+
+  get name => null;
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +37,36 @@ class TopProfile extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 10, 60, 0),
-                      child: Container(
-                        width: 115,
-                        height: 115,
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 148, 34, 34),
-                            borderRadius: BorderRadius.circular(100),
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    controller.user.details.photoURL),
-                                fit: BoxFit.cover)),
-                      ),
+                      child: Stack(children: [
+                        Container(
+                          width: 115,
+                          height: 115,
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 148, 34, 34),
+                              borderRadius: BorderRadius.circular(100),
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      controller.user.details.photoURL),
+                                  fit: BoxFit.cover)),
+                        ),
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: Container(
+                            width: 20,
+                            height: 30,
+                            color: Colors.white,
+                            child: Center(
+                              child: IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.edit,
+                                    size: 15,
+                                  )),
+                            ),
+                          ),
+                        )
+                      ]),
                     ),
                     const SizedBox(
                       height: 150,
@@ -52,7 +77,7 @@ class TopProfile extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(1.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,12 +87,16 @@ class TopProfile extends StatelessWidget {
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                language.email,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w100,
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    language.email,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w100,
+                                    ),
+                                  ),
+                                ],
                               ),
                               Text(
                                 controller.user.details.email,
@@ -79,18 +108,33 @@ class TopProfile extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 15,
                           ),
                           Column(
                             mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                language.phoneNumber,
-                                style: const TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w100,
-                                ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    language.phoneNumber,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w100,
+                                    ),
+                                  ),
+                                  IconButton(
+                                      onPressed: () {
+                                        _changePhoneNumberPressed(
+                                            context, ctrl.phoneNumber);
+                                      },
+                                      icon: const Icon(
+                                        Icons.edit,
+                                        size: 12,
+                                      ))
+                                ],
                               ),
                               Text(
                                 controller.user.details.phone,
@@ -112,26 +156,50 @@ class TopProfile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        controller.user.details.name,
-                        style: TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.w500,
-                          color: context.hintColor,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            controller.user.details.name,
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.w500,
+                              color: context.hintColor,
+                            ),
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                _changeNamePressed(context, ctrl.name);
+                              },
+                              icon: const Icon(
+                                Icons.edit,
+                                size: 12,
+                              ))
+                        ],
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        controller.user.details.surname,
-                        style: const TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.w200,
-                          // wordSpacing: 1.5,
-                          letterSpacing: 1.5,
-                          color: AppColors.textGrey,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            controller.user.details.surname,
+                            style: const TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.w200,
+                              // wordSpacing: 1.5,
+                              letterSpacing: 1.5,
+                              color: AppColors.textGrey,
+                            ),
+                          ),
+                          IconButton(
+                              onPressed: () {
+                                _changeSurNamePressed(context, ctrl.surname);
+                              },
+                              icon: const Icon(
+                                Icons.edit,
+                                size: 12,
+                              ))
+                        ],
                       ),
                     ],
                   ),
@@ -143,4 +211,94 @@ class TopProfile extends StatelessWidget {
       },
     );
   }
+}
+
+_changeNamePressed(context, TextEditingController mycontroller) {
+  Alert(
+      context: context,
+      title: "Change Your Firstname",
+      content: Column(
+        children: <Widget>[
+          TextField(
+            controller: mycontroller,
+            decoration: const InputDecoration(
+              icon: Icon(Icons.verified_user_rounded),
+              labelText: 'Firstname',
+            ),
+          ),
+        ],
+      ),
+      buttons: [
+        DialogButton(
+          color: AppColors.buttonBlue,
+          onPressed: () {
+            ctrl.updateName(ctrl.name.text);
+            Navigator.pop(context);
+          },
+          child: const Text(
+            "Change",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        )
+      ]).show();
+}
+
+_changeSurNamePressed(context, TextEditingController mycontroller) {
+  Alert(
+      context: context,
+      title: "Change Your Surname",
+      content: Column(
+        children: <Widget>[
+          TextField(
+            controller: mycontroller,
+            decoration: const InputDecoration(
+              icon: Icon(Icons.verified_user_rounded),
+              labelText: 'Surnane',
+            ),
+          ),
+        ],
+      ),
+      buttons: [
+        DialogButton(
+          color: AppColors.buttonBlue,
+          onPressed: () {
+            ctrl.updateSurname(ctrl.surname.text);
+            Navigator.pop(context);
+          },
+          child: const Text(
+            "Change",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        )
+      ]).show();
+}
+
+_changePhoneNumberPressed(context, TextEditingController mycontroller) {
+  Alert(
+      context: context,
+      title: "Change Your Number",
+      content: Column(
+        children: <Widget>[
+          TextField(
+            controller: mycontroller,
+            decoration: const InputDecoration(
+              icon: Icon(Icons.verified_user_rounded),
+              labelText: 'Phone number',
+            ),
+          ),
+        ],
+      ),
+      buttons: [
+        DialogButton(
+          color: AppColors.buttonBlue,
+          onPressed: () {
+            ctrl.updatePhoneNumber(ctrl.phoneNumber.text);
+            Navigator.pop(context);
+          },
+          child: const Text(
+            "Change",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        )
+      ]).show();
 }

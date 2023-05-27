@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UpdateProfileController extends GetxController {
-  late UserModel _user;
-  UserModel get user => _user;
+  static UpdateProfileController get instance => Get.find();
+  final name = TextEditingController();
+  final surname = TextEditingController();
+  final phoneNumber = TextEditingController();
 
-  Future<void> updateUserDetails(
-    BuildContext context,
-    String? name,
-    String? surname,
-  ) async {
+  Future<void> updateName(name) async {
     try {
       var response = FirebaseAuth.instance.currentUser;
       final userDocRef =
@@ -25,9 +23,47 @@ class UpdateProfileController extends GetxController {
         });
       }
 
+      snapshot = await userDocRef.get();
+      print('After update: ${snapshot.data()?['details']}');
+    } catch (e) {
+      print('Error updating user details: $e');
+    }
+  }
+
+  Future<void> updateSurname(
+    surname,
+  ) async {
+    try {
+      var response = FirebaseAuth.instance.currentUser;
+      final userDocRef =
+          FirebaseFirestore.instance.collection('users').doc(response!.uid);
+      var snapshot = await userDocRef.get();
+
       if (surname != null) {
         await userDocRef.update({
           'details.surname': surname,
+        });
+      }
+
+      snapshot = await userDocRef.get();
+      print('After update: ${snapshot.data()?['details']}');
+    } catch (e) {
+      print('Error updating user details: $e');
+    }
+  }
+
+  Future<void> updatePhoneNumber(
+    phoneNumber,
+  ) async {
+    try {
+      var response = FirebaseAuth.instance.currentUser;
+      final userDocRef =
+          FirebaseFirestore.instance.collection('users').doc(response!.uid);
+      var snapshot = await userDocRef.get();
+
+      if (phoneNumber != null) {
+        await userDocRef.update({
+          'details.phoneNumber': phoneNumber,
         });
       }
 
