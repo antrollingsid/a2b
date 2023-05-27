@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../Components/widgets/custom_button.dart';
-import '../../controllers/auth_controller.dart';
-import '../../main/utils/allConstants.dart';
-import '../../Components/widgets/app_bar_buttons.dart';
+import '../../../Components/widgets/custom_button.dart';
+import '../../../controllers/auth_controller.dart';
+import '../../../main/utils/allConstants.dart';
+import '../../../Components/widgets/app_bar_buttons.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import 'controller/rate_conroller.dart';
+
 class RatePage extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const RatePage({Key? key});
+  final String userId;
+
+  const RatePage({
+    Key? key,
+    required this.userId,
+  }) : super(key: key);
 
   @override
   State<RatePage> createState() => _RatePage();
@@ -81,10 +88,21 @@ class _RatePage extends State<RatePage> {
                 ),
 
                 CustomBtn(
-                  onPress: () {},
+                  onPress: () {
+                    final RateController authController = Get.find();
+                    authController.rateCourier(
+                      controller.user.details
+                          .id, // Use the userId from the widget property
+                      widget.userId, // Replace with the actual courier ID
+                      _rating.toString(), // Pass the rating as a string
+                      _commentController
+                          .text, // Pass the comment from the text controller
+                    );
+                  },
                   textonbtn: 'submit',
                   primary: true,
                 ),
+
                 // CustomCalendar(),
                 // CustomShip(),
               ],

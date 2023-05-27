@@ -7,7 +7,7 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../Components/widgets/review.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
-import '../ratePage/rate_page.dart';
+import 'ratePage/rate_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -198,7 +198,8 @@ class DetailsPage extends StatelessWidget {
                         CustomBtn(
                           textonbtn: 'rate the courier',
                           onPress: () {
-                            Get.to(() => const RatePage());
+                            Get.to(
+                                () => RatePage(userId: data!['details']['id']));
                           },
                           primary: true,
                         ),
