@@ -61,7 +61,6 @@ class AuthController extends GetxController {
           final nameParts = displayName.split(' ');
           final givenName = nameParts.first;
           final surname = nameParts.length > 1 ? nameParts.last : '';
-
           final createdAt = DateTime.now();
           final userDetails = {
             'role': 'general',
@@ -88,7 +87,7 @@ class AuthController extends GetxController {
                   name: givenName,
                   surname: surname,
                   email: user.email ?? '',
-                  photoURL: user.photoURL ?? ''));
+                  photoURL: user.photoURL ?? '', phone: ''));
         } else {
           print("Initialize the user motherfucker");
           var response =

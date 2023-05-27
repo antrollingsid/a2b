@@ -20,6 +20,7 @@ class UserModel {
           surname: json['details']['surname'],
           photoURL: json['details']['photoURL'],
           id: json['details']['id'],
+          phone: json['details']['phone'],
         ),
       );
 }
@@ -27,6 +28,7 @@ class UserModel {
 class Details {
   late String id;
   late String name;
+  late String phone;
   late String surname;
   late String email;
   late String photoURL;
@@ -34,6 +36,7 @@ class Details {
   Details({
     required this.id,
     required this.name,
+    required this.phone,
     required this.surname,
     required this.email,
     required this.photoURL,

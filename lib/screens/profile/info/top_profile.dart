@@ -92,9 +92,9 @@ class TopProfile extends StatelessWidget {
                                   fontWeight: FontWeight.w100,
                                 ),
                               ),
-                              const Text(
-                                '05338546422',
-                                style: TextStyle(
+                              Text(
+                                controller.user.details.phone,
+                                style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
                                 ),
