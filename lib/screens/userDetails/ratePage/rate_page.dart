@@ -47,6 +47,7 @@ class _RatePage extends State<RatePage> {
           child: CustomAppBar(
             titleText: 'rate and review',
             isActionVisible: true,
+            isLeadingVisible: true,
           ),
         ),
         body: SingleChildScrollView(

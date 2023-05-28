@@ -27,6 +27,7 @@ class _CourierOffers extends State<CourierOffers> {
         child: CustomAppBar(
           titleText: 'offers',
           isActionVisible: true,
+          isLeadingVisible: true,
         ),
       ),
       body: SingleChildScrollView(

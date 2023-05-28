@@ -172,6 +172,7 @@ class _LiveTrackingState extends State<LiveTracking> {
         child: CustomAppBar(
           titleText: 'Live Tracking',
           isActionVisible: true,
+          isLeadingVisible: true,
         ),
       ),
       body: Center(

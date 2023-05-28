@@ -1,3 +1,4 @@
+import 'package:a2b/Components/widgets/app_bar_buttons.dart';
 import 'package:a2b/screens/admin/applications/application.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,10 +27,13 @@ class _AdminDashboard extends State<AdminDashboard> {
       }
       return controller.user.role == 'admin'
           ? Scaffold(
-              appBar: AppBar(
-                backgroundColor: const Color(0xFF0F9D58),
-                // on below line we have given title of app
-                title: const Text('admin dash'),
+              appBar: const PreferredSize(
+                preferredSize: Size.fromHeight(80),
+                child: CustomAppBar(
+                  titleText: 'Dashboard',
+                  isActionVisible: true,
+                  isLeadingVisible: false,
+                ),
               ),
               body: SafeArea(
                 // on below line creating google maps

@@ -83,6 +83,7 @@ class _PlaceOrderUploadState extends State<PlaceOrderUpload>
         child: CustomAppBar(
           titleText: 'ulpaod documents',
           isActionVisible: true,
+          isLeadingVisible: true,
         ),
       ),
       body: SingleChildScrollView(

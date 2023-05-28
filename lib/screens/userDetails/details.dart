@@ -95,7 +95,7 @@ class DetailsPage extends StatelessWidget {
                             GestureDetector(
                               onTap: () {
                                 launch(
-                                    'tel:+905488788211'); // Replace the phone number with your desired phone number
+                                    "tel://+905488788211"); // Replace the phone number with your desired phone number
                               },
                               child: Container(
                                 width:

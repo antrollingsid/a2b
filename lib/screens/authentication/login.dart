@@ -29,8 +29,11 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: context.scaffoldBackgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
-          child:
-              CustomAppBar(titleText: language.signIn, isActionVisible: false)),
+          child: CustomAppBar(
+            titleText: language.signIn,
+            isActionVisible: false,
+            isLeadingVisible: true,
+          )),
       body: GetBuilder<AuthController>(builder: (controller) {
         return SafeArea(
           child: Column(

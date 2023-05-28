@@ -48,6 +48,7 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
         child: CustomAppBar(
           titleText: 'order summary',
           isActionVisible: true,
+          isLeadingVisible: true,
         ),
       ),
       body: SingleChildScrollView(

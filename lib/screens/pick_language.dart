@@ -30,6 +30,7 @@ class _Language extends State<Language> {
         child: CustomAppBar(
           titleText: 'Language',
           isActionVisible: false,
+          isLeadingVisible: true,
         ),
       ),
       body: ListView(

@@ -9,13 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../screens/admin/adminDashboard/admin_dashboard.dart';
+
 class AuthController extends GetxController {
   late UserModel _user;
   UserModel get user => _user;
   bool isLoaddIn = true;
   bool _isLoggedIn = false;
   bool get isLoggedIn => _isLoggedIn;
- 
+
   void register(BuildContext context, String email, String password,
       String name, String surname) async {
     // Call api
@@ -87,7 +89,8 @@ class AuthController extends GetxController {
                   name: givenName,
                   surname: surname,
                   email: user.email ?? '',
-                  photoURL: user.photoURL ?? '', phone: user.phoneNumber??''));
+                  photoURL: user.photoURL ?? '',
+                  phone: user.phoneNumber ?? ''));
         } else {
           print("Initialize the user motherfucker");
           var response =
@@ -184,7 +187,9 @@ class AuthController extends GetxController {
       update();
       isLoaddIn = false;
       navigator.pop();
-      Get.offAll(() => const DashBoard());
+      newUser.role == 'admin'
+          ? Get.offAll(() => const AdminDashboard())
+          : Get.offAll(() => const DashBoard());
     } on FirebaseAuthException catch (e) {
       navigator.pop();
       isLoaddIn = false;
@@ -193,43 +198,6 @@ class AuthController extends GetxController {
       print('Error saving user data ${e.message}');
     }
   }
-
-  // Future<void> updateUserDetails(
-  //   BuildContext context,
-  //   String? name,
-  //   String? surname,
-  //   String? age,
-  // ) async {
-  //   try {
-  //     var response = FirebaseAuth.instance.currentUser;
-  //     final userDocRef =
-  //         FirebaseFirestore.instance.collection('users').doc(response!.uid);
-  //     var snapshot = await userDocRef.get();
-
-  //     if (name != null) {
-  //       await userDocRef.update({
-  //         'details.name': name,
-  //       });
-  //     }
-
-  //     if (surname != null) {
-  //       await userDocRef.update({
-  //         'details.surname': surname,
-  //       });
-  //     }
-
-  //     if (age != null) {
-  //       await userDocRef.update({
-  //         'details.age': age,
-  //       });
-  //     }
-
-  //     snapshot = await userDocRef.get();
-  //     print('After update: ${snapshot.data()?['details']}');
-  //   } catch (e) {
-  //     print('Error updating user details: $e');
-  //   }
-  // }
 
   Future addUserDetails(
       String uid, String email, String name, String surname) async {

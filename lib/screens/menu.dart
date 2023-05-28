@@ -31,6 +31,7 @@ class _MenuPage extends State<MenuPage> {
         child: CustomAppBar(
           titleText: 'Menu',
           isActionVisible: false,
+          isLeadingVisible: true,
         ),
       ),
       body: SingleChildScrollView(

@@ -114,23 +114,25 @@ class CustomLoginSignupAppBar extends StatelessWidget {
 }
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({
-    super.key,
-    required this.titleText,
-    required this.isActionVisible,
-  });
+  const CustomAppBar(
+      {super.key,
+      required this.titleText,
+      required this.isActionVisible,
+      required this.isLeadingVisible});
   final String titleText;
   final bool isActionVisible;
-
+  final bool isLeadingVisible;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
       automaticallyImplyLeading: true,
-      leading: const Padding(
-        padding: EdgeInsets.fromLTRB(27, 4, 0, 4),
-        child: backBtn(),
-      ),
+      leading: isLeadingVisible
+          ? const Padding(
+              padding: EdgeInsets.fromLTRB(27, 4, 0, 4),
+              child: backBtn(),
+            )
+          : Container(),
       leadingWidth: 74,
       title: Text(
         titleText,

@@ -28,8 +28,11 @@ class _RegisterState extends State<Register> {
       backgroundColor: context.scaffoldBackgroundColor,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(80),
-          child:
-              CustomAppBar(titleText: language.signUp, isActionVisible: false)),
+          child: CustomAppBar(
+            titleText: language.signUp,
+            isActionVisible: false,
+            isLeadingVisible: true,
+          )),
       body: GetBuilder<AuthController>(
         builder: (controller) {
           return CustomScrollView(slivers: [

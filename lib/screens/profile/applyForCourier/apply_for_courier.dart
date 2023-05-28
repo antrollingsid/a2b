@@ -91,6 +91,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
         child: CustomAppBar(
           titleText: 'ulpaod documents',
           isActionVisible: true,
+          isLeadingVisible: true,
         ),
       ),
       body: SingleChildScrollView(

@@ -1,6 +1,8 @@
 // ignore_for_file: unnecessary_import
 
+import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
+import 'package:a2b/screens/epmty_page_appar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -25,9 +27,10 @@ class DashBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userRole = Get.put(AuthController());
     final tracked = FirebaseFirestore.instance.collection('location');
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       extendBody: false,
       backgroundColor: context.scaffoldBackgroundColor,
       appBar: const PreferredSize(
@@ -35,76 +38,94 @@ class DashBoard extends StatelessWidget {
         child: CustomAppBar(
           titleText: 'Dashboard',
           isActionVisible: true,
+          isLeadingVisible: false,
         ),
       ),
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 30,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(right: 150),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          child: userRole.user.role == 'general'
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "Ship Your",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.normal,
-                        // height:  1.5*ffem/fem,
-                        // color: Color(0xffffffff),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 150),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Ship Your",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.normal,
+                              // height:  1.5*ffem/fem,
+                              // color: Color(0xffffffff),
+                            ),
+                          ),
+                          Text(
+                            'Package Safely',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.normal,
+                              // wordSpacing: 1.5,
+                              // letterSpacing: 1.5,
+                              // height:  1.5*ffem/fem,
+                              // color: Color(0xffffffff),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Text(
-                      'Package Safely',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.normal,
-                        // wordSpacing: 1.5,
-                        // letterSpacing: 1.5,
-                        // height:  1.5*ffem/fem,
-                        // color: Color(0xffffffff),
+                    const TrackingTextField(),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                        onTap: () => Get.to(() => MyMap1(
+                              tracked.doc('user1').id,
+                            )),
+                        child: const CustomShip()),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      width: 333,
+                      height: 200, // Adjust the height as per your requirements
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        children: [
+                          OrderHistoryActivity(),
+                          OrderHistoryActivity(),
+                          OrderHistoryActivity(),
+                          OrderHistoryActivity(),
+                          ElevatedButton(
+                            onPressed: () {
+                              Get.to(() => MyApp());
+                            },
+                            child: const Text('track page 2'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Get.to(() => EmptyPage());
+                            },
+                            child: const Text('demo map'),
+                          ),
+                          // ElevatedButton(
+                          //   onPressed: () {
+                          //     Get.to(() => const AdminDashboard());
+                          //   },
+                          //   child: const Text('admin dashboard'),
+                          // ),
+                        ],
                       ),
                     ),
                   ],
-                ),
-              ),
-              const TrackingTextField(),
-              const SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                  onTap: () => Get.to(() => MyMap1(
-                        tracked.doc('user1').id,
-                      )),
-                  child: const CustomShip()),
-              const SizedBox(
-                height: 30,
-              ),
-              // const OrderHistoryActivity(),
-              SvgPicture.string(SvgConstant.lineDark),
-              const OrderHistoryActivity(),
-
-              ElevatedButton(
-                onPressed: () {
-                  Get.to(() => MyApp());
-                },
-                child: const Text('track page 2'),
-              ),
-
-              ElevatedButton(
-                onPressed: () {
-                  Get.to(() => const AdminDashboard());
-                },
-                child: const Text('admin dashboard'),
-              ),
-            ],
-          ),
+                )
+              : Container(),
         ),
       ),
       bottomNavigationBar: Container(

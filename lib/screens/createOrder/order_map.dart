@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/main/utils/allConstants.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -27,9 +26,7 @@ class PlaceOrderMap extends StatefulWidget {
 
 class _PlaceOrderMapState extends State<PlaceOrderMap> {
   final Completer<GoogleMapController> _controllers = Completer();
-
-  List<Location> searchResults = [];
-
+  Map<PolylineId, Polyline> polylines = {};
   LatLng _selectedDestination = LatLng(35.15571933375463, 33.900646269321435);
   LatLng _selectedLocation = LatLng(35.15115787475357, 33.90726964920759);
 
@@ -57,7 +54,6 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
       CameraPosition(target: _sourceLocation, zoom: 15.0, tilt: 0, bearing: 0);
 
   List<LatLng> polylineCoordinates = [];
-
   Future<Position> getUserCurrentLocation() async {
     try {
       LocationPermission permission = await Geolocator.requestPermission();
@@ -103,14 +99,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
       polylineCoordinates.add(
         LatLng(_selectedDestination.latitude, _selectedDestination.longitude),
       );
-      polylineSet.add(
-        Polyline(
-          polylineId: PolylineId('polyline2'),
-          points: polylineCoordinates,
-          color: Colors.blue,
-          width: 6,
-        ),
-      );
+
       print(polylineCoordinates);
       print(selectedDestinationText);
     }).catchError((error) {
@@ -126,14 +115,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
       polylineCoordinates.add(
         LatLng(_selectedLocation.latitude, _selectedLocation.longitude),
       );
-      polylineSet.add(
-        Polyline(
-          polylineId: PolylineId('polyline1'),
-          points: polylineCoordinates,
-          color: Colors.blue,
-          width: 6,
-        ),
-      );
+
       print(polylineCoordinates);
       print(selectedLocationText);
       print(polylineSet);
@@ -143,6 +125,9 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
   }
 
   void getPolyPoints() async {
+    polylinePoints = PolylinePoints();
+    polylineCoordinates.clear(); // Clear the previous polyline coordinates
+    polylines.clear();
     try {
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
         googleMapAPIKey,
@@ -151,28 +136,21 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
             _selectedDestination.latitude, _selectedDestination.longitude),
         travelMode: TravelMode.driving,
       );
-
       if (result.points.isNotEmpty) {
-        setState(() {
-          polylineCoordinates.clear(); // Clear the existing coordinates
-          polylineSet.clear(); // Clear the existing polylines
-
-          for (var position in result.points) {
-            polylineCoordinates.add(
-              LatLng(position.latitude, position.longitude),
-            );
-          }
-
-          polylineSet.add(
-            Polyline(
-              polylineId: PolylineId('polyline'),
-              points: polylineCoordinates,
-              color: Colors.blue,
-              width: 6,
-            ),
-          );
+        result.points.forEach((PointLatLng point) {
+          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
         });
       }
+      PolylineId id = PolylineId('poly');
+      Polyline polyline = Polyline(
+        polylineId: id,
+        color: Colors.red,
+        points: polylineCoordinates,
+        width: 3,
+      );
+      setState(() {
+        polylines[id] = polyline; // Update the polylines map
+      });
     } catch (e) {
       print('ERROR: $e');
     }
@@ -217,6 +195,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
         child: CustomAppBar(
           titleText: 'Place Order',
           isActionVisible: true,
+          isLeadingVisible: true,
         ),
       ),
       body: Stack(
@@ -253,7 +232,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                 position: _destination,
               ),
             },
-            polylines: polylineSet,
+            polylines: Set<Polyline>.of(polylines.values),
           ),
           DraggableScrollableSheet(
             initialChildSize: 0.43,

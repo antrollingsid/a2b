@@ -3,10 +3,8 @@ import 'package:a2b/main.dart';
 import 'package:a2b/main/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:timeago/timeago.dart' as timeago;
 import '../../../controllers/update_profile_controller.dart';
 
 final UpdateProfileController ctrl = Get.put(UpdateProfileController());
@@ -53,7 +51,7 @@ class TopProfile extends StatelessWidget {
                           child: Container(
                             width: 20,
                             height: 30,
-                            color: Colors.white,
+                            color: context.scaffoldBackgroundColor,
                             child: Center(
                               child: IconButton(
                                   onPressed: () {},
