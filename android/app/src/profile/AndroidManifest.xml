@@ -4,5 +4,10 @@
          the Flutter tool needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->
+
+    <intent-filter>
+      <action android:name="FLUTTER_NOTIFICATION_CLICK" />
+      <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

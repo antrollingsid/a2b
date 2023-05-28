@@ -120,7 +120,7 @@ class DetailsPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Container(
@@ -174,7 +174,7 @@ class DetailsPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Container(
@@ -183,8 +183,8 @@ class DetailsPage extends StatelessWidget {
                               480, // Adjust the height as per your requirements
                           child: ListView(
                             shrinkWrap: true,
-                            physics: ClampingScrollPhysics(),
-                            children: [
+                            physics: const ClampingScrollPhysics(),
+                            children: const [
                               CustomReview(),
                               CustomReview(),
                               CustomReview(),
