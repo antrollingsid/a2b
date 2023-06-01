@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';
