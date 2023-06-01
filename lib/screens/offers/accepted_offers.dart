@@ -6,7 +6,12 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../../models/user_model.dart';
+import '../../controllers/offert_controller.dart';
+import '../../main/utils/Colors.dart';
 
+
+
+final mycontroller = Get.put(OffertController());
 class AcceptedOffers extends StatefulWidget {
   const AcceptedOffers({Key? key}) : super(key: key);
 
@@ -83,19 +88,17 @@ class _AcceptedOffers extends State<AcceptedOffers> {
   }
 
   void _showDialog(BuildContext context, String userId, String userName) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
+   
           Alert(
               context: context,
-              title: "Change Your Number",
+              title: "Accept Offert",
               content: Column(
                 children: <Widget>[
                   TextField(
-                    controller: mycontroller,
+                    controller: mycontroller.price,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.verified_user_rounded),
-                      labelText: 'Phone number',
+                      labelText: 'Price',
                     ),
                   ),
                 ],
@@ -104,7 +107,7 @@ class _AcceptedOffers extends State<AcceptedOffers> {
                 DialogButton(
                   color: AppColors.buttonBlue,
                   onPressed: () {
-                    ctrl.updatePhoneNumber(ctrl.phoneNumber.text);
+                   
                     Navigator.pop(context);
                   },
                   child: const Text(
@@ -113,8 +116,8 @@ class _AcceptedOffers extends State<AcceptedOffers> {
                   ),
                 )
               ]).show();
-        });
-  }
+        }
+
 
   Future<void> _acceptApplication(String userId, String role) async {
     DocumentSnapshot userSnapshot =
@@ -206,4 +209,5 @@ class _AcceptedOffers extends State<AcceptedOffers> {
     // Delete the replicated data from the 'applications' collection
     await applicationsCollection.doc(userId).delete();
   }
-}
+
+  }

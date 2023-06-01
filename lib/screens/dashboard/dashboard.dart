@@ -50,7 +50,7 @@ class DashBoard extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(right: 150),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -110,7 +110,7 @@ class DashBoard extends StatelessWidget {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              Get.to(() => EmptyPage());
+                              Get.to(() => const EmptyPage());
                             },
                             child: const Text('demo map'),
                           ),
