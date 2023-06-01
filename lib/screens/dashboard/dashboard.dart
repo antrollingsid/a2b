@@ -19,6 +19,7 @@ import '../../../../Components/widgets/order_activity.dart';
 import '../../../../Components/widgets/shippement.dart';
 import '../livemap.dart';
 import '../mymap.dart';
+import '../offers/accepted_offers.dart';
 import '../profile/profile.dart';
 
 class DashBoard extends StatelessWidget {
@@ -124,7 +125,27 @@ class DashBoard extends StatelessWidget {
                     ),
                   ],
                 )
-              : Container(),
+              : SafeArea(
+                  child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(() => AcceptedOffers());
+                      },
+                      child: Container(
+                        color: context.primaryColor,
+                        height: 100,
+                        width: 170,
+                        child: Text(
+                          'Accepted offers',
+                          style:
+                              TextStyle(color: context.scaffoldBackgroundColor),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
         ),
       ),
       bottomNavigationBar: Container(

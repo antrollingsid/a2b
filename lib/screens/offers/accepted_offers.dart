@@ -6,16 +6,16 @@ import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../../models/user_model.dart';
 
-class UserApplication extends StatefulWidget {
-  const UserApplication({Key? key}) : super(key: key);
+class AcceptedOffers extends StatefulWidget {
+  const AcceptedOffers({Key? key}) : super(key: key);
 
   @override
-  _UserApplication createState() => _UserApplication();
+  _AcceptedOffers createState() => _AcceptedOffers();
 }
 
-class _UserApplication extends State<UserApplication> {
+class _AcceptedOffers extends State<AcceptedOffers> {
   CollectionReference applicationsCollection =
-      FirebaseFirestore.instance.collection('applications');
+      FirebaseFirestore.instance.collection('orders');
   CollectionReference usersCollection =
       FirebaseFirestore.instance.collection('users');
 
@@ -24,11 +24,11 @@ class _UserApplication extends State<UserApplication> {
     return GetBuilder<AuthController>(builder: (controller) {
       // ...
 
-      return controller.user.role == 'admin'
+      return controller.user.role == 'courier'
           ? Scaffold(
               appBar: AppBar(
                 backgroundColor: const Color(0xFF0F9D58),
-                title: const Text('Applications'),
+                title: const Text('Make Offer'),
               ),
               body: SafeArea(
                 child: StreamBuilder<QuerySnapshot>(
@@ -49,10 +49,10 @@ class _UserApplication extends State<UserApplication> {
                             Map<String, dynamic>? userData =
                                 document.data() as Map<String, dynamic>?;
                             String userId = document.id;
-                            String userName =
-                                userData?['details']['name'] ?? '';
-                            String photoUrl =
-                                userData?['details']['photoUrl'] ?? '';
+
+                            String userName = userData?['locationDetaills']
+                                    ['deliveryAddress'] ??
+                                '';
 
                             return GestureDetector(
                               onTap: () {
@@ -60,7 +60,7 @@ class _UserApplication extends State<UserApplication> {
                               },
                               child: OfferView(
                                 name: userName,
-                                photoUrl: photoUrl,
+                                photoUrl: '',
                               ),
                             );
                           }).toList(),
@@ -85,17 +85,57 @@ class _UserApplication extends State<UserApplication> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        Alert(
+            context: context,
+            title: "Change Your Number",
+            content: Column(
+              children: <Widget>[
+                TextField(
+                  controller: mycontroller,
+                  decoration: const InputDecoration(
+                    icon: Icon(Icons.verified_user_rounded),
+                    labelText: 'Phone number',
+                  ),
+                ),
+              ],
+            ),
+            buttons: [
+              DialogButton(
+                color: AppColors.buttonBlue,
+                onPressed: () {
+                  ctrl.updatePhoneNumber(ctrl.phoneNumber.text);
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Change",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              )
+            ]).show();
         return AlertDialog(
           title: Text('Confirm Offer'),
           content: Text('Do you accept this offer?'),
           actions: <Widget>[
             TextButton(
-              child: Text('Accept'),
-              onPressed: () {
-                // Perform accept action
-                _acceptApplication(userId, 'courier');
-                Navigator.of(context).pop();
-              },
+              child: Column(
+                children: [
+                  Text('Accept'),
+                  DialogButton(
+                    child: TextField(
+                      controller: mycontroller,
+                      decoration: const InputDecoration(
+                        icon: Icon(Icons.verified_user_rounded),
+                        labelText: 'Phone number',
+                      ),
+                    ),
+                    onPressed: () {
+                      // Perform accept action
+                      _acceptApplication(userId, 'courier');
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
             ),
             TextButton(
               child: Text('Decline'),
@@ -144,10 +184,7 @@ class _UserApplication extends State<UserApplication> {
     };
 
     // Add replicated data to the 'couriers' collection
-    await FirebaseFirestore.instance
-        .collection('couriers')
-        .doc(userId)
-        .set(json);
+    await FirebaseFirestore.instance.collection('offers').doc(userId).set(json);
 
     UserModel newUser = UserModel.fromJson(json);
 
@@ -192,7 +229,7 @@ class _UserApplication extends State<UserApplication> {
 
     // Add replicated data to the 'couriers' collection
     await FirebaseFirestore.instance
-        .collection('rejectedApplications')
+        .collection('rejectedOffers')
         .doc(userId)
         .set(json);
 

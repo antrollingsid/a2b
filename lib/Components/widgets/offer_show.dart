@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class OfferView extends StatelessWidget {
   const OfferView({
     super.key,
     required this.name,
+    required this.photoUrl,
   });
   final String name;
+  final String photoUrl;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -14,7 +17,8 @@ class OfferView extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.white10, borderRadius: BorderRadius.circular(10)),
+              color: context.secondaryHeaderColor,
+              borderRadius: BorderRadius.circular(10)),
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Row(
@@ -29,7 +33,7 @@ class OfferView extends StatelessWidget {
                           Container(
                             width: 30,
                             height: 30,
-                            color: Colors.purpleAccent,
+                            color: context.primaryColor,
                           ),
                           const SizedBox(
                             width: 15,
@@ -44,11 +48,33 @@ class OfferView extends StatelessWidget {
                           const SizedBox(
                             width: 15,
                           ),
-                          Container(
-                            width: 30,
-                            height: 16,
-                            color: Colors.purple,
-                          )
+                          GestureDetector(
+                            onTap: () {
+                              // Implement the logic to show the image in full size
+                              // For example, you can use a Dialog or a separate screen to display the image.
+                              showDialog(
+                                context: context,
+                                builder: (_) => Dialog(
+                                  child: Image.network(
+                                    photoUrl,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: ClipOval(
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(photoUrl),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(

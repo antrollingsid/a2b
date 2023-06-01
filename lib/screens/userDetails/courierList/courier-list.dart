@@ -51,6 +51,7 @@ class _CourierList extends State<CourierList> {
                           document.data() as Map<String, dynamic>?;
                       String userId = document.id;
                       String userName = userData?['details']['name'] ?? '';
+                      String photoUrl = userData?['details']['photoUrl'] ?? '';
                       String userRole = userData?['role'] ?? '';
 
                       return GestureDetector(
@@ -58,6 +59,7 @@ class _CourierList extends State<CourierList> {
                         child: userRole == 'courier'
                             ? OfferView(
                                 name: userName,
+                                photoUrl: photoUrl,
                               )
                             : Container(),
                       );

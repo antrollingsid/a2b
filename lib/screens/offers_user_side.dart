@@ -37,15 +37,19 @@ class _CourierOffers extends State<CourierOffers> {
             children: [
               OfferView(
                 name: '',
+                photoUrl: '',
               ),
               OfferView(
                 name: '',
+                photoUrl: '',
               ),
               OfferView(
                 name: '',
+                photoUrl: '',
               ),
               OfferView(
                 name: '',
+                photoUrl: '',
               ),
 
               // Message(),
