@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_import
 
 import 'package:a2b/controllers/auth_controller.dart';
+import 'package:a2b/screens/chat/pages/chat_page.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
 import 'package:a2b/screens/epmty_page_appar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -114,12 +115,18 @@ class DashBoard extends StatelessWidget {
                             },
                             child: const Text('demo map'),
                           ),
-                          // ElevatedButton(
-                          //   onPressed: () {
-                          //     Get.to(() => const AdminDashboard());
-                          //   },
-                          //   child: const Text('admin dashboard'),
-                          // ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Get.to(
+                                () => const ChatPage(
+                                  userName: 'test',
+                                  groupId: '123',
+                                  groupName: 'hello',
+                                ),
+                              );
+                            },
+                            child: const Text('chat'),
+                          ),
                         ],
                       ),
                     ),
@@ -143,6 +150,18 @@ class DashBoard extends StatelessWidget {
                           textAlign: TextAlign.center,
                         ),
                       ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Get.to(
+                          () => const ChatPage(
+                            userName: 'sid',
+                            groupId: '123',
+                            groupName: 'hello',
+                          ),
+                        );
+                      },
+                      child: const Text('chat'),
                     ),
                   ],
                 )),
