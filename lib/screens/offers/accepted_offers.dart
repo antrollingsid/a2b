@@ -83,71 +83,36 @@ class _AcceptedOffers extends State<AcceptedOffers> {
 
   void _showDialog(BuildContext context, String userId, String userName) {
     showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        Alert(
-            context: context,
-            title: "Change Your Number",
-            content: Column(
-              children: <Widget>[
-                TextField(
-                  controller: mycontroller,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.verified_user_rounded),
-                    labelText: 'Phone number',
-                  ),
-                ),
-              ],
-            ),
-            buttons: [
-              DialogButton(
-                color: AppColors.buttonBlue,
-                onPressed: () {
-                  ctrl.updatePhoneNumber(ctrl.phoneNumber.text);
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  "Change",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              )
-            ]).show();
-        return AlertDialog(
-          title: Text('Confirm Offer'),
-          content: Text('Do you accept this offer?'),
-          actions: <Widget>[
-            TextButton(
-              child: Column(
-                children: [
-                  Text('Accept'),
-                  DialogButton(
-                    child: TextField(
-                      controller: mycontroller,
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.verified_user_rounded),
-                        labelText: 'Phone number',
-                      ),
+        context: context,
+        builder: (BuildContext context) {
+          Alert(
+              context: context,
+              title: "Change Your Number",
+              content: Column(
+                children: <Widget>[
+                  TextField(
+                    controller: mycontroller,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.verified_user_rounded),
+                      labelText: 'Phone number',
                     ),
-                    onPressed: () {
-                      // Perform accept action
-                      _acceptApplication(userId, 'courier');
-                      Navigator.of(context).pop();
-                    },
                   ),
                 ],
               ),
-            ),
-            TextButton(
-              child: Text('Decline'),
-              onPressed: () {
-                _declineApplication(userId, 'general');
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+              buttons: [
+                DialogButton(
+                  color: AppColors.buttonBlue,
+                  onPressed: () {
+                    ctrl.updatePhoneNumber(ctrl.phoneNumber.text);
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "Change",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                )
+              ]).show();
+        });
   }
 
   Future<void> _acceptApplication(String userId, String role) async {
