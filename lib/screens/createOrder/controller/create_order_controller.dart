@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../dashboard/dashboard.dart';
+import '../../qr_genartor.dart';
 import '../order_summary.dart';
 import '../order_upload_doc.dart';
 
@@ -36,7 +37,7 @@ class PackageController extends GetxController {
 
   UploadTask? uploadTask;
 
-  Future<void> addPackage() async {
+  Future<Future<QRCodeGenerator>> addPackage() async {
     courrier_id = "0";
     IsAccepted = "pending";
 
@@ -88,7 +89,15 @@ class PackageController extends GetxController {
             'description': description,
           },
         )
-        .then((value) => dashboard())
+        .then((value) =>  QRCodeGenerator(
+              courrierid:courrier_id,
+              deliverydate:createdAt,
+              packagename:package_name,
+              packagetype: package_type,
+              packageweight: package_weight,
+              pickupaddress: pickup_address,
+              senderid: user.uid,
+            ))
         //  Get.offAll(() => const DashBoard()))
         .catchError((error) => print("Failed to add package: $error"));
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QRCodeGenerator extends StatelessWidget {
-  final double packageid;
+ 
   final DateTime deliverydate;
   final String senderid;
   final String packagename;
@@ -13,7 +13,6 @@ class QRCodeGenerator extends StatelessWidget {
 
   const QRCodeGenerator(
       {super.key,
-      required this.packageid,
       required this.deliverydate,
       required this.senderid,
       required this.packagename,
@@ -29,7 +28,7 @@ class QRCodeGenerator extends StatelessWidget {
           data: 'Date: $deliverydate \n'
               'Courier Id: $courrierid'
               'Sender Id: $senderid'
-              'Package Id: $packageid'
+             
               'Package Name: $packagename'
               'Package Type: $packagetype'
               'Package Weight: $packageweight'
