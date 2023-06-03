@@ -1,6 +1,3 @@
-import 'package:a2b/Components/widgets/app_bar_buttons.dart';
-import 'package:a2b/main.dart';
-import 'package:a2b/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,12 +22,10 @@ class _CourierList extends State<CourierList> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(builder: (controller) {
-      // ...
-
       return Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xFF0F9D58),
-          title: const Text('Applications'),
+          backgroundColor: context.primaryColor,
+          title: const Text('Couriers'),
         ),
         body: SafeArea(
           child: StreamBuilder<QuerySnapshot>(
@@ -52,25 +47,19 @@ class _CourierList extends State<CourierList> {
                           document.data() as Map<String, dynamic>?;
                       String userId = document.id;
                       String userName = userData?['details']['name'] ?? '';
-                      String photoUrl = userData?['details']['photoUrl'] ?? '';
-                      DateTime date =
-                          userData?['deliveryDetails']['deliveryDate'] ?? '';
+                      String photoUrl = userData?['details']['photoURL'] ?? '';
+
                       String userRole = userData?['role'] ?? '';
 
-                      String from = userData?['locationDetaills']
-                              ['deliveryAddress'] ??
-                          '';
-                      String to =
-                          userData?['locationDetaills']['pickupAddress'] ?? '';
                       return GestureDetector(
                         onTap: () => Get.to(() => DetailsPage(userId)),
                         child: userRole == 'courier'
                             ? OfferView(
                                 name: userName,
                                 photoUrl: photoUrl,
-                                date: DateFormat('dd MMM yyyy').format(date),
-                                from: from,
-                                to: to,
+                                date: 'date',
+                                from: 'from',
+                                to: 'to',
                               )
                             : Container(),
                       );

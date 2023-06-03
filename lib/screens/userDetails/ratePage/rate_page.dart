@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -26,13 +28,28 @@ final TextEditingController _commentController = TextEditingController();
 
 class _RatePage extends State<RatePage> {
   double _rating = 3.0; // Variable to store the rating
+  final user = FirebaseAuth.instance.currentUser!;
 
-  RangeValues _currentRangeValues = const RangeValues(0, 80);
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('users');
+  late String userName;
+  late String photoURL;
   @override
   void initState() {
     super.initState();
+    fetchUserName();
   }
 
+  void fetchUserName() async {
+    final userDoc = await usersCollection.doc(user.uid).get();
+    setState(() {
+      userName = userDoc['details']['name'];
+      photoURL = userDoc['details']['photoURL'];
+    });
+  }
+
+  RangeValues _currentRangeValues = const RangeValues(0, 80);
+  @override
   final int _selectedIndex = 0;
 
   @override
@@ -96,6 +113,8 @@ class _RatePage extends State<RatePage> {
                     widget.userId,
                     _rating.toString(),
                     _commentController.text,
+                    userName,
+                    photoURL,
                   ),
                   textonbtn: 'submit',
                   primary: true,

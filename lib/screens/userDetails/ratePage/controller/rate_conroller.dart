@@ -7,8 +7,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 
 class RateController extends GetxController {
-  Future<void> rateCourier(BuildContext context, String userId,
-      String courierId, String rate, String comment) {
+  Future<void> rateCourier(
+      BuildContext context,
+      String userId,
+      String courierId,
+      String rate,
+      String comment,
+      String userName,
+      String photoURL) {
     CollectionReference rates =
         FirebaseFirestore.instance.collection('userToCourierRates');
     String? rateId;
@@ -17,7 +23,9 @@ class RateController extends GetxController {
     return rates.doc(rateId).set({
       'date': DateTime.now().toString(),
       'courier': courierId,
+      'ratedByName': userName,
       'ratedBy': userId,
+      'ratedByPhoto': photoURL,
       'rate': rate,
       'comment': comment,
     });

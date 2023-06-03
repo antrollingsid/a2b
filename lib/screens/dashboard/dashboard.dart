@@ -120,9 +120,9 @@ class DashBoard extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () {
                               Get.to(
-                                () => const ChatPage(
-                                  userName: 'test',
-                                  groupId: '123',
+                                () => ChatPage(
+                                  userName: userRole.user.details.name,
+                                  groupId: userRole.user.details.id,
                                   groupName: 'hello',
                                 ),
                               );
