@@ -2,20 +2,20 @@ import 'package:a2b/main.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class OfferView extends StatelessWidget {
-  const OfferView({
+class CourierOfferView extends StatelessWidget {
+  const CourierOfferView({
     super.key,
     required this.name,
     required this.photoUrl,
+    required this.price,
+    required this.duration,
     required this.date,
-    required this.from,
-    required this.to,
   });
   final String name;
   final String photoUrl;
+  final String price;
+  final String duration;
   final String date;
-  final String from;
-  final String to;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -90,7 +90,7 @@ class OfferView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                language.date,
+                                language.pickupDatetime,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: context.scaffoldBackgroundColor),
@@ -107,13 +107,13 @@ class OfferView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                language.from,
+                                language.price,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: context.scaffoldBackgroundColor),
                               ),
                               Text(
-                                from,
+                                price,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: context.scaffoldBackgroundColor),
@@ -124,13 +124,13 @@ class OfferView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                language.to,
+                                language.deliverTime,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: context.scaffoldBackgroundColor),
                               ),
                               Text(
-                                to,
+                                duration,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: context.scaffoldBackgroundColor),

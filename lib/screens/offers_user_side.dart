@@ -38,18 +38,30 @@ class _CourierOffers extends State<CourierOffers> {
               OfferView(
                 name: '',
                 photoUrl: '',
+                from: '',
+                date: '',
+                to: '',
               ),
               OfferView(
                 name: '',
                 photoUrl: '',
+                from: '',
+                date: '',
+                to: '',
               ),
               OfferView(
                 name: '',
                 photoUrl: '',
+                from: '',
+                date: '',
+                to: '',
               ),
               OfferView(
                 name: '',
                 photoUrl: '',
+                from: '',
+                date: '',
+                to: '',
               ),
 
               // Message(),

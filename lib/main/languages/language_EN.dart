@@ -369,7 +369,10 @@ class LanguageEn extends BaseLanguage {
   String get paymentCollectFromPickup => "Payment Collect Form on Pickup";
 
   @override
-  String get pickupDatetime => "Pickup date and time";
+  String get pickupDatetime => "Pickup date";
+
+  @override
+  String get tranportType => "Transport type";
 
   @override
   String get hour => "Hour";
@@ -652,7 +655,7 @@ class LanguageEn extends BaseLanguage {
   String get selectDocument => "Select Document";
 
   @override
-  String get addDocument => "Add Document";
+  String get addDocument => "Document";
 
   @override
   String get deleteMessage => "Delete message?";

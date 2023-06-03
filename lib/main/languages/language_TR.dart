@@ -367,7 +367,9 @@ class LanguageTr extends BaseLanguage {
   String get paymentCollectFromPickup => "Pickup'ta Ödeme Formu Toplama";
 
   @override
-  String get pickupDatetime => "Toplama Tarihi ve Saati";
+  String get pickupDatetime => "Toplama Tarihi";
+  @override
+  String get tranportType => "taşıma türü";
 
   @override
   String get hour => "Saat";
@@ -650,7 +652,7 @@ class LanguageTr extends BaseLanguage {
   String get selectDocument => "Belge'yi seçin";
 
   @override
-  String get addDocument => "Belge ekle";
+  String get addDocument => "Belge";
 
   @override
   String get deleteMessage => "Mesajı sil?";

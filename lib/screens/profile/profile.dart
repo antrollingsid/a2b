@@ -1,11 +1,13 @@
 import 'package:a2b/controllers/auth_controller.dart';
-import 'package:a2b/screens/profile/applyForCourier/apply_for_courier.dart';
+import 'package:a2b/screens/applyForCourier/apply_for_courier.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../Components/widgets/app_bar_buttons.dart';
 import '../../../../Components/widgets/settings_button.dart';
+import '../offers/courier_offer_list.dart';
+import '../order_history.dart';
 import '../userDetails/courierList/courier-list.dart';
 import 'info/top_profile.dart';
 import '../../../../main.dart';
@@ -101,9 +103,14 @@ class _ProfileState extends State<Profile> {
                 InkWell(
                     onTap: () => Get.to(() => const CourierList()),
                     child: SettingBtn(action: 'Couriers')),
-
+                InkWell(
+                    onTap: () => Get.to(() => const CourierOfferList()),
+                    child: SettingBtn(action: 'Offers')),
+                InkWell(
+                    onTap: () => Get.to(() => const OrderHistoryList()),
+                    child: SettingBtn(action: 'Order History')),
                 SizedBox(
-                  height: 180,
+                  height: 130,
                 ),
                 InkWell(
                     onTap: () => Get.find<AuthController>().signOut(),

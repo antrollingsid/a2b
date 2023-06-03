@@ -39,7 +39,12 @@ class PackageController extends GetxController {
   Future<void> addPackage() async {
     courrier_id = "0";
     IsAccepted = "pending";
+
     final user = FirebaseAuth.instance.currentUser!;
+    DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
     final createdAt = DateTime.now();
     CollectionReference packages =
         FirebaseFirestore.instance.collection('orders');
@@ -48,9 +53,16 @@ class PackageController extends GetxController {
         .set(
           {
             'createdAt': createdAt,
-            'statut': IsAccepted,
+            'status': IsAccepted,
             'shippementstatut':
                 'published', // here we have 4 shipement status published,accepted, shipping, recieved
+            'userDetails': {
+              'email': userSnapshot['details']['email'],
+              'userPhoto': userSnapshot['details']['photoURL'],
+              'name': userSnapshot['details']['name'],
+              'surname': userSnapshot['details']['surname'],
+              'number': userSnapshot['details']['phoneNumber'],
+            },
             'packageDetails': {
               'productName': package_name,
               'weight': package_weight,
@@ -68,7 +80,7 @@ class PackageController extends GetxController {
             },
             'deliveryDetails': {
               'deliveryDate': delivery_date,
-              'sendedBy': user.uid,
+              'sentBy': user.uid,
               'deliverBy': courrier_id,
               'duration': delivery_duration,
             },
@@ -89,7 +101,7 @@ class PackageController extends GetxController {
     return packages
         .doc()
         .update({
-          'statut': IsAccepted,
+          'status': IsAccepted,
           'deliverBy': courrier_id,
           'duration': duration,
           'price': price,

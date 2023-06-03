@@ -1,17 +1,21 @@
+import 'package:a2b/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../../models/user_model.dart';
+import '../../Components/widgets/accepted_offers_widgets.dart';
 import '../../controllers/offert_controller.dart';
 import '../../main/utils/Colors.dart';
-
-
+import '../mymap.dart';
 
 final mycontroller = Get.put(OffertController());
+
 class AcceptedOffers extends StatefulWidget {
   const AcceptedOffers({Key? key}) : super(key: key);
 
@@ -20,25 +24,32 @@ class AcceptedOffers extends StatefulWidget {
 }
 
 class _AcceptedOffers extends State<AcceptedOffers> {
+  final price = TextEditingController();
+  final time = TextEditingController();
+  CollectionReference courierCollection =
+      FirebaseFirestore.instance.collection('couriers');
   CollectionReference applicationsCollection =
-      FirebaseFirestore.instance.collection('orders');
+      FirebaseFirestore.instance.collection('accepted offers');
   CollectionReference usersCollection =
       FirebaseFirestore.instance.collection('users');
+  final user = FirebaseAuth.instance.currentUser!;
+  CollectionReference offersCollection =
+      FirebaseFirestore.instance.collection('offers');
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(builder: (controller) {
-      // ...
-
       return controller.user.role == 'courier'
           ? Scaffold(
               appBar: AppBar(
                 backgroundColor: const Color(0xFF0F9D58),
-                title: const Text('Make Offer'),
+                title: const Text('Accepted Offers'),
               ),
               body: SafeArea(
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: applicationsCollection.snapshots(),
+                  stream: offersCollection
+                      .where('status', isEqualTo: 'offer accepted')
+                      .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text('Error: ${snapshot.error}');
@@ -46,32 +57,71 @@ class _AcceptedOffers extends State<AcceptedOffers> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return CircularProgressIndicator();
                     }
-                    return Center(
-                      child: SizedBox(
-                        width: 333,
-                        child: ListView(
-                          children: snapshot.data!.docs
-                              .map((DocumentSnapshot document) {
-                            Map<String, dynamic>? userData =
-                                document.data() as Map<String, dynamic>?;
-                            String userId = document.id;
 
-                            String userName = userData?['locationDetaills']
-                                    ['deliveryAddress'] ??
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      return Center(
+                        child: Text('No accepted offers found.'),
+                      );
+                    }
+
+                    return ListView(
+                      children:
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                        Map<String, dynamic>? userData =
+                            document.data() as Map<String, dynamic>?;
+                        String offerId = document.id;
+
+                        String from = userData?['deliveryDetails']
+                                ['deliveryAddress'] ??
+                            '';
+                        Timestamp deliveryTimestamp =
+                            userData?['deliveryDetails']?['deliveryDate'];
+                        String date = deliveryTimestamp != null
+                            ? DateFormat('dd/MM/yy').format(
+                                DateTime.fromMillisecondsSinceEpoch(
+                                    deliveryTimestamp.seconds * 1000))
+                            : '';
+
+                        String courierId =
+                            userData?['deliveryDetails']['deliverBy'] ?? '';
+
+                        return FutureBuilder<DocumentSnapshot>(
+                          future: courierCollection.doc(courierId).get(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<DocumentSnapshot> snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return CircularProgressIndicator();
+                            }
+
+                            if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            }
+
+                            String courierName = (snapshot.data?.data()
+                                        as Map<String, dynamic>)['details']
+                                    ['name'] ??
+                                '';
+                            String photoUrl = (snapshot.data?.data()
+                                        as Map<String, dynamic>)['details']
+                                    ['photoURL'] ??
                                 '';
 
                             return GestureDetector(
                               onTap: () {
-                                _showDialog(context, userId, userName);
+                                Get.to(() => MyApp());
                               },
-                              child: OfferView(
-                                name: userName,
-                                photoUrl: '',
+                              child: AcceptedOfferView(
+                                name: courierName,
+                                photoUrl: photoUrl,
+                                date: date,
+                                from: from,
+                                to: 'to',
                               ),
                             );
-                          }).toList(),
-                        ),
-                      ),
+                          },
+                        );
+                      }).toList(),
                     );
                   },
                 ),
@@ -81,133 +131,9 @@ class _AcceptedOffers extends State<AcceptedOffers> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('you have no access'),
+                Text('You have no access.'),
               ],
             );
     });
   }
-
-  void _showDialog(BuildContext context, String userId, String userName) {
-   
-          Alert(
-              context: context,
-              title: "Accept Offert",
-              content: Column(
-                children: <Widget>[
-                  TextField(
-                    controller: mycontroller.price,
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.verified_user_rounded),
-                      labelText: 'Price',
-                    ),
-                  ),
-                ],
-              ),
-              buttons: [
-                DialogButton(
-                  color: AppColors.buttonBlue,
-                  onPressed: () {
-                   
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    "Change",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                )
-              ]).show();
-        }
-
-
-  Future<void> _acceptApplication(String userId, String role) async {
-    DocumentSnapshot userSnapshot =
-        await applicationsCollection.doc(userId).get();
-    Map<String, dynamic> userData = userSnapshot.data() as Map<String, dynamic>;
-
-    // Update user role in the 'users' collection
-    await usersCollection.doc(userId).update({'role': role});
-
-    // Update user role and decision in the 'applications' collection
-    await applicationsCollection.doc(userId).update({
-      'decision': 'accepted',
-      'role': role,
-    });
-
-    final createdAt = Timestamp.fromDate(DateTime.now());
-    final json = {
-      'createdAt': createdAt,
-      'decision': 'accepted',
-      'details': {
-        'id': userData['details']['id'],
-        'name': userData['details']['name'],
-        'surname': userData['details']['surname'],
-        'email': userData['details']['email'],
-        'photoURL': userData['details']['photoURL'],
-      },
-      'role': role,
-      'documents': {
-        'licence': userData['documents']['licence'],
-        'plateNo': userData['documents']['plateNo'],
-        'transportType': userData['documents']['transportType'],
-      },
-    };
-
-    // Add replicated data to the 'couriers' collection
-    await FirebaseFirestore.instance.collection('offers').doc(userId).set(json);
-
-    UserModel newUser = UserModel.fromJson(json);
-
-    print(newUser);
-
-    // Delete the replicated data from the 'applications' collection
-    await applicationsCollection.doc(userId).delete();
-  }
-
-  Future<void> _declineApplication(String userId, String role) async {
-    DocumentSnapshot userSnapshot =
-        await applicationsCollection.doc(userId).get();
-    Map<String, dynamic> userData = userSnapshot.data() as Map<String, dynamic>;
-
-    // Update user role in the 'users' collection
-    await usersCollection.doc(userId).update({'role': role});
-
-    // Update user role and decision in the 'applications' collection
-    await applicationsCollection.doc(userId).update({
-      'decision': 'rejected',
-      'role': role,
-    });
-
-    final createdAt = Timestamp.fromDate(DateTime.now());
-    final json = {
-      'createdAt': createdAt,
-      'decision': 'rejected',
-      'details': {
-        'id': userData['details']['id'],
-        'name': userData['details']['name'],
-        'surname': userData['details']['surname'],
-        'email': userData['details']['email'],
-        'photoURL': userData['details']['photoURL'],
-      },
-      'role': role,
-      'documents': {
-        'licence': userData['documents']['licence'],
-        'plateNo': userData['documents']['plateNo'],
-        'transportType': userData['documents']['transportType'],
-      },
-    };
-
-    // Add replicated data to the 'couriers' collection
-    await FirebaseFirestore.instance
-        .collection('rejectedOffers')
-        .doc(userId)
-        .set(json);
-
-    UserModel newUser = UserModel.fromJson(json);
-
-    print(newUser);
-
-    // Delete the replicated data from the 'applications' collection
-    await applicationsCollection.doc(userId).delete();
-  }
-
-  }
+}

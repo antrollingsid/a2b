@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:nb_utils/nb_utils.dart';
 
+import '../../../Components/widgets/application_offer_view.dart';
 import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../../models/user_model.dart';
@@ -27,7 +30,7 @@ class _UserApplication extends State<UserApplication> {
       return controller.user.role == 'admin'
           ? Scaffold(
               appBar: AppBar(
-                backgroundColor: const Color(0xFF0F9D58),
+                backgroundColor: context.primaryColor,
                 title: const Text('Applications'),
               ),
               body: SafeArea(
@@ -49,18 +52,31 @@ class _UserApplication extends State<UserApplication> {
                             Map<String, dynamic>? userData =
                                 document.data() as Map<String, dynamic>?;
                             String userId = document.id;
+                            Timestamp deliveryTimestamp =
+                                userData?['createdAt'];
+                            String date = deliveryTimestamp != null
+                                ? DateFormat('dd/MM/yy').format(
+                                    DateTime.fromMillisecondsSinceEpoch(
+                                        deliveryTimestamp.seconds * 1000))
+                                : '';
                             String userName =
                                 userData?['details']['name'] ?? '';
                             String photoUrl =
-                                userData?['details']['photoUrl'] ?? '';
-
+                                userData?['details']['photoURL'] ?? '';
+                            String licenseUrl =
+                                userData?['documents']['licence'] ?? '';
+                            String transportationType =
+                                userData?['documents']['transportType'] ?? '';
                             return GestureDetector(
                               onTap: () {
                                 _showDialog(context, userId, userName);
                               },
-                              child: OfferView(
+                              child: ApplicationOfferView(
                                 name: userName,
                                 photoUrl: photoUrl,
+                                date: date,
+                                transportationType: transportationType,
+                                license: licenseUrl,
                               ),
                             );
                           }).toList(),

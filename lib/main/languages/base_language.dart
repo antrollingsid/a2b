@@ -594,6 +594,8 @@ abstract class BaseLanguage {
 
   String get declined;
 
+  String get tranportType;
+
   String get requested;
 
   String get approved;

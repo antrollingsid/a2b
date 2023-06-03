@@ -20,6 +20,7 @@ import '../../../../Components/widgets/order_activity.dart';
 import '../../../../Components/widgets/shippement.dart';
 import '../livemap.dart';
 import '../mymap.dart';
+import '../offers/create_offer.dart';
 import '../offers/accepted_offers.dart';
 import '../profile/profile.dart';
 
@@ -99,10 +100,11 @@ class DashBoard extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const ClampingScrollPhysics(),
                         children: [
-                          OrderHistoryActivity(),
-                          OrderHistoryActivity(),
-                          OrderHistoryActivity(),
-                          OrderHistoryActivity(),
+                          OrderHistoryActivity(
+                            date: '',
+                            productName: '',
+                            status: '',
+                          ),
                           ElevatedButton(
                             onPressed: () {
                               Get.to(() => MyApp());
@@ -137,6 +139,25 @@ class DashBoard extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
+                        Get.to(() => UsersOrders());
+                      },
+                      child: Container(
+                        color: context.primaryColor,
+                        height: 100,
+                        width: 170,
+                        child: Text(
+                          'users orders',
+                          style:
+                              TextStyle(color: context.scaffoldBackgroundColor),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () {
                         Get.to(() => AcceptedOffers());
                       },
                       child: Container(
@@ -144,7 +165,7 @@ class DashBoard extends StatelessWidget {
                         height: 100,
                         width: 170,
                         child: Text(
-                          'Accepted offers',
+                          'accepted offers',
                           style:
                               TextStyle(color: context.scaffoldBackgroundColor),
                           textAlign: TextAlign.center,

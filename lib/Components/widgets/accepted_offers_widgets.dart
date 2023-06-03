@@ -1,9 +1,16 @@
 import 'package:a2b/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'dart:async';
 
-class OfferView extends StatelessWidget {
-  const OfferView({
+import 'package:geolocator/geolocator.dart' as geo;
+import 'package:permission_handler/permission_handler.dart';
+
+import '../../screens/livemap.dart';
+
+class AcceptedOfferView extends StatefulWidget {
+  const AcceptedOfferView({
     super.key,
     required this.name,
     required this.photoUrl,
@@ -16,6 +23,14 @@ class OfferView extends StatelessWidget {
   final String date;
   final String from;
   final String to;
+
+  @override
+  State<AcceptedOfferView> createState() => _AcceptedOfferViewState();
+}
+
+class _AcceptedOfferViewState extends State<AcceptedOfferView> {
+  final geo.Geolocator geolocator = geo.Geolocator();
+  StreamSubscription<geo.Position>? _locationSubscription;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -45,7 +60,7 @@ class OfferView extends StatelessWidget {
                                 context: context,
                                 builder: (_) => Dialog(
                                   child: Image.network(
-                                    photoUrl,
+                                    widget.photoUrl,
                                     fit: BoxFit.contain,
                                   ),
                                 ),
@@ -57,7 +72,7 @@ class OfferView extends StatelessWidget {
                                 width: 40,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage(photoUrl),
+                                    image: NetworkImage(widget.photoUrl),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -68,7 +83,7 @@ class OfferView extends StatelessWidget {
                             width: 15,
                           ),
                           Text(
-                            name,
+                            widget.name,
                             style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.bold,
@@ -96,7 +111,7 @@ class OfferView extends StatelessWidget {
                                     color: context.scaffoldBackgroundColor),
                               ),
                               Text(
-                                date,
+                                widget.date,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: context.scaffoldBackgroundColor),
@@ -113,7 +128,7 @@ class OfferView extends StatelessWidget {
                                     color: context.scaffoldBackgroundColor),
                               ),
                               Text(
-                                from,
+                                widget.from,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: context.scaffoldBackgroundColor),
@@ -130,12 +145,34 @@ class OfferView extends StatelessWidget {
                                     color: context.scaffoldBackgroundColor),
                               ),
                               Text(
-                                to,
+                                widget.to,
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: context.scaffoldBackgroundColor),
                               ),
                             ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              _getLocation();
+                            },
+                            child: Text('Picked'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              _listenLocation();
+                            },
+                            child: Text('On the way'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              _stopListening();
+                            },
+                            child: Text('delivered'),
                           ),
                         ],
                       ),
@@ -156,5 +193,60 @@ class OfferView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _getLocation() async {
+    try {
+      final geo.Position _positionResult =
+          await geo.Geolocator.getCurrentPosition();
+      await FirebaseFirestore.instance.collection('location').doc('user1').set(
+        {
+          'latitude': _positionResult.latitude,
+          'longitude': _positionResult.longitude,
+          'name': 'john',
+        },
+        SetOptions(merge: true),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _listenLocation() async {
+    _locationSubscription =
+        geo.Geolocator.getPositionStream().handleError((onError) {
+      print(onError);
+      _locationSubscription?.cancel();
+      setState(() {
+        _locationSubscription = null;
+      });
+    }).listen((geo.Position currentPosition) async {
+      await FirebaseFirestore.instance.collection('location').doc('user1').set(
+        {
+          'latitude': currentPosition.latitude,
+          'longitude': currentPosition.longitude,
+          'name': 'john',
+        },
+        SetOptions(merge: true),
+      );
+    });
+  }
+
+  _stopListening() {
+    _locationSubscription?.cancel();
+    setState(() {
+      _locationSubscription = null;
+    });
+  }
+
+  _requestPermission() async {
+    var status = await Permission.location.request();
+    if (status.isGranted) {
+      print('done');
+    } else if (status.isDenied) {
+      _requestPermission();
+    } else if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
   }
 }

@@ -5,8 +5,14 @@ import '../../main/utils/allConstants.dart';
 
 class OrderHistoryActivity extends StatelessWidget {
   const OrderHistoryActivity({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+    required this.productName,
+    required this.status,
+    required this.date,
+  });
+  final String productName;
+  final String status;
+  final String date;
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +57,9 @@ class OrderHistoryActivity extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'iPhone Head Charger',
-                              style: TextStyle(
+                            Text(
+                              productName,
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 // height:  1.5*ffem/fem,
@@ -86,7 +92,7 @@ class OrderHistoryActivity extends StatelessWidget {
                                         text: ' ',
                                       ),
                                       TextSpan(
-                                        text: '- 27 May, 2022',
+                                        text: '- $date',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
@@ -114,7 +120,7 @@ class OrderHistoryActivity extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 0, 0, 3),
                         child: Text(
-                          'Received',
+                          status,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
