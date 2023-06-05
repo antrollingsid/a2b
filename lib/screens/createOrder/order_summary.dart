@@ -2,6 +2,8 @@
 
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/main.dart';
+import 'package:a2b/screens/qr_genartor.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -19,6 +21,32 @@ class OrderSummary extends StatefulWidget {
 }
 
 class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
+
+   // In this example, suppose that all messages contain a data field with the key 'type'.
+  Future<void> setupInteractedMessage() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  void _handleMessage(RemoteMessage message) {
+    if (message.data['type'] == 'chat') {
+      Navigator.pushNamed(context, '/chat',
+        arguments: ChatArguments(),
+      );
+    }
+  }
   @override
   void initState() {
     setState(() {});
@@ -58,6 +86,15 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                QRCodeGenerator(
+                  courrierid: orderSummary.courrier_id,
+                  deliverydate: orderSummary.delivery_date,
+                  packagename: orderSummary.package_name,
+                  packagetype: orderSummary.package_type,
+                  packageweight: orderSummary.package_weight,
+                  pickupaddress: orderSummary.pickup_address,
+                  senderid: orderSummary.sender_id,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -158,4 +195,8 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
       ),
     );
   }
+}
+
+class ChatArguments {
+  
 }

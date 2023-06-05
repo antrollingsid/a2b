@@ -1,7 +1,11 @@
 import 'package:a2b/screens/home_page.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
+import 'package:a2b/screens/notifications/notifications.dart';
 import 'package:a2b/screens/place_order_upload.dart';
 import 'package:a2b/screens/profile/profile.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:flutter/material.dart';
@@ -38,6 +42,7 @@ late BaseLanguage language;
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await dep.init();
 
   // Firebase.initializeApp().then((value) {
@@ -60,7 +65,29 @@ void main() async {
   } else if (themeModeIndex == appThemeMode.themeModeDark) {
     appStore.setDarkMode(true);
   }
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
 
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  print('User granted permission: ${settings.authorizationStatus}');
+
+  // Listneing to the foreground messages
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    Noti.showBigTextNotification(
+        title: "'Got a message whilst in the foreground!'",
+        body: "Message data: ${message.data}",
+        fln: flutterLocalNotificationsPlugin);
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
   // await OneSignal.shared.setAppId(mOneSignalAppId);
 
   // saveOneSignalPlayerId();
@@ -69,6 +96,15 @@ void main() async {
     child: MainApp(),
   ));
 }
+
+// Lisitnening to the background messages
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+}
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});

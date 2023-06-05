@@ -7,7 +7,6 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart' as geo;
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../screens/livemap.dart';
 
 class AcceptedOfferView extends StatefulWidget {
   const AcceptedOfferView({

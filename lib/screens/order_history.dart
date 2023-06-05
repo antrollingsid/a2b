@@ -1,18 +1,12 @@
-import 'package:a2b/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
-import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';
-import '../../../models/user_model.dart';
-import '../../Components/widgets/accepted_offers_widgets.dart';
 import '../../controllers/offert_controller.dart';
-import '../../main/utils/Colors.dart';
 import '../Components/widgets/order_activity.dart';
 
 final mycontroller = Get.put(OffertController());
@@ -21,6 +15,7 @@ class OrderHistoryList extends StatefulWidget {
   const OrderHistoryList({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _OrderHistoryList createState() => _OrderHistoryList();
 }
 

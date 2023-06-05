@@ -7,6 +7,28 @@
         android:label="a2b"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <!-- Add this service -->
+<service
+    android:name="com.example.my_flutter_app.FirebaseMessagingService"
+    android:exported="false">
+    <intent-filter>
+        <action android:name="com.google.firebase.MESSAGING_EVENT" />
+    </intent-filter>
+</service>
+
+<!-- Add this receiver -->
+<receiver
+    android:name="com.example.my_flutter_app.FirebaseBackgroundReceiver"
+    android:exported="true"
+    android:enabled="true"
+    android:permission="com.google.android.c2dm.permission.SEND">
+    <intent-filter>
+        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+        <category android:name="com.example.my_flutter_app" />
+    </intent-filter>
+</receiver>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
