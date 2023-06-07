@@ -35,10 +35,60 @@ class _MessagesList extends State<MessagesList> {
         ),
         body: SafeArea(
           child: userRole.user.role == 'courier'
-              ? userRole.user.details.id ==
-                      messagesCollection.doc(userRole.user.details.id).id
+              ? StreamBuilder<QuerySnapshot>(
+                  stream: messagesCollection
+                      .where('courierId', isEqualTo: userRole.user.details.id)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    }
+                    if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
+                      return Text('No chats found.');
+                    }
+                    return Center(
+                      child: SizedBox(
+                        width: 333,
+                        child: ListView(
+                          children: snapshot.data!.docs
+                              .map((DocumentSnapshot document) {
+                            Map<String, dynamic>? userData =
+                                document.data() as Map<String, dynamic>?;
+                            String userId = document.id;
+                            String userName = userData?['userrName'] ?? '';
+                            String userPhoto = userData?['userPhoto'] ?? '';
+                            String courierId = userData?['courierId'] ?? '';
+
+                            return GestureDetector(
+                              onTap: () => Get.to(() => ChatPage(
+                                    groupId: userId,
+                                    groupName: userName,
+                                    userName: userRole.user.details.name,
+                                    id: userId,
+                                    photo: userPhoto,
+                                  )),
+                              child: OfferView(
+                                name: userName,
+                                photoUrl: userPhoto,
+                                date: 'date',
+                                from: 'from',
+                                to: 'to',
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    );
+                  },
+                )
+              : userRole.user.role == 'general'
                   ? StreamBuilder<QuerySnapshot>(
-                      stream: usersCollection.snapshots(),
+                      stream: messagesCollection
+                          .where('userrId', isEqualTo: userRole.user.details.id)
+                          .snapshots(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           return Text('Error: ${snapshot.error}');
@@ -46,6 +96,10 @@ class _MessagesList extends State<MessagesList> {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return const CircularProgressIndicator();
+                        }
+                        if (snapshot.data == null ||
+                            snapshot.data!.docs.isEmpty) {
+                          return Text('No chats found.');
                         }
                         return Center(
                           child: SizedBox(
@@ -55,23 +109,26 @@ class _MessagesList extends State<MessagesList> {
                                   .map((DocumentSnapshot document) {
                                 Map<String, dynamic>? userData =
                                     document.data() as Map<String, dynamic>?;
-                                String userId = document.id;
+                                // String userId = document.id;
+                                String userId = userData?['userrId'] ?? '';
+                                String courierId = userData?['courierId'] ?? '';
                                 String userName =
-                                    userData?['details']['name'] ?? '';
-                                String photoUrl =
-                                    userData?['details']['photoURL'] ?? '';
+                                    userData?['courierName'] ?? '';
+                                String userPhoto = userData?['userPhoto'] ?? '';
+                                String courierPhoto =
+                                    userData?['courierPhoto'] ?? '';
 
                                 return GestureDetector(
                                   onTap: () => Get.to(() => ChatPage(
-                                        groupId: userRole.user.details.id,
+                                        groupId: userId,
                                         groupName: userName,
                                         userName: userRole.user.details.name,
-                                        id: '',
-                                        photo: '',
+                                        id: courierId,
+                                        photo: courierPhoto,
                                       )),
                                   child: OfferView(
-                                    name: userName,
-                                    photoUrl: photoUrl,
+                                    name: userData?['courierName'],
+                                    photoUrl: userPhoto,
                                     date: 'date',
                                     from: 'from',
                                     to: 'to',
@@ -83,57 +140,7 @@ class _MessagesList extends State<MessagesList> {
                         );
                       },
                     )
-                  : userRole.user.role == 'general'
-                      ? StreamBuilder<QuerySnapshot>(
-                          stream: usersCollection.snapshots(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasError) {
-                              return Text('Error: ${snapshot.error}');
-                            }
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return CircularProgressIndicator();
-                            }
-                            return Center(
-                              child: SizedBox(
-                                width: 333,
-                                child: ListView(
-                                  children: snapshot.data!.docs
-                                      .map((DocumentSnapshot document) {
-                                    Map<String, dynamic>? userData = document
-                                        .data() as Map<String, dynamic>?;
-                                    String userId = document.id;
-                                    String userName =
-                                        userData?['details']['name'] ?? '';
-                                    String photoUrl =
-                                        userData?['details']['photoURL'] ?? '';
-
-                                    //String userRole = userData?['role'] ?? '';
-                                    return GestureDetector(
-                                      onTap: () => Get.to(() => ChatPage(
-                                            groupId: userRole.user.details.id,
-                                            groupName: userName,
-                                            userName:
-                                                userRole.user.details.name,
-                                            id: '',
-                                            photo: '',
-                                          )),
-                                      child: OfferView(
-                                        name: userName,
-                                        photoUrl: photoUrl,
-                                        date: 'date',
-                                        from: 'from',
-                                        to: 'to',
-                                      ),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            );
-                          },
-                        )
-                      : Text('data')
-              : Text('error here'),
+                  : Text('data'),
         ),
       );
     });
