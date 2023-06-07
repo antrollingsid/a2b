@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 import '../../../controllers/auth_controller.dart';
 import '../../Components/widgets/accepted_offers_widgets.dart';
@@ -39,7 +40,7 @@ class _AcceptedOffers extends State<AcceptedOffers> {
       return controller.user.role == 'courier'
           ? Scaffold(
               appBar: AppBar(
-                backgroundColor: const Color(0xFF0F9D58),
+                backgroundColor: context.primaryColor,
                 title: const Text('Accepted Offers'),
               ),
               body: SafeArea(
@@ -67,7 +68,10 @@ class _AcceptedOffers extends State<AcceptedOffers> {
                         Map<String, dynamic>? userData =
                             document.data() as Map<String, dynamic>?;
 
-                        String from = userData?['deliveryDetails']
+                        String from = userData?['locationDetaills']
+                                ['pickupAddress'] ??
+                            '';
+                        String to = userData?['locationDetaills']
                                 ['deliveryAddress'] ??
                             '';
                         Timestamp deliveryTimestamp =
@@ -82,37 +86,33 @@ class _AcceptedOffers extends State<AcceptedOffers> {
                             userData?['deliveryDetails']['deliverBy'] ?? '';
 
                         return FutureBuilder<DocumentSnapshot>(
-                          future: courierCollection.doc(courierId).get(),
+                          future: applicationsCollection.doc().get(),
                           builder: (BuildContext context,
                               AsyncSnapshot<DocumentSnapshot> snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return CircularProgressIndicator();
+                              return const CircularProgressIndicator();
                             }
 
                             if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             }
 
-                            String courierName = (snapshot.data?.data()
-                                        as Map<String, dynamic>)['details']
-                                    ['name'] ??
-                                '';
-                            String photoUrl = (snapshot.data?.data()
-                                        as Map<String, dynamic>)['details']
-                                    ['photoURL'] ??
-                                '';
+                            String userName =
+                                userData?['userDetails']['name'] ?? '';
+                            String photoUrl =
+                                userData?['userDetails']['userPhoto'] ?? '';
 
                             return GestureDetector(
                               onTap: () {
                                 Get.to(() => MyApp());
                               },
                               child: AcceptedOfferView(
-                                name: courierName,
+                                name: userName,
                                 photoUrl: photoUrl,
                                 date: date,
                                 from: from,
-                                to: 'to',
+                                to: to,
                               ),
                             );
                           },

@@ -238,20 +238,6 @@ class _DashBoardState extends State<DashBoard> {
                         ),
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Get.to(
-                          () => const ChatPage(
-                            userName: 'sid',
-                            groupId: '123',
-                            groupName: 'hello',
-                            id: '',
-                            photo: '',
-                          ),
-                        );
-                      },
-                      child: const Text('chat'),
-                    ),
                   ],
                 )),
         ),

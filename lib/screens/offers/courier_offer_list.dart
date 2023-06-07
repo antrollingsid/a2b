@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:nb_utils/nb_utils.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../Components/widgets/courier_offer.dart';
 
@@ -28,7 +29,7 @@ class _CourierOfferList extends State<CourierOfferList> {
     return GetBuilder<AuthController>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color(0xFF0F9D58),
+          backgroundColor: context.primaryColor,
           title: const Text('offers'),
         ),
         body: SafeArea(

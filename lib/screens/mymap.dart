@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart' as geo;
+import 'package:nb_utils/nb_utils.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'livemap.dart';
@@ -33,6 +34,7 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
       appBar: AppBar(
         title: Text('live location tracker'),
+        backgroundColor: context.primaryColor,
       ),
       body: Column(
         children: [
@@ -40,19 +42,19 @@ class _MyAppState extends State<MyApp> {
             onPressed: () {
               _getLocation();
             },
-            child: Text('add my location'),
+            child: Text('pickup'),
           ),
           TextButton(
             onPressed: () {
               _listenLocation();
             },
-            child: Text('enable live location'),
+            child: Text('on the way'),
           ),
           TextButton(
             onPressed: () {
               _stopListening();
             },
-            child: Text('stop live location'),
+            child: Text('shipped'),
           ),
           Expanded(
             child: StreamBuilder(

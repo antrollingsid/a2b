@@ -1,5 +1,6 @@
 import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/screens/apply_for_courier.dart';
+import 'package:a2b/screens/offers/accepted_offers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -101,33 +102,52 @@ class _ProfileState extends State<Profile> {
                 const TopProfile(),
 
                 InkWell(
-                    onTap: () => Get.to(() => const MessagesList()),
-                    child: const SettingBtn(action: 'messages')),
-                userRole.user.role == 'general'
-                    ? InkWell(
+                  onTap: () => Get.to(() => const MessagesList()),
+                  child: const SettingBtn(action: 'messages'),
+                ),
+                if (userRole.user.role == 'general')
+                  Column(
+                    children: [
+                      InkWell(
                         onTap: () => Get.to(() => const ApplyForCourier()),
                         child:
-                            const SettingBtn(action: 'apply for couriership'))
-                    : Container(),
-                userRole.user.role == 'general'
-                    ? InkWell(
+                            const SettingBtn(action: 'apply for couriership'),
+                      ),
+                      InkWell(
                         onTap: () => Get.to(() => const CourierList()),
-                        child: const SettingBtn(action: 'Couriers'))
-                    : InkWell(
+                        child: const SettingBtn(action: 'Couriers'),
+                      ),
+                      InkWell(
+                        onTap: () => Get.to(() => const CourierOfferList()),
+                        child: const SettingBtn(action: 'Offers'),
+                      ),
+                      InkWell(
+                        onTap: () => Get.to(() => const OrderHistoryList()),
+                        child: const SettingBtn(action: 'Order History'),
+                      ),
+                    ],
+                  )
+                else if (userRole.user.role == 'courier')
+                  Column(
+                    children: [
+                      InkWell(
                         onTap: () => Get.to(() => const UserList()),
-                        child: const SettingBtn(action: 'Users')),
-                InkWell(
-                    onTap: () => Get.to(() => const CourierOfferList()),
-                    child: const SettingBtn(action: 'Offers')),
-                InkWell(
-                    onTap: () => Get.to(() => const OrderHistoryList()),
-                    child: const SettingBtn(action: 'Order History')),
+                        child: const SettingBtn(action: 'Users'),
+                      ),
+                      InkWell(
+                        onTap: () => Get.to(() => const AcceptedOffers()),
+                        child: const SettingBtn(action: 'Accepted offers'),
+                      ),
+                    ],
+                  ),
+
                 const SizedBox(
                   height: 130,
                 ),
                 InkWell(
-                    onTap: () => Get.find<AuthController>().signOut(),
-                    child: SettingBtn(action: language.logout))
+                  onTap: () => Get.find<AuthController>().signOut(),
+                  child: SettingBtn(action: language.logout),
+                ),
               ],
             ),
           ),
