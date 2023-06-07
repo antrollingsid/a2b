@@ -45,19 +45,19 @@ class _RegisterState extends State<Register> {
                       children: [
                         const LoginWithBtn(),
                         CustomTextfield(
-                          hintText: 'Sid',
+                          hintText: 'Name',
                           isPassword: false,
                           mycontroller: regcontroller.name,
                           width: 333,
                         ),
                         CustomTextfield(
-                          hintText: 'Alfaouri',
+                          hintText: 'Surname',
                           isPassword: false,
                           mycontroller: regcontroller.surname,
                           width: 333,
                         ),
                         CustomTextfield(
-                          hintText: 'sample@a2b.com',
+                          hintText: 'Email',
                           isPassword: false,
                           mycontroller: regcontroller.email,
                           width: 333,
@@ -68,6 +68,12 @@ class _RegisterState extends State<Register> {
                           mycontroller: regcontroller.password,
                           width: 333,
                         ),
+                        CustomTextfield(
+                          hintText: 'phone number',
+                          isPassword: false,
+                          mycontroller: regcontroller.phoneNo,
+                          width: 333,
+                        ),
                         Expanded(child: Container()),
                         CustomBtn(
                           textonbtn: 'Register',
@@ -76,7 +82,8 @@ class _RegisterState extends State<Register> {
                               regcontroller.email.text,
                               regcontroller.password.text,
                               regcontroller.name.text,
-                              regcontroller.surname.text),
+                              regcontroller.surname.text,
+                              regcontroller.phoneNo.text),
                           primary: true,
                         ),
                         InkwellBtn(

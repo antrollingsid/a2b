@@ -10,16 +10,16 @@ import '../../dashboard/dashboard.dart';
 import '../../profile/profile.dart';
 import '../details.dart';
 
-class CourierList extends StatefulWidget {
-  const CourierList({Key? key}) : super(key: key);
+class UserList extends StatefulWidget {
+  const UserList({Key? key}) : super(key: key);
 
   @override
-  _CourierList createState() => _CourierList();
+  _UserList createState() => _UserList();
 }
 
-class _CourierList extends State<CourierList> {
+class _UserList extends State<UserList> {
   CollectionReference usersCollection =
-      FirebaseFirestore.instance.collection('couriers');
+      FirebaseFirestore.instance.collection('users');
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _CourierList extends State<CourierList> {
       return Scaffold(
           appBar: AppBar(
             backgroundColor: context.primaryColor,
-            title: const Text('Couriers'),
+            title: const Text('Users'),
           ),
           body: SafeArea(
             child: StreamBuilder<QuerySnapshot>(
@@ -56,7 +56,7 @@ class _CourierList extends State<CourierList> {
 
                         return GestureDetector(
                           onTap: () => Get.to(() => DetailsPage(userId)),
-                          child: userRole == 'courier'
+                          child: userRole == 'general'
                               ? OfferView(
                                   name: userName,
                                   photoUrl: photoUrl,

@@ -52,7 +52,7 @@ class OrderHistoryActivity extends StatelessWidget {
                       ),
                       Container(
                         margin: const EdgeInsets.fromLTRB(0, 0, 30, 0),
-                        width: 162,
+                        width: 148,
                         height: 50,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +109,7 @@ class OrderHistoryActivity extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 9, 2.5),
+                        margin: const EdgeInsets.fromLTRB(0, 0, 0, 2.5),
                         child: SvgPicture.string(
                           SvgConstant.tickIconDark,
                           width: 17,
@@ -124,7 +124,6 @@ class OrderHistoryActivity extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
-                            // height:  2*ffem/fem,
                             color: context.primaryColor,
                           ),
                         ),

@@ -2,14 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../../Components/widgets/custom_button.dart';
 import '../../../controllers/auth_controller.dart';
-import '../../../main/utils/allConstants.dart';
 import '../../../Components/widgets/app_bar_buttons.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../createOrder/order_map.dart';
+import '../../dashboard/dashboard.dart';
+import '../../profile/profile.dart';
 import 'controller/rate_conroller.dart';
 
 class RatePage extends StatefulWidget {
@@ -48,132 +49,143 @@ class _RatePage extends State<RatePage> {
     });
   }
 
-  RangeValues _currentRangeValues = const RangeValues(0, 80);
-  @override
-  final int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     final rate = Get.put(RateController());
     return GetBuilder<AuthController>(builder: (controller) {
       return Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: context.scaffoldBackgroundColor,
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(80),
-          child: CustomAppBar(
-            titleText: 'rate and review',
-            isActionVisible: true,
-            isLeadingVisible: true,
+          resizeToAvoidBottomInset: false,
+          backgroundColor: context.scaffoldBackgroundColor,
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(80),
+            child: CustomAppBar(
+              titleText: 'rate and review',
+              isActionVisible: true,
+              isLeadingVisible: true,
+            ),
           ),
-        ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RatingBar.builder(
-                  initialRating: 3,
-                  minRating: 1,
-                  direction: Axis.horizontal,
-                  allowHalfRating: true,
-                  itemCount: 5,
-                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  itemBuilder: (context, _) => const Icon(
-                    Icons.star,
-                    color: Colors.amber,
+          body: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  RatingBar.builder(
+                    initialRating: 3,
+                    minRating: 1,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    itemCount: 5,
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    itemBuilder: (context, _) => const Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
+                    onRatingUpdate: (rating) {
+                      setState(() {
+                        _rating = rating;
+                      });
+                    },
                   ),
-                  onRatingUpdate: (rating) {
-                    setState(() {
-                      _rating = rating;
-                    });
-                  },
-                ),
-                TextField(
-                  controller: _commentController,
-                  maxLines: null, // allow any number of lines
-                  minLines: 5, // set a minimum of 5 lines
-                  keyboardType: TextInputType
-                      .multiline, // set the keyboard type to multiline
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your text here', // add a hint text
-                    border: OutlineInputBorder(),
-                    filled: true, // enable filling of the TextField
+                  Center(
+                    child: SizedBox(
+                      width: 333,
+                      child: TextField(
+                        controller: _commentController,
+                        maxLines: null, // allow any number of lines
+                        minLines: 5, // set a minimum of 5 lines
+                        keyboardType: TextInputType
+                            .multiline, // set the keyboard type to multiline
+                        decoration: const InputDecoration(
+                          hintText: 'Enter your text here', // add a hint text
+                          border: OutlineInputBorder(),
+                          filled: true, // enable filling of the TextField
 
-                    fillColor:
-                        Colors.white, // set the background color to white
-                    // add a border
+                          fillColor:
+                              Colors.white, // set the background color to white
+                          // add a border
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-
-                CustomBtn(
-                  onPress: () => rate.rateCourier(
-                    context,
-                    controller.user.details.id,
-                    widget.userId,
-                    _rating.toString(),
-                    _commentController.text,
-                    userName,
-                    photoURL,
+                  const SizedBox(
+                    height: 340,
                   ),
-                  textonbtn: 'submit',
-                  primary: true,
-                ),
+                  Center(
+                    child: CustomBtn(
+                      onPress: () => rate.rateCourier(
+                        context,
+                        controller.user.details.id,
+                        widget.userId,
+                        _rating.toString(),
+                        _commentController.text,
+                        userName,
+                        photoURL,
+                      ),
+                      textonbtn: 'submit',
+                      primary: true,
+                    ),
+                  ),
 
-                // CustomCalendar(),
-                // CustomShip(),
+                  // CustomCalendar(),
+                  // CustomShip(),
+                ],
+              ),
+            ),
+          ),
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: context.hintColor, // Choose your desired color
+                  width: 1.0, // Choose your desired width
+                ),
+              ),
+            ),
+            child: BottomNavigationBar(
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              backgroundColor: context.scaffoldBackgroundColor,
+              type: BottomNavigationBarType.fixed,
+              items: [
+                const BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Container(
+                    height: 52,
+                    width: 52,
+                    decoration: BoxDecoration(
+                      color: context.secondaryHeaderColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      Icons.add,
+                      color: context.scaffoldBackgroundColor,
+                      size: 30,
+                    ),
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.person_outlined,
+                    color: context.hintColor,
+                  ),
+                  label: '',
+                ),
               ],
+              selectedItemColor: context.primaryColor,
+              onTap: (index) {
+                if (index == 0) {
+                  Get.to(() => const DashBoard());
+                } else if (index == 1) {
+                  Get.to(() => const PlaceOrderMap());
+                } else if (index == 2) {
+                  Get.to(() => const Profile());
+                }
+              },
             ),
-          ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          backgroundColor: AppColors.buttonStroke,
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.access_time,
-                color: AppColors.backgroundLightMode,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.add,
-                color: AppColors.backgroundLightMode,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.feedback_outlined,
-                color: AppColors.backgroundLightMode,
-              ),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_outlined,
-                color: AppColors.backgroundLightMode,
-              ),
-              label: '',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          selectedItemColor: AppColors.primary,
-          onTap: (index) {
-            if (index == 2) {
-              // Get.to(() => const RatePage());
-            }
-          },
-        ),
-      );
+          ));
     });
   }
 }

@@ -10,45 +10,6 @@ class DatabaseService {
   final CollectionReference chats =
       FirebaseFirestore.instance.collection('chats');
 
-  // saving the userdata
-  // Future savingUserData(String fullName, String email, String userId, String courierId) async {
-  //   final createdAt = DateTime.now();
-  //   return chats.doc().set(
-  //     {
-  //       'createdAt': createdAt,
-  //       'userId': userId,
-  //       'courierId': courierId,
-  //       'packageDetails': {
-  //         'productName': package_name,
-  //         'weight': package_weight,
-  //         'productType': package_type,
-  //         'fragile': IsFragile,
-  //         'productUrl': urlDownload,
-  //       },
-  //       'locationDetaills': {
-  //         'pickupAddress': pickup_address,
-  //         'pickupLatitude': pickupLatitude,
-  //         'pickupLongitude': pickupLongitude,
-  //         'deliveryAddress': delivery_address,
-  //         'deliveryLatitude': deliveryLatitude,
-  //         'deliveryLongitude': deliveryLongitude,
-  //       },
-  //       'deliveryDetails': {
-  //         'deliveryDate': delivery_date,
-  //         'sendedBy': user.uid,
-  //         'deliverBy': courrier_id,
-  //         'duration': delivery_duration,
-  //       },
-  //       'price': 0.0,
-  //       'description': description,
-  //     },
-  //   );
-  //   return await userCollection.doc(uid).set({
-  //     "groups": [],
-  //     "uid": uid,
-  //   });
-  // }
-
   // getting user data
   Future gettingUserData(String email) async {
     QuerySnapshot snapshot =
@@ -151,12 +112,28 @@ class DatabaseService {
   }
 
   // send message
-  sendMessage(String groupId, Map<String, dynamic> chatMessageData) async {
+  sendMessage(
+      String groupId,
+      Map<String, dynamic> chatMessageData,
+      String courierId,
+      String courierName,
+      String courierPhoto,
+      String userId,
+      String userName,
+      String userPhoto) async {
     chats.doc(groupId).collection("messages").add(chatMessageData);
     chats.doc(groupId).update({
       "recentMessage": chatMessageData['message'],
       "recentMessageSender": chatMessageData['sender'],
       "recentMessageTime": chatMessageData['time'].toString(),
+    });
+    chats.doc(groupId).set({
+      "courierId": courierId,
+      "courierName": courierName,
+      "courierPhoto": courierPhoto,
+      "userrId": userId,
+      "userrName": userName,
+      "userPhoto": userPhoto,
     });
   }
 }

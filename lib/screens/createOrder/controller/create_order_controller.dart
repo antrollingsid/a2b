@@ -16,12 +16,12 @@ class PackageController extends GetxController {
 
   /// TextField Controllers to get data from TextFields
   late DateTime delivery_date;
-  late String sender_id;
+  late String sender_id = '';
   late String package_name;
   late String urlDownload;
   late String description;
 
-  late String courrier_id;
+  late String courrier_id = '';
   late String package_type;
   late String pickup_address;
   late String package_weight;
@@ -37,7 +37,7 @@ class PackageController extends GetxController {
 
   UploadTask? uploadTask;
 
-  Future<Future<QRCodeGenerator>> addPackage() async {
+  Future<Future<Null>> addPackage() async {
     courrier_id = "0";
     IsAccepted = "pending";
 
@@ -49,56 +49,56 @@ class PackageController extends GetxController {
     final createdAt = DateTime.now();
     CollectionReference packages =
         FirebaseFirestore.instance.collection('orders');
-    return packages
-        .doc()
-        .set(
-          {
-            'createdAt': createdAt,
-            'status': IsAccepted,
-            'shippementstatut':
-                'published', // here we have 4 shipement status published,accepted, shipping, recieved
-            'userDetails': {
-              'email': userSnapshot['details']['email'],
-              'userPhoto': userSnapshot['details']['photoURL'],
-              'name': userSnapshot['details']['name'],
-              'surname': userSnapshot['details']['surname'],
-              'number': userSnapshot['details']['phoneNumber'],
-            },
-            'packageDetails': {
-              'productName': package_name,
-              'weight': package_weight,
-              'productType': package_type,
-              'fragile': IsFragile,
-              'productUrl': urlDownload,
-            },
-            'locationDetaills': {
-              'pickupAddress': pickup_address,
-              'pickupLatitude': pickupLatitude,
-              'pickupLongitude': pickupLongitude,
-              'deliveryAddress': delivery_address,
-              'deliveryLatitude': deliveryLatitude,
-              'deliveryLongitude': deliveryLongitude,
-            },
-            'deliveryDetails': {
-              'deliveryDate': delivery_date,
-              'sentBy': user.uid,
-              'deliverBy': courrier_id,
-              'duration': delivery_duration,
-            },
-            'price': 0.0,
-            'description': description,
-          },
-        )
-        .then((value) =>  QRCodeGenerator(
-              courrierid:courrier_id,
-              deliverydate:createdAt,
-              packagename:package_name,
-              packagetype: package_type,
-              packageweight: package_weight,
-              pickupaddress: pickup_address,
-              senderid: user.uid,
-            ))
-        //  Get.offAll(() => const DashBoard()))
+    return packages.doc().set(
+      {
+        'createdAt': createdAt,
+        'status': IsAccepted,
+        'shippementstatut':
+            'published', // here we have 4 shipement status published,accepted, shipping, recieved
+        'userDetails': {
+          'email': userSnapshot['details']['email'],
+          'userPhoto': userSnapshot['details']['photoURL'],
+          'name': userSnapshot['details']['name'],
+          'surname': userSnapshot['details']['surname'],
+          'number': userSnapshot['details']['phoneNumber'],
+        },
+        'packageDetails': {
+          'productName': package_name,
+          'weight': package_weight,
+          'productType': package_type,
+          'fragile': IsFragile,
+          'productUrl': urlDownload,
+        },
+        'locationDetaills': {
+          'pickupAddress': pickup_address,
+          'pickupLatitude': pickupLatitude,
+          'pickupLongitude': pickupLongitude,
+          'deliveryAddress': delivery_address,
+          'deliveryLatitude': deliveryLatitude,
+          'deliveryLongitude': deliveryLongitude,
+        },
+        'deliveryDetails': {
+          'deliveryDate': delivery_date,
+          'sentBy': user.uid,
+          'deliverBy': courrier_id,
+          'duration': delivery_duration,
+        },
+        'price': 0.0,
+        'description': description,
+      },
+    ).then((value) {
+      QRCodeGenerator(
+        courrierid: courrier_id,
+        deliverydate: createdAt,
+        packagename: package_name,
+        packagetype: package_type,
+        packageweight: package_weight,
+        pickupaddress: pickup_address,
+        senderid: user.uid,
+      );
+      Get.offAll(() => const DashBoard());
+    })
+        // Get.offAll(() => const DashBoard());
         .catchError((error) => print("Failed to add package: $error"));
   }
 

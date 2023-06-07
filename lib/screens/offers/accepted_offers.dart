@@ -1,17 +1,14 @@
-import 'package:a2b/main.dart';
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
-import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';
-import '../../../models/user_model.dart';
 import '../../Components/widgets/accepted_offers_widgets.dart';
 import '../../controllers/offert_controller.dart';
-import '../../main/utils/Colors.dart';
 import '../mymap.dart';
 
 final mycontroller = Get.put(OffertController());
@@ -55,11 +52,11 @@ class _AcceptedOffers extends State<AcceptedOffers> {
                       return Text('Error: ${snapshot.error}');
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
 
                     if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                      return Center(
+                      return const Center(
                         child: Text('No accepted offers found.'),
                       );
                     }
@@ -69,7 +66,6 @@ class _AcceptedOffers extends State<AcceptedOffers> {
                           snapshot.data!.docs.map((DocumentSnapshot document) {
                         Map<String, dynamic>? userData =
                             document.data() as Map<String, dynamic>?;
-                        String offerId = document.id;
 
                         String from = userData?['deliveryDetails']
                                 ['deliveryAddress'] ??

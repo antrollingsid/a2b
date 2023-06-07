@@ -10,12 +10,14 @@ class CourierOfferView extends StatelessWidget {
     required this.price,
     required this.duration,
     required this.date,
+    required this.packageName,
   });
   final String name;
   final String photoUrl;
   final String price;
   final String duration;
   final String date;
+  final String packageName;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -76,6 +78,13 @@ class CourierOfferView extends StatelessWidget {
                           ),
                           const SizedBox(
                             width: 15,
+                          ),
+                          Text(
+                            packageName,
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: context.scaffoldBackgroundColor),
                           ),
                         ],
                       ),

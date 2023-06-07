@@ -3,16 +3,17 @@ import 'dart:io';
 import 'package:a2b/Components/widgets/custom_button.dart';
 import 'package:a2b/Components/widgets/custom_textfield.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:nb_utils/nb_utils.dart';
 
-import '../../controllers/apply_controller.dart';
-import '../../main/utils/allConstants.dart';
+import '../controllers/apply_controller.dart';
+import '../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
-import '../../Components/widgets/app_bar_buttons.dart';
+import '../Components/widgets/app_bar_buttons.dart';
 
 class ApplyForCourier extends StatefulWidget {
   const ApplyForCourier({Key? key}) : super(key: key);
@@ -85,12 +86,12 @@ class _ApplyForCourierState extends State<ApplyForCourier>
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundLightMode,
+      backgroundColor: context.scaffoldBackgroundColor,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
-          titleText: 'ulpaod documents',
-          isActionVisible: true,
+          titleText: 'Apply for courier',
+          isActionVisible: false,
           isLeadingVisible: true,
         ),
       ),
@@ -104,12 +105,12 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                 radius: const Radius.circular(10),
                 dashPattern: const [10, 4],
                 strokeCap: StrokeCap.round,
-                color: Colors.blue.shade400,
+                color: context.primaryColor,
                 child: Container(
                   width: 333,
                   height: 264,
                   decoration: BoxDecoration(
-                      color: const Color.fromARGB(20, 40, 40, 40),
+                      // color: const Color.fromARGB(20, 40, 40, 40),
                       borderRadius: BorderRadius.circular(10)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -126,7 +127,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                         'Upload your file',
                         style: TextStyle(
                             fontSize: 17,
-                            color: Color.fromARGB(255, 255, 255, 255),
+                            // color: Color.fromARGB(255, 255, 255, 255),
                             fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
@@ -138,7 +139,9 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                       Text(
                         'File should be jpg, png',
                         style: TextStyle(
-                            fontSize: 15, color: Colors.grey.shade500),
+                          fontSize: 15,
+                          // color: Colors.grey.shade500
+                        ),
                       ),
                     ],
                   ),
@@ -155,7 +158,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                         Text(
                           'Selected File',
                           style: TextStyle(
-                            color: Colors.grey.shade400,
+                            color: context.hintColor,
                             fontSize: 15,
                           ),
                         ),
@@ -165,8 +168,11 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                         Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
+                            border: Border.all(
+                              color: context.primaryColor,
+                            ),
                             borderRadius: BorderRadius.circular(10),
-                            color: AppColors.buttonStroke,
+                            color: context.scaffoldBackgroundColor,
                           ),
                           child: Row(
                             children: [
@@ -186,10 +192,9 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                   children: [
                                     Text(
                                       _platformFile!.name,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 13,
-                                        color:
-                                            Color.fromARGB(255, 235, 231, 231),
+                                        color: context.hintColor,
                                       ),
                                     ),
                                     const SizedBox(
@@ -199,7 +204,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                       '${(_platformFile!.size / 1024).ceil()} KB',
                                       style: TextStyle(
                                         fontSize: 13,
-                                        color: Colors.grey.shade500,
+                                        color: context.hintColor,
                                       ),
                                     ),
                                     const SizedBox(
@@ -213,7 +218,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(5),
-                                              color: AppColors.primary,
+                                              color: context.primaryColor,
                                             ),
                                           ),
                                           Positioned.fill(
@@ -224,7 +229,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
-                                                  color: AppColors.primary,
+                                                  color: context.primaryColor,
                                                 ),
                                                 child: ClipRRect(
                                                   borderRadius:
@@ -253,7 +258,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                           minWidth: double.infinity,
                           height: 45,
                           onPressed: uploadFile,
-                          color: AppColors.primary,
+                          color: context.primaryColor,
                           child: const Text(
                             'Upload file',
                             style:
@@ -312,11 +317,11 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                 LinearProgressIndicator(
                   value: progress,
                   backgroundColor: Colors.grey,
-                  color: Colors.green,
+                  color: context.primaryColor,
                 ),
                 Center(
                   child: Text('${(100 * progress).roundToDouble()}%',
-                      style: const TextStyle(color: Colors.white)),
+                      style: TextStyle(color: context.scaffoldBackgroundColor)),
                 ), // Center
               ],
             ),

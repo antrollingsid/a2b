@@ -116,19 +116,12 @@ class _CustomReviewState extends State<CustomReview> {
                               ],
                             ),
                             Expanded(child: Container()),
-                            const Text(
-                              '2 days ago', // Replace with the appropriate field from the document
-                              style: TextStyle(
-                                fontSize: 10,
-                              ),
-                            ),
                           ],
                         ),
                       ),
                       Expanded(
                         child: Text(
-                          data['comment'] ??
-                              '', // Add a null check using the null-aware operator (??) and provide a default value
+                          data['comment'] ?? '',
                         ),
                       ),
                     ],

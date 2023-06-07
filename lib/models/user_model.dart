@@ -10,9 +10,8 @@ class UserModel {
   static UserModel fromJson(Map<String, dynamic> json) => UserModel(
         // DateTime (Timestamp json['createdAt']) => value?.toDate();
 
-        createdAt: (json['createdAt'] as Timestamp).toDate(),
-        // createdAt: json['createdAt'].toDate() ?? DateTime.now(),
-        // convert timestamp to date in flutter?
+        // createdAt: Timestamp.fromDate(json['createdAt'] as DateTime),
+        createdAt: json['createdAt'].toDate() ?? DateTime.now(),
         role: json['role'],
         details: Details(
           email: json['details']['email'],

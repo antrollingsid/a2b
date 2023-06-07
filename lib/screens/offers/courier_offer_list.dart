@@ -1,12 +1,11 @@
-import 'package:a2b/screens/offers_user_side.dart';
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../Components/widgets/courier_offer.dart';
-import '../userDetails/details.dart';
 
 class CourierOfferList extends StatefulWidget {
   const CourierOfferList({Key? key}) : super(key: key);
@@ -40,7 +39,7 @@ class _CourierOfferList extends State<CourierOfferList> {
                 return Text('Error: ${snapshot.error}');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               }
               return Center(
                 child: SizedBox(
@@ -60,7 +59,7 @@ class _CourierOfferList extends State<CourierOfferList> {
                             AsyncSnapshot<DocumentSnapshot> snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return CircularProgressIndicator();
+                            return const CircularProgressIndicator();
                           }
 
                           if (snapshot.hasError) {
@@ -81,9 +80,10 @@ class _CourierOfferList extends State<CourierOfferList> {
                                   DateTime.fromMillisecondsSinceEpoch(
                                       deliveryTimestamp.seconds * 1000))
                               : '';
-
                           String duration =
                               userData?['deliveryDetails']['duration'] ?? '';
+                          String pName =
+                              userData?['packageDetails']['productName'] ?? '';
                           String price = userData?['price'] ?? '';
 
                           return GestureDetector(
@@ -92,6 +92,7 @@ class _CourierOfferList extends State<CourierOfferList> {
                               },
                               child: CourierOfferView(
                                 name: courierName,
+                                packageName: pName,
                                 photoUrl: photoUrl,
                                 price: price,
                                 duration: duration,

@@ -1,20 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../controllers/auth_controller.dart';
 import '../chatWidgets/widgets.dart';
 import '../chatWidgets/message_tiles.dart';
 import '../controllers/chat_controller.dart';
-import 'group_info.dart';
 
 class ChatPage extends StatefulWidget {
   final String groupId;
   final String groupName;
   final String userName;
+  final String id;
+  final String photo;
   const ChatPage(
       {Key? key,
       required this.groupId,
       required this.groupName,
-      required this.userName})
+      required this.userName,
+      required this.id,
+      required this.photo})
       : super(key: key);
 
   @override
@@ -22,9 +27,24 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  final userRole = Get.put(AuthController());
+  CollectionReference courierCollection =
+      FirebaseFirestore.instance.collection('couriers');
+
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('users');
   Stream<QuerySnapshot>? chats;
   TextEditingController messageController = TextEditingController();
   String admin = "";
+
+  late String courierName = '';
+  late String userName = '';
+
+  late String courierId = '';
+  late String userId = '';
+
+  late String courierPhoto = '';
+  late String userPhoto = '';
 
   @override
   void initState() {
@@ -47,25 +67,28 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (userRole.user.role == 'courier') {
+      courierName = userRole.user.details.name;
+      courierId = userRole.user.details.id;
+      courierPhoto = userRole.user.details.photoURL;
+      userName = widget.groupName;
+      userId = widget.id;
+      userPhoto = widget.photo;
+    } else {
+      userName = userRole.user.details.name;
+      userId = userRole.user.details.id;
+      userPhoto = userRole.user.details.photoURL;
+      courierName = widget.groupName;
+      courierId = widget.id;
+      courierPhoto = widget.photo;
+    }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
         title: Text(widget.groupName),
         backgroundColor: Theme.of(context).primaryColor,
-        actions: [
-          IconButton(
-              onPressed: () {
-                nextScreen(
-                    context,
-                    GroupInfo(
-                      groupId: widget.groupId,
-                      groupName: widget.groupName,
-                      adminName: admin,
-                    ));
-              },
-              icon: const Icon(Icons.info))
-        ],
       ),
       body: Stack(
         children: <Widget>[
@@ -146,10 +169,11 @@ class _ChatPageState extends State<ChatPage> {
       Map<String, dynamic> chatMessageMap = {
         "message": messageController.text,
         "sender": widget.userName,
-        "time": DateTime.now().millisecondsSinceEpoch,
+        "time": DateTime.now(),
       };
 
-      DatabaseService().sendMessage(widget.groupId, chatMessageMap);
+      DatabaseService().sendMessage(widget.groupId, chatMessageMap, courierId,
+          courierName, courierPhoto, userId, userName, userPhoto);
       setState(() {
         messageController.clear();
       });

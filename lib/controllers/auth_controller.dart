@@ -19,15 +19,15 @@ class AuthController extends GetxController {
   bool get isLoggedIn => _isLoggedIn;
 
   void register(BuildContext context, String email, String password,
-      String name, String surname) async {
+      String name, String surname, String phone) async {
     // Call api
     var navigator = Navigator.of(context);
 
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then(
-              (value) => addUserDetails(value.user!.uid, email, name, surname));
+          .then((value) =>
+              addUserDetails(value.user!.uid, email, name, surname, phone));
 
       navigator.pop();
       isLoaddIn = false;
@@ -142,7 +142,7 @@ class AuthController extends GetxController {
   // }
 
   void applyForCourier(BuildContext context, String email, String password,
-      String name, String surname) async {
+      String name, String surname, String phone) async {
     // Call api
     var navigator = Navigator.of(context);
     if (isLoaddIn) {
@@ -150,7 +150,8 @@ class AuthController extends GetxController {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password)
             .then(
-              (value) => addUserDetails(value.user!.uid, email, name, surname),
+              (value) =>
+                  addUserDetails(value.user!.uid, email, name, surname, phone),
             )
             .then((value) => isLoaddIn = false);
 
@@ -199,8 +200,8 @@ class AuthController extends GetxController {
     }
   }
 
-  Future addUserDetails(
-      String uid, String email, String name, String surname) async {
+  Future addUserDetails(String uid, String email, String name, String surname,
+      String phone) async {
     // Call api
     final createdAt = DateTime.now();
     final json = {
@@ -213,6 +214,7 @@ class AuthController extends GetxController {
         'email': email,
         'photoURL':
             'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80',
+        'phoneNumber': phone,
       }
     };
 

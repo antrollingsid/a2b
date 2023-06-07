@@ -3,8 +3,9 @@
 import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/screens/chat/pages/chat_page.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
-import 'package:a2b/screens/epmty_page_appar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'package:get/get.dart';
@@ -19,14 +20,29 @@ import '../../../../Components/widgets/app_bar_buttons.dart';
 import '../../../../Components/widgets/order_activity.dart';
 import '../../../../Components/widgets/shippement.dart';
 import '../livemap.dart';
-import '../mymap.dart';
 import '../offers/create_offer.dart';
 import '../offers/accepted_offers.dart';
 import '../profile/profile.dart';
 
-class DashBoard extends StatelessWidget {
+class DashBoard extends StatefulWidget {
   const DashBoard({super.key});
 
+  @override
+  State<DashBoard> createState() => _DashBoardState();
+}
+
+class _DashBoardState extends State<DashBoard> {
+  CollectionReference courierCollection =
+      FirebaseFirestore.instance.collection('couriers');
+  CollectionReference applicationsCollection =
+      FirebaseFirestore.instance.collection('accepted offers');
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('users');
+  final user = FirebaseAuth.instance.currentUser!;
+  CollectionReference offersCollection =
+      FirebaseFirestore.instance.collection('offers');
+  CollectionReference orderCollection =
+      FirebaseFirestore.instance.collection('orders');
   @override
   Widget build(BuildContext context) {
     final userRole = Get.put(AuthController());
@@ -81,7 +97,7 @@ class DashBoard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const TrackingTextField(),
+                    // const TrackingTextField(),
                     const SizedBox(
                       height: 30,
                     ),
@@ -93,45 +109,95 @@ class DashBoard extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    Container(
-                      width: 333,
-                      height: 200, // Adjust the height as per your requirements
-                      child: ListView(
-                        shrinkWrap: true,
-                        physics: const ClampingScrollPhysics(),
-                        children: [
-                          OrderHistoryActivity(
-                            date: '',
-                            productName: '',
-                            status: '',
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Get.to(() => MyApp());
-                            },
-                            child: const Text('track page 2'),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Get.to(() => const EmptyPage());
-                            },
-                            child: const Text('demo map'),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Get.to(
-                                () => ChatPage(
-                                  userName: userRole.user.details.name,
-                                  groupId: userRole.user.details.id,
-                                  groupName: 'hello',
+                    SafeArea(
+                        child: StreamBuilder<QuerySnapshot>(
+                            stream: applicationsCollection.snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              }
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              }
+
+                              if (!snapshot.hasData ||
+                                  snapshot.data!.docs.isEmpty) {
+                                return const Center(
+                                  child: Text('No accepted offers found.'),
+                                );
+                              }
+                              return Container(
+                                width: 333,
+                                height: 280,
+                                child: ListView(
+                                  children: snapshot.data!.docs
+                                      .map((DocumentSnapshot document) {
+                                    Map<String, dynamic>? userData = document
+                                        .data() as Map<String, dynamic>?;
+
+                                    String productName =
+                                        userData?['packageDetails']
+                                                ?['productName'] ??
+                                            '';
+                                    String status = userData?['status'] ?? '';
+                                    Timestamp? deliveryTimestamp =
+                                        userData?['deliveryDetails']
+                                            ?['deliveryDate'];
+                                    String date = deliveryTimestamp != null
+                                        ? DateFormat('dd/MM/yy').format(
+                                            DateTime.fromMillisecondsSinceEpoch(
+                                                deliveryTimestamp.seconds *
+                                                    1000))
+                                        : '';
+
+                                    String courierId =
+                                        userData?['deliveryDetails']
+                                                ?['deliverBy'] ??
+                                            '';
+
+                                    return FutureBuilder<DocumentSnapshot>(
+                                      future: courierCollection
+                                          .doc(courierId)
+                                          .get(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<DocumentSnapshot>
+                                              snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        }
+
+                                        if (snapshot.hasError) {
+                                          return Text(
+                                              'Error: ${snapshot.error}');
+                                        }
+
+                                        DocumentSnapshot? courierSnapshot =
+                                            snapshot.data;
+
+                                        if (!snapshot.hasData ||
+                                            courierSnapshot == null ||
+                                            courierSnapshot.data() == null) {
+                                          // Handle the case when the courier document is not found or has no data
+                                          return OrderHistoryActivity(
+                                            date: date,
+                                            productName: productName,
+                                            status: status,
+                                          );
+                                        }
+
+                                        return OrderHistoryActivity(
+                                          date: date,
+                                          productName: productName,
+                                          status: status,
+                                        );
+                                      },
+                                    );
+                                  }).toList(),
                                 ),
                               );
-                            },
-                            child: const Text('chat'),
-                          ),
-                        ],
-                      ),
-                    ),
+                            }))
                   ],
                 )
               : SafeArea(
@@ -139,7 +205,7 @@ class DashBoard extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => UsersOrders());
+                        Get.to(() => const UsersOrders());
                       },
                       child: Container(
                         color: context.primaryColor,
@@ -153,7 +219,7 @@ class DashBoard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     GestureDetector(
@@ -179,6 +245,8 @@ class DashBoard extends StatelessWidget {
                             userName: 'sid',
                             groupId: '123',
                             groupName: 'hello',
+                            id: '',
+                            photo: '',
                           ),
                         );
                       },

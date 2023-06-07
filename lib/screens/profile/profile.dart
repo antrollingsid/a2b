@@ -1,14 +1,16 @@
 import 'package:a2b/controllers/auth_controller.dart';
-import 'package:a2b/screens/applyForCourier/apply_for_courier.dart';
+import 'package:a2b/screens/apply_for_courier.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../Components/widgets/app_bar_buttons.dart';
 import '../../../../Components/widgets/settings_button.dart';
+import '../messages.dart';
 import '../offers/courier_offer_list.dart';
 import '../order_history.dart';
 import '../userDetails/courierList/courier-list.dart';
+import '../userDetails/courierList/user_list.dart';
 import 'info/top_profile.dart';
 import '../../../../main.dart';
 
@@ -25,6 +27,7 @@ class _ProfileState extends State<Profile> {
   String? selectedLanguage;
   @override
   Widget build(BuildContext context) {
+    final userRole = Get.put(AuthController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: context.scaffoldBackgroundColor,
@@ -35,7 +38,7 @@ class _ProfileState extends State<Profile> {
           'Profile',
           style: TextStyle(color: context.primaryColor),
         ),
-        leading: backBtn(),
+        leading: const backBtn(),
         actions: [
           Row(
             children: [
@@ -67,7 +70,7 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               GestureDetector(
                 onTap: () {
                   setState(() {
@@ -84,7 +87,7 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
               ),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
             ],
           )
         ],
@@ -95,21 +98,31 @@ class _ProfileState extends State<Profile> {
             child: Column(
               children: [
                 // if()
-                TopProfile(),
+                const TopProfile(),
 
                 InkWell(
-                    onTap: () => Get.to(() => const ApplyForCourier()),
-                    child: SettingBtn(action: 'apply for couriership')),
-                InkWell(
-                    onTap: () => Get.to(() => const CourierList()),
-                    child: SettingBtn(action: 'Couriers')),
+                    onTap: () => Get.to(() => const MessagesList()),
+                    child: const SettingBtn(action: 'messages')),
+                userRole.user.role == 'general'
+                    ? InkWell(
+                        onTap: () => Get.to(() => const ApplyForCourier()),
+                        child:
+                            const SettingBtn(action: 'apply for couriership'))
+                    : Container(),
+                userRole.user.role == 'general'
+                    ? InkWell(
+                        onTap: () => Get.to(() => const CourierList()),
+                        child: const SettingBtn(action: 'Couriers'))
+                    : InkWell(
+                        onTap: () => Get.to(() => const UserList()),
+                        child: const SettingBtn(action: 'Users')),
                 InkWell(
                     onTap: () => Get.to(() => const CourierOfferList()),
-                    child: SettingBtn(action: 'Offers')),
+                    child: const SettingBtn(action: 'Offers')),
                 InkWell(
                     onTap: () => Get.to(() => const OrderHistoryList()),
-                    child: SettingBtn(action: 'Order History')),
-                SizedBox(
+                    child: const SettingBtn(action: 'Order History')),
+                const SizedBox(
                   height: 130,
                 ),
                 InkWell(
