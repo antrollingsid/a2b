@@ -224,7 +224,7 @@ class _DashBoardState extends State<DashBoard> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Get.to(() => AcceptedOffers());
+                        Get.to(() => const AcceptedOffers());
                       },
                       child: Container(
                         color: context.primaryColor,

@@ -36,68 +36,70 @@ class _LoginPageState extends State<LoginPage> {
           )),
       body: GetBuilder<AuthController>(builder: (controller) {
         return SafeArea(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 5,
-              ),
-              const Text(
-                "Glad to see you again!",
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const SizedBox(
-                width: 333,
-                child: Text(
-                  "sign it and continue to delivery your\npackages!",
-                  style: TextStyle(
-                      color: AppColors.textFaded,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 16),
-                  textAlign: TextAlign.center,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 5,
                 ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              const LoginWithBtn(),
-              CustomTextfield(
-                hintText: 'sample@a2b.com',
-                isPassword: false,
-                mycontroller: logcontroller.email,
-                width: 333,
-              ),
-              CustomTextfield(
-                hintText: 'Enter your password',
-                isPassword: true,
-                mycontroller: logcontroller.password,
-                width: 333,
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              // Expanded(child: Container()),
-              CustomBtn(
-                textonbtn: 'Login',
-                onPress: () => controller.signIn(context,
-                    logcontroller.email.text, logcontroller.password.text),
-                primary: true,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              InkwellBtn(
-                textLeading: "Don't have an account?",
-                textEnding: ' Sign Up',
-                onTap: () => Get.to(() => const Register()),
-              ),
+                const Text(
+                  "Glad to see you again!",
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const SizedBox(
+                  width: 333,
+                  child: Text(
+                    "sign it and continue to delivery your\npackages!",
+                    style: TextStyle(
+                        color: AppColors.textFaded,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 16),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                const LoginWithBtn(),
+                CustomTextfield(
+                  hintText: 'sample@a2b.com',
+                  isPassword: false,
+                  mycontroller: logcontroller.email,
+                  width: 333,
+                ),
+                CustomTextfield(
+                  hintText: 'Enter your password',
+                  isPassword: true,
+                  mycontroller: logcontroller.password,
+                  width: 333,
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                // Expanded(child: Container()),
+                CustomBtn(
+                  textonbtn: 'Login',
+                  onPress: () => controller.signIn(context,
+                      logcontroller.email.text, logcontroller.password.text),
+                  primary: true,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                InkwellBtn(
+                  textLeading: "Don't have an account?",
+                  textEnding: ' Sign Up',
+                  onTap: () => Get.to(() => const Register()),
+                ),
 
-              const SizedBox(
-                height: 50,
-              )
-            ],
+                const SizedBox(
+                  height: 50,
+                )
+              ],
+            ),
           ),
         );
       }),
