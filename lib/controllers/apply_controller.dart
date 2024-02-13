@@ -11,9 +11,10 @@ void applyForCourier(BuildContext context, String url, String plateNo,
     await addApplicationDetails(context, url, plateNo, transportType);
     Get.offAll(() => const DashBoard());
   } catch (e) {
-    final snackBar = SnackBar(content: Text(e.toString()));
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    print('Error saving user data $e');
+    // final snackBar = SnackBar(content: Text(e.toString()));
+    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // print('Error saving user data $e');
+    Get.offAll(() => const DashBoard());
   }
 }
 
@@ -51,7 +52,9 @@ Future addApplicationDetails(BuildContext context, String url, String plateNo,
     UserModel newUser = UserModel.fromJson(json);
 
     print(newUser);
+    Get.offAll(() => const DashBoard());
   } on FirebaseException catch (e) {
-    print('Error saving user data ${e.message}');
+    Get.offAll(() => const DashBoard());
+    // print('Error saving user data ${e.message}');
   }
 }

@@ -35,33 +35,16 @@ class TopProfile extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(0, 10, 60, 0),
                       child: Stack(children: [
                         Container(
-                          width: 115,
-                          height: 115,
+                          width: 15,
+                          height: 15,
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 148, 34, 34),
                               borderRadius: BorderRadius.circular(100),
                               image: DecorationImage(
                                   image: NetworkImage(
-                                      controller.user.details.photoURL),
+                                      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"),
                                   fit: BoxFit.cover)),
                         ),
-                        Positioned(
-                          right: 0,
-                          bottom: 0,
-                          child: Container(
-                            width: 20,
-                            height: 30,
-                            color: context.scaffoldBackgroundColor,
-                            child: Center(
-                              child: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.edit,
-                                    size: 15,
-                                  )),
-                            ),
-                          ),
-                        )
                       ]),
                     ),
                     const SizedBox(

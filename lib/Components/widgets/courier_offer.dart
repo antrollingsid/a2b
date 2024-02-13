@@ -26,8 +26,9 @@ class CourierOfferView extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: Container(
           decoration: BoxDecoration(
-              color: context.secondaryHeaderColor,
-              borderRadius: BorderRadius.circular(10)),
+              // color: context.secondaryHeaderColor,
+              // borderRadius: BorderRadius.circular(10),
+              ),
           child: Padding(
             padding: const EdgeInsets.all(10),
             child: Row(
@@ -41,8 +42,6 @@ class CourierOfferView extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // Implement the logic to show the image in full size
-                              // For example, you can use a Dialog or a separate screen to display the image.
                               showDialog(
                                 context: context,
                                 builder: (_) => Dialog(
@@ -72,9 +71,10 @@ class CourierOfferView extends StatelessWidget {
                           Text(
                             name,
                             style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: context.scaffoldBackgroundColor),
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              // color: context.scaffoldBackgroundColor,
+                            ),
                           ),
                           const SizedBox(
                             width: 15,
@@ -82,9 +82,10 @@ class CourierOfferView extends StatelessWidget {
                           Text(
                             packageName,
                             style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: context.scaffoldBackgroundColor),
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              // color: context.scaffoldBackgroundColor,
+                            ),
                           ),
                         ],
                       ),
@@ -101,14 +102,17 @@ class CourierOfferView extends StatelessWidget {
                               Text(
                                 language.pickupDatetime,
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    color: context.scaffoldBackgroundColor),
+                                  fontSize: 14,
+                                  // color: context.scaffoldBackgroundColor,
+                                ),
                               ),
                               Text(
                                 date,
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    color: context.scaffoldBackgroundColor),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: context.primaryColor,
+                                ),
                               ),
                             ],
                           ),
@@ -118,14 +122,17 @@ class CourierOfferView extends StatelessWidget {
                               Text(
                                 language.price,
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    color: context.scaffoldBackgroundColor),
+                                  fontSize: 14,
+                                  // color: context.scaffoldBackgroundColor,
+                                ),
                               ),
                               Text(
                                 price,
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    color: context.scaffoldBackgroundColor),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: context.primaryColor,
+                                ),
                               ),
                             ],
                           ),
@@ -135,14 +142,17 @@ class CourierOfferView extends StatelessWidget {
                               Text(
                                 language.deliverTime,
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    color: context.scaffoldBackgroundColor),
+                                  fontSize: 14,
+                                  // color: context.scaffoldBackgroundColor,
+                                ),
                               ),
                               Text(
                                 duration,
                                 style: TextStyle(
-                                    fontSize: 14,
-                                    color: context.scaffoldBackgroundColor),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: context.primaryColor,
+                                ),
                               ),
                             ],
                           ),

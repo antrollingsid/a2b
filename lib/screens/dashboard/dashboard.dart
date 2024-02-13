@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_import
 
 import 'package:a2b/controllers/auth_controller.dart';
+import 'package:a2b/main.dart';
 import 'package:a2b/screens/chat/pages/chat_page.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -97,7 +98,7 @@ class _DashBoardState extends State<DashBoard> {
                         ],
                       ),
                     ),
-                    // const TrackingTextField(),
+                    const TrackingTextField(),
                     const SizedBox(
                       height: 30,
                     ),
@@ -108,6 +109,17 @@ class _DashBoardState extends State<DashBoard> {
                         child: const CustomShip()),
                     const SizedBox(
                       height: 30,
+                    ),
+                    SizedBox(
+                      width: 333,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            language.orderHistory,
+                          ),
+                        ],
+                      ),
                     ),
                     SafeArea(
                         child: StreamBuilder<QuerySnapshot>(
@@ -129,7 +141,7 @@ class _DashBoardState extends State<DashBoard> {
                               }
                               return Container(
                                 width: 333,
-                                height: 280,
+                                height: 199,
                                 child: ListView(
                                   children: snapshot.data!.docs
                                       .map((DocumentSnapshot document) {

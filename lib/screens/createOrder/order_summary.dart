@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
+import '../dashboard/dashboard.dart';
 import 'controller/create_order_controller.dart';
 
 class OrderSummary extends StatefulWidget {
@@ -21,8 +22,7 @@ class OrderSummary extends StatefulWidget {
 }
 
 class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
-
-   // In this example, suppose that all messages contain a data field with the key 'type'.
+  // In this example, suppose that all messages contain a data field with the key 'type'.
   Future<void> setupInteractedMessage() async {
     // Get any messages which caused the application to open from
     // a terminated state.
@@ -42,11 +42,14 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
 
   void _handleMessage(RemoteMessage message) {
     if (message.data['type'] == 'chat') {
-      Navigator.pushNamed(context, '/chat',
+      Navigator.pushNamed(
+        context,
+        '/chat',
         arguments: ChatArguments(),
       );
     }
   }
+
   @override
   void initState() {
     setState(() {});
@@ -184,10 +187,16 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
                   ],
                 ),
                 CustomBtn(
-                  textonbtn: 'Confirm Order',
+                  textonbtn: 'confirm Order',
                   onPress: () => orderSummary.addPackage(),
                   primary: true,
                 ),
+                // Get.to(() => const OrderUploadDoc());
+                // CustomBtn(
+                //   textonbtn: 'Confirm',
+                //   onPress: () => DashBoard(),
+                //   primary: true,
+                // ),
               ],
             ),
           ),
@@ -197,6 +206,4 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
   }
 }
 
-class ChatArguments {
-  
-}
+class ChatArguments {}

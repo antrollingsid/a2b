@@ -232,7 +232,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                 position: _destination,
               ),
             },
-            polylines: Set<Polyline>.of(polylines.values),
+            // polylines: Set<Polyline>.of(polylines.values),
           ),
           DraggableScrollableSheet(
             initialChildSize: 0.43,
