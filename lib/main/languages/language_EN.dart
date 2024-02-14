@@ -12,6 +12,9 @@ class LanguageEn extends BaseLanguage {
   String get welcomeMsg => "Welcome to a2b delivery";
 
   @override
+  String get hi => "Hi";
+
+  @override
   String get info1 =>
       "ship and track parcels and packages and learn about our express courier services";
 

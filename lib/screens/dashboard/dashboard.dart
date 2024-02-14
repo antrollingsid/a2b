@@ -19,6 +19,7 @@ import 'package:gradient_borders/input_borders/gradient_outline_input_border.dar
 import '../../../../Components/widgets/app_bar_buttons.dart';
 import '../../../../Components/widgets/order_activity.dart';
 import '../../../../Components/widgets/shippement.dart';
+import '../../Components/widgets/dash_menu.dart';
 import '../livemap.dart';
 import '../offers/create_offer.dart';
 import '../offers/accepted_offers.dart';
@@ -51,53 +52,14 @@ class _DashBoardState extends State<DashBoard> {
       resizeToAvoidBottomInset: false,
       extendBody: false,
       backgroundColor: context.scaffoldBackgroundColor,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(80),
-        child: CustomAppBar(
-          titleText: 'Dashboard',
-          isActionVisible: true,
-          isLeadingVisible: false,
-        ),
-      ),
       body: SafeArea(
         child: Center(
           child: userRole.user.role == 'general'
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 150),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Ship Your",
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.normal,
-                              // height:  1.5*ffem/fem,
-                              // color: Color(0xffffffff),
-                            ),
-                          ),
-                          Text(
-                            'Package Safely',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.normal,
-                              // wordSpacing: 1.5,
-                              // letterSpacing: 1.5,
-                              // height:  1.5*ffem/fem,
-                              // color: Color(0xffffffff),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const TrackingTextField(),
+                    const DashMenu(),
+                    // const TrackingTextField(),
                     const SizedBox(
                       height: 30,
                     ),

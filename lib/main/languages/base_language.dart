@@ -8,6 +8,8 @@ abstract class BaseLanguage {
 
   String get welcomeMsg;
 
+  String get hi;
+
   String get info1;
 
   String get language;

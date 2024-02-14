@@ -1,5 +1,6 @@
 import 'package:a2b/controllers/auth_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
@@ -28,14 +29,21 @@ Future<void> init() async {
   } catch (e) {
     if (e is PlatformException) {
       if (e.code == 'null-error') {
-        print('Error: Platform returned null value for non-null return value');
+        if (kDebugMode) {
+          print(
+              'Error: Platform returned null value for non-null return value');
+        }
         // Handle the specific null value error
       } else {
-        print('Platform Exception occurred: ${e.message}');
+        if (kDebugMode) {
+          print('Platform Exception occurred: ${e.message}');
+        }
         // Handle other types of PlatformExceptions
       }
     } else {
-      print('Error occurred during initialization: $e');
+      if (kDebugMode) {
+        print('Error occurred during initialization: $e');
+      }
       // Handle other types of errors
     }
   }
