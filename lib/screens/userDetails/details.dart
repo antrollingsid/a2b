@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../Components/widgets/review.dart';
+import '../../main/utils/colors.dart';
 import '../chat/pages/chat_page.dart';
 import '../createOrder/order_map.dart';
 import '../dashboard/dashboard.dart';
@@ -226,10 +227,11 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                 ),
                 bottomNavigationBar: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     border: Border(
                       top: BorderSide(
-                        color: context.hintColor, // Choose your desired color
+                        color: AppColors
+                            .backgroundLightMode, // Choose your desired color
                         width: 1.0, // Choose your desired width
                       ),
                     ),
@@ -249,7 +251,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           height: 52,
                           width: 52,
                           decoration: BoxDecoration(
-                            color: context.secondaryHeaderColor,
+                            color: AppColors.backgroundLightMode,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(
@@ -260,10 +262,10 @@ class _DetailsPageState extends State<DetailsPage> {
                         ),
                         label: '',
                       ),
-                      BottomNavigationBarItem(
+                      const BottomNavigationBarItem(
                         icon: Icon(
                           Icons.person_outlined,
-                          color: context.hintColor,
+                          color: AppColors.backgroundLightMode,
                         ),
                         label: '',
                       ),

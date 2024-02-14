@@ -68,7 +68,7 @@ dependencies:
   location: ^4.4.0
   lottie: ^2.3.2
   mobx: ^2.1.4
-  nb_utils: ^5.0.8
+  nb_utils: ^6.0.7
   onesignal_flutter: ^3.5.1
   path_provider: ^2.0.11
   pay: ^1.1.1

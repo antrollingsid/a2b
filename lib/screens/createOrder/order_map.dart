@@ -315,12 +315,12 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             width: 175,
                             height: 90,
                             decoration: BoxDecoration(
-                              color:
-                                  context.secondaryHeaderColor.withOpacity(0.1),
+                              color: AppColors.backgroundLightMode
+                                  .withOpacity(0.1),
                               border: Border.all(
                                 color: isPickupFocused
                                     ? context.primaryColor
-                                    : context.secondaryHeaderColor
+                                    : AppColors.backgroundLightMode
                                         .withOpacity(0.1),
                                 width: 1,
                               ),
@@ -370,12 +370,12 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             width: 175,
                             height: 90,
                             decoration: BoxDecoration(
-                              color:
-                                  context.secondaryHeaderColor.withOpacity(0.1),
+                              color: AppColors.backgroundLightMode
+                                  .withOpacity(0.1),
                               border: Border.all(
                                 color: isDeliveryFocused
                                     ? context.primaryColor
-                                    : context.secondaryHeaderColor
+                                    : AppColors.backgroundLightMode
                                         .withOpacity(0.1),
                                 width: 1,
                               ),
@@ -426,10 +426,10 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             width: 175,
                             height: 62,
                             decoration: BoxDecoration(
-                              color:
-                                  context.secondaryHeaderColor.withOpacity(0.1),
+                              color: AppColors.backgroundLightMode
+                                  .withOpacity(0.1),
                               border: Border.all(
-                                color: context.secondaryHeaderColor
+                                color: AppColors.backgroundLightMode
                                     .withOpacity(0.1),
                                 width: 1,
                               ),
@@ -503,10 +503,10 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                             width: 175,
                             height: 62,
                             decoration: BoxDecoration(
-                              color:
-                                  context.secondaryHeaderColor.withOpacity(0.1),
+                              color: AppColors.backgroundLightMode
+                                  .withOpacity(0.1),
                               border: Border.all(
-                                color: context.secondaryHeaderColor
+                                color: AppColors.backgroundLightMode
                                     .withOpacity(0.1),
                                 width: 1,
                               ),

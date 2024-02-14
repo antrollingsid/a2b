@@ -140,7 +140,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(
+                        const Text(
                           'File should be jpg, png',
                           style: TextStyle(
                             fontSize: 15,
@@ -162,7 +162,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                           Text(
                             'Selected File',
                             style: TextStyle(
-                              color: context.hintColor,
+                              color: AppColors.backgroundLightMode,
                               fontSize: 15,
                             ),
                           ),
@@ -199,7 +199,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                         _platformFile!.name,
                                         style: TextStyle(
                                           fontSize: 13,
-                                          color: context.hintColor,
+                                          color: AppColors.backgroundLightMode,
                                         ),
                                       ),
                                       const SizedBox(
@@ -209,7 +209,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                         '${(_platformFile!.size / 1024).ceil()} KB',
                                         style: TextStyle(
                                           fontSize: 13,
-                                          color: context.hintColor,
+                                          color: AppColors.backgroundLightMode,
                                         ),
                                       ),
                                       const SizedBox(
@@ -311,7 +311,8 @@ class _ApplyForCourierState extends State<ApplyForCourier>
           decoration: BoxDecoration(
             border: Border(
               top: BorderSide(
-                color: context.hintColor, // Choose your desired color
+                color:
+                    AppColors.backgroundLightMode, // Choose your desired color
                 width: 1.0, // Choose your desired width
               ),
             ),
@@ -331,7 +332,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                   height: 52,
                   width: 52,
                   decoration: BoxDecoration(
-                    color: context.secondaryHeaderColor,
+                    color: AppColors.backgroundLightMode,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -345,7 +346,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person_outlined,
-                  color: context.hintColor,
+                  color: AppColors.backgroundLightMode,
                 ),
                 label: '',
               ),

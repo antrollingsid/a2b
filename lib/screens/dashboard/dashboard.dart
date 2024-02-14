@@ -258,7 +258,7 @@ class _DashBoardState extends State<DashBoard> {
         decoration: BoxDecoration(
           border: Border(
             top: BorderSide(
-              color: context.hintColor, // Choose your desired color
+              color: AppColors.backgroundLightMode, // Choose your desired color
               width: 1.0, // Choose your desired width
             ),
           ),
@@ -278,7 +278,7 @@ class _DashBoardState extends State<DashBoard> {
                 height: 52,
                 width: 52,
                 decoration: BoxDecoration(
-                  color: context.secondaryHeaderColor,
+                  color: AppColors.backgroundLightMode,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
@@ -292,7 +292,7 @@ class _DashBoardState extends State<DashBoard> {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.person_outlined,
-                color: context.hintColor,
+                color: AppColors.backgroundLightMode,
               ),
               label: '',
             ),

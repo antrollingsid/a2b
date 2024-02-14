@@ -1,3 +1,4 @@
+import 'package:a2b/main/utils/colors.dart';
 import 'package:a2b/screens/profile/profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -123,7 +124,7 @@ class _OrderHistoryList extends State<OrderHistoryList> {
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: context.hintColor, // Choose your desired color
+                  color: context.accentColor, // Choose your desired color
                   width: 1.0, // Choose your desired width
                 ),
               ),
@@ -143,7 +144,7 @@ class _OrderHistoryList extends State<OrderHistoryList> {
                     height: 52,
                     width: 52,
                     decoration: BoxDecoration(
-                      color: context.secondaryHeaderColor,
+                      color: AppColors.accent,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(
@@ -157,7 +158,7 @@ class _OrderHistoryList extends State<OrderHistoryList> {
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person_outlined,
-                    color: context.hintColor,
+                    color: Colors.black,
                   ),
                   label: '',
                 ),

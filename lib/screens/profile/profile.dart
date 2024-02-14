@@ -7,6 +7,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 import '../../../../Components/widgets/app_bar_buttons.dart';
 import '../../../../Components/widgets/settings_button.dart';
+import '../../main/utils/colors.dart';
 import '../messages.dart';
 import '../offers/courier_offer_list.dart';
 import '../order_history.dart';
@@ -67,7 +68,7 @@ class _ProfileState extends State<Profile> {
                   style: TextStyle(
                     color: selectedItem == 'en'
                         ? context.primaryColor
-                        : context.hintColor,
+                        : AppColors.backgroundLightMode,
                   ),
                 ),
               ),
@@ -84,7 +85,7 @@ class _ProfileState extends State<Profile> {
                   style: TextStyle(
                     color: selectedItem == 'tr'
                         ? context.primaryColor
-                        : context.hintColor,
+                        : AppColors.backgroundLightMode,
                   ),
                 ),
               ),

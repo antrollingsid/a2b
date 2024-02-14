@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../Components/widgets/courier_offer.dart';
+import '../../main/utils/colors.dart';
 import '../createOrder/order_map.dart';
 import '../dashboard/dashboard.dart';
 import '../profile/profile.dart';
@@ -116,7 +117,8 @@ class _CourierOfferList extends State<CourierOfferList> {
             decoration: BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: context.hintColor, // Choose your desired color
+                  color: AppColors
+                      .backgroundLightMode, // Choose your desired color
                   width: 1.0, // Choose your desired width
                 ),
               ),
@@ -136,7 +138,7 @@ class _CourierOfferList extends State<CourierOfferList> {
                     height: 52,
                     width: 52,
                     decoration: BoxDecoration(
-                      color: context.secondaryHeaderColor,
+                      color: AppColors.backgroundLightMode,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(
@@ -150,7 +152,7 @@ class _CourierOfferList extends State<CourierOfferList> {
                 BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person_outlined,
-                    color: context.hintColor,
+                    color: AppColors.backgroundLightMode,
                   ),
                   label: '',
                 ),

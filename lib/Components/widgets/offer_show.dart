@@ -73,7 +73,7 @@ class OfferView extends StatelessWidget {
                             style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
-                              // color: context.hintColor,
+                              // color: AppColors.backgroundLightMode,
                             ),
                           ),
                           const SizedBox(

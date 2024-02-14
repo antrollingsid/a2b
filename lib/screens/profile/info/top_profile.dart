@@ -143,7 +143,7 @@ class TopProfile extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 36,
                               fontWeight: FontWeight.w500,
-                              color: context.hintColor,
+                              color: AppColors.backgroundLightMode,
                             ),
                           ),
                           IconButton(
