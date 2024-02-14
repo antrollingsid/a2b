@@ -53,7 +53,7 @@ Future addApplicationDetails(BuildContext context, String url, String plateNo,
 
     print(newUser);
     Get.offAll(() => const DashBoard());
-  } on FirebaseException catch (e) {
+  } on FirebaseException {
     Get.offAll(() => const DashBoard());
     // print('Error saving user data ${e.message}');
   }

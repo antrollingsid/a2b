@@ -94,11 +94,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-flutter_native_splash:
-  color: "#121212"
-  image: assets/images/1x/Artboard14.png
-  android: true
-  ios: true
+# flutter_native_splash:
+#   color: "#121212"
+#   image: assets/images/1x/Artboard14.png
+#   android: true
+#   ios: true
 
 flutter:
   uses-material-design: true

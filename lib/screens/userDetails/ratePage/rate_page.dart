@@ -168,7 +168,7 @@ class _RatePage extends State<RatePage> {
                   ),
                   label: '',
                 ),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person_outlined,
                     color: AppColors.backgroundLightMode,

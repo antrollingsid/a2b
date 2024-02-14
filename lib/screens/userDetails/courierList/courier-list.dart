@@ -38,7 +38,7 @@ class _CourierList extends State<CourierList> {
                   return Text('Error: ${snapshot.error}');
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }
                 return Center(
                   child: SizedBox(
@@ -75,7 +75,7 @@ class _CourierList extends State<CourierList> {
             ),
           ),
           bottomNavigationBar: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               border: Border(
                 top: BorderSide(
                   color: AppColors
@@ -110,7 +110,7 @@ class _CourierList extends State<CourierList> {
                   ),
                   label: '',
                 ),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person_outlined,
                     color: AppColors.backgroundLightMode,
@@ -138,17 +138,17 @@ class _CourierList extends State<CourierList> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirm Offer'),
-          content: Text('Do you accept this offer?'),
+          title: const Text('Confirm Offer'),
+          content: const Text('Do you accept this offer?'),
           actions: <Widget>[
             TextButton(
-              child: Text('Accept'),
+              child: const Text('Accept'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Decline'),
+              child: const Text('Decline'),
               onPressed: () {
                 // Perform decline action
                 Navigator.of(context).pop();

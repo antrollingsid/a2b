@@ -11,7 +11,6 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:flutter/material.dart';
 import '../../../Components/widgets/app_bar_buttons.dart';
 import '../../main.dart';
-import '../../main/utils/constants.dart';
 import 'controller/create_order_controller.dart';
 
 const darkMapStyle = 'assets/json/dark_mode_style.json';
@@ -27,8 +26,8 @@ class PlaceOrderMap extends StatefulWidget {
 class _PlaceOrderMapState extends State<PlaceOrderMap> {
   final Completer<GoogleMapController> _controllers = Completer();
   Map<PolylineId, Polyline> polylines = {};
-  LatLng _selectedDestination = LatLng(35.15571933375463, 33.900646269321435);
-  LatLng _selectedLocation = LatLng(35.15115787475357, 33.90726964920759);
+  LatLng _selectedDestination = const LatLng(35.15571933375463, 33.900646269321435);
+  LatLng _selectedLocation = const LatLng(35.15115787475357, 33.90726964920759);
 
   String selectedLocationText = 'click to select source';
   String selectedDestinationText = 'click to select destination';
@@ -50,7 +49,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
     33.908643,
   );
   Set<Polyline> polylineSet = {};
-  static CameraPosition _kInitialPosition =
+  static final CameraPosition _kInitialPosition =
       CameraPosition(target: _sourceLocation, zoom: 15.0, tilt: 0, bearing: 0);
 
   List<LatLng> polylineCoordinates = [];
@@ -137,11 +136,11 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
         travelMode: TravelMode.driving,
       );
       if (result.points.isNotEmpty) {
-        result.points.forEach((PointLatLng point) {
+        for (var point in result.points) {
           polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-        });
+        }
       }
-      PolylineId id = PolylineId('poly');
+      PolylineId id = const PolylineId('poly');
       Polyline polyline = Polyline(
         polylineId: id,
         color: Colors.red,
@@ -224,11 +223,11 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
             },
             markers: {
               Marker(
-                markerId: MarkerId('source'),
+                markerId: const MarkerId('source'),
                 position: _sourceLocation,
               ),
               Marker(
-                markerId: MarkerId('destination'),
+                markerId: const MarkerId('destination'),
                 position: _destination,
               ),
             },
@@ -242,7 +241,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
               return Container(
                 decoration: BoxDecoration(
                   color: context.scaffoldBackgroundColor,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(5)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(5)),
                 ),
                 child: ListView(
                   shrinkWrap: true,
@@ -452,12 +451,12 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                                   const SizedBox(
                                     height: 0,
                                   ),
-                                  Container(
+                                  SizedBox(
                                     // color: Colors.amberAccent,
                                     height: 26,
                                     child: DropdownButtonHideUnderline(
                                       child: DropdownButton(
-                                        icon: SizedBox.shrink(),
+                                        icon: const SizedBox.shrink(),
                                         value: selectedItem,
                                         items: const [
                                           DropdownMenuItem(

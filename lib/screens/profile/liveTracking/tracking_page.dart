@@ -108,9 +108,9 @@ class _LiveTrackingState extends State<LiveTracking> {
       if (result.points.isNotEmpty) {
         polylineCoordinates.clear();
 
-        result.points.forEach((PointLatLng point) {
+        for (var point in result.points) {
           polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-        });
+        }
         setState(() {});
       } else {
         print("No polyline points found");
@@ -256,7 +256,7 @@ class _LiveTrackingState extends State<LiveTracking> {
                   }
                 }
               },
-              child: Text('Print Coordinates'),
+              child: const Text('Print Coordinates'),
             ),
           ],
         ),

@@ -15,7 +15,7 @@ class EmptyPage extends StatefulWidget {
 }
 
 class _EmptyPage extends State<EmptyPage> {
-  CameraPosition _initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
+  final CameraPosition _initialLocation = const CameraPosition(target: LatLng(0.0, 0.0));
   late GoogleMapController mapController;
 
   late Position _currentPosition;
@@ -35,7 +35,7 @@ class _EmptyPage extends State<EmptyPage> {
 
   late PolylinePoints polylinePoints;
   Map<PolylineId, Polyline> polylines = {
-    PolylineId('polyline1'): Polyline(
+    const PolylineId('polyline1'): const Polyline(
       polylineId: PolylineId('polyline1'),
       color: Colors.blue,
       width: 3,
@@ -45,7 +45,7 @@ class _EmptyPage extends State<EmptyPage> {
         LatLng(37.765426, -122.424147),
       ],
     ),
-    PolylineId('polyline2'): Polyline(
+    const PolylineId('polyline2'): const Polyline(
       polylineId: PolylineId('polyline2'),
       color: Colors.red,
       width: 3,
@@ -58,8 +58,8 @@ class _EmptyPage extends State<EmptyPage> {
   };
 
   List<LatLng> polylineCoordinates = [
-    LatLng(55.75, 37.62),
-    LatLng(55.71, 37.61),
+    const LatLng(55.75, 37.62),
+    const LatLng(55.71, 37.61),
   ];
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -74,7 +74,7 @@ class _EmptyPage extends State<EmptyPage> {
     Widget? suffixIcon,
     required Function(String) locationCallback,
   }) {
-    return Container(
+    return SizedBox(
       width: width * 0.8,
       child: TextField(
         onChanged: (value) {
@@ -82,14 +82,14 @@ class _EmptyPage extends State<EmptyPage> {
         },
         controller: controller,
         focusNode: focusNode,
-        decoration: new InputDecoration(
+        decoration: InputDecoration(
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           labelText: label,
           filled: true,
           fillColor: Colors.white,
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(10.0),
             ),
             borderSide: BorderSide(
@@ -98,7 +98,7 @@ class _EmptyPage extends State<EmptyPage> {
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
+            borderRadius: const BorderRadius.all(
               Radius.circular(10.0),
             ),
             borderSide: BorderSide(
@@ -106,7 +106,7 @@ class _EmptyPage extends State<EmptyPage> {
               width: 2,
             ),
           ),
-          contentPadding: EdgeInsets.all(15),
+          contentPadding: const EdgeInsets.all(15),
           hintText: hint,
         ),
       ),
@@ -313,12 +313,12 @@ class _EmptyPage extends State<EmptyPage> {
     );
 
     if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
+      for (var point in result.points) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
+      }
     }
 
-    PolylineId id = PolylineId('poly');
+    PolylineId id = const PolylineId('poly');
     Polyline polyline = Polyline(
       polylineId: id,
       color: Colors.red,
@@ -340,7 +340,7 @@ class _EmptyPage extends State<EmptyPage> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return Container(
+    return SizedBox(
       height: height,
       width: width,
       child: Scaffold(
@@ -373,7 +373,7 @@ class _EmptyPage extends State<EmptyPage> {
                         color: Colors.blue.shade100, // button color
                         child: InkWell(
                           splashColor: Colors.blue, // inkwell color
-                          child: SizedBox(
+                          child: const SizedBox(
                             width: 50,
                             height: 50,
                             child: Icon(Icons.add),
@@ -386,13 +386,13 @@ class _EmptyPage extends State<EmptyPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ClipOval(
                       child: Material(
                         color: Colors.blue.shade100, // button color
                         child: InkWell(
                           splashColor: Colors.blue, // inkwell color
-                          child: SizedBox(
+                          child: const SizedBox(
                             width: 50,
                             height: 50,
                             child: Icon(Icons.remove),
@@ -417,7 +417,7 @@ class _EmptyPage extends State<EmptyPage> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white70,
                       borderRadius: BorderRadius.all(
                         Radius.circular(20.0),
@@ -429,17 +429,17 @@ class _EmptyPage extends State<EmptyPage> {
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          Text(
+                          const Text(
                             'Places',
                             style: TextStyle(fontSize: 20.0),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           _textField(
                               label: 'Start',
                               hint: 'Choose starting point',
-                              prefixIcon: Icon(Icons.looks_one),
+                              prefixIcon: const Icon(Icons.looks_one),
                               suffixIcon: IconButton(
-                                icon: Icon(Icons.my_location),
+                                icon: const Icon(Icons.my_location),
                                 onPressed: () {
                                   startAddressController.text = _currentAddress;
                                   _startAddress = _currentAddress;
@@ -453,11 +453,11 @@ class _EmptyPage extends State<EmptyPage> {
                                   _startAddress = value;
                                 });
                               }),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           _textField(
                               label: 'Destination',
                               hint: 'Choose destination',
-                              prefixIcon: Icon(Icons.looks_two),
+                              prefixIcon: const Icon(Icons.looks_two),
                               controller: destinationAddressController,
                               focusNode: desrinationAddressFocusNode,
                               width: width,
@@ -466,18 +466,18 @@ class _EmptyPage extends State<EmptyPage> {
                                   _destinationAddress = value;
                                 });
                               }),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Visibility(
                             visible: _placeDistance == null ? false : true,
                             child: Text(
                               'DISTANCE: $_placeDistance km',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           ElevatedButton(
                             onPressed: (_startAddress != '' &&
                                     _destinationAddress != '')
@@ -486,10 +486,12 @@ class _EmptyPage extends State<EmptyPage> {
                                     desrinationAddressFocusNode.unfocus();
                                     setState(() {
                                       if (markers.isNotEmpty) markers.clear();
-                                      if (polylines.isNotEmpty)
+                                      if (polylines.isNotEmpty) {
                                         polylines.clear();
-                                      if (polylineCoordinates.isNotEmpty)
+                                      }
+                                      if (polylineCoordinates.isNotEmpty) {
                                         polylineCoordinates.clear();
+                                      }
                                       _placeDistance = null;
                                     });
 
@@ -497,7 +499,7 @@ class _EmptyPage extends State<EmptyPage> {
                                       if (isCalculated) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
-                                          SnackBar(
+                                          const SnackBar(
                                             content: Text(
                                                 'Distance Calculated Sucessfully'),
                                           ),
@@ -505,7 +507,7 @@ class _EmptyPage extends State<EmptyPage> {
                                       } else {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
-                                          SnackBar(
+                                          const SnackBar(
                                             content: Text(
                                                 'Error Calculating Distance'),
                                           ),
@@ -514,20 +516,20 @@ class _EmptyPage extends State<EmptyPage> {
                                     });
                                   }
                                 : null,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Show Route'.toUpperCase(),
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20.0,
-                                ),
-                              ),
-                            ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'Show Route'.toUpperCase(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                ),
                               ),
                             ),
                           ),
@@ -549,7 +551,7 @@ class _EmptyPage extends State<EmptyPage> {
                       color: Colors.orange.shade100, // button color
                       child: InkWell(
                         splashColor: Colors.orange, // inkwell color
-                        child: SizedBox(
+                        child: const SizedBox(
                           width: 56,
                           height: 56,
                           child: Icon(Icons.my_location),

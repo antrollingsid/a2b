@@ -16,7 +16,7 @@ import 'package:url_launcher/url_launcher.dart';
 class DetailsPage extends StatefulWidget {
   final String userId;
 
-  DetailsPage(this.userId);
+  const DetailsPage(this.userId, {super.key});
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
@@ -176,7 +176,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                     launch("tel://+905488788211");
                                     print('you clicked me');
                                   },
-                                  child: Container(
+                                  child: SizedBox(
                                     width:
                                         40, // Adjust the width as per your desired size
                                     height:
@@ -201,7 +201,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           const SizedBox(
                             height: 20,
                           ),
-                          Container(
+                          SizedBox(
                             width: 333,
                             height: 410,
                             child: ListView(

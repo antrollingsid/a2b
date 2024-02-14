@@ -10,7 +10,7 @@ class UpgadeBtn extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       child: Center(
         child: Container(
-          margin: EdgeInsets.all(0),
+          margin: const EdgeInsets.all(0),
           width: 333,
           height: 86,
           decoration: BoxDecoration(

@@ -2,7 +2,6 @@
 
 import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/main.dart';
-import 'package:a2b/screens/chat/pages/chat_page.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -130,7 +129,7 @@ class _DashBoardState extends State<DashBoard> {
                               }
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
-                                return CircularProgressIndicator();
+                                return const CircularProgressIndicator();
                               }
 
                               if (!snapshot.hasData ||
@@ -139,7 +138,7 @@ class _DashBoardState extends State<DashBoard> {
                                   child: Text('No accepted offers found.'),
                                 );
                               }
-                              return Container(
+                              return SizedBox(
                                 width: 333,
                                 height: 199,
                                 child: ListView(
@@ -177,7 +176,7 @@ class _DashBoardState extends State<DashBoard> {
                                               snapshot) {
                                         if (snapshot.connectionState ==
                                             ConnectionState.waiting) {
-                                          return CircularProgressIndicator();
+                                          return const CircularProgressIndicator();
                                         }
 
                                         if (snapshot.hasError) {
@@ -255,7 +254,7 @@ class _DashBoardState extends State<DashBoard> {
         ),
       ),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(
               color: AppColors.backgroundLightMode, // Choose your desired color
@@ -289,7 +288,7 @@ class _DashBoardState extends State<DashBoard> {
               ),
               label: '',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.person_outlined,
                 color: AppColors.backgroundLightMode,
@@ -347,9 +346,9 @@ class TrackingTextField extends StatelessWidget {
                       context.primaryColor,
                       context.primaryColor,
                     ],
-                    begin: FractionalOffset(0.0, 0.0),
-                    end: FractionalOffset(0.5, 0.0),
-                    stops: [0.0, 1.0],
+                    begin: const FractionalOffset(0.0, 0.0),
+                    end: const FractionalOffset(0.5, 0.0),
+                    stops: const [0.0, 1.0],
                     tileMode: TileMode.clamp),
                 width: 1,
                 borderRadius: BorderRadius.circular(10),

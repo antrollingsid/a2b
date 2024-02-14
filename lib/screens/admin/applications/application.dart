@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../Components/widgets/application_offer_view.dart';
-import '../../../Components/widgets/offer_show.dart';
 import '../../../controllers/auth_controller.dart';
 import '../../../models/user_model.dart';
 
@@ -41,7 +40,7 @@ class _UserApplication extends State<UserApplication> {
                       return Text('Error: ${snapshot.error}');
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                     return Center(
                       child: SizedBox(
@@ -102,11 +101,11 @@ class _UserApplication extends State<UserApplication> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirm Offer'),
-          content: Text('Do you accept this offer?'),
+          title: const Text('Confirm Offer'),
+          content: const Text('Do you accept this offer?'),
           actions: <Widget>[
             TextButton(
-              child: Text('Accept'),
+              child: const Text('Accept'),
               onPressed: () {
                 // Perform accept action
                 _acceptApplication(userId, 'courier');
@@ -114,7 +113,7 @@ class _UserApplication extends State<UserApplication> {
               },
             ),
             TextButton(
-              child: Text('Decline'),
+              child: const Text('Decline'),
               onPressed: () {
                 _declineApplication(userId, 'general');
                 Navigator.of(context).pop();

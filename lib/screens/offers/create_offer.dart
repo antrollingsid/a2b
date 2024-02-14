@@ -52,7 +52,7 @@ class _UsersOrders extends State<UsersOrders> {
                       return Text('Error: ${snapshot.error}');
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                     return Center(
                       child: SizedBox(

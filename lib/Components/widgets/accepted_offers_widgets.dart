@@ -102,14 +102,14 @@ class _AcceptedOfferViewState extends State<AcceptedOfferView> {
                           children: [
                             Text(
                               language.date,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 // color: context.scaffoldBackgroundColor,
                               ),
                             ),
                             Text(
                               widget.date,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 // color: context.scaffoldBackgroundColor,
                               ),
@@ -121,14 +121,14 @@ class _AcceptedOfferViewState extends State<AcceptedOfferView> {
                           children: [
                             Text(
                               language.from,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 // color: context.scaffoldBackgroundColor,
                               ),
                             ),
                             Text(
                               widget.from,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 // color: context.scaffoldBackgroundColor,
                               ),
@@ -140,14 +140,14 @@ class _AcceptedOfferViewState extends State<AcceptedOfferView> {
                           children: [
                             Text(
                               language.to,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 // color: context.scaffoldBackgroundColor,
                               ),
                             ),
                             Text(
                               widget.to,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 14,
                                 // color: context.scaffoldBackgroundColor,
                               ),
@@ -163,19 +163,19 @@ class _AcceptedOfferViewState extends State<AcceptedOfferView> {
                           onPressed: () {
                             _getLocation();
                           },
-                          child: Text('Picked'),
+                          child: const Text('Picked'),
                         ),
                         TextButton(
                           onPressed: () {
                             _listenLocation();
                           },
-                          child: Text('On the way'),
+                          child: const Text('On the way'),
                         ),
                         TextButton(
                           onPressed: () {
                             _stopListening();
                           },
-                          child: Text('delivered'),
+                          child: const Text('delivered'),
                         ),
                       ],
                     ),
@@ -199,12 +199,12 @@ class _AcceptedOfferViewState extends State<AcceptedOfferView> {
 
   _getLocation() async {
     try {
-      final geo.Position _positionResult =
+      final geo.Position positionResult =
           await geo.Geolocator.getCurrentPosition();
       await FirebaseFirestore.instance.collection('location').doc('user1').set(
         {
-          'latitude': _positionResult.latitude,
-          'longitude': _positionResult.longitude,
+          'latitude': positionResult.latitude,
+          'longitude': positionResult.longitude,
           'name': 'john',
         },
         SetOptions(merge: true),

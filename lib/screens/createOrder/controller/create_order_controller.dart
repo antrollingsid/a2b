@@ -37,7 +37,7 @@ class PackageController extends GetxController {
 
   UploadTask? uploadTask;
 
-  Future<Future<Null>> addPackage() async {
+  Future<Future<void>> addPackage() async {
     courrier_id = "0";
     IsAccepted = "pending";
 

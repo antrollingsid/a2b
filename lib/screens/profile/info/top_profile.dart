@@ -3,7 +3,6 @@ import 'package:a2b/main.dart';
 import 'package:a2b/main/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../../controllers/update_profile_controller.dart';
 
@@ -40,7 +39,7 @@ class TopProfile extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 148, 34, 34),
                               borderRadius: BorderRadius.circular(100),
-                              image: DecorationImage(
+                              image: const DecorationImage(
                                   image: NetworkImage(
                                       "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"),
                                   fit: BoxFit.cover)),
@@ -140,7 +139,7 @@ class TopProfile extends StatelessWidget {
                         children: [
                           Text(
                             controller.user.details.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 36,
                               fontWeight: FontWeight.w500,
                               color: AppColors.backgroundLightMode,

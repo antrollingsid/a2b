@@ -183,7 +183,7 @@ class DetailsAppBar extends StatelessWidget {
               // margin: const EdgeInsets.all(26),
               decoration: BoxDecoration(
                 color: context.scaffoldBackgroundColor,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                   bottomLeft: Radius.circular(0),
@@ -260,7 +260,7 @@ class ProfileAppbar extends StatelessWidget {
       actions: isActionVisible
           ? [
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 5, 30, 3),
+                padding: const EdgeInsets.fromLTRB(0, 5, 30, 3),
                 child: lngBtn(),
               ),
             ]

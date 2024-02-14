@@ -105,7 +105,7 @@ class _AcceptedOffers extends State<AcceptedOffers> {
 
                             return GestureDetector(
                               onTap: () {
-                                Get.to(() => MyApp());
+                                Get.to(() => const MyApp());
                               },
                               child: AcceptedOfferView(
                                 name: userName,

@@ -7,7 +7,7 @@ class BodyCornerWidget extends StatelessWidget {
   final Widget child;
   final Color? color;
 
-  BodyCornerWidget({required this.child, this.color});
+  const BodyCornerWidget({super.key, required this.child, this.color});
 
   @override
   Widget build(BuildContext context) {

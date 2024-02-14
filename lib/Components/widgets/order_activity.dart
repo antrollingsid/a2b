@@ -93,7 +93,7 @@ class OrderHistoryActivity extends StatelessWidget {
                                       ),
                                       TextSpan(
                                         text: '- $date',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
                                           height: 2,

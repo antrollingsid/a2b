@@ -25,7 +25,7 @@ class AppTheme {
     // ),
 
     primarySwatch: createMaterialColor(colorPrimary),
-    hintColor: Color.fromARGB(255, 162, 162, 162),
+    hintColor: const Color.fromARGB(255, 162, 162, 162),
     primaryColor: const Color.fromRGBO(224, 124, 121, 1),
     secondaryHeaderColor: const Color.fromRGBO(13, 13, 13, 1),
     scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),

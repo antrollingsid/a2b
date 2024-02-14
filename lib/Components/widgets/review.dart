@@ -36,11 +36,11 @@ class _CustomReviewState extends State<CustomReview> {
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Text('No data available');
+          return const Text('No data available');
         } else {
           final documents = snapshot.data!.docs;
 
@@ -52,7 +52,7 @@ class _CustomReviewState extends State<CustomReview> {
           }).toList();
 
           if (filteredDocuments.isEmpty) {
-            return Text('No matching documents');
+            return const Text('No matching documents');
           }
 
           return ListView.builder(
@@ -61,10 +61,7 @@ class _CustomReviewState extends State<CustomReview> {
             itemCount: filteredDocuments.length,
             itemBuilder: (context, index) {
               final data = filteredDocuments[index].data();
-              if (data == null) {
-                return const SizedBox(); // Return an empty widget or handle the null case accordingly
-              }
-              return Container(
+              return SizedBox(
                 width: 333,
                 height: 120,
                 child: Padding(
@@ -78,7 +75,7 @@ class _CustomReviewState extends State<CustomReview> {
                             Container(
                               width: 40,
                               height: 40,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Colors.blueGrey,
                               ),
                               child: Image.network(

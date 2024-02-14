@@ -2,6 +2,8 @@ import 'package:a2b/main.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../main/utils/colors.dart';
+
 class ApplicationOfferView extends StatelessWidget {
   const ApplicationOfferView({
     super.key,
@@ -101,7 +103,7 @@ class ApplicationOfferView extends StatelessWidget {
                                     fontSize: 14,
                                     color: context.scaffoldBackgroundColor),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                             ],
@@ -121,7 +123,7 @@ class ApplicationOfferView extends StatelessWidget {
                                     fontSize: 14,
                                     color: context.scaffoldBackgroundColor),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                             ],

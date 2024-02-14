@@ -159,7 +159,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Selected File',
                             style: TextStyle(
                               color: AppColors.backgroundLightMode,
@@ -197,7 +197,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                     children: [
                                       Text(
                                         _platformFile!.name,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 13,
                                           color: AppColors.backgroundLightMode,
                                         ),
@@ -207,7 +207,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                       ),
                                       Text(
                                         '${(_platformFile!.size / 1024).ceil()} KB',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 13,
                                           color: AppColors.backgroundLightMode,
                                         ),
@@ -308,7 +308,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
           ),
         ),
         bottomNavigationBar: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             border: Border(
               top: BorderSide(
                 color:
@@ -343,7 +343,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                 ),
                 label: '',
               ),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person_outlined,
                   color: AppColors.backgroundLightMode,

@@ -5,7 +5,7 @@ import 'package:location/location.dart' as loc;
 
 class MyMap extends StatefulWidget {
   final String user_id;
-  MyMap(this.user_id);
+  const MyMap(this.user_id, {super.key});
   @override
   _MyMapState createState() => _MyMapState();
 }
@@ -24,7 +24,7 @@ class _MyMapState extends State<MyMap> {
           mymap(snapshot);
         }
         if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         return GoogleMap(
           mapType: MapType.normal,
@@ -36,7 +36,7 @@ class _MyMapState extends State<MyMap> {
                   snapshot.data!.docs.singleWhere(
                       (element) => element.id == widget.user_id)['longitude'],
                 ),
-                markerId: MarkerId('id'),
+                markerId: const MarkerId('id'),
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueMagenta)),
           },

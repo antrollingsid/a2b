@@ -9,6 +9,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'livemap.dart';
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -33,7 +35,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('live location tracker'),
+        title: const Text('live location tracker'),
         backgroundColor: context.primaryColor,
       ),
       body: Column(
@@ -42,19 +44,19 @@ class _MyAppState extends State<MyApp> {
             onPressed: () {
               _getLocation();
             },
-            child: Text('pickup'),
+            child: const Text('pickup'),
           ),
           TextButton(
             onPressed: () {
               _listenLocation();
             },
-            child: Text('on the way'),
+            child: const Text('on the way'),
           ),
           TextButton(
             onPressed: () {
               _stopListening();
             },
-            child: Text('shipped'),
+            child: const Text('shipped'),
           ),
           Expanded(
             child: StreamBuilder(
@@ -62,7 +64,7 @@ class _MyAppState extends State<MyApp> {
                   FirebaseFirestore.instance.collection('location').snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
                 return ListView.builder(
                   itemCount: snapshot.data?.docs.length,
@@ -74,13 +76,13 @@ class _MyAppState extends State<MyApp> {
                         children: [
                           Text(snapshot.data!.docs[index]['latitude']
                               .toString()),
-                          SizedBox(width: 20),
+                          const SizedBox(width: 20),
                           Text(snapshot.data!.docs[index]['longitude']
                               .toString()),
                         ],
                       ),
                       trailing: IconButton(
-                        icon: Icon(Icons.directions),
+                        icon: const Icon(Icons.directions),
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -103,12 +105,12 @@ class _MyAppState extends State<MyApp> {
 
   _getLocation() async {
     try {
-      final geo.Position _positionResult =
+      final geo.Position positionResult =
           await geo.Geolocator.getCurrentPosition();
       await FirebaseFirestore.instance.collection('location').doc('user1').set(
         {
-          'latitude': _positionResult.latitude,
-          'longitude': _positionResult.longitude,
+          'latitude': positionResult.latitude,
+          'longitude': positionResult.longitude,
           'name': 'john',
         },
         SetOptions(merge: true),

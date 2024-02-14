@@ -102,7 +102,7 @@ class _CustomTextfieldState extends State<CustomTextfield> {
 
 OutlineInputBorder myinputborder(BuildContext context) {
   return OutlineInputBorder(
-      borderRadius: BorderRadius.all(
+      borderRadius: const BorderRadius.all(
         Radius.circular(5),
       ),
       borderSide: BorderSide(

@@ -53,7 +53,7 @@ class _OrderHistoryList extends State<OrderHistoryList> {
                   return Text('Error: ${snapshot.error}');
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
@@ -88,7 +88,7 @@ class _OrderHistoryList extends State<OrderHistoryList> {
                           AsyncSnapshot<DocumentSnapshot> snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         }
 
                         if (snapshot.hasError) {
@@ -155,7 +155,7 @@ class _OrderHistoryList extends State<OrderHistoryList> {
                   ),
                   label: '',
                 ),
-                BottomNavigationBarItem(
+                const BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person_outlined,
                     color: Colors.black,

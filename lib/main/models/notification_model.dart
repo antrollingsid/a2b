@@ -16,11 +16,11 @@ class NotificationListModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['all_unread_count'] = this.allUnreadCount;
-    if (this.notificationData != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['all_unread_count'] = allUnreadCount;
+    if (notificationData != null) {
       data['notification_data'] =
-          this.notificationData!.map((v) => v.toJson()).toList();
+          notificationData!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -46,10 +46,10 @@ class NotificationData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['created_at'] = this.createdAt;
-    data['id'] = this.id;
-    data['read_at'] = this.readAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['created_at'] = createdAt;
+    data['id'] = id;
+    data['read_at'] = readAt;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -75,11 +75,11 @@ class NotificationOrderData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['message'] = this.message;
-    data['subject'] = this.subject;
-    data['type'] = this.type;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['message'] = message;
+    data['subject'] = subject;
+    data['type'] = type;
     return data;
   }
 }

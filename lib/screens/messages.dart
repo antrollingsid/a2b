@@ -1,9 +1,7 @@
 import 'package:a2b/screens/chat/pages/chat_page.dart';
-import 'package:a2b/screens/userDetails/details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import '../../../Components/widgets/offer_show.dart';
@@ -47,7 +45,7 @@ class _MessagesList extends State<MessagesList> {
                       return const CircularProgressIndicator();
                     }
                     if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
-                      return Text('No chats found.');
+                      return const Text('No chats found.');
                     }
                     return Center(
                       child: SizedBox(
@@ -99,7 +97,7 @@ class _MessagesList extends State<MessagesList> {
                         }
                         if (snapshot.data == null ||
                             snapshot.data!.docs.isEmpty) {
-                          return Text('No chats found.');
+                          return const Text('No chats found.');
                         }
                         return Center(
                           child: SizedBox(
@@ -140,7 +138,7 @@ class _MessagesList extends State<MessagesList> {
                         );
                       },
                     )
-                  : Text('data'),
+                  : const Text('data'),
         ),
       );
     });
@@ -151,17 +149,17 @@ class _MessagesList extends State<MessagesList> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirm Offer'),
-          content: Text('Do you accept this offer?'),
+          title: const Text('Confirm Offer'),
+          content: const Text('Do you accept this offer?'),
           actions: <Widget>[
             TextButton(
-              child: Text('Accept'),
+              child: const Text('Accept'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: Text('Decline'),
+              child: const Text('Decline'),
               onPressed: () {
                 // Perform decline action
                 Navigator.of(context).pop();

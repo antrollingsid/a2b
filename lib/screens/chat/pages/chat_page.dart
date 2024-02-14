@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/auth_controller.dart';
-import '../chatWidgets/widgets.dart';
 import '../chatWidgets/message_tiles.dart';
 import '../controllers/chat_controller.dart';
 

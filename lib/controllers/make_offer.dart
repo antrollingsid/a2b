@@ -24,7 +24,7 @@ class MakeOfferController extends GetxController {
         // Create a new document in the "offers" collection
         await FirebaseFirestore.instance
             .collection('offers')
-            .doc(response!.uid)
+            .doc(response.uid)
             .set(
           {
             'price': price,

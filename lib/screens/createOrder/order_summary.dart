@@ -10,7 +10,6 @@ import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../main/utils/allConstants.dart';
 import '../../Components/widgets/app_bar_buttons.dart';
-import '../dashboard/dashboard.dart';
 import 'controller/create_order_controller.dart';
 
 class OrderSummary extends StatefulWidget {
@@ -103,7 +102,7 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
                   children: [
                     Text(
                       '${language.product}: ',
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     Text(orderSummary.package_name),
                   ],
@@ -116,7 +115,7 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
                   children: [
                     Text(
                       language.createdAt,
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     Text(
                       DateFormat(
@@ -133,7 +132,7 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
                   children: [
                     Text(
                       language.pickupLocation,
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     Text(orderSummary.pickup_address),
                   ],
@@ -146,7 +145,7 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
                   children: [
                     Text(
                       language.deliveryLocation,
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     Text(orderSummary.delivery_address),
                   ],
@@ -159,7 +158,7 @@ class _OrderSummary extends State<OrderSummary> with TickerProviderStateMixin {
                   children: [
                     Text(
                       language.paymentType,
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     DropdownButton(
                       value: selectedItem,

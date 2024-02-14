@@ -25,7 +25,7 @@ class CourierOfferView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               // color: AppColors.backgroundLightMode,
               // borderRadius: BorderRadius.circular(10),
               ),
@@ -70,7 +70,7 @@ class CourierOfferView extends StatelessWidget {
                           ),
                           Text(
                             name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
                               // color: context.scaffoldBackgroundColor,
@@ -81,7 +81,7 @@ class CourierOfferView extends StatelessWidget {
                           ),
                           Text(
                             packageName,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
                               // color: context.scaffoldBackgroundColor,
@@ -101,7 +101,7 @@ class CourierOfferView extends StatelessWidget {
                             children: [
                               Text(
                                 language.pickupDatetime,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
                                   // color: context.scaffoldBackgroundColor,
                                 ),
@@ -121,7 +121,7 @@ class CourierOfferView extends StatelessWidget {
                             children: [
                               Text(
                                 language.price,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
                                   // color: context.scaffoldBackgroundColor,
                                 ),
@@ -141,7 +141,7 @@ class CourierOfferView extends StatelessWidget {
                             children: [
                               Text(
                                 language.deliverTime,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 14,
                                   // color: context.scaffoldBackgroundColor,
                                 ),
