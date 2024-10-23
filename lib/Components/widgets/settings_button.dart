@@ -17,7 +17,9 @@ class SettingBtn extends StatelessWidget {
         width: 333,
         height: 52,
         decoration: BoxDecoration(
-          // color: context.primaryColor,
+          color: appStore.isDarkMode
+              ? AppColors.buttonDark
+              : AppColors.buttonLight,
           borderRadius: BorderRadius.circular(5),
         ),
         // border: Border.all(color: context.primaryColor)),
@@ -38,13 +40,23 @@ class SettingBtn extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: Center(
-              child: SvgPicture.string(
-                SvgConstant.arrowRight,
+            padding: const EdgeInsets.only(right: 10),
+            child: Container(
+              height: 30,
+              width: 30,
+              decoration: BoxDecoration(
                 color: appStore.isDarkMode
-                    ? AppColors.onBackgroundDark
-                    : AppColors.onBackgroundLight,
+                    ? AppColors.textGrey
+                    : AppColors.textGrey,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Center(
+                child: SvgPicture.string(
+                  SvgConstant.arrowRight,
+                  color: appStore.isDarkMode
+                      ? AppColors.buttonDark
+                      : AppColors.buttonLight,
+                ),
               ),
             ),
           )

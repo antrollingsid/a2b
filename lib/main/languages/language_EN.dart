@@ -342,7 +342,7 @@ class LanguageEn extends BaseLanguage {
   String get trackOrderLocation => "Track Order Location";
 
   @override
-  String get track => "Track";
+  String get track => "Tracking Code";
 
   @override
   String get active => "Active";

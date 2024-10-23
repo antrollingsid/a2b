@@ -9,6 +9,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../../../Components/widgets/app_bar_buttons.dart';
 import '../../../../Components/widgets/settings_button.dart';
+import '../../Components/widgets/logout_btn.dart';
 import '../../controllers/update_profile_controller.dart';
 import '../../main/utils/colors.dart';
 import '../messages.dart';
@@ -237,7 +238,7 @@ class _ProfileState extends State<Profile> {
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 15, 0, 40),
+                              padding: const EdgeInsets.fromLTRB(0, 15, 0, 20),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -299,6 +300,9 @@ class _ProfileState extends State<Profile> {
                       onTap: () => Get.to(() => const MessagesList()),
                       child: SettingBtn(action: language.messages),
                     ),
+                    const SizedBox(
+                      height: 11,
+                    ),
                     if (userRole.user.role == 'general')
                       Column(
                         children: [
@@ -306,13 +310,22 @@ class _ProfileState extends State<Profile> {
                             onTap: () => Get.to(() => const ApplyForCourier()),
                             child: SettingBtn(action: language.applyForCourier),
                           ),
+                          const SizedBox(
+                            height: 11,
+                          ),
                           InkWell(
                             onTap: () => Get.to(() => const CourierList()),
                             child: SettingBtn(action: language.couriers),
                           ),
+                          const SizedBox(
+                            height: 11,
+                          ),
                           InkWell(
                             onTap: () => Get.to(() => const CourierOfferList()),
                             child: SettingBtn(action: language.offers),
+                          ),
+                          const SizedBox(
+                            height: 11,
                           ),
                           InkWell(
                             onTap: () => Get.to(() => const OrderHistoryList()),
@@ -334,11 +347,11 @@ class _ProfileState extends State<Profile> {
                         ],
                       ),
                     const SizedBox(
-                      height: 130,
+                      height: 50,
                     ),
                     InkWell(
                       onTap: () => Get.find<AuthController>().signOut(),
-                      child: SettingBtn(action: language.logout),
+                      child: LogoutBtn(action: language.logout),
                     ),
                   ],
                 ),

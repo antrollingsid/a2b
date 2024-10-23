@@ -139,7 +139,7 @@ class _DashBoardState extends State<DashBoard> {
                                 }
                                 return SizedBox(
                                   width: 333,
-                                  height: 199,
+                                  height: 203,
                                   child: ListView(
                                     children: snapshot.data!.docs
                                         .map((DocumentSnapshot document) {
@@ -220,7 +220,9 @@ class _DashBoardState extends State<DashBoard> {
                           Get.to(() => const UsersOrders());
                         },
                         child: Container(
-                          color: context.primaryColor,
+                          color: appStore.isDarkMode
+                              ? AppColors.primaryDark
+                              : AppColors.primaryLight,
                           height: 100,
                           width: 170,
                           child: Text(
@@ -256,10 +258,12 @@ class _DashBoardState extends State<DashBoard> {
         ),
       ),
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           border: Border(
             top: BorderSide(
-              color: AppColors.backgroundLight, // Choose your desired color
+              color: appStore.isDarkMode
+                  ? AppColors.buttonDark
+                  : AppColors.buttonLight,
               width: 1.0, // Choose your desired width
             ),
           ),
@@ -279,7 +283,9 @@ class _DashBoardState extends State<DashBoard> {
                 height: 52,
                 width: 52,
                 decoration: BoxDecoration(
-                  color: AppColors.backgroundLight,
+                  color: appStore.isDarkMode
+                      ? AppColors.onBackgroundDark
+                      : AppColors.onBackgroundLight,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
@@ -290,15 +296,19 @@ class _DashBoardState extends State<DashBoard> {
               ),
               label: '',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(
                 Icons.person_outlined,
-                color: AppColors.backgroundLight,
+                color: appStore.isDarkMode
+                    ? AppColors.onBackgroundDark
+                    : AppColors.onBackgroundLight,
               ),
               label: '',
             ),
           ],
-          selectedItemColor: context.primaryColor,
+          selectedItemColor: appStore.isDarkMode
+              ? AppColors.primaryDark
+              : AppColors.primaryLight,
           onTap: (index) {
             if (index == 0) {
               Get.to(() => const DashBoard());
@@ -338,7 +348,7 @@ class TrackingTextField extends StatelessWidget {
                   height: 19,
                 ),
               ),
-              hintText: 'Tracking code',
+              hintText: language.track,
               hintStyle: const TextStyle(color: AppColors.textGrey),
               filled: true,
               fillColor: context.scaffoldBackgroundColor,

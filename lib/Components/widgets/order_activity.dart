@@ -51,7 +51,7 @@ class OrderHistoryActivity extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.fromLTRB(0, 0, 30, 0),
+                        margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                         width: 148,
                         height: 50,
                         child: Column(
@@ -62,8 +62,6 @@ class OrderHistoryActivity extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
-                                // height:  1.5*ffem/fem,
-                                // color: Color(0xffffffff),
                               ),
                             ),
                             Row(
@@ -71,7 +69,7 @@ class OrderHistoryActivity extends StatelessWidget {
                               children: [
                                 Container(
                                   margin:
-                                      const EdgeInsets.fromLTRB(0, 5, 6.75, 0),
+                                      const EdgeInsets.fromLTRB(0, 5, 3.5, 0),
                                   child: SvgPicture.string(
                                       SvgConstant.dotInCircle,
                                       color: context.primaryColor),

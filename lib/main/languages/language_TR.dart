@@ -338,7 +338,7 @@ class LanguageTr extends BaseLanguage {
   String get trackOrderLocation => "Parça sipariş yeri";
 
   @override
-  String get track => "Izlemek";
+  String get track => "Takip Kodu";
 
   @override
   String get active => "Aktif";

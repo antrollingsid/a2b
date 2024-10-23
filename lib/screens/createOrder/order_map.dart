@@ -302,11 +302,13 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                           color: AppColors.backgroundLight.withOpacity(0.1),
                           border: Border.all(
                             color: isPickupFocused
-                                ? context.primaryColor
+                                ? (appStore.isDarkMode
+                                    ? AppColors.primaryDark
+                                    : AppColors.primaryLight)
                                 : AppColors.backgroundLight.withOpacity(0.1),
                             width: 1,
                           ),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(13),
                         ),
                         child: Row(
                           children: [
@@ -378,11 +380,13 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
                           color: AppColors.backgroundLight.withOpacity(0.1),
                           border: Border.all(
                             color: isDeliveryFocused
-                                ? context.primaryColor
+                                ? (appStore.isDarkMode
+                                    ? AppColors.secondaryDark
+                                    : AppColors.secondaryLight)
                                 : AppColors.backgroundLight.withOpacity(0.1),
                             width: 1,
                           ),
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(13),
                         ),
                         child: Row(
                           children: [
