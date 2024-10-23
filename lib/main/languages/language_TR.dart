@@ -129,6 +129,12 @@ class LanguageTr extends BaseLanguage {
   String get pickup => "Toplamak";
 
   @override
+  String get messages => "Mesajlar";
+
+  @override
+  String get applyForCourier => "Kurye Başvurusu";
+
+  @override
   String get delivery => "Teslimat";
 
   @override
@@ -933,7 +939,10 @@ class LanguageTr extends BaseLanguage {
   String get withdrawHistory => "Tarihi Çekme";
 
   @override
-  String get addMoney => "Para eklemek";
+  String get couriers => "Kuryeler";
+
+  @override
+  String get offers => "Teklifler";
 
   @override
   String get amount => "Miktar";

@@ -88,6 +88,10 @@ abstract class BaseLanguage {
 
   String get pickup;
 
+  String get messages;
+
+  String get applyForCourier;
+
   String get delivery;
 
   String get deliveryCharge;
@@ -157,6 +161,8 @@ abstract class BaseLanguage {
   String get notChangeEmail;
 
   String get username;
+
+  String get offers;
 
   String get notChangeUsername;
 
@@ -608,7 +614,7 @@ abstract class BaseLanguage {
 
   String get withdrawHistory;
 
-  String get addMoney;
+  String get couriers;
 
   String get amount;
 

@@ -4,6 +4,7 @@
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../main.dart';
 import '../../main/utils/allConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,7 +23,7 @@ class backBtn extends StatelessWidget {
       child: IconButton(
         icon: SvgPicture.string(
           SvgConstant.backArrow,
-          color: context.primaryColor,
+          color: AppColors.onBackgroundDark,
         ),
         onPressed: () {
           // Wrap the navigation code inside a try-catch block
@@ -54,7 +55,9 @@ class menuBtn extends StatelessWidget {
       child: IconButton(
         icon: SvgPicture.string(
           SvgConstant.profIcon,
-          color: context.primaryColor,
+          color: appStore.isDarkMode
+              ? AppColors.onBackgroundDark
+              : AppColors.onBackgroundLight,
         ),
         onPressed: () {
           Get.to(const Profile());
@@ -94,7 +97,9 @@ class CustomLoginSignupAppBar extends StatelessWidget {
                 fontFamily: AppFonts.mainFont,
                 fontSize: 36,
                 fontWeight: FontWeight.w600,
-                color: AppColors.onBackgroundDark,
+                color: appStore.isDarkMode
+                    ? AppColors.onBackgroundDark
+                    : AppColors.onBackgroundLight,
               ),
             ),
           ),
@@ -107,7 +112,7 @@ class CustomLoginSignupAppBar extends StatelessWidget {
       //   ),
       // ],
       elevation: 0,
-      backgroundColor: AppColors.backgroundLightMode,
+      backgroundColor: AppColors.backgroundLight,
     );
   }
 }
@@ -136,9 +141,11 @@ class CustomAppBar extends StatelessWidget {
       title: Text(
         titleText,
         style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-          color: context.primaryColor,
+          fontFamily: AppFonts.mainFont,
+          fontSize: 15,
+          color: appStore.isDarkMode
+              ? AppColors.onBackgroundDark
+              : AppColors.onBackgroundLight,
         ),
       ),
       actions: isActionVisible
@@ -217,16 +224,6 @@ class DetailsAppBar extends StatelessWidget {
     );
   }
 }
-// decoration: BoxDecoration(
-//         image: DecorationImage(
-//           image: NetworkImage(photoURL),
-//           colorFilter: ColorFilter.mode(
-//             const Color.fromARGB(255, 23, 18, 18).withOpacity(0.6),
-//             BlendMode.multiply,
-//           ),
-//           fit: BoxFit.cover,
-//         ),
-//       ),
 
 class ProfileAppbar extends StatelessWidget {
   ProfileAppbar({
@@ -252,9 +249,11 @@ class ProfileAppbar extends StatelessWidget {
       title: Text(
         titleText,
         style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-          color: context.primaryColor,
+          fontFamily: AppFonts.mainFont,
+          fontSize: 15,
+          color: appStore.isDarkMode
+              ? AppColors.onBackgroundDark
+              : AppColors.onBackgroundLight,
         ),
       ),
       actions: isActionVisible

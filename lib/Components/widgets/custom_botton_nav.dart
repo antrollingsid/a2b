@@ -34,7 +34,7 @@ class CustomBottomNav extends StatelessWidget {
           const BottomNavigationBarItem(
             icon: Icon(
               Icons.access_time,
-              color: AppColors.backgroundLightMode,
+              color: AppColors.backgroundLight,
             ),
             label: '',
           ),
@@ -45,8 +45,8 @@ class CustomBottomNav extends StatelessWidget {
               decoration: BoxDecoration(
                   gradient: const LinearGradient(
                       colors: [
-                        AppColors.secondaryBlue,
-                        AppColors.primary,
+                        AppColors.secondaryDark,
+                        AppColors.primaryLight,
                       ],
                       begin: FractionalOffset(0.0, 1.0),
                       end: FractionalOffset(1.0, 0.4),
@@ -55,7 +55,7 @@ class CustomBottomNav extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50)),
               child: const Icon(
                 Icons.add,
-                color: AppColors.backgroundLightMode,
+                color: AppColors.backgroundLight,
                 size: 40,
               ),
             ),
@@ -64,20 +64,20 @@ class CustomBottomNav extends StatelessWidget {
           const BottomNavigationBarItem(
             icon: Icon(
               Icons.feedback_outlined,
-              color: AppColors.backgroundLightMode,
+              color: AppColors.backgroundLight,
             ),
             label: '',
           ),
           const BottomNavigationBarItem(
             icon: Icon(
               Icons.person_outlined,
-              color: AppColors.backgroundLightMode,
+              color: AppColors.backgroundLight,
             ),
             label: '',
           ),
         ],
         // currentIndex: _selectedIndex,
-        selectedItemColor: AppColors.primary,
+        selectedItemColor: AppColors.primaryLight,
         onTap: (index) {
           if (index == 0) {
             actionitem1;

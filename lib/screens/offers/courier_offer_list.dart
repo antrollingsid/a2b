@@ -117,8 +117,7 @@ class _CourierOfferList extends State<CourierOfferList> {
             decoration: const BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: AppColors
-                      .backgroundLightMode, // Choose your desired color
+                  color: AppColors.backgroundLight, // Choose your desired color
                   width: 1.0, // Choose your desired width
                 ),
               ),
@@ -138,7 +137,7 @@ class _CourierOfferList extends State<CourierOfferList> {
                     height: 52,
                     width: 52,
                     decoration: BoxDecoration(
-                      color: AppColors.backgroundLightMode,
+                      color: AppColors.backgroundLight,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(
@@ -152,7 +151,7 @@ class _CourierOfferList extends State<CourierOfferList> {
                 const BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person_outlined,
-                    color: AppColors.backgroundLightMode,
+                    color: AppColors.backgroundLight,
                   ),
                   label: '',
                 ),

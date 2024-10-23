@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../main/utils/Colors.dart';
+
+import 'main/utils/allConstants.dart';
 
 class AppTheme {
   //
@@ -11,10 +12,10 @@ class AppTheme {
 
   static final ThemeData lightTheme = ThemeData(
     // colorScheme: const ColorScheme(
-    //   background: AppColors.backgroundLightMode,
+    //   background: AppColors.backgroundLight,
     //   error: AppColors.errorDark,
     //   onBackground: Color.fromRGBO(13, 13, 13, 1),
-    //   onError: AppColors.backgroundLightMode,
+    //   onError: AppColors.backgroundLight,
     //   onPrimary: Color.fromRGBO(13, 13, 13, 1),
     //   onSecondary: Color.fromRGBO(224, 124, 121, 1),
     //   onSurface: Color.fromRGBO(13, 13, 13, 1),
@@ -41,7 +42,7 @@ class AppTheme {
       elevation: 0,
       systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarIconBrightness: Brightness.light,
-          statusBarColor: AppColors.backgroundLightMode),
+          statusBarColor: AppColors.backgroundLight),
     ),
     dialogTheme: DialogTheme(shape: dialogShape()),
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white),
@@ -56,12 +57,12 @@ class AppTheme {
   );
 
   static final ThemeData darkTheme = ThemeData(
-    primarySwatch: createMaterialColor(colorPrimary),
+    primarySwatch: createMaterialColor(AppColors.primaryDark),
     primaryColor: const Color.fromRGBO(187, 134, 252, 1.0),
     scaffoldBackgroundColor: AppColors.buttonStroke,
     secondaryHeaderColor: Colors.white,
     fontFamily: GoogleFonts.roboto().fontFamily,
-    iconTheme: const IconThemeData(color: AppColors.backgroundLightMode),
+    iconTheme: const IconThemeData(color: AppColors.backgroundLight),
     dialogBackgroundColor: scaffoldSecondaryDark,
     unselectedWidgetColor: Colors.black,
     // textTheme: TextTheme(),

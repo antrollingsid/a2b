@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../main.dart';
 
 class SettingBtn extends StatelessWidget {
   const SettingBtn({super.key, required this.action});
@@ -29,7 +30,9 @@ class SettingBtn extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
-                  color: context.primaryColor,
+                  color: appStore.isDarkMode
+                      ? AppColors.onBackgroundDark
+                      : AppColors.onBackgroundLight,
                 ),
               ),
             ),
@@ -39,7 +42,9 @@ class SettingBtn extends StatelessWidget {
             child: Center(
               child: SvgPicture.string(
                 SvgConstant.arrowRight,
-                color: context.primaryColor,
+                color: appStore.isDarkMode
+                    ? AppColors.onBackgroundDark
+                    : AppColors.onBackgroundLight,
               ),
             ),
           )

@@ -97,7 +97,7 @@ class OrderHistoryActivity extends StatelessWidget {
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
                                           height: 2,
-                                          color: AppColors.backgroundLightMode,
+                                          color: AppColors.backgroundLight,
                                         ),
                                       ),
                                     ],

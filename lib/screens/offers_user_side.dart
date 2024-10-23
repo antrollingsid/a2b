@@ -21,7 +21,7 @@ class _CourierOffers extends State<CourierOffers> {
   Widget build(BuildContext context) {
     return const Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundLightMode,
+      backgroundColor: AppColors.backgroundLight,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(

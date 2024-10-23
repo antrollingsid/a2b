@@ -133,6 +133,12 @@ class LanguageEn extends BaseLanguage {
   String get pickup => "Pickup";
 
   @override
+  String get messages => "Messages";
+
+  @override
+  String get applyForCourier => "Apply For Courier";
+
+  @override
   String get delivery => "Delivery";
 
   @override
@@ -930,13 +936,10 @@ class LanguageEn extends BaseLanguage {
   String get withdraw => "WithDraw";
 
   @override
-  String get availableBalance => "Available Balance";
-
-  @override
   String get withdrawHistory => "Withdraw History";
 
   @override
-  String get addMoney => "Add Money";
+  String get couriers => "Couriers";
 
   @override
   String get amount => "Amount";
@@ -1039,4 +1042,10 @@ class LanguageEn extends BaseLanguage {
 
   @override
   String get adminCommission => "Admin Commission";
+
+  @override
+  String get availableBalance => "Available Balance";
+
+  @override
+  String get offers => "Offers";
 }

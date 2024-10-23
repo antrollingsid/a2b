@@ -24,7 +24,7 @@ class _Language extends State<Language> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.backgroundLightMode,
+      backgroundColor: AppColors.backgroundLight,
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(

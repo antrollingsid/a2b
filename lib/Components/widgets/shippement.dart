@@ -22,7 +22,7 @@ class CustomShip extends StatelessWidget {
             width: 333,
             decoration: BoxDecoration(
               color: context.primaryColor,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(20),
             ),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
@@ -38,6 +38,7 @@ class CustomShip extends StatelessWidget {
                         'Track\nYour Shipping',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
+                          color: AppColors.textBlack,
                         ),
                       ),
                     ),
@@ -53,6 +54,7 @@ class CustomShip extends StatelessWidget {
                             "Iphone 12",
                             style: TextStyle(
                               fontSize: 12,
+                              color: AppColors.textBlack,
                             ),
                           ),
                         )
@@ -65,10 +67,10 @@ class CustomShip extends StatelessWidget {
                   width: 95,
                   decoration: BoxDecoration(
                     color: Colors.blueGrey,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(15),
                     child: MyMap1(
                       tracked.doc('user1').id,
                     ),

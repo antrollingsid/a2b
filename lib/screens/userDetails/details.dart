@@ -231,7 +231,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     border: Border(
                       top: BorderSide(
                         color: AppColors
-                            .backgroundLightMode, // Choose your desired color
+                            .backgroundLight, // Choose your desired color
                         width: 1.0, // Choose your desired width
                       ),
                     ),
@@ -251,7 +251,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           height: 52,
                           width: 52,
                           decoration: BoxDecoration(
-                            color: AppColors.backgroundLightMode,
+                            color: AppColors.backgroundLight,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Icon(
@@ -265,7 +265,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       const BottomNavigationBarItem(
                         icon: Icon(
                           Icons.person_outlined,
-                          color: AppColors.backgroundLightMode,
+                          color: AppColors.backgroundLight,
                         ),
                         label: '',
                       ),

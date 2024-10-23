@@ -13,7 +13,7 @@ import '../../../Components/widgets/app_bar_buttons.dart';
 import '../../main.dart';
 import 'controller/create_order_controller.dart';
 
-const darkMapStyle = 'assets/json/dark_mode_style.json';
+const darkMapStyle = 'assets/json/map-dark-mode-style.json';
 const lightMapStyle = 'assets/json/map-light-mode-style.json';
 
 class PlaceOrderMap extends StatefulWidget {
@@ -26,7 +26,8 @@ class PlaceOrderMap extends StatefulWidget {
 class _PlaceOrderMapState extends State<PlaceOrderMap> {
   final Completer<GoogleMapController> _controllers = Completer();
   Map<PolylineId, Polyline> polylines = {};
-  LatLng _selectedDestination = const LatLng(35.15571933375463, 33.900646269321435);
+  LatLng _selectedDestination =
+      const LatLng(35.15571933375463, 33.900646269321435);
   LatLng _selectedLocation = const LatLng(35.15115787475357, 33.90726964920759);
 
   String selectedLocationText = 'click to select source';
@@ -186,7 +187,7 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
   Widget build(BuildContext context) {
     final orderPage1controller = Get.put(PackageController());
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
       resizeToAvoidBottomInset: false,
       backgroundColor: context.scaffoldBackgroundColor,
       appBar: const PreferredSize(
@@ -197,433 +198,414 @@ class _PlaceOrderMapState extends State<PlaceOrderMap> {
           isLeadingVisible: true,
         ),
       ),
-      body: Stack(
-        children: [
-          GoogleMap(
-            initialCameraPosition: _kInitialPosition,
-            onMapCreated: onMapCreated,
-            zoomControlsEnabled: true,
-            zoomGesturesEnabled: true,
-            myLocationEnabled: true,
-            compassEnabled: true,
-            mapType: MapType.normal,
-            mapToolbarEnabled: true,
-            onTap: (LatLng location) {
-              setState(() {
-                if (sourcePoint) {
-                  _selectedLocation = location;
-                  _sourceLocation = location;
-                  updateSelectedLocationText();
-                } else {
-                  _selectedDestination = location;
-                  _destination = location;
-                  updateSelectedDestinationText();
-                }
-              });
-            },
-            markers: {
-              Marker(
-                markerId: const MarkerId('source'),
-                position: _sourceLocation,
-              ),
-              Marker(
-                markerId: const MarkerId('destination'),
-                position: _destination,
-              ),
-            },
-            // polylines: Set<Polyline>.of(polylines.values),
-          ),
-          DraggableScrollableSheet(
-            initialChildSize: 0.43,
-            minChildSize: 0.15,
-            maxChildSize: 0.43,
-            builder: (BuildContext context, ScrollController scrollController) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: context.scaffoldBackgroundColor,
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(5)),
-                ),
-                child: ListView(
-                  shrinkWrap: true,
-                  controller: scrollController,
-                  padding: const EdgeInsets.all(16),
-                  children: [
-                    Center(
-                      child: SizedBox(
-                        width: 25,
-                        child: Container(
-                          height: 3,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(39, 42, 40, 1),
-                            borderRadius: BorderRadius.circular(2),
-                          ),
-                        ),
-                      ),
-                    ),
-                    TextFormField(
-                      textAlign: TextAlign.start,
-                      onTap: () async {
-                        final selectedDate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(DateTime.now().year + 1),
-                        );
-                        if (selectedDate != null) {
-                          setState(() {
-                            _selectedDate = selectedDate;
-                          });
-                        }
+      body: SingleChildScrollView(
+        child: Center(
+          child: SizedBox(
+            width: 333,
+            child: Column(
+              children: [
+                SizedBox(
+                  width: 333,
+                  height: 374,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(24),
+                    child: GoogleMap(
+                      initialCameraPosition: _kInitialPosition,
+                      onMapCreated: onMapCreated,
+                      zoomControlsEnabled: true,
+                      zoomGesturesEnabled: true,
+                      myLocationEnabled: true,
+                      compassEnabled: true,
+                      mapType: MapType.normal,
+                      mapToolbarEnabled: true,
+                      onTap: (LatLng location) {
+                        setState(() {
+                          if (sourcePoint) {
+                            _selectedLocation = location;
+                            _sourceLocation = location;
+                            updateSelectedLocationText();
+                          } else {
+                            _selectedDestination = location;
+                            _destination = location;
+                            updateSelectedDestinationText();
+                          }
+                        });
                       },
-                      decoration: InputDecoration(
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        hintText: 'Select date',
-                        suffixIcon: Icon(
-                          Icons.calendar_today,
-                          color: context.primaryColor,
+                      markers: {
+                        Marker(
+                          markerId: const MarkerId('source'),
+                          position: _sourceLocation,
+                        ),
+                        Marker(
+                          markerId: const MarkerId('destination'),
+                          position: _destination,
+                        ),
+                      },
+                      // polylines: Set<Polyline>.of(polylines.values),
+                    ),
+                  ),
+                ),
+                TextFormField(
+                  textAlign: TextAlign.left,
+                  onTap: () async {
+                    final selectedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(DateTime.now().year + 1),
+                    );
+                    if (selectedDate != null) {
+                      setState(() {
+                        _selectedDate = selectedDate;
+                      });
+                    }
+                  },
+                  decoration: InputDecoration(
+                    enabledBorder: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    hintText: 'Select date',
+                    suffixIcon: Icon(
+                      Icons.calendar_today,
+                      color: context.primaryColor,
+                    ),
+                  ),
+                  style: const TextStyle(
+                      fontSize: 22, fontWeight: FontWeight.w500),
+                  controller: TextEditingController(
+                    // ignore: unnecessary_null_comparison
+                    text: _selectedDate != null
+                        ? DateFormat('dd MMM yyyy').format(_selectedDate)
+                        : '',
+                  ),
+                  readOnly: true,
+                  maxLines: 1,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // PICKUP BOX
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          sourcePoint = true;
+                          isPickupFocused = true;
+                          isDeliveryFocused = false;
+                        });
+                      },
+                      child: Container(
+                        width: 333,
+                        height: 53,
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundLight.withOpacity(0.1),
+                          border: Border.all(
+                            color: isPickupFocused
+                                ? context.primaryColor
+                                : AppColors.backgroundLight.withOpacity(0.1),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          children: [
+                            Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 125,
+                                  height: 53,
+                                  decoration: BoxDecoration(
+                                    color: appStore.isDarkMode
+                                        ? AppColors.primaryDark
+                                        : AppColors.primaryLight,
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      language.from,
+                                      style: TextStyle(
+                                        color: appStore.isDarkMode
+                                            ? AppColors.backgroundDark
+                                            : AppColors.backgroundLight,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  color: null,
+                                  width: 206,
+                                  child: Center(
+                                    child: Text(
+                                      selectedLocationText,
+                                      style: TextStyle(
+                                        color: appStore.isDarkMode
+                                            ? AppColors.onBackgroundDark
+                                            : AppColors.onBackgroundLight,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.right,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                      style: const TextStyle(
-                          fontSize: 22, fontWeight: FontWeight.w500),
-                      controller: TextEditingController(
-                        // ignore: unnecessary_null_comparison
-                        text: _selectedDate != null
-                            ? DateFormat('dd MMM yyyy').format(_selectedDate)
-                            : '',
-                      ),
-                      readOnly: true,
-                      maxLines: 1,
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // PICKUP BOX
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              sourcePoint = true;
-                              isPickupFocused = true;
-                              isDeliveryFocused = false;
-                            });
-                          },
-                          child: Container(
-                            width: 175,
-                            height: 90,
-                            decoration: BoxDecoration(
-                              color: AppColors.backgroundLightMode
-                                  .withOpacity(0.1),
-                              border: Border.all(
-                                color: isPickupFocused
-                                    ? context.primaryColor
-                                    : AppColors.backgroundLightMode
-                                        .withOpacity(0.1),
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    language.pickup,
-                                    style: TextStyle(
-                                      color:
-                                          context.primaryColor.withOpacity(0.7),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  const SizedBox(
-                                    height: 14,
-                                  ),
-                                  Text(
-                                    selectedLocationText,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                ],
-                              ),
-                            ),
+                    // DELIVERY BOX
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          sourcePoint = false;
+                          isPickupFocused = false;
+                          isDeliveryFocused = true;
+                        });
+                      },
+                      child: Container(
+                        width: 333,
+                        height: 53,
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundLight.withOpacity(0.1),
+                          border: Border.all(
+                            color: isDeliveryFocused
+                                ? context.primaryColor
+                                : AppColors.backgroundLight.withOpacity(0.1),
+                            width: 1,
                           ),
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        // DELIVERY BOX
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              sourcePoint = false;
-                              isPickupFocused = false;
-                              isDeliveryFocused = true;
-                            });
-                          },
-                          child: Container(
-                            width: 175,
-                            height: 90,
-                            decoration: BoxDecoration(
-                              color: AppColors.backgroundLightMode
-                                  .withOpacity(0.1),
-                              border: Border.all(
-                                color: isDeliveryFocused
-                                    ? context.primaryColor
-                                    : AppColors.backgroundLightMode
-                                        .withOpacity(0.1),
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    language.delivery,
-                                    style: TextStyle(
-                                      color:
-                                          context.primaryColor.withOpacity(0.7),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                        child: Row(
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  width: 125,
+                                  height: 53,
+                                  decoration: BoxDecoration(
+                                    color: appStore.isDarkMode
+                                        ? AppColors.secondaryDark
+                                        : AppColors.secondaryLight,
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
-                                  const SizedBox(
-                                    height: 14,
-                                  ),
-                                  Text(
-                                    selectedDestinationText,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 11,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {});
-                          },
-                          child: Container(
-                            width: 175,
-                            height: 62,
-                            decoration: BoxDecoration(
-                              color: AppColors.backgroundLightMode
-                                  .withOpacity(0.1),
-                              border: Border.all(
-                                color: AppColors.backgroundLightMode
-                                    .withOpacity(0.1),
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    language.parcelType,
-                                    style: TextStyle(
-                                      color:
-                                          context.primaryColor.withOpacity(0.7),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 0,
-                                  ),
-                                  SizedBox(
-                                    // color: Colors.amberAccent,
-                                    height: 26,
-                                    child: DropdownButtonHideUnderline(
-                                      child: DropdownButton(
-                                        icon: const SizedBox.shrink(),
-                                        value: selectedItem,
-                                        items: const [
-                                          DropdownMenuItem(
-                                            value: 'Envelope',
-                                            child: Text('Envelope'),
-                                          ),
-                                          DropdownMenuItem(
-                                            value: 'Rectangular Box',
-                                            child: Text('Rectangular Box'),
-                                          ),
-                                          DropdownMenuItem(
-                                            value: 'Cubic Box',
-                                            child: Text('Cubic Box'),
-                                          ),
-                                          DropdownMenuItem(
-                                            value: 'Cylinder',
-                                            child: Text('Cylinder'),
-                                          ),
-                                        ],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            try {} catch (e) {
-                                              print(e);
-                                            }
-                                            selectedItem = value!;
-                                          });
-                                        },
+                                  child: Center(
+                                    child: Text(
+                                      language.to,
+                                      style: TextStyle(
+                                        color: appStore.isDarkMode
+                                            ? AppColors.backgroundDark
+                                            : AppColors.backgroundLight,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                   ),
-                                ],
+                                ),
+                              ],
+                            ),
+                            Container(
+                              color: null,
+                              width: 206,
+                              child: Center(
+                                child: Text(
+                                  selectedDestinationText,
+                                  style: TextStyle(
+                                    color: appStore.isDarkMode
+                                        ? AppColors.onBackgroundDark
+                                        : AppColors.onBackgroundLight,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-
-                        // WEIGHT BOX
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {});
-                          },
-                          child: Container(
-                            width: 175,
-                            height: 62,
-                            decoration: BoxDecoration(
-                              color: AppColors.backgroundLightMode
-                                  .withOpacity(0.1),
-                              border: Border.all(
-                                color: AppColors.backgroundLightMode
-                                    .withOpacity(0.1),
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    language.weight,
-                                    style: TextStyle(
-                                      color:
-                                          context.primaryColor.withOpacity(0.7),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 0,
-                                  ),
-                                  SizedBox(
-                                    // color: Colors.amberAccent,
-                                    height: 26,
-                                    child: DropdownButtonHideUnderline(
-                                      child: DropdownButton(
-                                        icon: const SizedBox.shrink(),
-                                        value: selectedWeight,
-                                        items: const [
-                                          DropdownMenuItem(
-                                            value: 'light',
-                                            child: Text('0kg - 5kg'),
-                                          ),
-                                          DropdownMenuItem(
-                                            value: 'normal',
-                                            child: Text('5kg - 9kg'),
-                                          ),
-                                          DropdownMenuItem(
-                                            value: 'heavy',
-                                            child: Text('9kg+'),
-                                          ),
-                                        ],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            try {
-                                              selectedWeight = value!;
-                                            } catch (e) {
-                                              print(e);
-                                            }
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
-              );
-            },
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: 100,
-            child: DraggableScrollableSheet(
-              initialChildSize: 1,
-              minChildSize: 1,
-              maxChildSize: 1,
-              builder:
-                  (BuildContext context, ScrollController scrollController) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: context.scaffoldBackgroundColor,
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(0)),
-                  ),
-                  child: ListView.builder(
-                    controller: scrollController,
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(0),
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          CustomBtn(
-                              textonbtn: "Next",
-                              onPress: () =>
-                                  orderPage1controller.setOrderMapDetails(
-                                    context,
-                                    selectedItem,
-                                    selectedWeight,
-                                    selectedLocationText,
-                                    selectedDestinationText,
-                                    _selectedDate,
-                                    _sourceLocation.latitude,
-                                    _sourceLocation.longitude,
-                                    _sourceLocation.latitude,
-                                    _sourceLocation.longitude,
+                const SizedBox(
+                  height: 11,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {});
+                      },
+                      child: Container(
+                        width: 160,
+                        height: 62,
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundLight.withOpacity(0.1),
+                          border: Border.all(
+                            color: AppColors.backgroundLight.withOpacity(0.1),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                language.parcelType,
+                                style: TextStyle(
+                                  color: appStore.isDarkMode
+                                      ? AppColors.primaryDark
+                                      : AppColors.primaryLight,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 23,
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    icon: const SizedBox.shrink(),
+                                    value: selectedItem,
+                                    items: const [
+                                      DropdownMenuItem(
+                                        value: 'Envelope',
+                                        child: Text('Envelope'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 'Rectangular Box',
+                                        child: Text('Rectangular Box'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 'Cubic Box',
+                                        child: Text('Cubic Box'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 'Cylinder',
+                                        child: Text('Cylinder'),
+                                      ),
+                                    ],
+                                    onChanged: (value) {
+                                      setState(() {
+                                        try {} catch (e) {
+                                          print(e);
+                                        }
+                                        selectedItem = value!;
+                                      });
+                                    },
                                   ),
-                              primary: true)
-                        ],
-                      );
-                    },
-                  ),
-                );
-              },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // WEIGHT BOX
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {});
+                      },
+                      child: Container(
+                        width: 160,
+                        height: 62,
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundLight.withOpacity(0.1),
+                          border: Border.all(
+                            color: AppColors.backgroundLight.withOpacity(0.1),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                language.weight,
+                                style: TextStyle(
+                                  color: appStore.isDarkMode
+                                      ? AppColors.primaryDark
+                                      : AppColors.primaryLight,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                // color: Colors.amberAccent,
+                                height: 23,
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    icon: const SizedBox.shrink(),
+                                    value: selectedWeight,
+                                    items: const [
+                                      DropdownMenuItem(
+                                        value: 'light',
+                                        child: Text('0kg - 5kg'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 'normal',
+                                        child: Text('5kg - 9kg'),
+                                      ),
+                                      DropdownMenuItem(
+                                        value: 'heavy',
+                                        child: Text('9kg+'),
+                                      ),
+                                    ],
+                                    onChanged: (value) {
+                                      setState(() {
+                                        try {
+                                          selectedWeight = value!;
+                                        } catch (e) {
+                                          print(e);
+                                        }
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomBtn(
+                        textonbtn: "Next",
+                        onPress: () => orderPage1controller.setOrderMapDetails(
+                              context,
+                              selectedItem,
+                              selectedWeight,
+                              selectedLocationText,
+                              selectedDestinationText,
+                              _selectedDate,
+                              _sourceLocation.latitude,
+                              _sourceLocation.longitude,
+                              _sourceLocation.latitude,
+                              _sourceLocation.longitude,
+                            ),
+                        primary: true)
+                  ],
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

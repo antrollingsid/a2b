@@ -42,24 +42,24 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 5,
                 ),
-                const Text(
-                  "Glad to see you again!",
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const SizedBox(
-                  width: 333,
-                  child: Text(
-                    "sign it and continue to delivery your\npackages!",
-                    style: TextStyle(
-                        color: AppColors.textFaded,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                // const Text(
+                //   "Glad to see you again!",
+                //   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 24),
+                // ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // const SizedBox(
+                //   width: 333,
+                //   child: Text(
+                //     "sign it and continue to delivery your\npackages!",
+                //     style: TextStyle(
+                //         color: AppColors.textFaded,
+                //         fontWeight: FontWeight.normal,
+                //         fontSize: 16),
+                //     textAlign: TextAlign.center,
+                //   ),
+                // ),
                 const SizedBox(
                   height: 40,
                 ),

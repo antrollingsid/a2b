@@ -47,14 +47,14 @@ class _CustomCalendarState extends State<CustomCalendar> {
           titleCentered: true,
           leftChevronIcon: Icon(
             Icons.chevron_left,
-            color: AppColors.secondaryBlue,
+            color: AppColors.secondaryDark,
           ),
           rightChevronIcon: Icon(
             Icons.chevron_right,
-            color: AppColors.secondaryBlue,
+            color: AppColors.secondaryDark,
           ),
           titleTextStyle: TextStyle(
-            color: AppColors.backgroundLightMode,
+            color: AppColors.backgroundLight,
           ),
         ),
         calendarStyle: CalendarStyle(
@@ -67,10 +67,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
           selectedDecoration: BoxDecoration(
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(10),
-            color: AppColors.primary,
+            color: AppColors.primaryLight,
           ),
           selectedTextStyle: const TextStyle(
-            color: AppColors.backgroundLightMode,
+            color: AppColors.backgroundLight,
           ),
 
           /*-----------------
@@ -95,11 +95,11 @@ class _CustomCalendarState extends State<CustomCalendar> {
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
               width: 1,
-              color: AppColors.primary,
+              color: AppColors.primaryLight,
             ),
           ),
           todayTextStyle: const TextStyle(
-            color: AppColors.primary,
+            color: AppColors.primaryLight,
           ),
 
           /*----------------

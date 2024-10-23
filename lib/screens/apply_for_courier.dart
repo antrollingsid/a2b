@@ -162,7 +162,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                           const Text(
                             'Selected File',
                             style: TextStyle(
-                              color: AppColors.backgroundLightMode,
+                              color: AppColors.backgroundLight,
                               fontSize: 15,
                             ),
                           ),
@@ -199,7 +199,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                         _platformFile!.name,
                                         style: const TextStyle(
                                           fontSize: 13,
-                                          color: AppColors.backgroundLightMode,
+                                          color: AppColors.backgroundLight,
                                         ),
                                       ),
                                       const SizedBox(
@@ -209,7 +209,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                                         '${(_platformFile!.size / 1024).ceil()} KB',
                                         style: const TextStyle(
                                           fontSize: 13,
-                                          color: AppColors.backgroundLightMode,
+                                          color: AppColors.backgroundLight,
                                         ),
                                       ),
                                       const SizedBox(
@@ -268,8 +268,8 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                             color: context.primaryColor,
                             child: const Text(
                               'Upload file',
-                              style: TextStyle(
-                                  color: AppColors.backgroundLightMode),
+                              style:
+                                  TextStyle(color: AppColors.backgroundLight),
                             ),
                           )
                         ],
@@ -311,8 +311,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
           decoration: const BoxDecoration(
             border: Border(
               top: BorderSide(
-                color:
-                    AppColors.backgroundLightMode, // Choose your desired color
+                color: AppColors.backgroundLight, // Choose your desired color
                 width: 1.0, // Choose your desired width
               ),
             ),
@@ -332,7 +331,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
                   height: 52,
                   width: 52,
                   decoration: BoxDecoration(
-                    color: AppColors.backgroundLightMode,
+                    color: AppColors.backgroundLight,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
@@ -346,7 +345,7 @@ class _ApplyForCourierState extends State<ApplyForCourier>
               const BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person_outlined,
-                  color: AppColors.backgroundLightMode,
+                  color: AppColors.backgroundLight,
                 ),
                 label: '',
               ),
@@ -410,7 +409,7 @@ class TrackingTextField extends StatelessWidget {
         width: 333,
         child: Center(
           child: TextField(
-            style: const TextStyle(color: AppColors.backgroundLightMode),
+            style: const TextStyle(color: AppColors.backgroundLight),
             textAlign: TextAlign.center,
             decoration: InputDecoration(
               prefixIcon: Padding(
@@ -428,7 +427,7 @@ class TrackingTextField extends StatelessWidget {
               fillColor: AppColors.buttonStroke,
               border: GradientOutlineInputBorder(
                 gradient: const LinearGradient(
-                    colors: [AppColors.secondaryBlue, AppColors.primary],
+                    colors: [AppColors.secondaryDark, AppColors.primaryLight],
                     begin: FractionalOffset(0.0, 0.0),
                     end: FractionalOffset(0.5, 0.0),
                     stops: [0.0, 1.0],

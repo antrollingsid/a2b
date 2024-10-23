@@ -26,7 +26,7 @@ class ApplicationOfferView extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: Container(
           decoration: BoxDecoration(
-              color: AppColors.backgroundLightMode,
+              color: AppColors.backgroundLight,
               borderRadius: BorderRadius.circular(10)),
           child: Padding(
             padding: const EdgeInsets.all(10),

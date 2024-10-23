@@ -52,174 +52,214 @@ class _DashBoardState extends State<DashBoard> {
       resizeToAvoidBottomInset: false,
       extendBody: false,
       backgroundColor: context.scaffoldBackgroundColor,
-      body: SafeArea(
-        child: Center(
-          child: userRole.user.role == 'general'
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const DashMenu(),
-                    // const TrackingTextField(),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    GestureDetector(
-                        onTap: () => Get.to(() => MyMap1(
-                              tracked.doc('user1').id,
-                            )),
-                        child: const CustomShip()),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    SizedBox(
-                      width: 333,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            language.orderHistory,
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80),
+          child: CustomAppBar(
+            titleText: language.appName,
+            isActionVisible: false,
+            isLeadingVisible: false,
+          )),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Center(
+            child: userRole.user.role == 'general'
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // const CustomAppBar(
+                      //   titleText: language.signIn,
+                      //   isActionVisible: false,
+                      //   isLeadingVisible: true,
+                      // ),
+                      const SizedBox(
+                        width: 333,
+                        child: Text(
+                          "Ship Your",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 24,
                           ),
-                        ],
+                          textAlign: TextAlign.left,
+                        ),
                       ),
-                    ),
-                    SafeArea(
-                        child: StreamBuilder<QuerySnapshot>(
-                            stream: applicationsCollection.snapshots(),
-                            builder: (context, snapshot) {
-                              if (snapshot.hasError) {
-                                return Text('Error: ${snapshot.error}');
-                              }
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const CircularProgressIndicator();
-                              }
+                      const SizedBox(
+                        width: 333,
+                        child: Text(
+                          "Package Safely",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 24,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const TrackingTextField(),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      GestureDetector(
+                          onTap: () => Get.to(() => MyMap1(
+                                tracked.doc('user1').id,
+                              )),
+                          child: const CustomShip()),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      SizedBox(
+                        width: 333,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              language.orderHistory,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SafeArea(
+                          child: StreamBuilder<QuerySnapshot>(
+                              stream: applicationsCollection.snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                }
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const CircularProgressIndicator();
+                                }
 
-                              if (!snapshot.hasData ||
-                                  snapshot.data!.docs.isEmpty) {
-                                return const Center(
-                                  child: Text('No accepted offers found.'),
-                                );
-                              }
-                              return SizedBox(
-                                width: 333,
-                                height: 199,
-                                child: ListView(
-                                  children: snapshot.data!.docs
-                                      .map((DocumentSnapshot document) {
-                                    Map<String, dynamic>? userData = document
-                                        .data() as Map<String, dynamic>?;
+                                if (!snapshot.hasData ||
+                                    snapshot.data!.docs.isEmpty) {
+                                  return const Center(
+                                    child: Text('No accepted offers found.'),
+                                  );
+                                }
+                                return SizedBox(
+                                  width: 333,
+                                  height: 199,
+                                  child: ListView(
+                                    children: snapshot.data!.docs
+                                        .map((DocumentSnapshot document) {
+                                      Map<String, dynamic>? userData = document
+                                          .data() as Map<String, dynamic>?;
 
-                                    String productName =
-                                        userData?['packageDetails']
-                                                ?['productName'] ??
-                                            '';
-                                    String status = userData?['status'] ?? '';
-                                    Timestamp? deliveryTimestamp =
-                                        userData?['deliveryDetails']
-                                            ?['deliveryDate'];
-                                    String date = deliveryTimestamp != null
-                                        ? DateFormat('dd/MM/yy').format(
-                                            DateTime.fromMillisecondsSinceEpoch(
-                                                deliveryTimestamp.seconds *
-                                                    1000))
-                                        : '';
+                                      String productName =
+                                          userData?['packageDetails']
+                                                  ?['productName'] ??
+                                              '';
+                                      String status = userData?['status'] ?? '';
+                                      Timestamp? deliveryTimestamp =
+                                          userData?['deliveryDetails']
+                                              ?['deliveryDate'];
+                                      String date = deliveryTimestamp != null
+                                          ? DateFormat('dd/MM/yy').format(
+                                              DateTime
+                                                  .fromMillisecondsSinceEpoch(
+                                                      deliveryTimestamp
+                                                              .seconds *
+                                                          1000))
+                                          : '';
 
-                                    String courierId =
-                                        userData?['deliveryDetails']
-                                                ?['deliverBy'] ??
-                                            '';
+                                      String courierId =
+                                          userData?['deliveryDetails']
+                                                  ?['deliverBy'] ??
+                                              '';
 
-                                    return FutureBuilder<DocumentSnapshot>(
-                                      future: courierCollection
-                                          .doc(courierId)
-                                          .get(),
-                                      builder: (BuildContext context,
-                                          AsyncSnapshot<DocumentSnapshot>
-                                              snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return const CircularProgressIndicator();
-                                        }
+                                      return FutureBuilder<DocumentSnapshot>(
+                                        future: courierCollection
+                                            .doc(courierId)
+                                            .get(),
+                                        builder: (BuildContext context,
+                                            AsyncSnapshot<DocumentSnapshot>
+                                                snapshot) {
+                                          if (snapshot.connectionState ==
+                                              ConnectionState.waiting) {
+                                            return const CircularProgressIndicator();
+                                          }
 
-                                        if (snapshot.hasError) {
-                                          return Text(
-                                              'Error: ${snapshot.error}');
-                                        }
+                                          if (snapshot.hasError) {
+                                            return Text(
+                                                'Error: ${snapshot.error}');
+                                          }
 
-                                        DocumentSnapshot? courierSnapshot =
-                                            snapshot.data;
+                                          DocumentSnapshot? courierSnapshot =
+                                              snapshot.data;
 
-                                        if (!snapshot.hasData ||
-                                            courierSnapshot == null ||
-                                            courierSnapshot.data() == null) {
-                                          // Handle the case when the courier document is not found or has no data
+                                          if (!snapshot.hasData ||
+                                              courierSnapshot == null ||
+                                              courierSnapshot.data() == null) {
+                                            // Handle the case when the courier document is not found or has no data
+                                            return OrderHistoryActivity(
+                                              date: date,
+                                              productName: productName,
+                                              status: status,
+                                            );
+                                          }
+
                                           return OrderHistoryActivity(
                                             date: date,
                                             productName: productName,
                                             status: status,
                                           );
-                                        }
-
-                                        return OrderHistoryActivity(
-                                          date: date,
-                                          productName: productName,
-                                          status: status,
-                                        );
-                                      },
-                                    );
-                                  }).toList(),
-                                ),
-                              );
-                            }))
-                  ],
-                )
-              : SafeArea(
-                  child: Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(() => const UsersOrders());
-                      },
-                      child: Container(
-                        color: context.primaryColor,
-                        height: 100,
-                        width: 170,
-                        child: Text(
-                          'users orders',
-                          style:
-                              TextStyle(color: context.scaffoldBackgroundColor),
-                          textAlign: TextAlign.center,
+                                        },
+                                      );
+                                    }).toList(),
+                                  ),
+                                );
+                              }))
+                    ],
+                  )
+                : SafeArea(
+                    child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => const UsersOrders());
+                        },
+                        child: Container(
+                          color: context.primaryColor,
+                          height: 100,
+                          width: 170,
+                          child: Text(
+                            'users orders',
+                            style: TextStyle(
+                                color: context.scaffoldBackgroundColor),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(() => const AcceptedOffers());
-                      },
-                      child: Container(
-                        color: context.primaryColor,
-                        height: 100,
-                        width: 170,
-                        child: Text(
-                          'accepted offers',
-                          style:
-                              TextStyle(color: context.scaffoldBackgroundColor),
-                          textAlign: TextAlign.center,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => const AcceptedOffers());
+                        },
+                        child: Container(
+                          color: context.primaryColor,
+                          height: 100,
+                          width: 170,
+                          child: Text(
+                            'accepted offers',
+                            style: TextStyle(
+                                color: context.scaffoldBackgroundColor),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                )),
+                    ],
+                  )),
+          ),
         ),
       ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(
-              color: AppColors.backgroundLightMode, // Choose your desired color
+              color: AppColors.backgroundLight, // Choose your desired color
               width: 1.0, // Choose your desired width
             ),
           ),
@@ -239,7 +279,7 @@ class _DashBoardState extends State<DashBoard> {
                 height: 52,
                 width: 52,
                 decoration: BoxDecoration(
-                  color: AppColors.backgroundLightMode,
+                  color: AppColors.backgroundLight,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Icon(
@@ -253,7 +293,7 @@ class _DashBoardState extends State<DashBoard> {
             const BottomNavigationBarItem(
               icon: Icon(
                 Icons.person_outlined,
-                color: AppColors.backgroundLightMode,
+                color: AppColors.backgroundLight,
               ),
               label: '',
             ),
@@ -291,7 +331,7 @@ class TrackingTextField extends StatelessWidget {
             textAlign: TextAlign.center,
             decoration: InputDecoration(
               prefixIcon: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(10.0),
                 child: SvgPicture.string(
                   SvgConstant.searchIconDark,
                   width: 19,

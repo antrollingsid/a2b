@@ -78,8 +78,7 @@ class _UserList extends State<UserList> {
             decoration: const BoxDecoration(
               border: Border(
                 top: BorderSide(
-                  color: AppColors
-                      .backgroundLightMode, // Choose your desired color
+                  color: AppColors.backgroundLight, // Choose your desired color
                   width: 1.0, // Choose your desired width
                 ),
               ),
@@ -99,7 +98,7 @@ class _UserList extends State<UserList> {
                     height: 52,
                     width: 52,
                     decoration: BoxDecoration(
-                      color: AppColors.backgroundLightMode,
+                      color: AppColors.backgroundLight,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(
@@ -113,7 +112,7 @@ class _UserList extends State<UserList> {
                 const BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person_outlined,
-                    color: AppColors.backgroundLightMode,
+                    color: AppColors.backgroundLight,
                   ),
                   label: '',
                 ),
