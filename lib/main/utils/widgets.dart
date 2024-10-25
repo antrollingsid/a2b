@@ -67,3 +67,22 @@ Widget scheduleOptionWidget(
     ),
   );
 }
+
+Positioned stackContainerDetails(BuildContext context) {
+  return Positioned(
+    top: 215,
+    child: Container(
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        color: appStore.isDarkMode
+            ? AppColors.backgroundDark
+            : AppColors.backgroundLight,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
+      ),
+    ),
+  );
+}

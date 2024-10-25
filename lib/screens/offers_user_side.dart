@@ -37,6 +37,7 @@ class _CourierOffers extends State<CourierOffers> {
             children: [
               OfferView(
                 name: '',
+                surname: '',
                 photoUrl: '',
                 from: '',
                 date: '',
@@ -44,6 +45,7 @@ class _CourierOffers extends State<CourierOffers> {
               ),
               OfferView(
                 name: '',
+                surname: '',
                 photoUrl: '',
                 from: '',
                 date: '',
@@ -51,6 +53,7 @@ class _CourierOffers extends State<CourierOffers> {
               ),
               OfferView(
                 name: '',
+                surname: '',
                 photoUrl: '',
                 from: '',
                 date: '',
@@ -58,6 +61,7 @@ class _CourierOffers extends State<CourierOffers> {
               ),
               OfferView(
                 name: '',
+                surname: '',
                 photoUrl: '',
                 from: '',
                 date: '',

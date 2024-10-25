@@ -80,7 +80,8 @@ class _UsersOrders extends State<UsersOrders> {
                                 '';
                             String userName =
                                 userData?['userDetails']['name'] ?? '';
-
+                            String userSurname =
+                                userData?['details']['surname'] ?? '';
                             String userPhoto =
                                 userData?['userDetails']['userPhoto'] ?? '';
 
@@ -90,6 +91,7 @@ class _UsersOrders extends State<UsersOrders> {
                               },
                               child: OfferView(
                                 name: userName,
+                                surname: userSurname,
                                 photoUrl: userPhoto,
                                 date: date,
                                 from: from,

@@ -1,0 +1,6 @@
+decoration: BoxDecoration(
+color: appStore.isDarkMode
+? AppColors.secondaryDark
+: AppColors.secondaryLight,
+borderRadius: BorderRadius.circular(12),
+),

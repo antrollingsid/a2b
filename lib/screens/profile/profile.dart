@@ -17,7 +17,6 @@ import '../offers/courier_offer_list.dart';
 import '../order_history.dart';
 import '../userDetails/courierList/courier-list.dart';
 import '../userDetails/courierList/user_list.dart';
-import 'info/top_profile.dart';
 import '../../../../main.dart';
 
 final UpdateProfileController ctrl = Get.put(UpdateProfileController());

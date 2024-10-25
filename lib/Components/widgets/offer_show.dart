@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+import '../../main.dart';
+import '../../main/utils/allConstants.dart';
+
 class OfferView extends StatelessWidget {
   const OfferView({
     super.key,
     required this.name,
+    required this.surname,
     required this.photoUrl,
     required this.date,
     required this.from,
     required this.to,
   });
   final String name;
+  final String surname;
   final String photoUrl;
   final String date;
   final String from;
@@ -22,9 +27,13 @@ class OfferView extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: Container(
+          height: 96,
+          width: 333,
           decoration: BoxDecoration(
-            color: context.scaffoldBackgroundColor,
-            // borderRadius: BorderRadius.circular(10)
+            color: appStore.isDarkMode
+                ? AppColors.buttonDark
+                : AppColors.buttonLight,
+            borderRadius: BorderRadius.circular(12),
           ),
           child: Padding(
             padding: const EdgeInsets.all(10),
@@ -76,7 +85,15 @@ class OfferView extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(
-                            width: 15,
+                            width: 10,
+                          ),
+                          Text(
+                            surname,
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                              // color: AppColors.backgroundLightMode,
+                            ),
                           ),
                         ],
                       ),

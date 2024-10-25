@@ -57,6 +57,8 @@ class _MessagesList extends State<MessagesList> {
                                 document.data() as Map<String, dynamic>?;
                             String userId = document.id;
                             String userName = userData?['userrName'] ?? '';
+                            String userSurname = userData?['userrName'] ?? '';
+
                             String userPhoto = userData?['userPhoto'] ?? '';
                             String courierId = userData?['courierId'] ?? '';
 
@@ -70,6 +72,7 @@ class _MessagesList extends State<MessagesList> {
                                   )),
                               child: OfferView(
                                 name: userName,
+                                surname: userSurname,
                                 photoUrl: userPhoto,
                                 date: 'date',
                                 from: 'from',
@@ -126,6 +129,7 @@ class _MessagesList extends State<MessagesList> {
                                       )),
                                   child: OfferView(
                                     name: userData?['courierName'],
+                                    surname: userData?['courierName'],
                                     photoUrl: userPhoto,
                                     date: 'date',
                                     from: 'from',

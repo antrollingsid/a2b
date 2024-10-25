@@ -50,6 +50,8 @@ class _UserList extends State<UserList> {
                             document.data() as Map<String, dynamic>?;
                         String userId = document.id;
                         String userName = userData?['details']['name'] ?? '';
+                        String userSurName =
+                            userData?['details']['surname'] ?? '';
                         String photoUrl =
                             userData?['details']['photoURL'] ?? '';
 
@@ -60,6 +62,7 @@ class _UserList extends State<UserList> {
                           child: userRole == 'general'
                               ? OfferView(
                                   name: userName,
+                                  surname: userSurName,
                                   photoUrl: photoUrl,
                                   date: 'date',
                                   from: 'from',

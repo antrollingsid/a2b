@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_import
 
+import 'package:a2b/Components/widgets/tracking_text_field.dart';
 import 'package:a2b/controllers/auth_controller.dart';
 import 'package:a2b/main.dart';
 import 'package:a2b/screens/createOrder/order_map.dart';
@@ -23,6 +24,7 @@ import '../../Components/widgets/dash_menu.dart';
 import '../livemap.dart';
 import '../offers/create_offer.dart';
 import '../offers/accepted_offers.dart';
+import '../place_order_upload.dart';
 import '../profile/profile.dart';
 
 class DashBoard extends StatefulWidget {
@@ -51,14 +53,17 @@ class _DashBoardState extends State<DashBoard> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: false,
-      backgroundColor: context.scaffoldBackgroundColor,
+      backgroundColor: appStore.isDarkMode
+          ? AppColors.backgroundDark
+          : AppColors.backgroundLight,
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
-          child: CustomAppBar(
-            titleText: language.appName,
-            isActionVisible: false,
-            isLeadingVisible: false,
-          )),
+        preferredSize: const Size.fromHeight(80),
+        child: CustomAppBar(
+          titleText: language.appName,
+          isActionVisible: false,
+          isLeadingVisible: false,
+        ),
+      ),
       body: SingleChildScrollView(
         child: SafeArea(
           child: Center(
@@ -66,11 +71,6 @@ class _DashBoardState extends State<DashBoard> {
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // const CustomAppBar(
-                      //   titleText: language.signIn,
-                      //   isActionVisible: false,
-                      //   isLeadingVisible: true,
-                      // ),
                       const SizedBox(
                         width: 333,
                         child: Text(
@@ -318,55 +318,6 @@ class _DashBoardState extends State<DashBoard> {
               Get.to(() => const Profile());
             }
           },
-        ),
-      ),
-    );
-  }
-}
-
-class TrackingTextField extends StatelessWidget {
-  const TrackingTextField({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 15),
-      child: SizedBox(
-        height: 67,
-        width: 333,
-        child: Center(
-          child: TextField(
-            textAlign: TextAlign.center,
-            decoration: InputDecoration(
-              prefixIcon: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SvgPicture.string(
-                  SvgConstant.searchIconDark,
-                  width: 19,
-                  height: 19,
-                ),
-              ),
-              hintText: language.track,
-              hintStyle: const TextStyle(color: AppColors.textGrey),
-              filled: true,
-              fillColor: context.scaffoldBackgroundColor,
-              border: GradientOutlineInputBorder(
-                gradient: LinearGradient(
-                    colors: [
-                      context.primaryColor,
-                      context.primaryColor,
-                    ],
-                    begin: const FractionalOffset(0.0, 0.0),
-                    end: const FractionalOffset(0.5, 0.0),
-                    stops: const [0.0, 1.0],
-                    tileMode: TileMode.clamp),
-                width: 1,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
         ),
       ),
     );
