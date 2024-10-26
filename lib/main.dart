@@ -7,22 +7,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
+
 import '/screens/authentication/login.dart';
 import '/screens/authentication/register.dart';
 import 'app_theme.dart';
 import 'screens/dashboard/dashboard.dart';
-// import 'main/Services/ChatMessagesService.dart';
-// import 'main/Services/NotificationService.dart';
 import 'main/languages/base_language.dart';
 import 'main/store/store.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'main/utils/constants.dart';
 import 'main/utils/data_providers.dart';
 import './helper/dependencies.dart' as dep;
